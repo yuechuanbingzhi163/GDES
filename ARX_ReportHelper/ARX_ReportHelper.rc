@@ -1,0 +1,349 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", "ARX_ReportHelper ObjectARX application"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "ARX_ReportHelper"
+            VALUE "LegalCopyright", "Copyright ?2002"
+            VALUE "OriginalFilename", "ARX_ReportHelper.arx"
+            VALUE "ProductName", "ARX_ReportHelper Application"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_GAS_SYS_DIALOG DIALOGEX 0, 0, 317, 263
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "瓦斯抽采系统"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        ID_PERMSYS_NUM_EDIT,154,3,35,13,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "确定",ID_ENSURE,84,247,60,14
+    CONTROL         "",IDC_PERMSYS_INPUT_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,0,21,317,96
+    CONTROL         "地面固定瓦斯抽采系统个数",-1,"Static",SS_SIMPLE | WS_GROUP,54,5,97,8
+    PUSHBUTTON      "清除",IDC_PERM_CLEAR_BUTTON,198,3,50,14
+    CONTROL         "",IDC_TEMPSYS_INPUT_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,0,142,317,96
+    EDITTEXT        ID_TEMPESYS_NUM_EDIT,151,124,35,13,ES_AUTOHSCROLL
+    CONTROL         "井下移动瓦斯抽采系统个数",-1,"Static",SS_SIMPLE | WS_GROUP,51,126,97,8
+    PUSHBUTTON      "清除",IDC_TEMP_CLEAR_BUTTON,195,124,50,14
+    PUSHBUTTON      "退出",IDC_EXIT_BUTTON,174,247,60,14
+END
+
+IDD_YEARPLAN_DIALOG DIALOGEX 0, 0, 392, 143
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "瓦斯抽采达标规划和年度实施计划管理文件"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,106,122,50,14
+    PUSHBUTTON      "取消",IDCANCEL,236,122,50,14
+    GROUPBOX        "抽采达标规划管理文件",IDC_STATIC,7,7,143,112
+    GROUPBOX        "年度实施计划管理文件",IDC_STATIC,144,7,241,111
+    CONTROL         "抽采达标范围可规划产量（表）",IDC_RANGE_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,20,128,10
+    CONTROL         "抽采达标工程（表）",IDC_SEE_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,34,128,10
+    CONTROL         "抽采量（表）",IDC_DEQ_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,104,128,10
+    CONTROL         "抽采设备设施（表）",IDC_EEF_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,48,128,10
+    CONTROL         "资金计划（表）",IDC_CP_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,62,128,10
+    CONTROL         "采面接替（表）",IDC_CMFA_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,76,128,10
+    CONTROL         "巷道掘进（表）",IDC_CRE_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,13,90,128,10
+    CONTROL         "年度瓦斯抽采达标的煤层范围及相对应的年度产量安排（表）",IDC_APS_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,18,225,10
+    CONTROL         "施工队伍、抽采时间、抽采量（表）",IDC_TTV_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,32,144,10
+    CONTROL         "抽采指标、资金计划（表）",IDC_DFP_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,46,112,10
+    CONTROL         "年度抽采工程（表）",IDC_AEP_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,60,88,10
+    CONTROL         "抽采设备设施（表）",IDC_YEEF_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,74,88,10
+    CONTROL         "采面接替（表）",IDC_YMFA_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,88,128,10
+    CONTROL         "巷道掘进（表）",IDC_YRE_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,152,102,128,10
+END
+
+IDD_EPCMFD_DIALOG DIALOGEX 0, 0, 215, 197
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "抽采达标工艺方案设计和采掘工作面施工设计"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,37,176,50,14
+    PUSHBUTTON      "取消",IDCANCEL,118,176,50,14
+    CONTROL         "抽采达标工艺方案设计管理文件",IDC_DDSP_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,7,128,10
+    GROUPBOX        "",IDC_STATIC,7,14,201,49
+    CONTROL         "为抽采达标服务的各项工程布局、工程量",IDC_DCSEL_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,21,160,10
+    CONTROL         "进度、资金计划、接续关系",IDC_SFCR_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,35,112,10
+    CONTROL         "施工设备、主要器材",IDC_CEME_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,49,88,10
+    CONTROL         "采掘工作面施工设计管理文件",IDC_MFCD_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,68,120,10
+    GROUPBOX        "",IDC_STATIC,7,75,201,91
+    CONTROL         "钻孔参数表、施工要求、钻孔工程量",IDC_DPCRD_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,82,144,10
+    CONTROL         "施工设备与进度计划",IDC_CES_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,96,88,10
+    CONTROL         "预期效果及组织管理",IDC_EROM_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,110,88,10
+    CONTROL         "有效抽瓦斯时间",IDC_ETPG_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,138,72,10
+    CONTROL         "安全技术措施",IDC_SM_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,152,64,10
+    CONTROL         "抽采钻孔布置图",IDC_BL_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,124,72,10
+END
+
+IDD_SELFMANAGE_DIALOG DIALOGEX 0, 0, 258, 80
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "矿井瓦斯抽采达标自评价体系和瓦斯抽采管理制度"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,56,59,50,14
+    PUSHBUTTON      "取消",IDCANCEL,151,59,50,14
+    CONTROL         "瓦斯抽采达标评价工作体系",IDC_GDES_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,9,112,10
+    CONTROL         "瓦斯抽采达标评判细则",IDC_GDJR_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,23,96,10
+    CONTROL         "瓦斯抽采管理和考核奖惩制度",IDC_GDMAR_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,37,120,10
+    CONTROL         "抽采工程检查验收制度",IDC_DPIA_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,149,9,96,10
+    CONTROL         "先抽后采例会制度",IDC_AFDRM_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,149,23,80,10
+    CONTROL         "技术档案管理制度",IDC_TFMS_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,149,37,80,10
+END
+
+IDD_INSPECTION_DATA_DIALOG DIALOGEX 0, 0, 187, 115
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "瓦斯抽采工程验收资料"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,32,83,50,14
+    PUSHBUTTON      "取消",IDCANCEL,104,83,50,14
+    GROUPBOX        "",IDC_STATIC,16,22,70,49
+    CONTROL         "抽采工程竣工图",IDC_DWB_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,15,72,10
+    CONTROL         "工程开工时间",IDC_PST_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,28,64,10
+    CONTROL         "竣工时间",IDC_CT_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,42,48,10
+    CONTROL         "异常现象记录",IDC_AR_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,19,57,64,10
+    CONTROL         "其他验收资料",IDC_OID_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,95,15,64,10
+END
+
+IDD_GAS_PUMP_DIALOG DIALOGEX 0, 0, 313, 202
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "泵站能力和备用泵能力"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,57,181,50,14
+    PUSHBUTTON      "取消",IDCANCEL,179,181,50,14
+    CONTROL         "",IDC_GAS_PUMP_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,299,161
+END
+
+IDD_RESULT_DIALOG DIALOGEX 0, 0, 242, 174
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "结果选择"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,52,153,50,14
+    PUSHBUTTON      "取消",IDCANCEL,140,153,50,14
+    CONTROL         "",IDC_RESULT_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,2,17,240,131
+    LTEXT           "评判方式",IDC_STATIC,5,3,33,10
+    COMBOBOX        IDC_COMBO1,42,2,70,12,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_REASONS_DESC_DIALOG DIALOGEX 0, 0, 232, 121
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "结论自述"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,56,100,50,14
+    PUSHBUTTON      "取消",IDCANCEL,125,100,50,14
+    CONTROL         "是否满足抽采达标要求",IDC_YesOrNo_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,4,86,96,10
+    CONTROL         "",IDC_REASONS_DESC_RICHEDIT2,"RichEdit20W",WS_BORDER | WS_VSCROLL | WS_TABSTOP | 0x44,1,1,229,83
+END
+
+IDD_MERE_DIALOG DIALOGEX 0, 0, 159, 71
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,20,50,50,14
+    PUSHBUTTON      "取消",IDCANCEL,89,50,50,14
+    CONTROL         "是否满足抽采达标要求",IDC_MERE_YESNO_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,34,24,91,14
+    LTEXT           "评判方式",IDC_STATIC,30,7,36,9
+    COMBOBOX        IDC_MERE_METHOD_COMBO,66,5,62,15,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_GAS_SYS_DIALOG, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 261
+    END
+
+    IDD_YEARPLAN_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 385
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 136
+    END
+
+    IDD_EPCMFD_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 190
+    END
+
+    IDD_SELFMANAGE_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 251
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 73
+    END
+
+    IDD_INSPECTION_DATA_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 108
+    END
+
+    IDD_GAS_PUMP_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 306
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 195
+    END
+
+    IDD_RESULT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        BOTTOMMARGIN, 167
+    END
+
+    IDD_REASONS_DESC_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 1
+        RIGHTMARGIN, 230
+        BOTTOMMARGIN, 114
+    END
+
+    IDD_MERE_DIALOG, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 64
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_GASSYS_ICON         ICON                    "icon.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_LIST_DEL_MENU MENU 
+BEGIN
+    POPUP "CLISTMENU"
+    BEGIN
+        MENUITEM "删除",                          ID_DELETE_ITEM
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_DELETE_BITMAP       BITMAP                  "delete.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_PROJNAME            "ARX_ReportHelper"
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+

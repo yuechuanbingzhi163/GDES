@@ -1,0 +1,18 @@
+#include "StdAfx.h"
+#include "DoubleStorageDraw.h"
+
+ACRX_CONS_DEFINE_MEMBERS ( DoublePowderStorageDraw, DoubleStorageDrawBase, 1 )
+ACRX_CONS_DEFINE_MEMBERS ( DoubleMachineRoomDraw, DoubleStorageDrawBase, 1 )
+ACRX_CONS_DEFINE_MEMBERS ( DoubleChargeRoomDraw, DoubleStorageDrawBase, 1 )
+
+DoublePowderStorageDraw::DoublePowderStorageDraw( void ) : DoubleStorageDrawBase( _T( "±¬Õ¨²ÄÁÏ¿â" ) )
+{
+}
+
+DoubleMachineRoomDraw::DoubleMachineRoomDraw( void ) : DoubleStorageDrawBase( _T( "»úµçíÏÊÒ" ) )
+{
+}
+
+DoubleChargeRoomDraw::DoubleChargeRoomDraw( void ) : DoubleStorageDrawBase( _T( "³äµçÊÒ" ) )
+{
+}

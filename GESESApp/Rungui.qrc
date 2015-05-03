@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>rungui_zh.qm</file>
+        <file>qt_zh_CN.qm</file>
+        <file>icon.ico</file>
+        <file>images/background.png</file>
+        <file>images/help.png</file>
+        <file>images/helpHover.png</file>
+        <file>images/autoCAD.png</file>
+        <file>images/open.png</file>
+        <file>images/openHover.png</file>
+        <file>images/startHover.png</file>
+    </qresource>
+</RCC>

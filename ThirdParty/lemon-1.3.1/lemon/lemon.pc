@@ -1,0 +1,10 @@
+prefix=C:/Program Files/Project
+exec_prefix=C:/Program Files/Project/bin
+libdir=C:/Program Files/Project/lib
+includedir=C:/Program Files/Project/include
+
+Name: Project
+Description: Library for Efficient Modeling and Optimization in Networks
+Version: 
+Libs: -L${libdir} -lemon     
+Cflags: -I${includedir}
