@@ -489,7 +489,7 @@ LRESULT CMenuWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		lRes = OnCreate(uMsg, wParam, lParam, bHandled); 
 		break;
 	case WM_KILLFOCUS:       
-		lRes = OnKillFocus(uMsg, wParam, lParam, bHandled); 
+		lRes = OnKillFocus(uMsg, wParam, lParam, bHandled);
 		break;
 	case WM_KEYDOWN:
 		if( wParam == VK_ESCAPE || wParam == VK_LEFT)
@@ -505,6 +505,11 @@ LRESULT CMenuWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			m_pOwner->SetPos(m_pOwner->GetPos());
 			m_pOwner->SetFocus();
 		}
+		else
+		{
+			CControlUI* pc = m_pm.GetFocus();
+			bHandled = FALSE;
+		}	
 		break;
 	case WM_RBUTTONDOWN:
 	case WM_CONTEXTMENU:

@@ -1,6 +1,7 @@
 #include "SQLite.h"
 #include <cstdlib>
 #include <cstdio>
+#include <clocale>
 
 void SqliteOperate()
 {
@@ -10,7 +11,7 @@ void SqliteOperate()
 
 	SQLite sqlite;
 
-	// æ‰“å¼€æˆ–åˆ›å»ºæ•°æ®åº“
+	// ´ò¿ª»ò´´½¨Êı¾İ¿â
 	//******************************************************
 	if(!sqlite.Open(szDbPath))
 	{
@@ -19,7 +20,7 @@ void SqliteOperate()
 	}
     //******************************************************
 
-	// åˆ›å»ºæ•°æ®åº“è¡¨
+	// ´´½¨Êı¾İ¿â±í
     //******************************************************
 	TCHAR sql[512] = {0};
 	_stprintf(sql,_T("%s"),
@@ -35,51 +36,51 @@ void SqliteOperate()
 		);
 	if(!sqlite.ExcuteNonQuery(sql))
 	{
-		printf("Create database table failed...\n");
+		_tprintf(_T("Create database table failed...\n"));
 	}
 	//******************************************************
 
-	// æ’å…¥æ•°æ®ã€æ™®é€šæ–¹å¼ã€‘
+	// ²åÈëÊı¾İ¡¾ÆÕÍ¨·½Ê½¡¿
 	DWORD dwBeginTick = GetTickCount();
 	//******************************************************
-	// å½“ä¸€æ¬¡æ€§æ’å…¥å¤šæ¡è®°å½•æ—¶å€™ï¼Œé‡‡ç”¨äº‹åŠ¡çš„æ–¹å¼ï¼Œæé«˜æ•ˆç‡
+	// µ±Ò»´ÎĞÔ²åÈë¶àÌõ¼ÇÂ¼Ê±ºò£¬²ÉÓÃÊÂÎñµÄ·½Ê½£¬Ìá¸ßĞ§ÂÊ
 	sqlite.BeginTransaction();
-	// æ‰¹é‡æ’å…¥æ•°æ®
-	for(int i=0;i<1000;i++)
+	// ÅúÁ¿²åÈëÊı¾İ
+	for(int i=0;i<10;i++)
 	{
 		memset(sql,0,sizeof(sql));
-		_stprintf(sql,_T("insert into Book(name,author,catagory_id) values('çº¢é«˜ç²±%d','è«è¨€',1)"),i);
+		_stprintf(sql,_T("insert into Book(name,author,catagory_id) values('ºì¸ßÁ»%d','ÄªÑÔ',1)"),i);
 		if(!sqlite.ExcuteNonQuery(sql))
 		{
 			_tprintf(_T("%s\n"),sqlite.GetLastErrorMsg());
 			break;
 		}
 	}
-	// æäº¤äº‹åŠ¡
+	// Ìá½»ÊÂÎñ
 	sqlite.CommitTransaction();
-	printf("Insert Data Take %dMS...\n",GetTickCount()-dwBeginTick);
+	_tprintf(_T("Insert Data Take %dMS...\n"),GetTickCount()-dwBeginTick);
     //******************************************************
 
 
-	// æ’å…¥æ•°æ®ã€é€šè¿‡å‚æ•°ç»‘å®šçš„æ–¹å¼ï¼Œæäº¤æ‰¹é‡æ•°æ®æ—¶ï¼Œæ¯”ä¸Šé¢çš„æ™®é€šæ¨¡å¼æ•ˆç‡æ›´é«˜ï¼ˆæé«˜çº¦45%ï¼‰ï¼ŒåŒæ—¶å¯æ”¯æŒæ’å…¥äºŒè¿›åˆ¶æ•°æ®ã€‘
+	// ²åÈëÊı¾İ¡¾Í¨¹ı²ÎÊı°ó¶¨µÄ·½Ê½£¬Ìá½»ÅúÁ¿Êı¾İÊ±£¬±ÈÉÏÃæµÄÆÕÍ¨Ä£Ê½Ğ§ÂÊ¸ü¸ß£¨Ìá¸ßÔ¼45%£©£¬Í¬Ê±¿ÉÖ§³Ö²åÈë¶ş½øÖÆÊı¾İ¡¿
 	dwBeginTick = GetTickCount();
     //******************************************************
-	// å½“ä¸€æ¬¡æ€§æ’å…¥å¤šæ¡è®°å½•æ—¶å€™ï¼Œé‡‡ç”¨äº‹åŠ¡çš„æ–¹å¼ï¼Œæé«˜æ•ˆç‡
+	// µ±Ò»´ÎĞÔ²åÈë¶àÌõ¼ÇÂ¼Ê±ºò£¬²ÉÓÃÊÂÎñµÄ·½Ê½£¬Ìá¸ßĞ§ÂÊ
 	sqlite.BeginTransaction();
 	memset(sql,0,sizeof(sql));
-	_stprintf(sql,_T("insert into Book(name,author,catagory_id,image) values(?,'éŸ©å¯’',?,?)"));
+	_stprintf(sql,_T("insert into Book(name,author,catagory_id,image) values(?,'º«º®',?,?)"));
 	SQLiteCommand cmd(&sqlite,sql);
-	// æ‰¹é‡æ’å…¥æ•°æ®
-	for(int i=0;i<1000;i++)
+	// ÅúÁ¿²åÈëÊı¾İ
+	for(int i=0;i<10;i++)
 	{
 		TCHAR strValue[16] = {0};
-		_stprintf(strValue,_T("ä»–çš„å›½%d"),i);
-		// ç»‘å®šç¬¬ä¸€ä¸ªå‚æ•°ï¼ˆnameå­—æ®µå€¼ï¼‰
+		_stprintf(strValue,_T("ËûµÄ¹ú%d"),i);
+		// °ó¶¨µÚÒ»¸ö²ÎÊı£¨name×Ö¶ÎÖµ£©
 		cmd.BindParam(1,strValue);
-		// ç»‘å®šç¬¬äºŒä¸ªå‚æ•°ï¼ˆcatagory_idå­—æ®µå€¼ï¼‰
+		// °ó¶¨µÚ¶ş¸ö²ÎÊı£¨catagory_id×Ö¶ÎÖµ£©
 		cmd.BindParam(2,20);
 		BYTE imageBuf[] = {0xff,0xff,0xff,0xff};
-		// ç»‘å®šç¬¬ä¸‰ä¸ªå‚æ•°ï¼ˆimageå­—æ®µå€¼,äºŒè¿›åˆ¶æ•°æ®ï¼‰
+		// °ó¶¨µÚÈı¸ö²ÎÊı£¨image×Ö¶ÎÖµ,¶ş½øÖÆÊı¾İ£©
 		cmd.BindParam(3,imageBuf,sizeof(imageBuf));
 		if(!sqlite.ExcuteNonQuery(&cmd))
 		{
@@ -87,18 +88,19 @@ void SqliteOperate()
 			break;
 		}
 	}
-	// æ¸…ç©ºcmd
+	// Çå¿Õcmd
 	cmd.Clear();
-	// æäº¤äº‹åŠ¡
+	// Ìá½»ÊÂÎñ
 	sqlite.CommitTransaction();
-	printf("Insert Data Take %dMS...\n",GetTickCount()-dwBeginTick);
+	_tprintf(_T("Insert Data Take %dMS...\n"),GetTickCount()-dwBeginTick);
     //******************************************************
 
-	// æŸ¥è¯¢
+	// ²éÑ¯
 	dwBeginTick = GetTickCount();
 	//******************************************************
 	memset(sql,0,sizeof(sql));
-	_stprintf(sql,_T("%s"),_T("select * from Book where name = 'ä»–çš„å›½345'"));
+	//_stprintf(sql,_T("%s"),_T("select * from Book where name = 'ËûµÄ¹ú345'"));
+	_stprintf(sql,_T("%s"),_T("select * from Book"));
 
 	SQLiteDataReader Reader = sqlite.ExcuteQuery(sql);
 
@@ -106,26 +108,30 @@ void SqliteOperate()
 	int len = 0;
 	while(Reader.Read())
 	{
-		_tprintf( _T("***************ã€ç¬¬%dæ¡è®°å½•ã€‘***************\n"),++index);
-		_tprintf( _T("å­—æ®µå:%s å­—æ®µå€¼:%d\n"),Reader.GetName(0),Reader.GetIntValue(0));
-		_tprintf( _T("å­—æ®µå:%s å­—æ®µå€¼:%s\n"),Reader.GetName(1),Reader.GetStringValue(1));
-		_tprintf( _T("å­—æ®µå:%s å­—æ®µå€¼:%s\n"),Reader.GetName(2),Reader.GetStringValue(2));
-		_tprintf( _T("å­—æ®µå:%s å­—æ®µå€¼:%d\n"),Reader.GetName(3),Reader.GetIntValue(3));
-		_tprintf( _T("å­—æ®µå:%s å­—æ®µå€¼:%s\n"),Reader.GetName(4),Reader.GetStringValue(4));
-		// è¯»å–å›¾ç‰‡äºŒè¿›åˆ¶æ–‡ä»¶
+		_tprintf( _T("***************¡¾µÚ%dÌõ¼ÇÂ¼¡¿***************\n"),++index);
+		_tprintf( _T("×Ö¶ÎÃû:%s ×Ö¶ÎÖµ:%d\n"),Reader.GetName(0),Reader.GetIntValue(0));
+		_tprintf( _T("×Ö¶ÎÃû:%s ×Ö¶ÎÖµ:%s\n"),Reader.GetName(1),Reader.GetStringValue(1));
+		_tprintf( _T("×Ö¶ÎÃû:%s ×Ö¶ÎÖµ:%s\n"),Reader.GetName(2),Reader.GetStringValue(2));
+		_tprintf( _T("×Ö¶ÎÃû:%s ×Ö¶ÎÖµ:%d\n"),Reader.GetName(3),Reader.GetIntValue(3));
+		_tprintf( _T("×Ö¶ÎÃû:%s ×Ö¶ÎÖµ:%s\n"),Reader.GetName(4),Reader.GetStringValue(4));
+		// ¶ÁÈ¡Í¼Æ¬¶ş½øÖÆÎÄ¼ş
 		const BYTE *ImageBuf = Reader.GetBlobValue(6,len);
 		_tprintf( _T("*******************************************\n"));
 	}
 	Reader.Close();
-	printf("Query Take %dMS...\n",GetTickCount()-dwBeginTick);
+	_tprintf(_T("Query Take %dMS...\n"),GetTickCount()-dwBeginTick);
     //******************************************************
 
-	// å…³é—­æ•°æ®åº“
+	// ¹Ø±ÕÊı¾İ¿â
 	sqlite.Close();
 }
 
 int main()
 {
+	/**
+	* ²Î¿¼:http://blog.csdn.net/cdn_founder/article/details/7679137
+	*/
+	setlocale(LC_ALL, "chs");//ĞèÒªÊµÏÖ±¾µØ»¯£¬ÒÔÊµÏÖÖĞÎÄÕı³£Êä³ö
 	SqliteOperate();
 	return 0;
 }

@@ -163,6 +163,7 @@ LRESULT WindowImplBase::OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOO
 			CControlUI* pControl = static_cast<CControlUI*>(m_PaintManager.FindControl(pt));
 			if( pControl && _tcsicmp(pControl->GetClass(), _T("ButtonUI")) != 0 && 
 				_tcsicmp(pControl->GetClass(), _T("OptionUI")) != 0 &&
+				_tcsicmp(pControl->GetClass(), _T("CheckBoxUI")) != 0 &&
 				_tcsicmp(pControl->GetClass(), _T("TextUI")) != 0 &&
 				_tcsicmp(pControl->GetClass(), _T("SliderUI")) != 0 )
 				return HTCAPTION;

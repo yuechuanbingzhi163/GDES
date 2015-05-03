@@ -3,7 +3,7 @@ filename: 	SQLite.h
 created:	2012-11-05
 author:		firehood
 
-purpose:	SQLiteæ•°æ®åº“æ“ä½œç±»
+purpose:	SQLiteÊı¾İ¿â²Ù×÷Àà
 *********************************************************************/
 #pragma once
 
@@ -31,25 +31,25 @@ public:
 	SQLiteDataReader(sqlite3_stmt *pStmt);
 	~SQLiteDataReader();
 public:
-	// è¯»å–ä¸€è¡Œæ•°æ®
+	// ¶ÁÈ¡Ò»ĞĞÊı¾İ
 	BOOL Read();
-	// å…³é—­Readerï¼Œè¯»å–ç»“æŸåè°ƒç”¨
+	// ¹Ø±ÕReader£¬¶ÁÈ¡½áÊøºóµ÷ÓÃ
 	void Close();
-	// æ€»çš„åˆ—æ•°
+	// ×ÜµÄÁĞÊı
     int ColumnCount(void);
-	// è·å–æŸåˆ—çš„åç§° 
+	// »ñÈ¡Ä³ÁĞµÄÃû³Æ 
 	LPCTSTR GetName(int nCol);
-	// è·å–æŸåˆ—çš„æ•°æ®ç±»å‹
+	// »ñÈ¡Ä³ÁĞµÄÊı¾İÀàĞÍ
 	SQLITE_DATATYPE GetDataType(int nCol);
-	// è·å–æŸåˆ—çš„å€¼(å­—ç¬¦ä¸²)
+	// »ñÈ¡Ä³ÁĞµÄÖµ(×Ö·û´®)
 	LPCTSTR GetStringValue(int nCol);
-	// è·å–æŸåˆ—çš„å€¼(æ•´å½¢)
+	// »ñÈ¡Ä³ÁĞµÄÖµ(ÕûĞÎ)
 	int GetIntValue(int nCol);
-	// è·å–æŸåˆ—çš„å€¼(é•¿æ•´å½¢)
+	// »ñÈ¡Ä³ÁĞµÄÖµ(³¤ÕûĞÎ)
 	long GetInt64Value(int nCol);
-	// è·å–æŸåˆ—çš„å€¼(æµ®ç‚¹å½¢)
+	// »ñÈ¡Ä³ÁĞµÄÖµ(¸¡µãĞÎ)
 	double GetFloatValue(int nCol);
-	// è·å–æŸåˆ—çš„å€¼(äºŒè¿›åˆ¶æ•°æ®)
+	// »ñÈ¡Ä³ÁĞµÄÖµ(¶ş½øÖÆÊı¾İ)
 	const BYTE* GetBlobValue(int nCol, int &nLen);
 private:
 	sqlite3_stmt *m_pStmt;
@@ -62,16 +62,16 @@ public:
 	SQLiteCommand(SQLite* pSqlite,LPCTSTR lpSql);
 	~SQLiteCommand();
 public:
-	// è®¾ç½®å‘½ä»¤
+	// ÉèÖÃÃüÁî
 	BOOL SetCommandText(LPCTSTR lpSql);
-	// ç»‘å®šå‚æ•°ï¼ˆindexä¸ºè¦ç»‘å®šå‚æ•°çš„åºå·ï¼Œä»1å¼€å§‹ï¼‰
+	// °ó¶¨²ÎÊı£¨indexÎªÒª°ó¶¨²ÎÊıµÄĞòºÅ£¬´Ó1¿ªÊ¼£©
 	BOOL BindParam(int index, LPCTSTR szValue);
 	BOOL BindParam(int index, const int nValue);
 	BOOL BindParam(int index, const double dValue);
 	BOOL BindParam(int index, const unsigned char* blobValue, int nLen);
-	// æ‰§è¡Œå‘½ä»¤
+	// Ö´ĞĞÃüÁî
 	BOOL Excute();
-	// æ¸…é™¤å‘½ä»¤ï¼ˆå‘½ä»¤ä¸å†ä½¿ç”¨æ—¶éœ€è°ƒç”¨è¯¥æ¥å£æ¸…é™¤ï¼‰
+	// Çå³ıÃüÁî£¨ÃüÁî²»ÔÙÊ¹ÓÃÊ±Ğèµ÷ÓÃ¸Ã½Ó¿ÚÇå³ı£©
 	void Clear();
 private:
 	SQLite *m_pSqlite;
@@ -84,28 +84,28 @@ public:
 	SQLite(void);
 	~SQLite(void);
 public:
-	// æ‰“å¼€æ•°æ®åº“
+	// ´ò¿ªÊı¾İ¿â
     BOOL Open(LPCTSTR lpDbFlie);
-	// å…³é—­æ•°æ®åº“
+	// ¹Ø±ÕÊı¾İ¿â
 	void Close();
 
-    // æ‰§è¡ŒéæŸ¥è¯¢æ“ä½œï¼ˆæ›´æ–°æˆ–åˆ é™¤ï¼‰
+    // Ö´ĞĞ·Ç²éÑ¯²Ù×÷£¨¸üĞÂ»òÉ¾³ı£©
 	BOOL ExcuteNonQuery(LPCTSTR lpSql);
 	BOOL ExcuteNonQuery(SQLiteCommand* pCmd);
 
-    // æŸ¥è¯¢
+    // ²éÑ¯
 	SQLiteDataReader ExcuteQuery(LPCTSTR lpSql);
-	// æŸ¥è¯¢ï¼ˆå›è°ƒæ–¹å¼ï¼‰
+	// ²éÑ¯£¨»Øµ÷·½Ê½£©
 	BOOL ExcuteQuery(LPCTSTR lpSql,QueryCallback pCallBack);
 
-	// å¼€å§‹äº‹åŠ¡
+	// ¿ªÊ¼ÊÂÎñ
 	BOOL BeginTransaction();
-	// æäº¤äº‹åŠ¡
+	// Ìá½»ÊÂÎñ
 	BOOL CommitTransaction();
-	// å›æ»šäº‹åŠ¡
+	// »Ø¹öÊÂÎñ
 	BOOL RollbackTransaction();
 
-	// è·å–ä¸Šä¸€æ¡é”™è¯¯ä¿¡æ¯
+	// »ñÈ¡ÉÏÒ»Ìõ´íÎóĞÅÏ¢
 	LPCTSTR GetLastErrorMsg();
 public:
 	friend class SQLiteCommand;

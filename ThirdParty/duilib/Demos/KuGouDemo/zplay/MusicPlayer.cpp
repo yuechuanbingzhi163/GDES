@@ -9,22 +9,22 @@ CDuiString CMusicPlayer::TimeToString(int time)
 	CDuiString sTime,sMin,sSec;
 	if (time/60<10)
 	{
-		sMin.Format(L"0%d",time/60);
+		sMin.Format(_T("0%d"),time/60);
 	}else
 	{
-		sMin.Format(L"%d",time/60);
+		sMin.Format(_T("%d"),time/60);
 	}
 	
 	if (time%60<10)
 	{
-		sSec.Format(L"0%d",time%60);
+		sSec.Format(_T("0%d"),time%60);
 	}else
 	{
-		sSec.Format(L"%d",time%60);
+		sSec.Format(_T("%d"),time%60);
 	}
 
 	sTime.Append(sMin);
-	sTime.Append(L":");
+	sTime.Append(_T(":"));
 	sTime.Append(sSec);
 	return sTime;
 }
@@ -214,7 +214,7 @@ void CMusicPlayer::Play()
 	if (m_pZplayer->OpenFileW(m_CurMedia->pathFileName.GetData(), sfAutodetect) == 0)
 	{
 		m_pZplayer->Close();
-		MessageBox( L"文件不符合要求", MB_ICONERROR, _T("错误！"), MB_OK);
+		MessageBox( _T("文件不符合要求"), MB_ICONERROR, _T("错误！"), MB_OK);
 					
 		return;
 	}

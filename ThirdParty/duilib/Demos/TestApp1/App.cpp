@@ -124,7 +124,7 @@ public:
         if( uMsg == WM_CREATE ) {
             m_pm.Init(m_hWnd);
             CDialogBuilder builder;
-            CControlUI* pRoot = builder.Create(_T("test1.xml"), (UINT)0, NULL, &m_pm);
+            CControlUI* pRoot = builder.Create(_T("skin.xml"), (UINT)0, NULL, &m_pm);
             ASSERT(pRoot && "Failed to parse XML");
             m_pm.AttachDialog(pRoot);
             m_pm.AddNotifier(this);
@@ -157,7 +157,7 @@ public:
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int nCmdShow)
 {
     CPaintManagerUI::SetInstance(hInstance);
-    CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath() + _T("../skin/TestRes"));
+    CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath() + _T("../skin/xx"));
 
     HRESULT Hr = ::CoInitialize(NULL);
     if( FAILED(Hr) ) return 0;

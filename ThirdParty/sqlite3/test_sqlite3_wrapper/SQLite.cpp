@@ -3,7 +3,7 @@ filename: 	SQLite.cpp
 created:	2012-11-05
 author:		firehood
 
-purpose:	SQLiteæ•°æ®åº“æ“ä½œç±»
+purpose:	SQLiteÊı¾İ¿â²Ù×÷Àà
 *********************************************************************/
 #include "SQLite.h"
 
@@ -108,7 +108,7 @@ BOOL SQLite::ExcuteNonQuery(SQLiteCommand* pCmd)
 	return pCmd->Excute();
 }
 
-// æŸ¥è¯¢(å›è°ƒæ–¹å¼)
+// ²éÑ¯(»Øµ÷·½Ê½)
 BOOL SQLite::ExcuteQuery(LPCTSTR lpSql,QueryCallback pCallBack)
 {
 	if(lpSql == NULL || pCallBack == NULL)
@@ -133,7 +133,7 @@ BOOL SQLite::ExcuteQuery(LPCTSTR lpSql,QueryCallback pCallBack)
 	return TRUE;
 }
 
-// æŸ¥è¯¢
+// ²éÑ¯
 SQLiteDataReader SQLite::ExcuteQuery(LPCTSTR lpSql)
 {
 	if(lpSql == NULL)
@@ -152,7 +152,7 @@ SQLiteDataReader SQLite::ExcuteQuery(LPCTSTR lpSql)
 	return SQLiteDataReader(stmt);
 }
 
-// å¼€å§‹äº‹åŠ¡
+// ¿ªÊ¼ÊÂÎñ
 BOOL SQLite::BeginTransaction()
 {
 	char * errmsg = NULL;
@@ -163,7 +163,7 @@ BOOL SQLite::BeginTransaction()
 	return TRUE;
 }
 
-// æäº¤äº‹åŠ¡
+// Ìá½»ÊÂÎñ
 BOOL SQLite::CommitTransaction()
 {
 	char * errmsg = NULL;
@@ -174,7 +174,7 @@ BOOL SQLite::CommitTransaction()
 	return TRUE;
 }
 
-// å›æ»šäº‹åŠ¡
+// »Ø¹öÊÂÎñ
 BOOL SQLite::RollbackTransaction()
 {
 	char * errmsg = NULL;
@@ -185,7 +185,7 @@ BOOL SQLite::RollbackTransaction()
 	return TRUE;
 }
 
-// è·å–ä¸Šä¸€æ¡é”™è¯¯ä¿¡æ¯
+// »ñÈ¡ÉÏÒ»Ìõ´íÎóĞÅÏ¢
 LPCTSTR SQLite::GetLastErrorMsg()
 {
 #ifdef UNICODE 
@@ -208,7 +208,7 @@ SQLiteDataReader::~SQLiteDataReader()
 	Close();
 }
 
-// è¯»å–ä¸€è¡Œæ•°æ®
+// ¶ÁÈ¡Ò»ĞĞÊı¾İ
 BOOL SQLiteDataReader::Read()
 {
 	if(m_pStmt == NULL)
@@ -222,7 +222,7 @@ BOOL SQLiteDataReader::Read()
 	return TRUE;
 }
 
-// å…³é—­Readerï¼Œè¯»å–ç»“æŸåè°ƒç”¨
+// ¹Ø±ÕReader£¬¶ÁÈ¡½áÊøºóµ÷ÓÃ
 void SQLiteDataReader::Close()
 {
 	if(m_pStmt)
@@ -232,13 +232,13 @@ void SQLiteDataReader::Close()
 	}
 }
 
-// æ€»çš„åˆ—æ•°
+// ×ÜµÄÁĞÊı
 int SQLiteDataReader::ColumnCount(void)
 {
 	return sqlite3_column_count(m_pStmt);
 }
 
-// è·å–æŸåˆ—çš„åç§° 
+// »ñÈ¡Ä³ÁĞµÄÃû³Æ 
 LPCTSTR SQLiteDataReader::GetName(int nCol)
 {
 #ifdef  UNICODE 
@@ -248,13 +248,13 @@ LPCTSTR SQLiteDataReader::GetName(int nCol)
 #endif
 }
 
-// è·å–æŸåˆ—çš„æ•°æ®ç±»å‹
+// »ñÈ¡Ä³ÁĞµÄÊı¾İÀàĞÍ
 SQLITE_DATATYPE SQLiteDataReader::GetDataType(int nCol)
 {
 	return (SQLITE_DATATYPE)sqlite3_column_type(m_pStmt, nCol);
 }
 
-// è·å–æŸåˆ—çš„å€¼(å­—ç¬¦ä¸²)
+// »ñÈ¡Ä³ÁĞµÄÖµ(×Ö·û´®)
 LPCTSTR SQLiteDataReader::GetStringValue(int nCol)
 {
 #ifdef  UNICODE 
@@ -264,25 +264,25 @@ LPCTSTR SQLiteDataReader::GetStringValue(int nCol)
 #endif
 }
 
-// è·å–æŸåˆ—çš„å€¼(æ•´å½¢)
+// »ñÈ¡Ä³ÁĞµÄÖµ(ÕûĞÎ)
 int SQLiteDataReader::GetIntValue(int nCol)
 {
 	return sqlite3_column_int(m_pStmt, nCol);
 }
 
-// è·å–æŸåˆ—çš„å€¼(é•¿æ•´å½¢)
+// »ñÈ¡Ä³ÁĞµÄÖµ(³¤ÕûĞÎ)
 long SQLiteDataReader::GetInt64Value(int nCol)
 {
 	return (long)sqlite3_column_int64(m_pStmt, nCol);
 }
 
-// è·å–æŸåˆ—çš„å€¼(æµ®ç‚¹å½¢)
+// »ñÈ¡Ä³ÁĞµÄÖµ(¸¡µãĞÎ)
 double SQLiteDataReader::GetFloatValue(int nCol)
 {
 	return sqlite3_column_double(m_pStmt, nCol);
 }
 
-// è·å–æŸåˆ—çš„å€¼(äºŒè¿›åˆ¶æ•°æ®)
+// »ñÈ¡Ä³ÁĞµÄÖµ(¶ş½øÖÆÊı¾İ)
 const BYTE* SQLiteDataReader::GetBlobValue(int nCol, int &nLen)
 {
 	nLen = sqlite3_column_bytes(m_pStmt, nCol);

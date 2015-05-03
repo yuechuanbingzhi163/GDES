@@ -80,8 +80,8 @@ public:
             IWebBrowser2* pWebBrowser = NULL;
             pActiveXUI->GetControl(IID_IWebBrowser2, (void**)&pWebBrowser);
             if( pWebBrowser != NULL ) {
-                pWebBrowser->Navigate(L"https://github.com/duilib/duilib",NULL,NULL,NULL,NULL);  
-                //pWebBrowser->Navigate(L"about:blank",NULL,NULL,NULL,NULL); 
+                pWebBrowser->Navigate(_T("https://github.com/duilib/duilib"),NULL,NULL,NULL,NULL);  
+                //pWebBrowser->Navigate(_T("about:blank"),NULL,NULL,NULL,NULL); 
                 pWebBrowser->Release();
             }
         }
