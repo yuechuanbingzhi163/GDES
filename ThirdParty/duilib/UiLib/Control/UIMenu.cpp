@@ -507,7 +507,6 @@ LRESULT CMenuWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		else
 		{
-			CControlUI* pc = m_pm.GetFocus();
 			bHandled = FALSE;
 		}	
 		break;
