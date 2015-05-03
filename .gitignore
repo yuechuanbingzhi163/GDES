@@ -28,6 +28,7 @@
 *.manifest
 *.res
 *.[Oo]bj
+*.db
 
 *.pkg
 *.swp
