@@ -5,6 +5,7 @@
 #include "../ArxHelper/HelperClass.h"
 #include "../MineGE/HelperClass.h"
 #include "../ARX_ReportHelper/ReportHelper.h"
+#include <SqliteHelper/SqliteHelper.h>
 
 // 定义注册服务名称
 #ifndef GESES_CMD_SERVICE_NAME
@@ -120,6 +121,18 @@ public:
 	{
 		ReportHelper::ShowReleatedInfoDlg();
 	}
+	static void HD_Test()
+	{
+		LPCTSTR sql = _T("select * from TypeTable");
+		LPCTSTR szDbPath = _T("D:\\test\\git\\GDES\\Win32\\Debug\\Datas\\pump.db");
+		std::vector<TypeTable> msg;
+		GetPumpMessage(sql,szDbPath,msg);
+		for(int i = 0; i < msg.size(); i++)
+		{
+			TypeTable tt = msg[i];
+			acutPrintf(_T("\n第%d组数据ID:%d"),i+1,tt.id);
+		}
+	}
 
 } ;
 
@@ -138,3 +151,4 @@ ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _InspectionDataDlg, InspectionDat
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _GasPumpDlg, GasPumpDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _MeasureDlg, MeasureDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _ReleatedInfoDlg, ReleatedInfoDlg, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, HD, _Test, Test, ACRX_CMD_TRANSPARENT, NULL )
