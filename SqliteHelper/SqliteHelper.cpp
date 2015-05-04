@@ -1,6 +1,6 @@
 #include "SqliteHelper.h"
 
-bool GetPumpMessage( LPCTSTR sql, LPCTSTR szDbPath, std::vector<TypeTable>& msg )
+bool GetPumpMessage( CString sql, CString szDbPath, std::vector<TypeTable>& msg )
 {
 	SQLite sqlite;
 	if(!sqlite.Open(szDbPath))
@@ -24,6 +24,7 @@ bool GetPumpMessage( LPCTSTR sql, LPCTSTR szDbPath, std::vector<TypeTable>& msg 
 		//acutPrintf( _T("*******************************************\n"));
 		TypeTable typeTable;
 		typeTable.id = Reader.GetIntValue(1);
+		//_tcscpy(typeTable.type,Reader.GetStringValue(2));
 		typeTable.type = Reader.GetStringValue(2);
 		typeTable.absP = Reader.GetIntValue(3);
 		typeTable.weight = Reader.GetIntValue(4);

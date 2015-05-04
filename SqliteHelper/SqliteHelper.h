@@ -1,17 +1,18 @@
 #pragma once
 
+#include <afx.h>
 #include "SQLite.h"
 #include <vector>
 
 struct TypeTable 
 {
 	int id;
-	LPCTSTR type;
+	CString type;
 	int absP;
 	int weight;
 	int length;
 	int weidth;
 	int heigth;
-	LPCTSTR factName;
+	CString factName;
 };
-extern bool GetPumpMessage(LPCTSTR sql, LPCTSTR szDbPath, std::vector<TypeTable>& msg );
+extern bool GetPumpMessage(CString sql, CString szDbPath, std::vector<TypeTable>& msg );
