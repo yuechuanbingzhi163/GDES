@@ -7,11 +7,7 @@ ACRX_DXF_DEFINE_MEMBERS (
     FieldInfoObject, AcDbObject,
     AcDb::kDHL_CURRENT, AcDb::kMReleaseCurrent,
     AcDbProxyEntity::kNoOperation, FIELDINFOOBJECT,
-    MINEGEAPP
-    | Product Desc:     A description for your object
-    | Company:          Your company name
-    | WEB Address:      Your company WEB site address
-)
+    MINEGEAPP)
 
     FieldInfoObject::FieldInfoObject () : AcDbObject ()
 {
@@ -37,8 +33,8 @@ Acad::ErrorStatus FieldInfoObject::dwgOutFields ( AcDbDwgFiler* pFiler ) const
     pFiler->writeInt32( m_info.m_minValue2 );
     pFiler->writeInt32( m_info.m_maxValue2 );
 
-    pFiler->writeInt32( m_info.m_minValue );
-    pFiler->writeInt32( m_info.m_maxValue );
+    pFiler->writeDouble( m_info.m_minValue );
+    pFiler->writeDouble( m_info.m_maxValue );
 
     pFiler->writeInt16( m_info.m_lt );
     pFiler->writeString( ( LPCTSTR )m_info.m_varName );
