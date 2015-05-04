@@ -445,28 +445,60 @@ void UIHelper::SetGESize()
 
 }
 
-void UIHelper::GetPumpDB()
+static void GetTypeTable(TypeTableVector& msg)
 {
+	CString dataDirName = _T( "Datas\\" );
+	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
+
 	int x = 1000;
 	CString strX;
 	strX.Format(_T("%d"),x);
 	CString sql = _T("select * from TypeTable where weight <= ") + strX;
-	CString dataDirName = _T( "Datas\\" );
-	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
-	//LPCTSTR szDbPath = _T("D:\\test\\git\\GDES\\x64\\Debug\\Datas\\pump.db");
-	std::vector<TypeTable> msg;
-	if(!GetPumpMessage(sql,szDbPath,msg))
+	if(!GetPumpTypeTable(sql,szDbPath,msg))
 	{
 		AfxMessageBox(_T("数据库打开失败!"));
 		return;
 	}
+
 	for(int i = 0; i < msg.size(); i++)
 	{
 		TypeTable tt = msg[i];
-		CString strType,strFactName;
-		//strType.Format(_T("%s"),tt.type);
-		//strFactName.Format(_T("%s"),tt.factName);
 		acutPrintf(_T("\n第%d组数据\nID:%d,类型%s,吸入绝压:%d,泵重:%d,长:%d,宽:%d,高:%d,厂家:%s"),
 			i+1,tt.id,tt.type,tt.absP,tt.weight,tt.length,tt.weidth,tt.heigth,tt.factName);
 	}
+}
+
+static void GetPropertTable(PropertyTableVector& msg)
+{
+	CString dataDirName = _T( "Datas\\" );
+	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
+
+	CString sql = _T("select * from PropertyTable where catagory_id = 1");
+	if(!GetPumpPropertyTable(sql,szDbPath,msg))
+	{
+		AfxMessageBox(_T("数据库打开失败!"));
+		return;
+	}
+
+	for(int i = 0; i < msg.size(); i++)
+	{
+		PropertyTable tt = msg[i];
+		acutPrintf(_T("\n第%d组数据\nID:%d,转速:%d,电机功率:%.1f,最大气量:%.2f,极限压力:%d,吸入绝压:%d"),
+			i+1,tt.id,tt.speed,tt.power,tt.maxQ,tt.maxP,tt.absP);
+	}
+}
+void UIHelper::GetPumpDB(TableName tableName)
+{
+	TypeTableVector typeMSG;
+	PropertyTableVector propertyMSG;
+	switch(tableName)
+	{
+	case DB_TypeTable:
+		GetTypeTable(typeMSG);
+		break;
+	case DB_PropertyTable:
+		GetPropertTable(propertyMSG);
+		break;
+	}
+
 }

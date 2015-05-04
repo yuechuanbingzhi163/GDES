@@ -9,6 +9,6 @@ public:
 	static void DestroyDataListDockBar();
 	static void CreatReport();
 	static void SetGESize();
-	static void GetPumpDB();
+	static void GetPumpDB(TableName tableName);
 };
 

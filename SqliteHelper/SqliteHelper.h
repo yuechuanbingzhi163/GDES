@@ -4,6 +4,12 @@
 #include "SQLite.h"
 #include <vector>
 
+enum TableName
+{
+	DB_TypeTable = 0,
+	DB_PropertyTable = 1
+};
+
 struct TypeTable 
 {
 	int id;
@@ -15,4 +21,19 @@ struct TypeTable
 	int heigth;
 	CString factName;
 };
-extern bool GetPumpMessage(CString sql, CString szDbPath, std::vector<TypeTable>& msg );
+
+struct PropertyTable 
+{
+	int id;
+	int speed;
+	double power;
+	double maxQ;
+	int maxP;
+	int absP;
+};
+
+typedef std::vector<TypeTable> TypeTableVector;
+typedef std::vector<PropertyTable> PropertyTableVector;
+
+extern bool GetPumpTypeTable(CString sql, CString szDbPath, TypeTableVector& msg );
+extern bool GetPumpPropertyTable(CString sql, CString szDbPath, PropertyTableVector& msg );

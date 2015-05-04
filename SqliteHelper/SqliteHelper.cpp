@@ -1,6 +1,6 @@
 #include "SqliteHelper.h"
 
-bool GetPumpMessage( CString sql, CString szDbPath, std::vector<TypeTable>& msg )
+bool GetPumpTypeTable( CString sql, CString szDbPath, TypeTableVector& msg )
 {
 	SQLite sqlite;
 	if(!sqlite.Open(szDbPath))
@@ -14,17 +14,8 @@ bool GetPumpMessage( CString sql, CString szDbPath, std::vector<TypeTable>& msg 
 	int index = 0;
 	while(Reader.Read())
 	{
-		//acutPrintf( _T("***************【第%d条记录】***************\n"),++index);
-		//acutPrintf( _T("字段名:%s 字段值:%d\n"),Reader.GetName(0),Reader.GetIntValue(0));
-		//acutPrintf( _T("字段名:%s 字段值:%s\n"),Reader.GetName(1),Reader.GetStringValue(1));
-		//acutPrintf( _T("字段名:%s 字段值:%s\n"),Reader.GetName(2),Reader.GetStringValue(2));
-		//acutPrintf( _T("字段名:%s 字段值:%d\n"),Reader.GetName(3),Reader.GetIntValue(3));
-		//acutPrintf( _T("字段名:%s 字段值:%s\n"),Reader.GetName(4),Reader.GetStringValue(4));
-		//acutPrintf( _T("字段名:%s 字段值:%s\n"),Reader.GetName(5),Reader.GetStringValue(5));
-		//acutPrintf( _T("*******************************************\n"));
 		TypeTable typeTable;
 		typeTable.id = Reader.GetIntValue(1);
-		//_tcscpy(typeTable.type,Reader.GetStringValue(2));
 		typeTable.type = Reader.GetStringValue(2);
 		typeTable.absP = Reader.GetIntValue(3);
 		typeTable.weight = Reader.GetIntValue(4);
@@ -36,4 +27,30 @@ bool GetPumpMessage( CString sql, CString szDbPath, std::vector<TypeTable>& msg 
 	}
 	Reader.Close();
 return true;
+}
+
+bool GetPumpPropertyTable( CString sql, CString szDbPath, PropertyTableVector& msg )
+{
+	SQLite sqlite;
+	if(!sqlite.Open(szDbPath))
+	{
+		return false;
+	}
+
+	SQLiteDataReader Reader = sqlite.ExcuteQuery(sql);
+
+	int index = 0;
+	while(Reader.Read())
+	{
+		PropertyTable propertyTable;
+		propertyTable.id = Reader.GetIntValue(1);
+		propertyTable.speed = Reader.GetIntValue(2);
+		propertyTable.power = Reader.GetFloatValue(3);
+		propertyTable.maxQ = Reader.GetFloatValue(4);
+		propertyTable.maxP = Reader.GetIntValue(5);
+		propertyTable.absP = Reader.GetIntValue(6);
+		msg.push_back(propertyTable);
+	}
+	Reader.Close();
+	return true;
 }

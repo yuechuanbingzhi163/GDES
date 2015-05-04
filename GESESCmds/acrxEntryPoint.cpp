@@ -122,7 +122,8 @@ public:
 	}
 	static void HD_Test()
 	{
-		UIHelper::GetPumpDB();
+		UIHelper::GetPumpDB(DB_TypeTable);
+		UIHelper::GetPumpDB(DB_PropertyTable);
 	}
 
 } ;
