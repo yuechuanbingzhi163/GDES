@@ -14,7 +14,9 @@ CMenuUI::CMenuUI()
 }
 
 CMenuUI::~CMenuUI()
-{}
+{
+
+}
 
 LPCTSTR CMenuUI::GetClass() const
 {
@@ -380,7 +382,8 @@ LRESULT CMenuWnd::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandl
 
 		CDialogBuilder builder;
 
-		CControlUI* pRoot = builder.Create(m_xml,UINT(0), this, &m_pm);
+		//CControlUI* pRoot = builder.Create(m_xml,UINT(0), this, &m_pm);
+		CControlUI* pRoot = builder.Create(m_xml,_T("xml"), this, &m_pm);
 		m_pm.GetShadow()->ShowShadow(false);
 		m_pm.AttachDialog(pRoot);
 		m_pm.AddNotifier(this);
@@ -505,11 +508,7 @@ LRESULT CMenuWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			m_pOwner->SetPos(m_pOwner->GetPos());
 			m_pOwner->SetFocus();
 		}
-		else
-		{
-			CControlUI* pc = m_pm.GetFocus();
-			bHandled = FALSE;
-		}	
+		bHandled = FALSE;
 		break;
 	case WM_RBUTTONDOWN:
 	case WM_CONTEXTMENU:
