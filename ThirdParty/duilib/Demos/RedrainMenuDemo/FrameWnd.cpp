@@ -75,26 +75,32 @@ void CFrameWnd::Notify( TNotifyUI& msg )
 		 {
 			 if (bChecked)
 			 {
-				 MessageBox(m_hWnd, _T("你选中Menu_Test1"), _T(""), MB_OK);
+				 //不要使用m_hWnd参数，否则会调用messagebox将窗口隐藏
+				 //MessageBox(m_hWnd, _T("你选中Menu_Test1"), _T(""), MB_OK);
+				 MessageBox(0, _T("你选中Menu_Test1"), _T(""), MB_OK);
 			 } 
 			 else
 			 {
-				 MessageBox(m_hWnd, _T("你取消Menu_Test1"), _T(""), MB_OK);
+				 //MessageBox(m_hWnd, _T("你取消Menu_Test1"), _T(""), MB_OK);
+				 MessageBox(0, _T("你取消Menu_Test1"), _T(""), MB_OK);
 			 }			 
 		 }
 		 else if ( *strMenuName == _T("Menu_Test2")) 
 		 {
-				MessageBox(m_hWnd, _T("你单击了Menu_Test2"), _T(""), MB_OK);		 
+				//MessageBox(m_hWnd, _T("你单击了Menu_Test2"), _T(""), MB_OK);
+				MessageBox(0, _T("你单击了Menu_Test2"), _T(""), MB_OK);
 		 }
 		 else if ( *strMenuName == _T("Menu_Test3")) 
 		 {
 			 if (bChecked)
 			 {
-				 MessageBox(m_hWnd, _T("你选中Menu_Test3"), _T(""), MB_OK);
+				 //MessageBox(m_hWnd, _T("你选中Menu_Test3"), _T(""), MB_OK);
+				 MessageBox(0, _T("你选中Menu_Test3"), _T(""), MB_OK);
 			 } 
 			 else
 			 {
-				 MessageBox(m_hWnd, _T("你取消Menu_Test3"), _T(""), MB_OK);
+				 //MessageBox(m_hWnd, _T("你取消Menu_Test3"), _T(""), MB_OK);
+				 MessageBox(0, _T("你取消Menu_Test3"), _T(""), MB_OK);
 			 }			 
 		 }
 

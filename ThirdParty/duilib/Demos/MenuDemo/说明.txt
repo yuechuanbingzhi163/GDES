@@ -1,0 +1,3 @@
+在原来duilib里的MenuDemo里将图片等资源嵌入到exe里，在xml里采用res的方式来描述所用的图片资源
+
+普通的xml里采用的是file=xxx.png来描述图片，而MenuDemo里采用的是res='119' restype='png'（资源编号）来描述图片

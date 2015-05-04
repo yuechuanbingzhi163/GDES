@@ -1,17 +1,34 @@
-#include "duilib.h"
+#include <UiLib\UIlib.h>
+using namespace UiLib;
 
-int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+#include "main_frame.hpp"
+
+#if defined(WIN32) && !defined(UNDER_CE)
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int nCmdShow)
+#else
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lpCmdLine, int nCmdShow)
+#endif
 {
-    ::CoInitialize(NULL);
+	CPaintManagerUI::SetInstance(hInstance);
 
-    CPaintManagerUI::SetInstance(hInstance);
-	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath()+_T("../skin/MenuRes"));
+#if defined(WIN32) && !defined(UNDER_CE)
+	HRESULT Hr = ::CoInitialize(NULL);
+#else
+	HRESULT Hr = ::CoInitializeEx(NULL, COINIT_MULTITHREADED);
+#endif
+	if( FAILED(Hr) ) return 0;
 
-	CFrameWnd *pFrame = new CFrameWnd(_T("Main_dlg.xml"));
-    pFrame->Create(NULL, _T("Redrain²Ëµ¥Demo"), UI_WNDSTYLE_FRAME, WS_EX_WINDOWEDGE);
-    pFrame->ShowModal();
+	MainFrame* pFrame = new MainFrame();
+	if( pFrame == NULL ) return 0;
+#if defined(WIN32) && !defined(UNDER_CE)
+	pFrame->Create(NULL, _T("MenuTest"), UI_WNDSTYLE_FRAME, WS_EX_STATICEDGE | WS_EX_APPWINDOW, 0, 0, 600, 800);
+#else
+	pFrame->Create(NULL, _T("MenuTest"), UI_WNDSTYLE_FRAME, WS_EX_TOPMOST, 0, 0, GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
+#endif
+	pFrame->CenterWindow();
+	::ShowWindow(*pFrame, SW_SHOW);
 
-    delete pFrame;
-    ::CoUninitialize();
-    return 0;
+	CPaintManagerUI::MessageLoop();
+
+	return 0;
 }
