@@ -381,6 +381,10 @@
 			RelativePath=".\MenuDemo.aps"
 			>
 		</File>
+		<File
+			RelativePath=".\หตร๗.txt"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

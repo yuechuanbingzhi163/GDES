@@ -508,10 +508,7 @@ LRESULT CMenuWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			m_pOwner->SetPos(m_pOwner->GetPos());
 			m_pOwner->SetFocus();
 		}
-		else
-		{
-			bHandled = FALSE;
-		}	
+		bHandled = FALSE;
 		break;
 	case WM_RBUTTONDOWN:
 	case WM_CONTEXTMENU:
