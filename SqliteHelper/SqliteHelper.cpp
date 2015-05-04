@@ -5,7 +5,7 @@ bool GetPumpMessage( LPCTSTR sql, LPCTSTR szDbPath, std::vector<TypeTable>& msg 
 	SQLite sqlite;
 	if(!sqlite.Open(szDbPath))
 	{
-		_tprintf(_T("%s\n"),sqlite.GetLastErrorMsg());
+		//_tprintf(_T("%s\n"),sqlite.GetLastErrorMsg());
 		return false;
 	}
 

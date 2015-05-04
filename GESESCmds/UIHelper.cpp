@@ -444,3 +444,25 @@ void UIHelper::SetGESize()
 	DataHelper::SetPropertyData(objId,_T("大小"),lenthStr );
 
 }
+
+void UIHelper::GetPumpDB()
+{
+	int x = 1000;
+	CString strX;
+	strX.Format(_T("%d"),x);
+	LPCTSTR sql = _T("select * from TypeTable where weight <= 1000 ");
+	CString dataDirName = _T( "Datas\\" );
+	LPCTSTR szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
+	//LPCTSTR szDbPath = _T("D:\\test\\git\\GDES\\x64\\Debug\\Datas\\pump.db");
+	std::vector<TypeTable> msg;
+	if(!GetPumpMessage(sql,szDbPath,msg))
+	{
+		AfxMessageBox(_T("数据库打开失败!"));
+		return;
+	}
+	for(int i = 0; i < msg.size(); i++)
+	{
+		TypeTable tt = msg[i];
+		acutPrintf(_T("\n第%d组数据ID:%d"),i+1,tt.id);
+	}
+}
