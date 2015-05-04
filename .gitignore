@@ -47,6 +47,8 @@
 *.svn
 ~$*
 
+*.dump
+
 Ankh.NoLoad
 build/
 [Oo]bj/
