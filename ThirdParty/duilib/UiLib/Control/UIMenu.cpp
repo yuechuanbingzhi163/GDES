@@ -14,7 +14,9 @@ CMenuUI::CMenuUI()
 }
 
 CMenuUI::~CMenuUI()
-{}
+{
+
+}
 
 LPCTSTR CMenuUI::GetClass() const
 {
@@ -380,7 +382,8 @@ LRESULT CMenuWnd::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandl
 
 		CDialogBuilder builder;
 
-		CControlUI* pRoot = builder.Create(m_xml,UINT(0), this, &m_pm);
+		//CControlUI* pRoot = builder.Create(m_xml,UINT(0), this, &m_pm);
+		CControlUI* pRoot = builder.Create(m_xml,_T("xml"), this, &m_pm);
 		m_pm.GetShadow()->ShowShadow(false);
 		m_pm.AttachDialog(pRoot);
 		m_pm.AddNotifier(this);
