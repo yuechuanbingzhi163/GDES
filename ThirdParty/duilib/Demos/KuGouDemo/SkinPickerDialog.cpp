@@ -146,7 +146,7 @@ void CSkinPickerDialog::Notify(TNotifyUI& msg)
 		else if (msg.pSender->GetName() == kBtnCustom)
 		{
 			vector<CDuiString> names;
-			if (CFileUtil::OpenFile(L"JEPG Files(*.jpg)\0*.jpg\0BMP Files\0*.bmp\0PNG Files\0*.png\0\0",GetHWND(),names, false))
+			if (CFileUtil::OpenFile(_T("JEPG Files(*.jpg)\0*.jpg\0BMP Files\0*.bmp\0PNG Files\0*.png\0\0"),GetHWND(),names, false))
 			{
 				SetBkImage(names[0]);
 				m_pMainWnd->SetBkImage(names[0]);

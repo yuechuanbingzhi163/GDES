@@ -128,7 +128,7 @@ BOOL CFileUtil::BrowseAllFile(CDuiString path,LPCWSTR lpstrFilter,vector<FILE_ST
 
 	file.fileName = fd.cFileName;
 	file.size = fd.nFileSizeLow-fd.nFileSizeHigh;
-	file.name = file.fileName.Left(file.fileName.Find(L"."));
+	file.name = file.fileName.Left(file.fileName.Find(_T(".")));
 	file.exName = file.fileName.Right(file.fileName.GetLength()-file.name.GetLength()-1);
 
 	if (lpstrFilter!=NULL)
@@ -153,7 +153,7 @@ BOOL CFileUtil::BrowseAllFile(CDuiString path,LPCWSTR lpstrFilter,vector<FILE_ST
 		{  
 			file.fileName = fd.cFileName;
 			file.size = fd.nFileSizeLow-fd.nFileSizeHigh;
-			file.name = file.fileName.Left(file.fileName.Find(L"."));
+			file.name = file.fileName.Left(file.fileName.Find(_T(".")));
 			file.exName = file.fileName.Right(file.fileName.GetLength()-file.name.GetLength()-1);
 			if (lpstrFilter!=NULL)
 			{
@@ -178,15 +178,15 @@ BOOL CFileUtil::BrowseAllFile(CDuiString path,LPCWSTR lpstrFilter,vector<FILE_ST
 void CFileUtil::OpenDir(HWND hwndOwner,CDuiString path,CDuiString fileName)
 {
 	CDuiString str;
-	str.Format(L"/select,%s",path);
-	str.Append(L"\\");
+	str.Format(_T("/select,%s"),path);
+	str.Append(_T("\\"));
 	str.Append(fileName);
 	ShellExecute(hwndOwner,_T("open"),_T("Explorer.exe"),str,NULL,SW_SHOWNORMAL);
 }
 
 void CFileUtil::SplitFileName(CDuiString fileName,CDuiString &name,CDuiString &exName)
 {
-	name = fileName.Left(fileName.Find(L"."));
+	name = fileName.Left(fileName.Find(_T(".")));
 	exName = fileName.Right(fileName.GetLength()-name.GetLength()-1);
 }
 

@@ -1,3 +1,6 @@
+*.db
+*.mdb
+
 *.o
 *.a
 *.so
@@ -28,7 +31,6 @@
 *.manifest
 *.res
 *.[Oo]bj
-*.db
 
 *.pkg
 *.swp

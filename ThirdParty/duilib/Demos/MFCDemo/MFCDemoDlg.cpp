@@ -96,9 +96,11 @@ BOOL CMFCDemoDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
 	CPaintManagerUI::SetInstance(AfxGetInstanceHandle());
-	m_dlgWnd.Create(this->GetSafeHwnd(), _T("DUIWnd"), UI_WNDSTYLE_CHILD, 0, 0, 0, 800, 600); 
+	//CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath());
+	m_dlgWnd.Create(*this, _T("DUIWnd"), UI_WNDSTYLE_CHILD, 0, 0, 0, 800, 600);
+	//m_dlgWnd.ShowWindow(true);
 	// TODO: 在此添加额外的初始化代码
-	this->MoveWindow(0, 0, 800, 572);
+	this->MoveWindow(0, 0, 900, 700);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }

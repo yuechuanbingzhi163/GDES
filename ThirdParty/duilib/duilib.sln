@@ -35,7 +35,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameDemo", "Demos\GameDemo\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QQDemo", "Demos\QQDemo\QQDemo.vcproj", "{5EEA82DD-05C7-477F-8870-942E8758BFFF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MenuDemo", "Demos\MenuDemo\MenuDemo.vcproj", "{E5C5C015-EC83-4793-8B6F-BE0F2FCC08A1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RedrainMenuDemo", "Demos\RedrainMenuDemo\RedrainMenuDemo.vcproj", "{E5C5C015-EC83-4793-8B6F-BE0F2FCC08A1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8008C984-6884-460A-8242-9A58A7A77036} = {8008C984-6884-460A-8242-9A58A7A77036}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KuGouDemo", "Demos\KuGouDemo\KuGouDemo.vcproj", "{8ECC920A-063A-4D39-BCD3-EDF471BDE4A8}"
 EndProject

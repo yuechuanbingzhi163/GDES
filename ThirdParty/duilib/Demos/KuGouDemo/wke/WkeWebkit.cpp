@@ -6,7 +6,7 @@
 
 
 CWkeWebkitWnd::CWkeWebkitWnd() : 
-	m_strUrl(L""),
+	m_strUrl(_T("")),
 	m_pOwner(NULL),
 	m_pWebView(NULL),
 	m_bInit(false),
