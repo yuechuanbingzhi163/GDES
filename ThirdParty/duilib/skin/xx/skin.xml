@@ -12,10 +12,9 @@
   <!--Default shared="true" name="Button" value="textcolor=&quot;#000000&quot; hottextcolor=&quot;#FFFFFF&quot; focusedtextcolor=&quot;#000000&quot; pushedtextcolor=&quot;#77a8de&quot; normalimage=&quot;file='Button/btn.png' corner='5,11,5,11' source='0,0,96,24'&quot; hotimage=&quot;file='Button/btn.png' corner='5,11,5,11' source='0,24,96,48'&quot; pushedimage=&quot;file='Button/btn.png' corner='5,11,5,11' source='0,48,96,72'&quot; disabledimage=&quot;file='Button/btn.png' corner='5,11,5,11' source='0,72,96,96'&quot;" /-->
   <Default shared="true" name="Option" value="textcolor=&quot;#FFbac0c5&quot; hottextcolor=&quot;#FF386382&quot; selectedtextcolor=&quot;#FF386382&quot; disabledtextcolor=&quot;#FFbac0c5&quot; textpadding=&quot;18,2,0,0&quot; align=&quot;left&quot; selectedimage=&quot;file='Button/RadioBtnSel.png' source='0,0,13,13' dest='0,5,14,19'&quot; normalimage=&quot;file='Button/RadioBtnNon.png' source='0,0,13,13' dest='0,5,14,19'&quot;" />
   <Default shared="true" name="CheckBox" value="textcolor=&quot;#FFbac0c5&quot; hottextcolor=&quot;#FF386382&quot; selectedtextcolor=&quot;#FF386382&quot; disabledtextcolor=&quot;#FFbac0c5&quot; textpadding=&quot;20,2,0,0&quot; align=&quot;left&quot; selectedimage=&quot;file='Icon/checked.png' dest='0,2,16,18'&quot; normalimage=&quot;file='Icon/unchecked.png' dest='0,2,16,18'&quot;" />
-  
+
   <!-- 标题栏背景色 bkcolor、bkcolor2分别是渐变色的2个值-->
   <VerticalLayout  bkcolor="#FFF0F0F0" bkcolor2="#FFAAAAA0">
-    <VerticalLayout bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FF768D9B" bordersize="1" >
     <Option text="扩展单选框" width="100" group="RadioBoxTest" />
     <Option text="扩展单选框" width="100" group="RadioBoxTest" />
 
@@ -23,31 +22,27 @@
     <Control height="4"/>
 
     <Button name="changeskinbtn" height="20" text="换肤" maxwidth="120" />
-  </VerticalLayout>
 
-    <HorizontalLayout>
-       <VerticalLayout bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FF768D9B" bordersize="1" >
-    <CheckBox name="IDC_DDSP_CHECK" text="抽采达标工艺方案设计管理文件" width="300" />
+
+  <CheckBox name="IDC_DDSP_CHECK" text="抽采达标工艺方案设计管理文件" width="300" />
+  <!--VerticalLayout bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FF768D9B" bordersize="1" >  </VerticalLayout-->
     <CheckBox name="IDC_DCSEL_CHECK" text="为抽采达标服务的各项工程布局、工程量" width="300"/>
     <CheckBox name="IDC_SFCR_CHECK" text="进度、资金计划、接续关系" width="300"/>
     <CheckBox name="IDC_CEME_CHECK" text="施工设备、主要器材" width="300"/>
-  </VerticalLayout>
-<VerticalLayout width="4"/>
-<VerticalLayout bkcolor="#FFD1E8F5" bkcolor2="#FFC6E0F1" bordercolor="#FF768D9B" bordersize="1" >
+
+
+  <CheckBox name="IDC_MFCD_CHECK" text="采掘工作面施工设计管理文件" width="300"/>
+
     <CheckBox name="IDC_MFCD_CHECK" text="采掘工作面施工设计管理文件" width="300"/>
     <CheckBox name="IDC_DPCRD_CHECK" text="钻孔参数表、施工要求、钻孔工程量" width="300" />
     <CheckBox name="IDC_CES_CHECK" text="施工设备与进度计划" width="300"/>
     <CheckBox name="IDC_EROM_CHECK" text="预期效果及组织管理" width="300" />
-    <ChekBox name="IDC_BL_CHECK" text="抽采钻孔布置图" width="300"/>
+    <CheckBox name="IDC_BL_CHECK" text="抽采钻孔布置图" width="300"/>
     <CheckBox name="IDC_ETPG_CHECK" text="有效抽瓦斯时间" width="300" />
     <CheckBox name="IDC_SM_CHECK" text="安全技术措施" width="300" />
-</VerticalLayout>
-    </HorizontalLayout>
 
 
-
-      <VerticalLayout /> <!-- 占空位，占据上面所有的空位-->
-
+<!--VerticalLayout width="4"/-->
    
   </VerticalLayout>
 </Window>
