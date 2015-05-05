@@ -126,13 +126,10 @@ public:
 		UIHelper::SelectPump();
 	}
 
-	static void HD_Test()
+	static void JL_PumpsSelect()
 	{
-		UIHelper::GetPumpDB(DB_TypeTable);
-		UIHelper::GetPumpDB(DB_PropertyTable);
+		UIHelper::SelectPumps();
 	}
-
-
 } ;
 
 //-----------------------------------------------------------------------------
@@ -151,4 +148,4 @@ ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _GasPumpDlg, GasPumpDlg, ACRX_CMD
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _MeasureDlg, MeasureDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _ReleatedInfoDlg, ReleatedInfoDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _PumpSelect, PumpSelect, ACRX_CMD_TRANSPARENT, NULL )
-ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, HD, _Test, Test, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _PumpsSelect, PumpsSelect, ACRX_CMD_TRANSPARENT, NULL )

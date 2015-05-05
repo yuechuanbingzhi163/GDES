@@ -9,7 +9,7 @@ public:
 	static void DestroyDataListDockBar();
 	static void CreatReport();
 	static void SetGESize();
-	static void GetPumpDB(TableName tableName);
 	static void SelectPump();
+	static void SelectPumps();
 };
 

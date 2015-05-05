@@ -69,6 +69,9 @@ public:
 	// 用一种颜色显示图元的所有标签图元
 	static void ShowAllTagGE(const AcDbObjectId& objId, unsigned short colorIndex);
 
+	// 用一种颜色显示高亮显示某个图元
+	static void HighLightShowGE(const AcDbObjectId& objId, unsigned short colorIndex);
+
 	// 用一种颜色显示标签图元所关联的宿主图元HostGE
 	static void ShowHostGE(const AcDbObjectId& objId, unsigned short colorIndex);
 

@@ -4,12 +4,6 @@
 #include "SQLite.h"
 #include <vector>
 
-enum TableName
-{
-	DB_TypeTable = 0,
-	DB_PropertyTable = 1
-};
-
 struct TypeTable 
 {
 	int id;

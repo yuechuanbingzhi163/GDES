@@ -6,6 +6,7 @@
 
 #include "../MineGE/DataListHelper.h"
 #include "../MineGE/DataHelper.h"
+#include "../MineGE/DrawHelper.h"
 #include "../ArxHelper/ArxUtilHelper.h"
 #include "../ARX_ReportHelper/ReportHelper.h"
 
@@ -445,64 +446,6 @@ void UIHelper::SetGESize()
 
 }
 
-static void GetTypeTable(TypeTableVector& msg)
-{
-	CString dataDirName = _T( "Datas\\" );
-	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
-
-	int x = 1000;
-	CString strX;
-	strX.Format(_T("%d"),x);
-	CString sql = _T("select * from TypeTable where weight <= ") + strX;
-	if(!GetPumpTypeTable(sql,szDbPath,msg))
-	{
-		AfxMessageBox(_T("数据库打开失败!"));
-		return;
-	}
-
-	for(int i = 0; i < msg.size(); i++)
-	{
-		TypeTable tt = msg[i];
-		acutPrintf(_T("\n第%d组数据\nID:%d,类型%s,吸入绝压:%d,泵重:%d,长:%d,宽:%d,高:%d,厂家:%s"),
-			i+1,tt.id,tt.type,tt.absP,tt.weight,tt.length,tt.weidth,tt.heigth,tt.factName);
-	}
-}
-
-static void GetPropertTable(PropertyTableVector& msg)
-{
-	CString dataDirName = _T( "Datas\\" );
-	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
-
-	CString sql = _T("select * from PropertyTable where catagory_id = 1");
-	if(!GetPumpPropertyTable(sql,szDbPath,msg))
-	{
-		AfxMessageBox(_T("数据库打开失败!"));
-		return;
-	}
-
-	for(int i = 0; i < msg.size(); i++)
-	{
-		PropertyTable tt = msg[i];
-		acutPrintf(_T("\n第%d组数据\nID:%d,转速:%d,电机功率:%.1f,最大气量:%.2f,极限压力:%d,吸入绝压:%d"),
-			i+1,tt.id,tt.speed,tt.power,tt.maxQ,tt.maxP,tt.absP);
-	}
-}
-void UIHelper::GetPumpDB(TableName tableName)
-{
-	TypeTableVector typeMSG;
-	PropertyTableVector propertyMSG;
-	switch(tableName)
-	{
-	case DB_TypeTable:
-		GetTypeTable(typeMSG);
-		break;
-	case DB_PropertyTable:
-		GetPropertTable(propertyMSG);
-		break;
-	}
-
-}
-
 static void PrintPropertyTable( const PropertyTable& pt)
 {
 	//acutPrintf(_T("\n***************************"));
@@ -516,7 +459,7 @@ static void PrintTypeTable( const TypeTable& tt)
 {
 	//acutPrintf(_T("\n***************************"));
 	acutPrintf(_T("\n**********类型表**********"));
-	acutPrintf(_T("\nID:%d,类型%s,吸入绝压:%d,泵重:%d,长:%d,宽:%d,高:%d,厂家:%s"),
+	acutPrintf(_T("\nID:%d,类型%s,最低吸入绝压:%d,泵重:%d,长:%d,宽:%d,高:%d,厂家:%s"),
 		tt.id,tt.type,tt.absP,tt.weight,tt.length,tt.weidth,tt.heigth,tt.factName);
 	acutPrintf(_T("\n"));
 }
@@ -560,7 +503,7 @@ static void SelectPumpByQP(const PropertyTableVector& propertyTableVector,double
 		if( (abs(minP - pt.absP) < 1e-5) && ( abs(minQ - pt.maxQ) < 1e-5) ) 
 		{
 			retPropertyTableVector.push_back(pt);
-			PrintPropertyTable(pt);
+			//PrintPropertyTable(pt);
 		}
 	}
 
@@ -584,7 +527,7 @@ static bool SelectPumpType( const CString& strID ,TypeTable& selTT)
 	for(int i = 0; i < typeTableVector.size(); i++)
 	{
 		TypeTable tt = typeTableVector[i];
-		PrintTypeTable(tt);
+		//PrintTypeTable(tt);
 		selTT = tt;
 	}
 	return true;
@@ -611,6 +554,34 @@ static void SelectMinPower( const PropertyTableVector& retPropertyTableVector,Pr
 			selPT = pt;
 		}
 	}
+}
+
+static void WritePumpDatas( const AcDbObjectId& objId, const PropertyTable& selPT,const TypeTable& selTT )
+{
+	CString strTemp;
+	strTemp.Format(_T("%d"),selPT.absP);
+	DataHelper::SetPropertyData(objId,_T("吸入绝压"),strTemp);
+	strTemp.Format(_T("%d"),selPT.speed);
+	DataHelper::SetPropertyData(objId,_T("转速"),strTemp);
+	strTemp.Format(_T("%.1lf"),selPT.power);
+	DataHelper::SetPropertyData(objId,_T("电机功率"),strTemp);
+	strTemp.Format(_T("%.2lf"),selPT.maxQ);
+	DataHelper::SetPropertyData(objId,_T("最大气量"),strTemp);
+	strTemp.Format(_T("%d"),selPT.maxP);
+	DataHelper::SetPropertyData(objId,_T("极限压力"),strTemp);
+
+	DataHelper::SetPropertyData(objId,_T("型号"),selTT.type);
+	strTemp.Format(_T("%d"),selTT.absP);
+	DataHelper::SetPropertyData(objId,_T("最低吸入绝压"),strTemp);
+	strTemp.Format(_T("%d"),selTT.weight);
+	DataHelper::SetPropertyData(objId,_T("泵重"),strTemp);
+	strTemp.Format(_T("%d"),selTT.length);
+	DataHelper::SetPropertyData(objId,_T("长"),strTemp);
+	strTemp.Format(_T("%d"),selTT.weidth);
+	DataHelper::SetPropertyData(objId,_T("宽"),strTemp);
+	strTemp.Format(_T("%d"),selTT.heigth);
+	DataHelper::SetPropertyData(objId,_T("高"),strTemp);
+	DataHelper::SetPropertyData(objId,_T("厂家"),selTT.factName);
 }
 
 static bool PumpSelecting( const AcDbObjectId& objId )
@@ -641,6 +612,8 @@ static bool PumpSelecting( const AcDbObjectId& objId )
 	if(vLenth < 1) 
 	{
 		AfxMessageBox(_T("没有合适的瓦斯泵型号!"));
+		//用红色表示高亮
+		DrawHelper::HighLightShowGE(objId,240);
 		return false;
 	}
 	if(vLenth > 1)
@@ -655,15 +628,33 @@ static bool PumpSelecting( const AcDbObjectId& objId )
 	strID.Format(_T("%d"),selPT.id);
 	TypeTable selTT;
 	if( !SelectPumpType(strID,selTT) ) return false;
-	acutPrintf(_T("\n**********最终结果**********"));
-	PrintPropertyTable(selPT);
-	PrintTypeTable(selTT);
+	//acutPrintf(_T("\n**********最终结果**********"));
+	//PrintPropertyTable(selPT);
+	//PrintTypeTable(selTT);
+	WritePumpDatas(objId,selPT,selTT);
 	return true;
 }
 
 void UIHelper::SelectPump()
 {
+	CAcModuleResourceOverride myResources;
 	AcDbObjectId objId = ArxUtilHelper::SelectObject(_T("选择需要选型的瓦斯泵"));
 	if (!ArxUtilHelper::IsEqualType( _T( "GasPumpGE" ), objId)) return;
 	if(!PumpSelecting(objId)) return;
+	AfxMessageBox(_T("瓦斯泵选型成功!"));
+
+	//用黄色表示高亮
+	DrawHelper::HighLightShowGE(objId,2);
+}
+
+void UIHelper::SelectPumps()
+{
+	CAcModuleResourceOverride myResources;
+	AcDbObjectIdArray objIds;
+	DrawHelper::FindMineGEs(_T("GasPumpGE"), objIds);
+	for (int i = 0; i < objIds.length(); i++)
+	{
+		if(!PumpSelecting(objIds[i])) return;
+	}
+	AfxMessageBox(_T("所有瓦斯泵选型成功!"));
 }

@@ -516,3 +516,22 @@ AcDbObjectIdArray DrawHelper::GetRelatedTunnel(AcDbObjectId ttunnelId)
 	return tunnelsRetIds;
 }
 
+void DrawHelper::HighLightShowGE( const AcDbObjectId& objId, unsigned short colorIndex )
+{
+	AcDbObjectIdArray objIds;
+	objIds.append( objId );
+
+	// 记录图元的原颜色
+	AcArray<Adesk::UInt16> colors;
+	if( !ArxEntityHelper::GetEntitiesColor( objIds, colors ) ) return;
+
+	// 高亮显示图元
+	ArxEntityHelper::SetEntitiesColor( objIds, colorIndex );
+
+	// 中断
+	ArxUtilHelper::Pause();
+
+	// 恢复原有颜色
+	ArxEntityHelper::SetEntitiesColor2( objIds, colors );
+
+}
