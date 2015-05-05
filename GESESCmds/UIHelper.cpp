@@ -661,6 +661,7 @@ void UIHelper::SelectPumps()
 
 void UIHelper::InsertPump()
 {
+	CAcModuleResourceOverride myResources;
 	CString dataDirName = _T( "Datas\\" );
 	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
 

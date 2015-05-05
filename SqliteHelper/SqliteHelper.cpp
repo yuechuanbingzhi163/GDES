@@ -59,21 +59,23 @@ bool GetPumpPropertyTable( CString sql, CString szDbPath, PropertyTableVector& m
 
 static void GetPumpNewColId( const CString& tableName, SQLite& sqlite, int& newId )
 {
-	CString sql = _T("select count(id) from ") + tableName;
+	//CString sql = _T("select count(id) from ") + tableName;
+	CString sql = _T("select * from ") + tableName + _T(" limit 1 offset (select count(*)-1  from ") + tableName + _T(")");
 	SQLiteDataReader Reader = sqlite.ExcuteQuery(sql);
 
 	Reader.Read();
-	int id = Reader.GetIntValue(0);
+	int id = Reader.GetIntValue(1);
 	Reader.Close();
 
-	CString strId;
-	strId.Format(_T("%d"),id);
-	sql = _T("select * from ") + tableName + _T(" where id = ") + strId;
-	SQLiteDataReader Reader2 = sqlite.ExcuteQuery(sql);
+	newId = id;
+	//CString strId;
+	//strId.Format(_T("%d"),id);
+	//sql = _T("select * from ") + tableName + _T(" where id = ") + strId;
+	//SQLiteDataReader Reader2 = sqlite.ExcuteQuery(sql);
 
-	Reader2.Read();
-	newId = Reader2.GetIntValue(1);
-	Reader2.Close();
+	//Reader2.Read();
+	//newId = Reader2.GetIntValue(1);
+	//Reader2.Close();
 
 	//sqlite.Close();
 }
