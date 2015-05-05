@@ -65,7 +65,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="sqlite3.lib"
+				AdditionalDependencies="sqlite3_d.lib"
 				AdditionalLibraryDirectories="..\ThirdParty\sqlite3\lib"
 			/>
 			<Tool
@@ -131,7 +131,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="sqlite3_x64.lib"
+				AdditionalDependencies="sqlite3_x64_d.lib"
 				AdditionalLibraryDirectories="..\ThirdParty\sqlite3\lib"
 			/>
 			<Tool

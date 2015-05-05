@@ -404,7 +404,12 @@ bool wordOprate(CString templPath,CString savePath,CString& mineName)
 	//基础条件达标评价
 	if(-1 != templPath.Find(_T("tplBase"))) 
 	{
-		if(!SetBaseReportVal(mineName)) return false;
+		if(!SetBaseReportVal(mineName)) 
+		{
+			MyWord->CloseDocument();
+			MyWord->CloseApp();
+			return false;
+		}
 	}
 
 	//抽采达标评价报告
@@ -412,8 +417,8 @@ bool wordOprate(CString templPath,CString savePath,CString& mineName)
 	{
 		SetFieldsValue();
 	}
-	MyWord->UpdateField(_T("CONT_UPDATE"));
 	bool ret;
+	MyWord->UpdateField(_T("CONT_UPDATE"));
 	if(!SaveReport(savePath)) ret = false;
 	else ret = true;
 

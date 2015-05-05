@@ -26,6 +26,7 @@ bool GetPumpTypeTable( CString sql, CString szDbPath, TypeTableVector& msg )
 		msg.push_back(typeTable);
 	}
 	Reader.Close();
+	sqlite.Close();
 return true;
 }
 
@@ -52,5 +53,6 @@ bool GetPumpPropertyTable( CString sql, CString szDbPath, PropertyTableVector& m
 		msg.push_back(propertyTable);
 	}
 	Reader.Close();
+	sqlite.Close();
 	return true;
 }

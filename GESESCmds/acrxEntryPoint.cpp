@@ -120,11 +120,18 @@ public:
 	{
 		ReportHelper::ShowReleatedInfoDlg();
 	}
+
+	static void JL_PumpSelect()
+	{
+		UIHelper::SelectPump();
+	}
+
 	static void HD_Test()
 	{
 		UIHelper::GetPumpDB(DB_TypeTable);
 		UIHelper::GetPumpDB(DB_PropertyTable);
 	}
+
 
 } ;
 
@@ -143,4 +150,5 @@ ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _InspectionDataDlg, InspectionDat
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _GasPumpDlg, GasPumpDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _MeasureDlg, MeasureDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _ReleatedInfoDlg, ReleatedInfoDlg, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _PumpSelect, PumpSelect, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, HD, _Test, Test, ACRX_CMD_TRANSPARENT, NULL )

@@ -502,3 +502,168 @@ void UIHelper::GetPumpDB(TableName tableName)
 	}
 
 }
+
+static void PrintPropertyTable( const PropertyTable& pt)
+{
+	//acutPrintf(_T("\n***************************"));
+	acutPrintf(_T("\n**********属性表**********"));
+	acutPrintf(_T("\nID:%d,转速:%d,电机功率:%.1f,最大气量:%.2f,极限压力:%d,吸入绝压:%d"),
+		pt.id,pt.speed,pt.power,pt.maxQ,pt.maxP,pt.absP);
+	acutPrintf(_T("\n"));
+}
+
+static void PrintTypeTable( const TypeTable& tt)
+{
+	//acutPrintf(_T("\n***************************"));
+	acutPrintf(_T("\n**********类型表**********"));
+	acutPrintf(_T("\nID:%d,类型%s,吸入绝压:%d,泵重:%d,长:%d,宽:%d,高:%d,厂家:%s"),
+		tt.id,tt.type,tt.absP,tt.weight,tt.length,tt.weidth,tt.heigth,tt.factName);
+	acutPrintf(_T("\n"));
+}
+
+//初步选定，依据是气量和绝压最接近
+static void SelectPumpByQP(const PropertyTableVector& propertyTableVector,double fpumpQ,double fpumpH,PropertyTableVector& retPropertyTableVector)
+{
+	double deltaQ = 1e100;
+	double deltaP = 1e100;
+	double minQ,minP;
+
+	//先选出气量最接近的那个
+	for(int i = 0; i < propertyTableVector.size(); i++)
+	{
+		PropertyTable pt = propertyTableVector[i];
+		double difQ = pt.maxQ - fpumpQ;
+		if(deltaQ >= difQ && difQ >= 0) 
+		{
+			minQ = pt.maxQ;
+			deltaQ = difQ;
+		}
+	}
+
+	//然后选出绝压最接近的那个
+	for(int i = 0; i < propertyTableVector.size(); i++)
+	{
+		PropertyTable pt = propertyTableVector[i];
+		double difP = pt.absP - fpumpH;
+		if((deltaP >= difP && difP >= 0) && ( abs(minQ - pt.maxQ) < 1e-5)) 
+		{
+			minP = pt.absP;
+			deltaP = difP;
+		}
+	}
+
+	//记录所选出的数据
+	for(int i = 0; i < propertyTableVector.size(); i++)
+	{
+		PropertyTable pt = propertyTableVector[i];
+
+		if( (abs(minP - pt.absP) < 1e-5) && ( abs(minQ - pt.maxQ) < 1e-5) ) 
+		{
+			retPropertyTableVector.push_back(pt);
+			PrintPropertyTable(pt);
+		}
+	}
+
+}
+
+static bool SelectPumpType( const CString& strID ,TypeTable& selTT)
+{
+	CString dataDirName = _T( "Datas\\" );
+	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
+
+	CString sql = _T("select * from TypeTable where catagory_id = ") + strID;
+	TypeTableVector typeTableVector;
+	if(!GetPumpTypeTable(sql,szDbPath,typeTableVector))
+	{
+		AfxMessageBox(_T("数据库打开失败!"));
+		return false;
+	}
+
+	//记录所选出的数据
+	//TypeTable selTT;
+	for(int i = 0; i < typeTableVector.size(); i++)
+	{
+		TypeTable tt = typeTableVector[i];
+		PrintTypeTable(tt);
+		selTT = tt;
+	}
+	return true;
+}
+
+static void SelectMinPower( const PropertyTableVector& retPropertyTableVector,PropertyTable& selPT )
+{
+	int vLenth = retPropertyTableVector.size();
+	double minPower = 1e100;
+	for(int i = 0; i < vLenth; i++)
+	{
+		PropertyTable pt = retPropertyTableVector[i];
+		if(minPower >= pt.power)
+		{
+			minPower = pt.power;
+		}
+	}
+
+	for(int i = 0; i < vLenth; i++)
+	{
+		PropertyTable pt = retPropertyTableVector[i];
+		if(abs(minPower - pt.power) < 1e-5)
+		{
+			selPT = pt;
+		}
+	}
+}
+
+static bool PumpSelecting( const AcDbObjectId& objId )
+{
+	CString pumpQ,pumpH;
+	DataHelper::GetPropertyData(objId,_T("瓦斯泵的额定流量"),pumpQ);
+	DataHelper::GetPropertyData(objId,_T("瓦斯泵的压力"),pumpH);
+	double fpumpH = _tstof(pumpH) * 0.01;
+	double fpumpQ = _tstof(pumpQ);
+	pumpH.Format(_T("%lf"),fpumpH);
+
+	CString dataDirName = _T( "Datas\\" );
+	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
+
+	CString sql = _T("select * from PropertyTable where maxQ >= ") + pumpQ + (_T(" and absP >= ")) + pumpH;
+	PropertyTableVector propertyTableVector;
+	if(!GetPumpPropertyTable(sql,szDbPath,propertyTableVector))
+	{
+		AfxMessageBox(_T("数据库打开失败!"));
+		return false;
+	}
+
+	PropertyTableVector retPropertyTableVector;
+	SelectPumpByQP(propertyTableVector,fpumpQ,fpumpH,retPropertyTableVector);
+
+	PropertyTable selPT;
+	int vLenth = retPropertyTableVector.size();
+	if(vLenth < 1) 
+	{
+		AfxMessageBox(_T("没有合适的瓦斯泵型号!"));
+		return false;
+	}
+	if(vLenth > 1)
+	{
+		SelectMinPower(retPropertyTableVector,selPT);
+	}
+	else
+	{
+		selPT = retPropertyTableVector[0];
+	}
+	CString strID;
+	strID.Format(_T("%d"),selPT.id);
+	TypeTable selTT;
+	if( !SelectPumpType(strID,selTT) ) return false;
+	acutPrintf(_T("\n**********最终结果**********"));
+	PrintPropertyTable(selPT);
+	PrintTypeTable(selTT);
+	return true;
+}
+
+void UIHelper::SelectPump()
+{
+	AcDbObjectId objId = ArxUtilHelper::SelectObject(_T("选择需要选型的瓦斯泵"));
+	if (!ArxUtilHelper::IsEqualType( _T( "GasPumpGE" ), objId)) return;
+	if(!PumpSelecting(objId)) return;
+}
