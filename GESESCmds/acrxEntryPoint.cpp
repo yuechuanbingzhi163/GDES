@@ -130,6 +130,12 @@ public:
 	{
 		UIHelper::SelectPumps();
 	}
+
+	static void JL_InsertPumpData()
+	{
+		UIHelper::InsertPump();
+	}
+
 } ;
 
 //-----------------------------------------------------------------------------
@@ -149,3 +155,4 @@ ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _MeasureDlg, MeasureDlg, ACRX_CMD
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _ReleatedInfoDlg, ReleatedInfoDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _PumpSelect, PumpSelect, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _PumpsSelect, PumpsSelect, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL,_InsertPumpData, InsertPumpData, ACRX_CMD_TRANSPARENT, NULL )
