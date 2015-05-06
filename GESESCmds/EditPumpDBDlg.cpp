@@ -1,9 +1,6 @@
-// EditPumpDB.cpp : 实现文件
-//
-
 #include "stdafx.h"
 #include "EditPumpDBDlg.h"
-#include "EditPumpDBDlg.h"
+#include "PathBuild.h"
 
 
 IMPLEMENT_DYNAMIC(EditPumpDBDlg, CDialog)
@@ -112,17 +109,17 @@ void EditPumpDBDlg::OnBnClickedAllPumpCheck()
 	m_btype = m_bweight = m_bspeed = m_bmaxp
 		= m_bfactory = m_blength =m_bheight
 		= m_bweidth = m_bminabsp = m_babsp
-		= m_bpower = m_bmaxq = m_ball;
+		= m_bpower = m_bmaxq = !m_ball;
 	UpdateData(FALSE);
 }
 
 void EditPumpDBDlg::SetAllCheckBox()
 {
 	UpdateData(TRUE);
-	m_ball = m_btype && m_bweight && m_bspeed && m_bmaxp
-		&& m_bfactory && m_blength && m_bheight
-		&& m_bweidth && m_bminabsp && m_babsp
-		&& m_bpower && m_bmaxq;
+	m_ball = !(m_btype || m_bweight || m_bspeed || m_bmaxp
+				|| m_bfactory || m_blength || m_bheight
+				|| m_bweidth || m_bminabsp || m_babsp
+				|| m_bpower || m_bmaxq);
 	UpdateData(FALSE);
 }
 
@@ -218,7 +215,7 @@ void EditPumpDBDlg::OnInitListCtrl()
 	m_listCtrl.SetColumnWidth(7, 1.5*rect.Width() / 23);  
 	m_listCtrl.SetColumnWidth(8, 1.5*rect.Width() / 23);  
 	m_listCtrl.SetColumnWidth(9, 1.5*rect.Width() / 23);  
-	m_listCtrl.SetColumnWidth(10,2.5*rect.Width() / 23);  
+	m_listCtrl.SetColumnWidth(10,2.3*rect.Width() / 23);  
 	m_listCtrl.SetColumnWidth(11, 6*rect.Width() / 23);  
 
 	CFont *cFont = new CFont;  
@@ -238,10 +235,128 @@ void EditPumpDBDlg::OnBnClickedExitButton()
 
 void EditPumpDBDlg::OnBnClickedUpdatePumpdbButton()
 {
-	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
 }
 
+static void PrintPropertyTable( const PropertyTable& pt)
+{
+	//acutPrintf(_T("\n***************************"));
+	acutPrintf(_T("\n**********属性表**********"));
+	acutPrintf(_T("\nID:%d,转速:%d,电机功率:%.1f,最大气量:%.2f,极限压力:%d,吸入绝压:%d"),
+		pt.id,pt.speed,pt.power,pt.maxQ,pt.maxP,pt.absP);
+	acutPrintf(_T("\n"));
+}
+
+static void PrintTypeTable( const TypeTable& tt)
+{
+	//acutPrintf(_T("\n***************************"));
+	acutPrintf(_T("\n**********类型表**********"));
+	acutPrintf(_T("\nID:%d,类型%s,最低吸入绝压:%d,泵重:%d,长:%d,宽:%d,高:%d,厂家:%s"),
+		tt.id,tt.type,tt.absP,tt.weight,tt.length,tt.weidth,tt.heigth,tt.factName);
+	acutPrintf(_T("\n"));
+}
+
+static void GetTypeTableDatas(const CString& sql,TypeTableVector& ttV)
+{
+	CString dataDirName = _T( "Datas\\" );
+	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
+	GetPumpTypeTable(sql,szDbPath,ttV);
+}
+
+static void GetPropertyTableDatas(const CString& sql,PropertyTableVector& ptV)
+{
+	CString dataDirName = _T( "Datas\\" );
+	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
+	GetPumpPropertyTable(sql,szDbPath,ptV);
+}
+
+static void FindAllPumps(DBDatasVector& datasV)
+{
+	CString ttsql,ptsql;
+	ttsql = _T("select * from TypeTable");
+	TypeTableVector ttV;
+	GetTypeTableDatas(ttsql,ttV);
+	for(int i = 0; i < ttV.size(); i++)
+	{
+		TypeTable tt = ttV[i];
+		DBDatas datas;
+		datas.CopyFromType(tt);
+		CString strID;
+		strID.Format(_T("%d"),tt.id);
+		ptsql = _T("select * from PropertyTable where catagory_id = ") + strID;
+		PropertyTableVector ptV;
+		GetPropertyTableDatas(ptsql,ptV);
+		for(int i = 0; i < ptV.size(); i++)
+		{
+			datas.CopyFromProperty(ptV[i]);
+			datasV.push_back(datas);
+		}
+	}
+}
+
+
+void EditPumpDBDlg::setCountFans()
+{
+	int itemNum = m_listCtrl.GetItemCount();
+	CString itemNumStr;
+	BOOL show = FALSE;
+	itemNumStr.Format(_T("%d"),itemNum);
+	if( 0 >= itemNum ) 
+	{
+		itemNumStr = _T("");
+		show = FALSE;
+	}
+	else
+	{
+		show = TRUE;
+	}
+	GetDlgItem(IDC_PUMP_ITEMSNUM_EDIT)->SetWindowText(itemNumStr);
+	GetDlgItem(IDC_NUM_STATIC)->ShowWindow(show);
+	GetDlgItem(IDC_GROUP_STATIC)->ShowWindow(show);
+}
+
+void EditPumpDBDlg::UpdateList( const DBDatasVector& datasV )
+{
+	m_listCtrl.DeleteAllItems();
+
+	//避免刷新数据的时候闪烁
+	m_listCtrl.SetRedraw(FALSE);
+	for (int i = 0; i < datasV.size(); i++ )
+	{
+		DBDatas datas = datasV[i];
+		m_listCtrl.InsertItem(i, datas.type);  
+		m_listCtrl.SetItemText(i, 1, datas.weight);  
+		m_listCtrl.SetItemText(i, 2, datas.length);  
+		m_listCtrl.SetItemText(i, 3, datas.weidth);  
+		m_listCtrl.SetItemText(i, 4, datas.height);
+		m_listCtrl.SetItemText(i, 5, datas.speed);  
+		m_listCtrl.SetItemText(i, 6, datas.absp);  
+		m_listCtrl.SetItemText(i, 7, datas.maxp);  
+		m_listCtrl.SetItemText(i, 8, datas.maxq);  
+		m_listCtrl.SetItemText(i, 9, datas.power);  
+		m_listCtrl.SetItemText(i, 10, datas.minabsp);  
+		m_listCtrl.SetItemText(i, 11, datas.factory);  
+	}
+
+	m_listCtrl.SetRedraw(TRUE);
+	m_listCtrl.Invalidate();
+	//m_listCtrl.UpdateWindow();
+
+	setCountFans();
+}
 void EditPumpDBDlg::OnBnClickedFindPump()
 {
-	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	DBDatasVector datasV;
+	//查看所有瓦斯泵
+	if(m_ball)
+	{
+		FindAllPumps(datasV);
+	}
+	//for (int i = 0; i < datasV.size(); i++)
+	//{
+	//	DBDatas datas = datasV[i];
+	//	datas.Print();
+	//}
+	UpdateList(datasV);
 }

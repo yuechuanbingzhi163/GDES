@@ -10,13 +10,9 @@
 #include "../ArxHelper/ArxUtilHelper.h"
 #include "../ARX_ReportHelper/ReportHelper.h"
 
-#include <iostream>
-#include <fstream>
-using namespace std;
-#include "AcFStream.h"
 
 #include "DataList_DockBar.h"
-#include "EditPumpDB.h"
+#include "EditPumpDBDlg.h"
 
 #define NONRET _T("**")
 

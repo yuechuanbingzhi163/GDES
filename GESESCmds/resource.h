@@ -4,6 +4,7 @@
 //
 #define IDS_PROJNAME                    100
 #define IDC_NUM_STATIC                  100
+#define IDC_GROUP_STATIC                101
 #define IDI_GASSYS_ICON                 103
 #define IDD_FIND_PUMP_DIALOG            115
 #define IDD_DATA_LIST_DLG               145
@@ -48,7 +49,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        103
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         101
+#define _APS_NEXT_CONTROL_VALUE         102
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif

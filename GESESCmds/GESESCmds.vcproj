@@ -400,6 +400,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PathBuild.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\StdAfx.cpp"
 				>
 				<FileConfiguration
