@@ -270,10 +270,8 @@ static void GetPropertyTableDatas(const CString& sql,PropertyTableVector& ptV)
 	GetPumpPropertyTable(sql,szDbPath,ptV);
 }
 
-static void FindAllPumps(DBDatasVector& datasV)
+static void FindTypeFirst(const CString& ttsql,DBDatasVector& datasV)
 {
-	CString ttsql,ptsql;
-	ttsql = _T("select * from TypeTable");
 	TypeTableVector ttV;
 	GetTypeTableDatas(ttsql,ttV);
 	for(int i = 0; i < ttV.size(); i++)
@@ -283,15 +281,64 @@ static void FindAllPumps(DBDatasVector& datasV)
 		datas.CopyFromType(tt);
 		CString strID;
 		strID.Format(_T("%d"),tt.id);
-		ptsql = _T("select * from PropertyTable where catagory_id = ") + strID;
+		CString ptsql = _T("select * from PropertyTable where catagory_id = ") + strID;
 		PropertyTableVector ptV;
 		GetPropertyTableDatas(ptsql,ptV);
-		for(int i = 0; i < ptV.size(); i++)
+		for(int j = 0; j < ptV.size(); j++)
 		{
-			datas.CopyFromProperty(ptV[i]);
+			datas.CopyFromProperty(ptV[j]);
 			datasV.push_back(datas);
 		}
 	}
+}
+
+static void FindPropertyFirst(const CString& ptsql,DBDatasVector& datasV)
+{
+	PropertyTableVector ptV;
+	GetPropertyTableDatas(ptsql,ptV);
+	for(int i = 0; i < ptV.size(); i++)
+	{
+		PropertyTable pt = ptV[i];
+		DBDatas datas;
+		datas.CopyFromProperty(pt);
+		CString strID;
+		strID.Format(_T("%d"),pt.id);
+		CString ttsql = _T("select * from TypeTable where catagory_id = ") + strID;
+		TypeTableVector ttV;
+		GetTypeTableDatas(ttsql,ttV);
+		for(int j = 0; j < ttV.size(); j++)
+		{
+			datas.CopyFromType(ttV[j]);
+			datasV.push_back(datas);
+		}
+	}
+}
+
+static void FindTypeProperty(const CString& ttsql,const CString& ptsql,DBDatasVector& datasV)
+{
+	PropertyTableVector ptV;
+	GetPropertyTableDatas(ptsql,ptV);
+	TypeTableVector ttV;
+	GetTypeTableDatas(ttsql,ttV);
+	for(int i = 0; i < ttV.size(); i++)
+	{
+		DBDatas datas;
+		datas.CopyFromType(ttV[i]);
+		for(int j = 0; j < ptV.size(); j++)
+		{
+			PropertyTable pt = ptV[j];
+			if(pt.id != ttV[i].id) continue;
+			datas.CopyFromProperty(pt);
+			datasV.push_back(datas);
+		}
+	}
+}
+
+static void FindAllPumps(DBDatasVector& datasV)
+{
+	CString ttsql;
+	ttsql = _T("select * from TypeTable");
+	FindTypeFirst(ttsql,datasV);
 }
 
 
@@ -358,5 +405,322 @@ void EditPumpDBDlg::OnBnClickedFindPump()
 	//	DBDatas datas = datasV[i];
 	//	datas.Print();
 	//}
+	else
+	{
+		if(!FindPumpsByCondition(datasV)) datasV.clear();
+	}
 	UpdateList(datasV);
+}
+
+int EditPumpDBDlg::CheckBoxTable()
+{
+	UpdateData(TRUE);
+	if((m_btype || m_bminabsp || m_bweight || m_blength || m_bweidth || m_bheight || m_bfactory)
+		&& (!m_bspeed && !m_bpower && !m_bmaxq && !m_bmaxp && !m_babsp)) return 1;
+	if((!m_btype && !m_bminabsp && !m_bweight && !m_blength && !m_bweidth && !m_bheight && !m_bfactory)
+		&& (m_bspeed || m_bpower || m_bmaxq || m_bmaxp || m_babsp)) return 2;
+	if((m_btype || m_bminabsp || m_bweight || m_blength || m_bweidth || m_bheight || m_bfactory)
+		&& (m_bspeed || m_bpower || m_bmaxq || m_bmaxp || m_babsp)) return 3;
+
+	return 0;
+}
+
+bool EditPumpDBDlg::FindPumpsByCondition( DBDatasVector& datasV )
+{
+	int indx = CheckBoxTable();
+	CString msg;
+	CString ttsql = _T("select * from TypeTable where ");
+	CString ptsql = _T("select * from PropertyTable where ");
+	switch(indx)
+	{
+	case 0:
+		msg = _T("一个都没有选中!");
+		break;
+	case 1:
+		OnlyTypesql(ttsql,msg);
+		FindTypeFirst(ttsql,datasV);
+		break;
+	case 2:
+		OnlyPropertysql(ptsql,msg);
+		FindPropertyFirst(ptsql,datasV);
+		break;
+	case 3:
+		OnlyTypesql(ttsql,msg);
+		OnlyPropertysql(ptsql,msg);
+		FindTypeProperty(ttsql,ptsql,datasV);
+		break;
+	default:
+		msg = _T("选择错误!");
+		break;
+	}
+	if(!msg.IsEmpty()) 
+	{
+		AfxMessageBox(msg);
+		return false;
+	}
+	//acutPrintf(_T("\n%s"),msg);
+	return true;
+
+}
+
+static void DealStringType(CString& ttsql,CString& msg,CString& contents,const CString& condition)
+{
+	ttsql.Append(condition);
+	if(contents.IsEmpty())
+	{
+		msg = _T("条件为空!");
+		return;
+	}
+	if(contents.Find(_T("<")) != -1 || contents.Find(_T(">")) != -1 || contents.Find(_T("=")) != -1) 
+		msg = _T("类型中包含非法符号【>】【<】【=】");
+	ttsql.Append(_T(" = \'"));
+	ttsql.Append(contents);
+	ttsql.Append(_T("\'"));
+}
+
+static void DealOtherType(CString& ttsql,CString& msg,CString& editString,const CString& condition)
+{
+	ttsql.Append(condition);
+	if(editString.IsEmpty())
+	{
+		msg = _T("条件为空!");
+		return;
+	}
+	if(editString.Find(_T("<")) == -1 && editString.Find(_T(">")) == -1 && editString.Find(_T("=")) == -1)
+		ttsql.Append(_T(" = "));
+	ttsql.Append(editString);
+
+}
+
+static void DealProperty(CString& ptsql,CString& msg,CString& editString,const CString& condition)
+{
+	ptsql.Append(condition);
+	if(editString.IsEmpty())
+	{
+		msg = _T("条件为空!");
+		return;
+	}
+	if(editString.Find(_T("<")) == -1 && editString.Find(_T(">")) == -1 && editString.Find(_T("=")) == -1)
+		ptsql.Append(_T(" = "));
+	ptsql.Append(editString);
+
+}
+
+void EditPumpDBDlg::OnlyTypesql(CString& ttsql,CString& msg)
+{
+	int checkNum = GetCheckBoxNum();
+	int currentNum = 0;
+	if(m_btype)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and type ");
+		}
+		else
+		{
+			condition = _T(" type ");
+		}
+		DealStringType(ttsql,msg,m_type,condition);
+		currentNum += 1;
+	}
+
+	if(m_bminabsp)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and absP ");
+		}
+		else
+		{
+			condition = _T(" absP ");
+		}
+
+		DealOtherType(ttsql,msg,m_minabsp,condition);
+		currentNum += 1;
+	}
+
+	if(m_bweight)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and weight ");
+		}
+		else
+		{
+			condition = _T(" weight ");
+		}
+
+		DealOtherType(ttsql,msg,m_weight,condition);
+		currentNum += 1;
+	}
+
+	if(m_blength)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and length ");
+		}
+		else
+		{
+			condition = _T(" length ");
+		}
+
+		DealOtherType(ttsql,msg,m_length,condition);
+		currentNum += 1;
+	}
+
+	if(m_bweidth)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and weidth ");
+		}
+		else
+		{
+			condition = _T(" weidth ");
+		}
+
+		DealOtherType(ttsql,msg,m_weidth,condition);
+		currentNum += 1;
+	}
+
+	if(m_bheight)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and heigth ");
+		}
+		else
+		{
+			condition = _T(" heigth ");
+		}
+
+		DealOtherType(ttsql,msg,m_height,condition);
+		currentNum += 1;
+	}
+
+	if(m_bfactory)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and factoryName ");
+		}
+		else
+		{
+			condition = _T(" factoryName ");
+		}
+
+		DealStringType(ttsql,msg,m_factory,condition);
+		currentNum += 1;
+	}
+}
+
+void EditPumpDBDlg::OnlyPropertysql( CString& ptsql,CString& msg )
+{
+	int checkNum = GetCheckBoxNum();
+	int currentNum = 0;
+	if(m_bspeed)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and speed ");
+		}
+		else
+		{
+			condition = _T(" speed ");
+		}
+		DealProperty(ptsql,msg,m_speed,condition);
+		currentNum += 1;
+	}
+
+	if(m_bpower)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and power ");
+		}
+		else
+		{
+			condition = _T(" power ");
+		}
+
+		DealProperty(ptsql,msg,m_power,condition);
+		currentNum += 1;
+	}
+
+	if(m_bmaxq)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and maxQ ");
+		}
+		else
+		{
+			condition = _T(" maxQ ");
+		}
+
+		DealProperty(ptsql,msg,m_maxq,condition);
+		currentNum += 1;
+	}
+
+	if(m_bmaxp)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and maxP ");
+		}
+		else
+		{
+			condition = _T(" maxP ");
+		}
+
+		DealProperty(ptsql,msg,m_maxp,condition);
+		currentNum += 1;
+	}
+
+	if(m_babsp)
+	{
+		CString condition;
+		if(currentNum >= 1 && checkNum > 1)
+		{
+			condition = _T(" and absP ");
+		}
+		else
+		{
+			condition = _T(" absP ");
+		}
+
+		DealProperty(ptsql,msg,m_absp,condition);
+		currentNum += 1;
+	}
+}
+
+int EditPumpDBDlg::GetCheckBoxNum()
+{
+	UpdateData(TRUE);
+	int ret = 0;
+	if(m_btype) ret += 1;
+	if(m_bweight) ret += 1;
+	if(m_bspeed) ret += 1;
+	if(m_bmaxp) ret += 1;
+	if(m_bfactory) ret += 1;
+	if(m_blength) ret += 1;
+	if(m_bheight) ret += 1;
+	if(m_bweidth) ret += 1;
+	if(m_bminabsp) ret += 1;
+	if(m_babsp) ret += 1;
+	if(m_bpower) ret += 1;
+	if(m_bmaxq) ret += 1;
+	return ret;
 }

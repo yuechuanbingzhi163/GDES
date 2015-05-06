@@ -100,6 +100,15 @@ private:
 	void OnInitListCtrl();
 	void UpdateList( const DBDatasVector& datasV );
 	void setCountFans();
+	//检验查找条件
+	//1--只有类型表的数据
+	//2--只有属性表的数据
+	//3--既有类型表又有属性表数据
+	int CheckBoxTable();
+	bool FindPumpsByCondition( DBDatasVector& datasV );
+	void OnlyTypesql(CString& ttsql,CString& msg);
+	void OnlyPropertysql(CString& ptsql,CString& msg);
+	int GetCheckBoxNum();
 
 public:
 	afx_msg void OnBnClickedAllPumpCheck();
