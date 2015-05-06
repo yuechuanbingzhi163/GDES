@@ -16,6 +16,7 @@ using namespace std;
 #include "AcFStream.h"
 
 #include "DataList_DockBar.h"
+#include "EditPumpDB.h"
 
 #define NONRET _T("**")
 
@@ -662,6 +663,10 @@ void UIHelper::SelectPumps()
 void UIHelper::InsertPump()
 {
 	CAcModuleResourceOverride myResources;
+	EditPumpDBDlg dlg;
+	dlg.DoModal();
+	return;
+
 	CString dataDirName = _T( "Datas\\" );
 	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
 

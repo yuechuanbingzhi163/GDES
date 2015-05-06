@@ -3,6 +3,8 @@
 // Used by GESESCmds.rc
 //
 #define IDS_PROJNAME                    100
+#define IDC_NUM_STATIC                  100
+#define IDI_GASSYS_ICON                 103
 #define IDD_FIND_PUMP_DIALOG            115
 #define IDD_DATA_LIST_DLG               145
 #define IDC_PUMP_NAME_CHECK             170
@@ -34,7 +36,6 @@
 #define IDC_FIND_PUMP_MINABSP_EDIT      196
 #define IDC_PUMP_FACTORY_CHECK          197
 #define IDC_FIND_PUMP_FACTORY_EDIT      198
-#define IDC_UPDATE_PUMPDB_BUTTON2       199
 #define IDC_EXIT_BUTTON                 199
 #define IDC_TYPE_LIST                   324
 #define IDC_DATA_LIST_UPDATE_BTN        325
@@ -47,7 +48,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        103
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         100
+#define _APS_NEXT_CONTROL_VALUE         101
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif

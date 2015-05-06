@@ -392,7 +392,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\EditPumpDB.cpp"
+				RelativePath=".\EditPumpDBDlg.cpp"
 				>
 			</File>
 			<File
@@ -457,7 +457,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\EditPumpDB.h"
+				RelativePath=".\EditPumpDBDlg.h"
 				>
 			</File>
 			<File
@@ -483,6 +483,10 @@
 			>
 			<File
 				RelativePath=".\GESESCmds.rc"
+				>
+			</File>
+			<File
+				RelativePath=".\icon.ico"
 				>
 			</File>
 		</Filter>
