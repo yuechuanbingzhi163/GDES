@@ -392,6 +392,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\EditPumpDB.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GESESCmds_DllMain.cpp"
 				>
 			</File>
@@ -453,6 +457,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\EditPumpDB.h"
+				>
+			</File>
+			<File
 				RelativePath=".\PathBuild.h"
 				>
 			</File>
@@ -480,5 +488,9 @@
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="GESESCmds.rc"
+		/>
 	</Globals>
 </VisualStudioProject>
