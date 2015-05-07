@@ -109,6 +109,8 @@ private:
 	void OnlyTypesql(CString& ttsql,CString& msg);
 	void OnlyPropertysql(CString& ptsql,CString& msg);
 	int GetCheckBoxNum();
+	bool EditsHasEmpty();
+	bool GetEditContents(TypeTable& tt,PropertyTable& pt);
 
 public:
 	afx_msg void OnBnClickedAllPumpCheck();

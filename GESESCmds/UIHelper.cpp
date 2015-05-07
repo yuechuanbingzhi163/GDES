@@ -662,36 +662,4 @@ void UIHelper::InsertPump()
 	EditPumpDBDlg dlg;
 	dlg.DoModal();
 	return;
-
-	CString dataDirName = _T( "Datas\\" );
-	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
-
-	TypeTable tt;
-	tt.absP = 1356;
-	tt.factName = _T("呵呵");
-	tt.heigth = 103;
-	tt.length = 125;
-	tt.type = _T("测试类型");
-	tt.weidth = 136;
-	tt.weight = 145;
-	int newId;
-	InsertPumpToTypeTable(szDbPath,tt,newId);
-
-	PropertyTable pt;
-	pt.id = newId;
-	pt.speed = 15;
-	pt.power = 5.6;
-	pt.absP = 100054;
-	pt.maxP = 111111;
-	pt.maxQ = 5698;
-
-
-	if(!InsertPumpToPropertyTable(szDbPath,pt))
-	{
-		AfxMessageBox(_T("数据插入失败!"));
-	}
-	else
-	{
-		AfxMessageBox(_T("数据插入成功!"));
-	}
 }

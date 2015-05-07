@@ -233,9 +233,233 @@ void EditPumpDBDlg::OnBnClickedExitButton()
 	CDialog::OnCancel();
 }
 
-void EditPumpDBDlg::OnBnClickedUpdatePumpdbButton()
+static BOOL IsNum(CString &str)
+{
+	int n=str.GetLength();
+	for(int i=0;i<n;i++)
+		if ((str[i]<'0'||str[i]>'9') && str[i] != '.') 
+			return FALSE;
+	return TRUE;
+}
+
+static BOOL IsInt(CString &str)
+{
+	int n=str.GetLength();
+	for(int i=0;i<n;i++)
+		if (str[i]<'0'||str[i]>'9') 
+			return FALSE;
+	return TRUE;
+}
+
+bool EditPumpDBDlg::EditsHasEmpty()
 {
 	UpdateData(TRUE);
+	CString msg;
+	if(m_type.IsEmpty())
+	{
+		msg = _T("型号为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(m_weight.IsEmpty())
+	{
+		msg = _T("泵重为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(m_speed.IsEmpty())
+	{
+		msg = _T("转速为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(m_maxp.IsEmpty())
+	{
+		msg = _T("极限压力为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(m_factory.IsEmpty())
+	{
+		msg = _T("生产厂家为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(m_length.IsEmpty())
+	{
+		msg = _T("泵长为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(m_height.IsEmpty())
+	{
+		msg = _T("泵高为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(m_weidth.IsEmpty())
+	{
+		msg = _T("泵宽为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(m_absp.IsEmpty())
+	{
+		msg = _T("吸入绝压为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(m_power.IsEmpty())
+	{
+		msg = _T("电机功率为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(m_maxq.IsEmpty())
+	{
+		msg = _T("最大气量为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(m_minabsp.IsEmpty())
+	{
+		msg = _T("最低吸入绝压为空!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(!IsInt(m_weight))
+	{
+		msg = _T("泵重非法[请输入整数]!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(!IsInt(m_speed))
+	{
+		msg = _T("转速非法[请输入整数]!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(!IsInt(m_maxp))
+	{
+		msg = _T("极限压力非法[请输入整数]!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(!IsInt(m_length))
+	{
+		msg = _T("泵长非法[请输入整数]!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(!IsInt(m_height))
+	{
+		msg = _T("泵高非法[请输入整数]!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(!IsInt(m_weidth))
+	{
+		msg = _T("泵宽非法[请输入整数]!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(!IsInt(m_absp))
+	{
+		msg = _T("吸入绝压非法[请输入整数]!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(!IsNum(m_power))
+	{
+		msg = _T("电机功率非法[请输入整数或者小数]!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(!IsNum(m_maxq))
+	{
+		msg = _T("最大气量非法[请输入整数或者小数]!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	if(!IsInt(m_minabsp))
+	{
+		msg = _T("最低吸入绝压非法[请输入整数]!");
+		AfxMessageBox(msg);
+		return true;
+	}
+
+	return false;
+}
+
+bool EditPumpDBDlg::GetEditContents(TypeTable& tt,PropertyTable& pt)
+{
+	if(EditsHasEmpty()) return false;
+
+	tt.absP = _ttoi(m_minabsp);
+	tt.factName = m_factory;
+	tt.heigth = _ttoi(m_height);
+	tt.length = _ttoi(m_length);
+	tt.type = m_type;
+	tt.weidth = _ttoi(m_weidth);
+	tt.weight = _ttoi(m_weight);
+
+	pt.speed = _ttoi(m_speed);
+	pt.power = _tstof(m_power);
+	pt.absP = _ttoi(m_absp);
+	pt.maxP = _ttoi(m_maxp);
+	pt.maxQ = _tstof(m_maxq);
+	return true;
+
+}
+
+void EditPumpDBDlg::OnBnClickedUpdatePumpdbButton()
+{
+	CString dataDirName = _T( "Datas\\" );
+	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
+
+	TypeTable tt;
+	PropertyTable pt;
+	if(!GetEditContents(tt,pt)) return;
+	int newId;
+	InsertPumpToTypeTable(szDbPath,tt,newId);
+	pt.id = newId;
+
+	if(!InsertPumpToPropertyTable(szDbPath,pt))
+	{
+		AfxMessageBox(_T("数据插入失败!"),MB_OK|MB_ICONSTOP);
+		return;
+	}
+	AfxMessageBox(_T("数据插入成功!"));
+	//更新列表控件
+	m_btype = m_bweight = m_bspeed = m_bmaxp
+		= m_bfactory = m_blength =m_bheight
+		= m_bweidth = m_bminabsp = m_babsp
+		= m_bpower = m_bmaxq = TRUE;
+	UpdateData(FALSE);
+	DBDatasVector datasV;
+	if(!FindPumpsByCondition(datasV)) datasV.clear();
+	UpdateList(datasV);
 }
 
 static void PrintPropertyTable( const PropertyTable& pt)
