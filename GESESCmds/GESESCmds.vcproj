@@ -486,6 +486,10 @@
 			Filter="rc;ico;bmp;cur;jpg;gif"
 			>
 			<File
+				RelativePath=".\delete.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\GESESCmds.rc"
 				>
 			</File>

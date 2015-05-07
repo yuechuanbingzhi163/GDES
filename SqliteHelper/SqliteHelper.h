@@ -50,3 +50,4 @@ extern bool GetPumpPropertyTable(CString sql, CString szDbPath, PropertyTableVec
 //extern bool GetPumpNewColId( const CString& tableName, CString szDbPath, CString& lastId );
 extern bool InsertPumpToPropertyTable(const CString& szDbPath, const PropertyTable& pt);
 extern bool InsertPumpToTypeTable(const CString& szDbPath, const TypeTable& tt,int& newId);
+extern bool DeletePumpFronTable(const CString& szDbPath,const CString& sql);

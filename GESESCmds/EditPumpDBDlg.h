@@ -106,6 +106,7 @@ private:
 	//3--既有类型表又有属性表数据
 	int CheckBoxTable();
 	bool FindPumpsByCondition( DBDatasVector& datasV );
+	bool DeletePump( const DBDatas& datas );
 	void OnlyTypesql(CString& ttsql,CString& msg);
 	void OnlyPropertysql(CString& ptsql,CString& msg);
 	int GetCheckBoxNum();
@@ -129,4 +130,7 @@ public:
 	afx_msg void OnBnClickedExitButton();
 	afx_msg void OnBnClickedUpdatePumpdbButton();
 	afx_msg void OnBnClickedFindPump();
+	afx_msg void OnNMRClickFindPumpRetList(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnDeleteItem();
+	afx_msg void OnNMDblclkFindPumpRetList(NMHDR *pNMHDR, LRESULT *pResult);
 };

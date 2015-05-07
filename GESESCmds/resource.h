@@ -6,7 +6,9 @@
 #define IDC_NUM_STATIC                  100
 #define IDC_GROUP_STATIC                101
 #define IDI_GASSYS_ICON                 103
+#define IDR_LIST_DEL_MENU               104
 #define IDD_FIND_PUMP_DIALOG            115
+#define IDB_DELETE_BITMAP               117
 #define IDD_DATA_LIST_DLG               145
 #define IDC_PUMP_NAME_CHECK             170
 #define IDC_PUMP_POWER_CHECK            171
@@ -42,6 +44,7 @@
 #define IDC_DATA_LIST_UPDATE_BTN        325
 #define IDC_DATA_LIST                   326
 #define IDC_DATA_LIST_HILIGHT_SELECT_BTN 328
+#define ID_DELETE_ITEM                  32769
 
 // Next default values for new objects
 // 

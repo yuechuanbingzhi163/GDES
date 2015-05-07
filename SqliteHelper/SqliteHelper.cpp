@@ -195,3 +195,21 @@ bool InsertPumpToTypeTable( const CString& szDbPath, const TypeTable& tt ,int& n
 	return true;
 
 }
+
+bool DeletePumpFronTable( const CString& szDbPath,const CString& sql )
+{
+	SQLite sqlite;
+	if(!sqlite.Open(szDbPath))
+	{
+		return false;
+	}
+	sqlite.BeginTransaction();
+	if(!sqlite.ExcuteNonQuery(sql))
+	{
+		return false;
+	}
+
+	// 提交事务
+	sqlite.CommitTransaction();
+	return true;
+}

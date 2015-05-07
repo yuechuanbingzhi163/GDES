@@ -91,6 +91,9 @@ BEGIN_MESSAGE_MAP(EditPumpDBDlg, CDialog)
 	ON_BN_CLICKED(IDC_EXIT_BUTTON, &EditPumpDBDlg::OnBnClickedExitButton)
 	ON_BN_CLICKED(IDC_UPDATE_PUMPDB_BUTTON, &EditPumpDBDlg::OnBnClickedUpdatePumpdbButton)
 	ON_BN_CLICKED(ID_FIND_PUMP, &EditPumpDBDlg::OnBnClickedFindPump)
+	ON_NOTIFY(NM_RCLICK, IDC_FIND_PUMP_RET_LIST, &EditPumpDBDlg::OnNMRClickFindPumpRetList)
+	ON_COMMAND(ID_DELETE_ITEM, &EditPumpDBDlg::OnDeleteItem)
+	ON_NOTIFY(NM_DBLCLK, IDC_FIND_PUMP_RET_LIST, &EditPumpDBDlg::OnNMDblclkFindPumpRetList)
 END_MESSAGE_MAP()
 
 BOOL EditPumpDBDlg::OnInitDialog()
@@ -456,6 +459,7 @@ void EditPumpDBDlg::OnBnClickedUpdatePumpdbButton()
 		= m_bfactory = m_blength =m_bheight
 		= m_bweidth = m_bminabsp = m_babsp
 		= m_bpower = m_bmaxq = TRUE;
+	m_ball = FALSE;
 	UpdateData(FALSE);
 	DBDatasVector datasV;
 	if(!FindPumpsByCondition(datasV)) datasV.clear();
@@ -685,6 +689,28 @@ bool EditPumpDBDlg::FindPumpsByCondition( DBDatasVector& datasV )
 	//acutPrintf(_T("\n%s"),msg);
 	return true;
 
+}
+
+static bool DeletePumpFromDB(CString& ttsql,CString& ptsql)
+{
+	CString dataDirName = _T( "Datas\\" );
+	CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
+	if(!DeletePumpFronTable(szDbPath,ttsql)) return false;
+	if(!DeletePumpFronTable(szDbPath,ptsql)) return false;
+	return true;
+}
+
+bool EditPumpDBDlg::DeletePump( const DBDatas& datas )
+{
+	CString ttsql = _T("delete from TypeTable where type = \'") + datas.type + _T("\' and absP = ")
+		+ datas.minabsp + _T(" and weight = ") + datas.weight + _T(" and length = ")
+		+ datas.length + _T(" and weidth = ") + datas.weidth + _T(" and heigth = ") + datas.height
+		+ _T(" and factoryName = \'") + datas.factory + _T("\'");
+	CString ptsql = _T("delete from PropertyTable where speed = ") + datas.speed + _T(" and power = ")
+		+ datas.power + _T(" and maxQ = ") + datas.maxq + _T(" and maxP = ") + datas.maxp + _T(" and absP = ")
+		+ datas.absp;
+	bool ret = DeletePumpFromDB(ttsql,ptsql);
+	return ret;
 }
 
 static void DealStringType(CString& ttsql,CString& msg,CString& contents,const CString& condition)
@@ -947,4 +973,91 @@ int EditPumpDBDlg::GetCheckBoxNum()
 	if(m_bpower) ret += 1;
 	if(m_bmaxq) ret += 1;
 	return ret;
+}
+void EditPumpDBDlg::OnNMRClickFindPumpRetList(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+	if(pNMListView->iItem == -1) return; 
+	CPoint point;
+	::GetCursorPos(&point);
+
+	CMenu menu;
+	menu.LoadMenu(IDR_LIST_DEL_MENU);
+	CMenu* popup=menu.GetSubMenu(0);
+	if(popup==NULL ) return;
+
+	CBitmap m_bitmap1;//位图
+	m_bitmap1.LoadBitmap(IDB_DELETE_BITMAP);//加载ID为IDB_BITMAP1的位图
+
+	popup->SetMenuItemBitmaps(0,MF_BYPOSITION,&m_bitmap1,&m_bitmap1); 
+
+	popup->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON, point.x, point.y, this );
+
+	*pResult = 0;
+}
+
+static void GetListDatas(const CListCtrl& listCtrl, DBDatas& datas,int index)
+{
+	datas.type = listCtrl.GetItemText(index,0);
+	datas.weight = listCtrl.GetItemText(index,1);
+	datas.length = listCtrl.GetItemText(index,2);
+	datas.weidth = listCtrl.GetItemText(index,3);
+	datas.height = listCtrl.GetItemText(index,4);
+	datas.speed = listCtrl.GetItemText(index,5);
+	datas.absp = listCtrl.GetItemText(index,6);
+	datas.maxp = listCtrl.GetItemText(index,7);
+	datas.maxq = listCtrl.GetItemText(index,8);
+	datas.power = listCtrl.GetItemText(index,9);
+	datas.minabsp = listCtrl.GetItemText(index,10);
+	datas.factory = listCtrl.GetItemText(index,11);
+}
+
+void EditPumpDBDlg::OnDeleteItem()
+{
+	//删除所选项
+	int nIndex;
+	POSITION pos = m_listCtrl.GetFirstSelectedItemPosition();
+	nIndex = m_listCtrl.GetNextSelectedItem(pos);  // 获取引索项。m_nIndex的值为用户在列表框中选中的行号
+
+	if(nIndex == -1) return;
+	if(IDYES != AfxMessageBox(_T("谨慎操作（不可撤销删除）!是否删除?"),MB_YESNO)) return;
+	DBDatas datas;
+	GetListDatas(m_listCtrl,datas,nIndex); 
+	if(!DeletePump(datas))
+	{
+		AfxMessageBox(_T("删除数据失败!"),MB_OK | MB_ICONSTOP);
+		return;
+	}
+	m_listCtrl.DeleteItem(nIndex);
+	UpdateData(TRUE);
+	if(IsInt(m_itemsNum))
+	{
+		int num = _ttoi(m_itemsNum);
+		num = num -1;
+		m_itemsNum.Format(_T("%d"),num);
+	}
+	UpdateData(FALSE);
+}
+
+void EditPumpDBDlg::OnNMDblclkFindPumpRetList(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	int nIdx=m_listCtrl.GetNextItem(-1,LVIS_SELECTED);//选中的行的索引
+
+	DBDatas datas;
+	GetListDatas(m_listCtrl,datas,nIdx);
+	m_type = datas.type;
+	m_weight = datas.weight;
+	m_length = datas.length;
+	m_weidth = datas.weidth;
+	m_height = datas.height;
+	m_speed = datas.speed;
+	m_absp = datas.absp;
+	m_maxp = datas.maxp;
+	m_maxq = datas.maxq;
+	m_power = datas.power;
+	m_minabsp = datas.minabsp;
+	m_factory = datas.factory;
+	UpdateData(FALSE);
+	*pResult = 0;
 }
