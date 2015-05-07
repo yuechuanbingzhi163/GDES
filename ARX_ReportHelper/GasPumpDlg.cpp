@@ -9,7 +9,7 @@
 #include "CGridColumnTraitHyperLink.h"
 #include "CGridRowTraitXP.h"
 #include "ViewConfigSection.h"
-
+#include <sqliteHelper/SqliteHelper.h>
 
 IMPLEMENT_DYNAMIC(GasPumpDlg, GasBaseAcesDlg)
 
@@ -154,6 +154,17 @@ BOOL GasPumpDlg::OnInitDialog()
 	UpdateData(FALSE);
 	return TRUE;
 }
+static void GetPumpTypes(const CString& szDbPath,AcStringArray& types)
+{
+	TypeTableVector ttV;
+	CString sql = _T("select * from TypeTable");
+	GetPumpTypeTable(sql,szDbPath,ttV);
+	for(int i = 0; i < ttV.size(); i++)
+	{
+		TypeTable tt = ttV[i];
+		types.append(tt.type);
+	}
+}
 
 void GasPumpDlg::InitListCtrl()
 {
@@ -173,6 +184,20 @@ void GasPumpDlg::InitListCtrl()
 		{
 			pTrait = new CGridColumnTraitEdit;
 		}
+		if ( 2 == col)
+		{
+			CGridColumnTraitCombo* pComboTrait = new CGridColumnTraitCombo;
+			CString dataDirName = _T( "Datas\\" );
+			CString szDbPath = BuildPath ( BuildPath( GetAppPathDir(), dataDirName ),_T("pump.db") );
+			AcStringArray types;
+			GetPumpTypes(szDbPath,types);
+			for(int i = 0; i < types.length(); i++)
+			{
+				pComboTrait->AddItem((DWORD_PTR)i,types[i].kACharPtr());
+			}
+			pTrait = pComboTrait;
+		}
+
 		if( 3 == col )
 		{
 			m_gasPumpCListPump.InsertColumnTrait(col+1, title, LVCFMT_LEFT, 2*rect.Width()/5, col, pTrait);

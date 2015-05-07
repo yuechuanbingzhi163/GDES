@@ -86,7 +86,7 @@ static bool HaveSameProperty( const CString& szDbPath,const PropertyTable& pt )
 	PropertyTableVector ptV;
 	GetPumpPropertyTable(sql,szDbPath,ptV);
 	int num = 0;
-	for (int i = 0; i < ptV.size(); i++)
+	for (size_t  i = 0; i < ptV.size(); i++)
 	{
 		PropertyTable oldPT = ptV[i];
 		if(oldPT == pt)
@@ -141,7 +141,7 @@ static bool HaveSameType( const CString& szDbPath,const TypeTable& tt,int& id )
 	TypeTableVector ttV;
 	GetPumpTypeTable(sql,szDbPath,ttV);
 	int num = 0;
-	for (int i = 0; i < ttV.size(); i++)
+	for (size_t i = 0; i < ttV.size(); i++)
 	{
 		TypeTable oldPT = ttV[i];
 		if(oldPT == tt)

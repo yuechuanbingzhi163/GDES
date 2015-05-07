@@ -46,7 +46,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".."
+				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\sqlite3\sqlite3&quot;"
 				AdditionalUsingDirectories="c:\Program Files\AutoCAD"
 				PreprocessorDefinitions="WIN32;_WINDOWS;ARX_REPORTHELPER_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -72,9 +72,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="sqlite3_d.lib"
 				OutputFile="$(outdir)/ARX_ReportHelper.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories=""
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\sqlite3\lib&quot;"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/ARX_ReportHelper.pdb"
@@ -133,7 +134,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".."
+				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\sqlite3\sqlite3&quot;"
 				AdditionalUsingDirectories="c:\Program Files\AutoCAD"
 				PreprocessorDefinitions="WIN32;_WINDOWS;ARX_REPORTHELPER_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -159,9 +160,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="sqlite3_x64_d.lib"
 				OutputFile="$(outdir)/ARX_ReportHelper.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories=""
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\sqlite3\lib&quot;"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/ARX_ReportHelper.pdb"
@@ -219,7 +221,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories=".."
+				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\sqlite3\sqlite3&quot;"
 				AdditionalUsingDirectories="c:\Program Files\AutoCAD"
 				PreprocessorDefinitions="WIN32;_WINDOWS;ARX_REPORTHELPER_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -245,8 +247,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="sqlite3.lib"
 				OutputFile="$(outdir)/ARX_ReportHelper.arx"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\sqlite3\lib&quot;"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
@@ -305,7 +309,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories=".."
+				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\sqlite3\sqlite3&quot;"
 				AdditionalUsingDirectories="c:\Program Files\AutoCAD"
 				PreprocessorDefinitions="WIN32;_WINDOWS;ARX_REPORTHELPER_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -331,8 +335,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="sqlite3_x64.lib"
 				OutputFile="$(outdir)/ARX_ReportHelper.arx"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\sqlite3\lib&quot;"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
