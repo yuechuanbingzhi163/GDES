@@ -131,9 +131,9 @@ public:
 		UIHelper::SelectPumps();
 	}
 
-	static void JL_InsertPumpData()
+	static void JL_ShowDatabaseManagerDlg()
 	{
-		UIHelper::InsertPump();
+		UIHelper::DatabaseManagerDlg();
 	}
 
 } ;
@@ -155,4 +155,4 @@ ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _MeasureDlg, MeasureDlg, ACRX_CMD
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _ReleatedInfoDlg, ReleatedInfoDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _PumpSelect, PumpSelect, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL, _PumpsSelect, PumpsSelect, ACRX_CMD_TRANSPARENT, NULL )
-ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL,_InsertPumpData, InsertPumpData, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CGESESCmdsApp, JL,_ShowDatabaseManagerDlg, ShowDatabaseManagerDlg, ACRX_CMD_TRANSPARENT, NULL )

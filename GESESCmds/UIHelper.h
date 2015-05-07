@@ -11,6 +11,6 @@ public:
 	static void SetGESize();
 	static void SelectPump();
 	static void SelectPumps();
-	static void InsertPump();
+	static void DatabaseManagerDlg();
 };
 

@@ -656,7 +656,7 @@ void UIHelper::SelectPumps()
 	AfxMessageBox(_T("所有瓦斯泵选型成功!"));
 }
 
-void UIHelper::InsertPump()
+void UIHelper::DatabaseManagerDlg()
 {
 	CAcModuleResourceOverride myResources;
 	EditPumpDBDlg dlg;
