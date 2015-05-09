@@ -49,7 +49,7 @@ public:
 
     virtual AcRx::AppRetCode On_kLoadDwgMsg( void* pkt )
     {
-        AcRx::AppRetCode retCode = AcRxDbxApp::On_kLoadDwgMsg ( pkt ) ;
+        AcRx::AppRetCode retCode = AcRxArxApp::On_kLoadDwgMsg ( pkt ) ;
 
         CString dataDirName = _T( "Datas\\" );
         InitAllData( BuildPath( GetAppPathDir(), dataDirName ) );
@@ -61,7 +61,7 @@ public:
 
     virtual AcRx::AppRetCode On_kUnloadDwgMsg( void* pkt )
     {
-        AcRx::AppRetCode retCode = AcRxDbxApp::On_kUnloadDwgMsg ( pkt ) ;
+        AcRx::AppRetCode retCode = AcRxArxApp::On_kUnloadDwgMsg ( pkt ) ;
 
         acutPrintf( _T( "\nDataInit::On_kUnloadDwgMsg\n" ) );
 
