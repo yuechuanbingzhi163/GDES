@@ -102,6 +102,93 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="2"
+			UseOfMFC="2"
+			UseOfATL="0"
+			CharacterSet="1"
+			ManagedExtensions="0"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
+				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
+				PreprocessorDefinitions="_WIN64;_WINDOWS;ARXSOUI_MODULE;_AFXEXT;_ACRXAPP"
+				StringPooling="false"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="2"
+				BufferSecurityCheck="true"
+				TreatWChar_tAsBuiltInType="true"
+				ForceConformanceInForLoopScope="true"
+				RuntimeTypeInfo="true"
+				UsePrecompiledHeader="2"
+				WarningLevel="1"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="soui.lib utilities.lib"
+				OutputFile="$(outdir)/ArxSoUI.arx"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories="../ThirdParty/soui/bin"
+				LinkDLL="true"
+				GenerateDebugInformation="true"
+				ProgramDatabaseFile="$(OutDir)/ArxSoUI.pdb"
+				SubSystem="2"
+				ImportLibrary="$(OutDir)/ArxSoUI.lib"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
@@ -186,90 +273,6 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Debug|x64"
-			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
-			ConfigurationType="2"
-			UseOfMFC="2"
-			UseOfATL="0"
-			CharacterSet="1"
-			ManagedExtensions="0"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
-				PreprocessorDefinitions="_WIN64;_WINDOWS;ARXSOUI_MODULE;_AFXEXT;_ACRXAPP"
-				StringPooling="false"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="2"
-				BufferSecurityCheck="true"
-				TreatWChar_tAsBuiltInType="true"
-				ForceConformanceInForLoopScope="true"
-				RuntimeTypeInfo="true"
-				UsePrecompiledHeader="2"
-				WarningLevel="1"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				OutputFile="$(outdir)/ArxSoUI.arx"
-				LinkIncremental="2"
-				LinkDLL="true"
-				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(OutDir)/ArxSoUI.pdb"
-				SubSystem="2"
-				ImportLibrary="$(OutDir)/ArxSoUI.lib"
-				TargetMachine="17"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
 			Name="Release|x64"
 			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
@@ -297,6 +300,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
+				AdditionalIncludeDirectories="../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
 				PreprocessorDefinitions="_WIN64;_WINDOWS;ARXSOUI_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -322,8 +326,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="soui.lib utilities.lib"
 				OutputFile="$(outdir)/ArxSoUI.arx"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="../ThirdParty/soui/bin"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
@@ -370,6 +376,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\mfc.demo.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\mfc.demoDlg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RealWndDlg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SouiRealWndHandler.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\StdAfx.cpp"
 				>
 				<FileConfiguration
@@ -381,7 +403,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32"
+					Name="Debug|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -389,7 +411,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug|x64"
+					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -411,7 +433,23 @@
 			Filter="h;hh;hxx"
 			>
 			<File
+				RelativePath=".\mfc.demo.h"
+				>
+			</File>
+			<File
+				RelativePath=".\mfc.demoDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RealWndDlg.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SouiRealWndHandler.h"
 				>
 			</File>
 			<File
@@ -425,6 +463,10 @@
 			>
 			<File
 				RelativePath=".\ArxSoUI.rc"
+				>
+			</File>
+			<File
+				RelativePath=".\res\mfc.demo.ico"
 				>
 			</File>
 		</Filter>

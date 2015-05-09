@@ -1,4 +1,4 @@
-//Microsoft Visual C++ generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -12,31 +12,40 @@
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE 
 BEGIN
-	"resource.h\0"
+    "resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE 
 BEGIN
-	"#include ""afxres.h""\r\n"
+    "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE 
 BEGIN
-	"\0"
+    "\0"
 END
 
 #endif    // APSTUDIO_INVOKED
 
-#ifndef _MAC
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -55,47 +64,82 @@ VS_VERSION_INFO VERSIONINFO
  FILETYPE 0x2L
  FILESUBTYPE 0x0L
 BEGIN
-	BLOCK "StringFileInfo"
-	BEGIN
-		BLOCK "040904B0"
-		BEGIN
-			VALUE "CompanyName", "\0"
-			VALUE "FileDescription", "ArxSoUI ObjectARX application\0"
-			VALUE "FileVersion", "1, 0, 0, 1\0"
-			VALUE "InternalName", "ArxSoUI\0"
-			VALUE "LegalCopyright", "Copyright ?2002\0"
-			VALUE "OriginalFilename", "ArxSoUI.arx\0"
-			VALUE "ProductName", "ArxSoUI Application\0"
-			VALUE "ProductVersion", "1, 0, 0, 1\0"
-		END
-	END
-	BLOCK "VarFileInfo"
-	BEGIN
-		VALUE "Translation", 0x0409, 0x04B0
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", "ArxSoUI ObjectARX application"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "ArxSoUI"
+            VALUE "LegalCopyright", "Copyright ?2002"
+            VALUE "OriginalFilename", "ArxSoUI.arx"
+            VALUE "ProductName", "ArxSoUI Application"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
     END
 END
 
-#endif    // !_MAC
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MFCDEMO_DIALOG DIALOGEX 0, 0, 320, 200
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "mfc.demo"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,209,179,50,14
+    PUSHBUTTON      "取消",IDCANCEL,263,179,50,14
+    PUSHBUTTON      "Open Soui Dialog",IDC_BUTTON1,93,77,106,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_MFCDEMO_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 313
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 193
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\mfc.demo.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
-	IDS_PROJNAME					"ArxSoUI"
+    IDS_PROJNAME            "ArxSoUI"
 END
 
-
-
+#endif    // 中文(中华人民共和国) resources
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef APSTUDIO_INVOKED
-/////////////////////////////////////////////////////////////////////////////
-//
-// Generated from the TEXTINCLUDE 3 resource.
-//
-/////////////////////////////////////////////////////////////////////////////
-#endif    // not APSTUDIO_INVOKED
 
