@@ -324,6 +324,8 @@ public:
 		if( !loadArxModule( _T( "AllTests" ) ) ) return false;
 #endif
 
+		if( !loadArxModule( _T( "ArxSoUI" ) ) ) return false;
+
 		return true;
 	}
 
@@ -361,6 +363,8 @@ public:
 #if INCLUDE_TEST_MODULE
 		unloadArxModule( _T( "AllTests" ) );
 #endif
+
+		unloadArxModule( _T( "ArxSoUI" ) );
 	}
 
 	//static void VVTest_testVector()
