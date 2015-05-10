@@ -3,9 +3,7 @@
 // Used by ArxSoUI.rc
 //
 #define IDS_PROJNAME                    100
-#define IDD_MFCDEMO_DIALOG              102
 #define IDR_MAINFRAME                   128
-#define IDC_BUTTON1                     1000
 
 // Next default values for new objects
 // 
