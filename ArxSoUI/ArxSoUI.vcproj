@@ -455,6 +455,10 @@
 				RelativePath=".\UIHelper2.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\UIHelper3.cpp"
+				>
+			</File>
 			<Filter
 				Name="controls.extend"
 				>

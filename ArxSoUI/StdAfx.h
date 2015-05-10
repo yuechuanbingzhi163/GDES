@@ -86,7 +86,7 @@
 #include <control/souictrls.h>
 #include <control/realwndhandler-i.h>
 #include <res.mgr/sobjdefattr.h>
-//#include <com-cfg.h>
+#include <com-cfg.h>
 //#include <com-loader.hpp>
 #include <helper/MenuWndHook.h>
 #include <helper/mybuffer.h>

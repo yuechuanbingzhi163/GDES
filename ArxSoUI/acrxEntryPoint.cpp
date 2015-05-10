@@ -74,10 +74,15 @@ public:
 	{
 		UIHelper::ShowSoUIDlg2();
 	}
+
+	static void JL_TestSoUI3()
+	{
+		UIHelper::ShowSoUIDlg3();
+	}
 } ;
 
 //-----------------------------------------------------------------------------
 IMPLEMENT_ARX_ENTRYPOINT(CArxSoUIApp)
 ACED_ARXCOMMAND_ENTRY_AUTO( CArxSoUIApp, JL, _TestSoUI1, TestSoUI1, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CArxSoUIApp, JL, _TestSoUI2, TestSoUI2, ACRX_CMD_TRANSPARENT, NULL )
-
+ACED_ARXCOMMAND_ENTRY_AUTO( CArxSoUIApp, JL, _TestSoUI3, TestSoUI3, ACRX_CMD_TRANSPARENT, NULL )
