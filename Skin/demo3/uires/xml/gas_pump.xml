@@ -1,0 +1,7 @@
+﻿<include>
+  <text pos="10,10">泵站能力和备用泵能力</text>
+  <window pos="10,[5,-10,@210">
+    <include src="layout:pump_list" />
+  </window>
+   <gifplayer pos="10,[5,-5,-0" skin="gif_fan" />
+</include>

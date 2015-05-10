@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<include>
+  <treectrl size="full,full"  name="mytree1" itemHeight="30" iconSkin="skin_tree_icon" checkBox="1" font="underline:1">
+    <item text="抽采达标工艺方案设计管理文件" img="0" selImg="1"  expand="1">
+      <item text="为抽采达标服务的各项工程布局、工程量" img="2"/>
+      <item text="进度、资金计划、接续关系" img="2"/>
+      <item text="施工设备、主要器材" img="2"/>
+    </item>
+
+    <item text="采掘工作面施工设计管理文件" img="0" selImg="1" expand="1">
+      <item text="钻孔参数表、施工要求、钻孔工程量" img="2"/>
+      <item text="施工设备与进度计划" img="2"/>
+      <item text="预期效果及组织管理" img="2"/>
+      <item text="抽采钻孔布置图" img="2"/>
+      <item text="有效抽瓦斯时间" img="2"/>
+      <item text="安全技术措施" img="2"/>
+    </item>
+
+    <item text="抽采达标规划管理文件" img="0" selImg="1" expand="1">
+      <item text="抽采达标范围可规划产量（表）" img="2"/>
+      <item text="抽采达标工程（表）" img="2"/>
+      <item text="抽采设备设施（表）" img="2"/>
+      <item text="资金计划（表）" img="2"/>
+      <item text="采面接替（表）" img="2"/>
+      <item text="巷道掘进（表）" img="2"/>
+      <item text="抽采量（表）" img="2"/>
+    </item>
+
+    <item text="年度实施计划管理文件" img="0" selImg="1" expand="1">
+      <item text="年度瓦斯抽采达标的煤层范围及相对应的年度产量安排（表）" img="2"/>
+      <item text="施工队伍、抽采时间、抽采量（表）" img="2"/>
+      <item text="抽采指标、资金计划（表）" img="2"/>
+      <item text="年度抽采工程（表）" img="2"/>
+      <item text="抽采设备设施（表）" img="2"/>
+      <item text="采面接替（表）" img="2"/>
+      <item text="巷道掘进（表）" img="2"/>
+    </item>
+
+  </treectrl>
+
+</include>

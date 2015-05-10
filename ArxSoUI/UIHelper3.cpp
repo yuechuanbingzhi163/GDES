@@ -15,7 +15,7 @@
 //#include <controls.extend/SFlyWnd.h>
 //#include <controls.extend/SFadeFrame.h>
 //#include <controls.extend/sradiobox2.h>
-//#include <controls.extend/SVscrollbar.h>
+#include <controls.extend/SVscrollbar.h>
 //#include <controls.extend/SChromeTabCtrl.h>
 //#include <controls.extend/siectrl.h>
 //#include <controls.extend/SCalendar2.h>
@@ -58,7 +58,7 @@ public:
 		pSouiApp->RegisterWndFactory(TplSWindowFactory<SGifPlayer>());//×¢²áGIFPlayer
 		pSouiApp->RegisterSkinFactory(TplSkinFactory<SSkinGif>());//×¢²áSkinGif
 		//pSouiApp->RegisterSkinFactory(TplSkinFactory<SSkinAPNG>());//×¢²áSSkinAPNG
-		//pSouiApp->RegisterSkinFactory(TplSkinFactory<SSkinVScrollbar>());//×¢²á×ÝÏò¹ö¶¯ÌõÆ¤·ô
+		pSouiApp->RegisterSkinFactory(TplSkinFactory<SSkinVScrollbar>());//×¢²á×ÝÏò¹ö¶¯ÌõÆ¤·ô
 
 		pSouiApp->RegisterWndFactory(TplSWindowFactory<SIPAddressCtrl>());//×¢²áIP¿Ø¼þ
 		//pSouiApp->RegisterWndFactory(TplSWindowFactory<SPropertyGrid>());//×¢²áÊôÐÔ±í¿Ø¼þ

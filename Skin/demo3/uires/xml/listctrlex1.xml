@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<include>
+  <listctrlex name="ground_list" colorBkgnd="#ffffff" hotTrack="1" multiSelection="1" pos="10,10,-10,-10" itemHeight="70" headerHeight="30"  itemSkin="skin_tab_left" colorItemSelBkgnd="#f7f7f7ff" colorItemHotBkgnd="#f7f7f777" selectRangeSkin="skin_lcex_selectrange">
+	<header align="center"  sortSkin="skin_lcex_header_arrow" itemSkin="skin_lcex_header" itemSwapEnable="1" fixWidth="0" font="underline:0,adding:-3" sortHeader="1" colorBkgnd="#ffffff" >
+	  <items>
+		<item width="480">软件名称</item>
+		<item width="95">软件评分</item>
+		<item width="100">大小</item>
+		<item width="100">安装时间</item>
+		<item width="100">使用频率</item>
+		<item width="100">操作</item>
+	  </items>
+	</header>
+	<items>
+	  <item>
+		<window clipClient="1" cache="1" >
+			<img skin="skin_icon1" pos="10,8" height="54" width="54" msgTransparent="0" /> 
+			<text pos="70,16" font="bold:1,adding:-1">鲁大师</text>
+			<text pos="70,36,-10,-16" font="bold:1,adding:-4" dotted="1">鲁大师是一款专业的硬件检测，驱动安装工具</text>
+		</window>
+		<window clipClient="1" cache="1" >
+			<img skin="skin_star2" iconIndex="0" msgTransparent="0" pos="10,16"  />
+			<img skin="skin_star2" iconIndex="0" msgTransparent="0" pos="25,16"  />
+			<img skin="skin_star2" iconIndex="1" msgTransparent="0" pos="40,16"  />
+			<img skin="skin_star2" iconIndex="2" msgTransparent="0" pos="55,16"  />
+			<img skin="skin_star2" iconIndex="2" msgTransparent="0" pos="70,16"  />
+			<text pos="15,36,50,-16" font="adding:-5"  >5.4分</text>
+			<link pos="55,36,85,-16" cursor="hand" colorText="#1e78d5" href="www.163.com" font="adding:-5" >投票</link>
+		</window>
+		<window clipClient="1" cache="1" >
+			<text pos="0,26,-0,-26" font="adding:-4" align="center" >20.92M</text>
+		</window>
+		<window clipClient="1" cache="1" >
+			<text pos="0,26,-0,-26" font="adding:-4" align="center" >2015-01-09</text>
+		</window>
+		<window clipClient="1" cache="1" >
+			<text pos="0,26,-0,-26" font="adding:-4" align="center" >今天</text>
+		</window>
+		<window clipClient="1" cache="1" >
+			<imgbtn animate="1" pos="|-35,|-14" font="adding:-3" align="center" skin="skin_install" >卸载</imgbtn>
+		</window>
+	  </item>
+	</items>  
+	
+  </listctrlex>
+</include>

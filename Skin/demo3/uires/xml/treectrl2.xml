@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<include>
+  <treectrl size="full,full"  name="mytree2" itemHeight="30" iconSkin="skin_tree_icon" checkBox="1" font="underline:1">
+    <item text="瓦斯抽采达标评价工作体系" img="0" selImg="1" expand="1">
+      <item text="建立瓦斯抽采达标评价工作体系" img="2"/>
+      <item text="瓦斯抽采达标评判细则" img="2"/>
+    </item>
+
+    <item text="瓦斯抽采管理制度" img="0" selImg="1" expand="1">
+      <item text="瓦斯抽采管理和考核奖惩制度" img="2"/>
+      <item text="抽采工程检查验收制度" img="2"/>
+      <item text="先抽后采例会制度" img="2"/>
+      <item text="技术档案管理制度" img="2"/>
+    </item>
+
+  </treectrl>
+
+</include>

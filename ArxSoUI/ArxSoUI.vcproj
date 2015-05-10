@@ -567,6 +567,10 @@
 					RelativePath="..\ThirdParty\soui\controls.extend\gif\SSkinGif.h"
 					>
 				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\SVscrollbar.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
