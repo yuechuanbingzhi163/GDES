@@ -28,12 +28,19 @@ public:
 	{
 		hInstance = 0; hSysResource = 0;
 		delete pSouiApp; pSouiApp = 0;
+		//卸载菜单边框绘制hook
+		CMenuWndHook::UnInstallHook();
 		CoUninitialize();
 	}
 
 	SComMgr* getComMrg()
 	{
 		return &comMgrObj;
+	}
+
+	SApplication* getApp()
+	{
+		return pSouiApp;
 	}
 
 	bool init()
@@ -75,18 +82,15 @@ public:
 
 	virtual bool initApp()
 	{
-		if(pSouiApp == 0)
-		{
-			pSouiApp=new SApplication(pRenderFactory, hInstance);
-			SStringT strResDir = pSouiApp->GetAppDir();
-			strResDir += getSkinDir();
-			//将程序的运行路径修改到demo所在的目录
-			//注意:最好是在加载soui-sys-resource.dll之后设置,否则soui系统资源加载会失败!!!
-			SetCurrentDirectory(strResDir);
-			//SOUI系统总是从appdir去查找资源
-			//注:这个说法是不准确的,soui的源代码中并没有使用GetAppDir(),主要还是依赖SetCurrentDirectory()设置当前路径
-			pSouiApp->SetAppDir(strResDir);
-		}
+		pSouiApp=new SApplication(pRenderFactory, hInstance);
+		SStringT strResDir = pSouiApp->GetAppDir();
+		strResDir += getSkinDir();
+		//将程序的运行路径修改到demo所在的目录
+		//注意:最好是在加载soui-sys-resource.dll之后设置,否则soui系统资源加载会失败!!!
+		SetCurrentDirectory(strResDir);
+		//SOUI系统总是从appdir去查找资源
+		//注:这个说法是不准确的,soui的源代码中并没有使用GetAppDir(),主要还是依赖SetCurrentDirectory()设置当前路径
+		pSouiApp->SetAppDir(strResDir);
 		return true;
 	}
 
@@ -170,7 +174,7 @@ public:
 	{
 		//加载全局资源描述XML
 		//初始化SOUI全局资源
-		return (TRUE == pSouiApp->Init(_T("xml_init"), _T("xml"))); 
+		return (TRUE == pSouiApp->Init(_T("xml_init"), _T("uidef"))); 
 	}
 
 protected:

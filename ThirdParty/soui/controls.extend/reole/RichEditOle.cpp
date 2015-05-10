@@ -14,6 +14,8 @@
 
 using namespace Gdiplus;
 
+namespace SOUI{
+
 HBITMAP CreateGDIBitmap(HDC hdc, int nWid,int nHei )
 {
     BITMAPINFO bmi;
@@ -736,4 +738,6 @@ BOOL SetSRicheditOleCallback(SRichEdit *pRichedit,FunCreateSource pCreateSource 
     pCallback->Release();
     pHost->Release();
     return bRet;
+}
+
 }

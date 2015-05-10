@@ -382,6 +382,28 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FormatMsgDlg.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\MainDlg.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\RealWndDlg.cpp"
 				>
 			</File>
@@ -426,14 +448,62 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\UIHelper.cpp"
+				RelativePath=".\UIHelper1.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\UIHelper2.cpp"
+				>
+			</File>
+			<Filter
+				Name="controls.extend"
+				>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\reole\dataobject.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\reole\RichEditOle.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\SChatEdit.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\gif\SGifPlayer.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\SIPAddressCtrl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\SListCtrlEx.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\SScrollText.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\gif\SSkinGif.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Include Files"
 			Filter="h;hh;hxx"
 			>
+			<File
+				RelativePath=".\FormatMsgDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MainDlg.h"
+				>
+			</File>
 			<File
 				RelativePath=".\RealWndDlg.h"
 				>
@@ -458,6 +528,42 @@
 				RelativePath=".\UIHelper.h"
 				>
 			</File>
+			<Filter
+				Name="controls.extend"
+				>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\reole\dataobject.h"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\reole\RichEditOle.h"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\SChatEdit.h"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\gif\SGifPlayer.h"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\SIPAddressCtrl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\SListCtrlEx.h"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\SScrollText.h"
+					>
+				</File>
+				<File
+					RelativePath="..\ThirdParty\soui\controls.extend\gif\SSkinGif.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

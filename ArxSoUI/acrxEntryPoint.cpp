@@ -65,13 +65,19 @@ public:
 	virtual void RegisterServerComponents () {
 	}
 
-	static void JL_TestSoUI()
+	static void JL_TestSoUI1()
 	{
-		UIHelper::ShowSoUIDlg();
+		UIHelper::ShowSoUIDlg1();
+	}
+
+	static void JL_TestSoUI2()
+	{
+		UIHelper::ShowSoUIDlg2();
 	}
 } ;
 
 //-----------------------------------------------------------------------------
 IMPLEMENT_ARX_ENTRYPOINT(CArxSoUIApp)
-ACED_ARXCOMMAND_ENTRY_AUTO( CArxSoUIApp, JL, _TestSoUI, TestSoUI, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CArxSoUIApp, JL, _TestSoUI1, TestSoUI1, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CArxSoUIApp, JL, _TestSoUI2, TestSoUI2, ACRX_CMD_TRANSPARENT, NULL )
 
