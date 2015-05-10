@@ -4,6 +4,8 @@
 #include "StdAfx.h"
 #include "resource.h"
 
+#include "UIHelper.h"
+
 // 定义注册服务名称
 #ifndef ARX_SOUI_SERVICE_NAME
 #define ARX_SOUI_SERVICE_NAME _T("ARXSOUI_SERVICE_NAME")
@@ -63,8 +65,13 @@ public:
 	virtual void RegisterServerComponents () {
 	}
 
+	static void JL_TestSoUI()
+	{
+		UIHelper::ShowSoUIDlg();
+	}
 } ;
 
 //-----------------------------------------------------------------------------
 IMPLEMENT_ARX_ENTRYPOINT(CArxSoUIApp)
+ACED_ARXCOMMAND_ENTRY_AUTO( CArxSoUIApp, JL, _TestSoUI, TestSoUI, ACRX_CMD_TRANSPARENT, NULL )
 

@@ -45,6 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
 				PreprocessorDefinitions="WIN32;_WINDOWS;ARXSOUI_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -70,8 +71,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="soui.lib utilities.lib"
 				OutputFile="$(outdir)/ArxSoUI.arx"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="../ThirdParty/soui/bin"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/ArxSoUI.pdb"
@@ -129,7 +132,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
+				AdditionalIncludeDirectories="../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
 				PreprocessorDefinitions="_WIN64;_WINDOWS;ARXSOUI_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -216,6 +219,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
+				AdditionalIncludeDirectories="../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
 				PreprocessorDefinitions="WIN32;_WINDOWS;ARXSOUI_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -241,8 +245,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="soui.lib utilities.lib"
 				OutputFile="$(outdir)/ArxSoUI.arx"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="../ThirdParty/soui/bin"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
@@ -300,9 +306,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
+				AdditionalIncludeDirectories="../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
-				PreprocessorDefinitions="_WIN64;_WINDOWS;ARXSOUI_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
+				PreprocessorDefinitions="WIN32;_WINDOWS;ARXSOUI_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -376,14 +382,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\mfc.demo.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\mfc.demoDlg.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\RealWndDlg.cpp"
 				>
 			</File>
@@ -427,19 +425,15 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\UIHelper.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Include Files"
 			Filter="h;hh;hxx"
 			>
-			<File
-				RelativePath=".\mfc.demo.h"
-				>
-			</File>
-			<File
-				RelativePath=".\mfc.demoDlg.h"
-				>
-			</File>
 			<File
 				RelativePath=".\RealWndDlg.h"
 				>
@@ -449,11 +443,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SoUILoader.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SouiRealWndHandler.h"
 				>
 			</File>
 			<File
 				RelativePath=".\StdAfx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\UIHelper.h"
 				>
 			</File>
 		</Filter>

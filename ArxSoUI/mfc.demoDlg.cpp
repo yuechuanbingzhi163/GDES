@@ -1,21 +1,6 @@
-
-// mfc.demoDlg.cpp : 实现文件
-//
-
 #include "stdafx.h"
-#include "mfc.demo.h"
 #include "mfc.demoDlg.h"
 #include "realwnddlg.h"
-
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#endif
-
-
-// CmfcdemoDlg 对话框
-
-
-
 
 CmfcdemoDlg::CmfcdemoDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CmfcdemoDlg::IDD, pParent)
@@ -90,7 +75,7 @@ HCURSOR CmfcdemoDlg::OnQueryDragIcon()
 
 void CmfcdemoDlg::OnOpenSouiDlg()
 {
+	MessageBox(_T("xxx"));
     CRealWndDlg dlg;
-    dlg.DoModal(m_hWnd);
+    dlg.DoModal(GetSafeHwnd());
 }
-

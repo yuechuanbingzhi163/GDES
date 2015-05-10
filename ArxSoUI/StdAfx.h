@@ -23,7 +23,7 @@
 #endif
 
 #ifndef _WIN32_WINNT			//- Allow use of features specific to Windows NT 4 or later.
-#define _WIN32_WINNT 0x0500		//- Change this to the appropriate value to target Windows 2000 or later.
+#define _WIN32_WINNT 0x0502		//- Change this to the appropriate value to target Windows 2000 or later.
 #endif						
 
 #ifndef _WIN32_WINDOWS			//- Allow use of features specific to Windows 98 or later.
@@ -31,7 +31,7 @@
 #endif
 
 #ifndef _WIN32_IE				//- Allow use of features specific to IE 4.0 or later.
-#define _WIN32_IE 0x0400		//- Change this to the appropriate value to target IE 5.0 or later.
+#define _WIN32_IE 0x0601		//- Change this to the appropriate value to target IE 5.0 or later.
 #endif
 
 
@@ -41,6 +41,11 @@
 //-----------------------------------------------------------------------------
 #include <afxwin.h>				//- MFC core and standard components
 #include <afxext.h>				//- MFC extensions
+
+// 某些 CString 构造函数将是显式的
+#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS
+// 关闭 MFC 对某些常见但经常可放心忽略的警告消息的隐藏
+#define _AFX_ALL_WARNINGS
 
 #ifndef _AFX_NO_OLE_SUPPORT
 #include <afxole.h>				//- MFC OLE classes
@@ -73,6 +78,7 @@
 //#define _INC_LEAGACY_HEADERS_		//- Include legacy headers in this project
 #include "arxHeaders.h"
 
+#include "resource.h"
 
 #include <souistd.h>
 #include <core/SHostDialog.h>
@@ -82,5 +88,7 @@
 #include <res.mgr/sobjdefattr.h>
 #include <com-cfg.h>
 #include <com-loader.hpp>
+#include <helper/MenuWndHook.h>
+#include <helper/mybuffer.h>
 
 #pragma pack (pop)

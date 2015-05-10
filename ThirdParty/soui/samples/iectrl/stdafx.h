@@ -11,7 +11,7 @@
 #include <core/SHostDialog.h>
 #include <control/SMessageBox.h>
 #include <control/souictrls.h>
-#include <SIECtrl.h>
+#include <controls.extend/SIECtrl.h>
 
 #include "resource.h"
 

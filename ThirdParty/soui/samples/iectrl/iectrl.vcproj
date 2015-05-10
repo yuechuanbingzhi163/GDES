@@ -11,6 +11,9 @@
 		<Platform
 			Name="Win32"
 		/>
+		<Platform
+			Name="x64"
+		/>
 	</Platforms>
 	<ToolFiles>
 	</ToolFiles>
@@ -40,9 +43,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\SOUI\include;..\..\utilities\include;..\..\controls.extend;..\..\config"
+				AdditionalIncludeDirectories="..\..\;..\..\soui\include;..\..\utilities\include;..\..\config;..\..\components"
 				PreprocessorDefinitions="WIN32;_WINDOWS;STRICT;_DEBUG"
-				RuntimeLibrary="1"
+				RuntimeLibrary="3"
 				TreatWChar_tAsBuiltInType="true"
 				UsePrecompiledHeader="2"
 				BrowseInformation="1"
@@ -91,6 +94,83 @@
 			/>
 		</Configuration>
 		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="..\..\bin"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\;..\..\soui\include;..\..\utilities\include;..\..\config;..\..\components"
+				PreprocessorDefinitions="WIN32;_WINDOWS;STRICT;_DEBUG"
+				RuntimeLibrary="3"
+				TreatWChar_tAsBuiltInType="true"
+				UsePrecompiledHeader="2"
+				BrowseInformation="1"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="utilitiesd.lib souid.lib"
+				OutputFile="$(OutDir)\$(ProjectName)d.exe"
+				LinkIncremental="2"
+				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories="&quot;$(OutDir)&quot;"
+				GenerateDebugInformation="true"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="..\..\bin\"
 			IntermediateDirectory="$(ConfigurationName)"
@@ -115,9 +195,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				WholeProgramOptimization="true"
-				AdditionalIncludeDirectories="..\..\SOUI\include;..\..\utilities\include;..\..\controls.extend;..\..\config"
+				AdditionalIncludeDirectories="..\..\;..\..\soui\include;..\..\utilities\include;..\..\config;..\..\components"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
-				RuntimeLibrary="0"
+				RuntimeLibrary="2"
 				TreatWChar_tAsBuiltInType="true"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -139,6 +219,80 @@
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="&quot;$(OutDir)&quot;"
 				GenerateDebugInformation="true"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="..\..\bin"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				WholeProgramOptimization="true"
+				AdditionalIncludeDirectories="..\..\;..\..\soui\include;..\..\utilities\include;..\..\config;..\..\components"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG"
+				RuntimeLibrary="2"
+				TreatWChar_tAsBuiltInType="true"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				SuppressStartupBanner="true"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="utilities.lib soui.lib"
+				LinkIncremental="1"
+				SuppressStartupBanner="true"
+				AdditionalLibraryDirectories="&quot;$(OutDir)&quot;"
+				GenerateDebugInformation="true"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -198,7 +352,23 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -259,7 +429,27 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Building UI Resource"
+						CommandLine="&quot;..\..\tools\uiresbuilder.exe&quot; -i &quot;$(InputPath)&quot; -p uires -r .\res\soui_res.rc2&#x0D;&#x0A;"
+						Outputs=".\res\soui_res.rc2;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
 					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Building UI Resource"
+						CommandLine="&quot;..\..\tools\uiresbuilder.exe&quot; -i &quot;$(InputPath)&quot; -p uires -r .\res\soui_res.rc2&#x0D;&#x0A;"
+						Outputs=".\res\soui_res.rc2;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCustomBuildTool"
