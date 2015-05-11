@@ -1,0 +1,87 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgdecoder-wic", "C:/Develop/GitProject/DUI/soui/components/imgdecoder-wic\imgdecoder-wic.vcproj", "{6F0A9901-4F0D-3BE8-8A15-C7153C6CD1D3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "render-gdi", "C:/Develop/GitProject/DUI/soui/components/render-gdi\render-gdi.vcproj", "{BE3B5B37-45E7-325C-B499-B2E2111C5AB3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "skia", "C:/Develop/GitProject/DUI/soui/components/skia\skia.vcproj", "{F8843E18-0ECC-348A-A09C-2E1784DD142B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "render-skia", "C:/Develop/GitProject/DUI/soui/components/render-skia\render-skia.vcproj", "{D1F7017E-FBDF-31F0-AE1A-52031F214F9F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F8843E18-0ECC-348A-A09C-2E1784DD142B} = {F8843E18-0ECC-348A-A09C-2E1784DD142B}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "translator", "C:/Develop/GitProject/DUI/soui/components/translator\translator.vcproj", "{6D29D3F2-829E-36B4-92E7-37C2A85EB249}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "C:/Develop/GitProject/DUI/soui/components/zlib\zlib.vcproj", "{4FEF1176-4B37-3C85-9E11-8602CBE1DDCF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "png", "C:/Develop/GitProject/DUI/soui/components/png\png.vcproj", "{33E54065-EB7E-353E-9CF5-E48AB3CFB551}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "resprovider-zip", "C:/Develop/GitProject/DUI/soui/components/resprovider-zip\resprovider-zip.vcproj", "{DC19BE57-E706-3497-86DC-D2A4C0970874}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgdecoder-stb", "C:/Develop/GitProject/DUI/soui/components/imgdecoder-stb\imgdecoder-stb.vcproj", "{E8AAF95E-3F61-3639-9CDF-21331391916B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgdecoder-png", "C:/Develop/GitProject/DUI/soui/components/imgdecoder-png\imgdecoder-png.vcproj", "{9BAAC198-49A7-3980-9F9C-A32E292A754F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4FEF1176-4B37-3C85-9E11-8602CBE1DDCF} = {4FEF1176-4B37-3C85-9E11-8602CBE1DDCF}
+		{33E54065-EB7E-353E-9CF5-E48AB3CFB551} = {33E54065-EB7E-353E-9CF5-E48AB3CFB551}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imgdecoder-gdip", "C:/Develop/GitProject/DUI/soui/components/imgdecoder-gdip\imgdecoder-gdip.vcproj", "{B82328DD-40A3-331B-8DB9-78FE837157B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F0A9901-4F0D-3BE8-8A15-C7153C6CD1D3}.Debug|x64.ActiveCfg = Debug|x64
+		{6F0A9901-4F0D-3BE8-8A15-C7153C6CD1D3}.Debug|x64.Build.0 = Debug|x64
+		{6F0A9901-4F0D-3BE8-8A15-C7153C6CD1D3}.Release|x64.ActiveCfg = Release|x64
+		{6F0A9901-4F0D-3BE8-8A15-C7153C6CD1D3}.Release|x64.Build.0 = Release|x64
+		{BE3B5B37-45E7-325C-B499-B2E2111C5AB3}.Debug|x64.ActiveCfg = Debug|x64
+		{BE3B5B37-45E7-325C-B499-B2E2111C5AB3}.Debug|x64.Build.0 = Debug|x64
+		{BE3B5B37-45E7-325C-B499-B2E2111C5AB3}.Release|x64.ActiveCfg = Release|x64
+		{BE3B5B37-45E7-325C-B499-B2E2111C5AB3}.Release|x64.Build.0 = Release|x64
+		{F8843E18-0ECC-348A-A09C-2E1784DD142B}.Debug|x64.ActiveCfg = Debug|x64
+		{F8843E18-0ECC-348A-A09C-2E1784DD142B}.Debug|x64.Build.0 = Debug|x64
+		{F8843E18-0ECC-348A-A09C-2E1784DD142B}.Release|x64.ActiveCfg = Release|x64
+		{F8843E18-0ECC-348A-A09C-2E1784DD142B}.Release|x64.Build.0 = Release|x64
+		{D1F7017E-FBDF-31F0-AE1A-52031F214F9F}.Debug|x64.ActiveCfg = Debug|x64
+		{D1F7017E-FBDF-31F0-AE1A-52031F214F9F}.Debug|x64.Build.0 = Debug|x64
+		{D1F7017E-FBDF-31F0-AE1A-52031F214F9F}.Release|x64.ActiveCfg = Release|x64
+		{D1F7017E-FBDF-31F0-AE1A-52031F214F9F}.Release|x64.Build.0 = Release|x64
+		{6D29D3F2-829E-36B4-92E7-37C2A85EB249}.Debug|x64.ActiveCfg = Debug|x64
+		{6D29D3F2-829E-36B4-92E7-37C2A85EB249}.Debug|x64.Build.0 = Debug|x64
+		{6D29D3F2-829E-36B4-92E7-37C2A85EB249}.Release|x64.ActiveCfg = Release|x64
+		{6D29D3F2-829E-36B4-92E7-37C2A85EB249}.Release|x64.Build.0 = Release|x64
+		{4FEF1176-4B37-3C85-9E11-8602CBE1DDCF}.Debug|x64.ActiveCfg = Debug|x64
+		{4FEF1176-4B37-3C85-9E11-8602CBE1DDCF}.Debug|x64.Build.0 = Debug|x64
+		{4FEF1176-4B37-3C85-9E11-8602CBE1DDCF}.Release|x64.ActiveCfg = Release|x64
+		{4FEF1176-4B37-3C85-9E11-8602CBE1DDCF}.Release|x64.Build.0 = Release|x64
+		{33E54065-EB7E-353E-9CF5-E48AB3CFB551}.Debug|x64.ActiveCfg = Debug|x64
+		{33E54065-EB7E-353E-9CF5-E48AB3CFB551}.Debug|x64.Build.0 = Debug|x64
+		{33E54065-EB7E-353E-9CF5-E48AB3CFB551}.Release|x64.ActiveCfg = Release|x64
+		{33E54065-EB7E-353E-9CF5-E48AB3CFB551}.Release|x64.Build.0 = Release|x64
+		{DC19BE57-E706-3497-86DC-D2A4C0970874}.Debug|x64.ActiveCfg = Debug|x64
+		{DC19BE57-E706-3497-86DC-D2A4C0970874}.Debug|x64.Build.0 = Debug|x64
+		{DC19BE57-E706-3497-86DC-D2A4C0970874}.Release|x64.ActiveCfg = Release|x64
+		{DC19BE57-E706-3497-86DC-D2A4C0970874}.Release|x64.Build.0 = Release|x64
+		{E8AAF95E-3F61-3639-9CDF-21331391916B}.Debug|x64.ActiveCfg = Debug|x64
+		{E8AAF95E-3F61-3639-9CDF-21331391916B}.Debug|x64.Build.0 = Debug|x64
+		{E8AAF95E-3F61-3639-9CDF-21331391916B}.Release|x64.ActiveCfg = Release|x64
+		{E8AAF95E-3F61-3639-9CDF-21331391916B}.Release|x64.Build.0 = Release|x64
+		{9BAAC198-49A7-3980-9F9C-A32E292A754F}.Debug|x64.ActiveCfg = Debug|x64
+		{9BAAC198-49A7-3980-9F9C-A32E292A754F}.Debug|x64.Build.0 = Debug|x64
+		{9BAAC198-49A7-3980-9F9C-A32E292A754F}.Release|x64.ActiveCfg = Release|x64
+		{9BAAC198-49A7-3980-9F9C-A32E292A754F}.Release|x64.Build.0 = Release|x64
+		{B82328DD-40A3-331B-8DB9-78FE837157B2}.Debug|x64.ActiveCfg = Debug|x64
+		{B82328DD-40A3-331B-8DB9-78FE837157B2}.Debug|x64.Build.0 = Debug|x64
+		{B82328DD-40A3-331B-8DB9-78FE837157B2}.Release|x64.ActiveCfg = Release|x64
+		{B82328DD-40A3-331B-8DB9-78FE837157B2}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

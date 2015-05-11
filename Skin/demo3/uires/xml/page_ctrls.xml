@@ -1,0 +1,28 @@
+﻿<include>
+  <tabctrl pos="0,0,-0,-0" alpha="200" layeredWindow="1" animateSteps="10"  colorBkgnd="#cccccc" tabAlign="left" tabSkin="skin_tab_left" tabInterSkin="skin_tab_left_splitter" tabInterSize="2" tabWidth="200" iconSkin="skin_small_icons" icon-x="5" icon-y="8" colorText="#000000bb">
+    <page title="管理文件">
+      <include src="layout:treectrl1"/>
+    </page>
+    
+    <page title="规章制度">
+      <include src="layout:treectrl2"/>
+    </page>
+
+    <page title="验收资料">
+      <include src="layout:treectrl3"/>
+    </page>
+
+    <page title="瓦斯抽采系统">
+      <include src="layout:gas_sys"/>
+    </page>
+
+	<page title="泵站能力">
+      <include src="layout:gas_pump"/>
+    </page>
+
+	<page title="结论自述">
+      <include src="layout:conclusion"/>
+    </page>
+
+  </tabctrl>
+</include>

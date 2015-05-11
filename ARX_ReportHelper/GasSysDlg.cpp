@@ -85,7 +85,7 @@ static void initList(CGridListCtrlGroups& listCtrl,const CListCtrl_DataModel& da
 			CGridColumnTraitCombo* pComboTrait = new CGridColumnTraitCombo;
 			pComboTrait->AddItem((DWORD_PTR)0,_T("正在维修"));
 			pComboTrait->AddItem((DWORD_PTR)1,_T("已经撤出"));
-			pComboTrait->AddItem((DWORD_PTR)1,_T("正在建设"));
+			pComboTrait->AddItem((DWORD_PTR)2,_T("正在建设"));
 			pTrait = pComboTrait;
 		}
 

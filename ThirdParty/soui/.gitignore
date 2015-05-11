@@ -1,0 +1,55 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*idb
+*.ilk
+*.pdb
+BuildLog.htm
+*.dep
+*.suo
+*.res
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+.svn*
+obj*
+bin*
+
+stdafx.h.cpp
+*.filters
+*.user
+*.vcxproj
+*.ncb
+*.aps
+*.sbr
+/SoSmiley/_SoSmiley_i.c
+/SoSmiley/_SoSmiley_p.c
+/SoSmiley/dlldata.c
+/SoSmiley/_SoSmiley.h
+/SoSmiley/_SoSmiley.idl
+
+[Dd]ebug/
+[Rr]elease/

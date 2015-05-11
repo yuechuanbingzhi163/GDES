@@ -19,8 +19,6 @@
 *.ilk
 *.pch
 *.aps
-*.tlb
-*.tlh
 *.suo
 *.user
 *.deps

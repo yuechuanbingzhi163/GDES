@@ -71,7 +71,7 @@ public:
     // 文档对象已经失效; 数据库对象同样也是如此
     virtual AcRx::AppRetCode On_kLoadDwgMsg( void* pkt )
     {
-        AcRx::AppRetCode retCode = AcRxDbxApp::On_kLoadDwgMsg ( pkt ) ;
+        AcRx::AppRetCode retCode = AcRxArxApp::On_kLoadDwgMsg ( pkt ) ;
 
         // 注册dictionary和regAppName
         ArxDataTool::RegDict( PROPERTY_DATA_FIELD_DICT );
@@ -101,7 +101,7 @@ public:
 
     virtual AcRx::AppRetCode On_kUnloadDwgMsg( void* pkt )
     {
-        AcRx::AppRetCode retCode = AcRxDbxApp::On_kUnloadDwgMsg ( pkt ) ;
+        AcRx::AppRetCode retCode = AcRxArxApp::On_kUnloadDwgMsg ( pkt ) ;
 
         ReactorHelper::RemoveDocumentReactor( curDoc() );
 

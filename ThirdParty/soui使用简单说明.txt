@@ -1,0 +1,28 @@
+soui支持2种编译方式：
+1、全dll
+2、全lib（除了SoSmiley.dll和soui-sys-resouce.dll以外）
+
+我用soui提供的build.bat生成了x64版本的vc解决方案和项目文件，你直接打开soui.sln进行编译即可，生成的所有文件（exe、lib、dll）都位于soui/bin目录下，然后将这几个dll文件都拷贝到arx文件的路径（比如x64/debug）
+
+由于咱们的电脑都是64位的，cad也是64位的，所以开发主要以64位为主
+到后期需要32位的时候，在用soui/build.bat生成32位的全lib配置
+
+
+头文件路径
+../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components
+
+库文件路径
+../ThirdParty/soui/bin
+
+依赖的库（release版本）
+soui.lib utilities.lib
+
+依赖的库（debug版本）
+souid.lib utilitiesd.lib
+
+注：arx程序只能使用release版本
+
+soui教程
+http://www.cnblogs.com/setoutsoft/category/600691.html
+
+另外，soui在的例子musicplayer如果要编译和运行，需要使用64位版本的bass库，由于git不能上传二进制文件，编译soui的例子需要的第3方库和工具打包成7z格式了，参见soui/third-party.7z 和 soui/tools.7z，在使用时候解压覆盖到本地即可
