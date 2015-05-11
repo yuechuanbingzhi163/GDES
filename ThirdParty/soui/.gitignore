@@ -35,7 +35,6 @@ BuildLog.htm
 *.app
 
 .svn*
-obj*
 bin*
 
 stdafx.h.cpp
