@@ -29,6 +29,7 @@
 *.manifest
 *.res
 *.[Oo]bj
+*.bsc
 
 *.pkg
 *.swp
@@ -51,8 +52,7 @@ Ankh.NoLoad
 build/
 [Oo]bj/
 [Bb]in/
-*[Dd]ebug*/
-*[Rr]elease*/
+
 GeneratedFiles/
 Unicode*/
 [Bb]uild/
@@ -66,3 +66,8 @@ qmake_image_collection.cpp
 CMakeCache.txt
 [Tt]humbs.db
 acad.err
+
+[Xx]64/
+
+*[Dd]ebug/
+*[Rr]elease/
