@@ -54,9 +54,6 @@ build/
 *[Dd]ebug*/
 *[Rr]elease*/
 GeneratedFiles/
-[Ww]in*/
-[Xx]86*/
-[Xx]64*/
 Unicode*/
 [Bb]uild/
 CMakeFiles/
