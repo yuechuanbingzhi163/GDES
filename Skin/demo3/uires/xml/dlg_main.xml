@@ -56,7 +56,7 @@
         <include src="layout:page_about"/>
       </page>
 
-      <page title="瓦斯泵查询">
+      <page title="瓦斯泵选型">
         <include src="layout:page_db" />
       </page>
 
