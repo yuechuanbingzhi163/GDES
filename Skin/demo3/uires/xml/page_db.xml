@@ -1,0 +1,54 @@
+﻿<include>
+  <check pos="5,5" height="30">型号</check>
+  <edit readOnly="1" width="80"></edit>
+  <check height="30">泵长</check>
+  <edit readOnly="1" width="80"></edit>
+  <text>(mm)</text>
+  <check height="30">吸入绝压</check>
+  <edit readOnly="1" width="80"></edit>
+  <text>(hPa)</text>
+  <check height="30">极限压力</check>
+  <edit readOnly="1" width="80"></edit>
+  <text>(hPa)</text>
+
+  <check pos="5,[20" height="30">泵重</check>
+  <edit readOnly="1" width="80"></edit>
+  <text>(kg)</text>
+  <check height="30">泵高</check>
+  <edit readOnly="1" width="80"></edit>
+  <text>(mm)</text>
+  <check height="30">电机功率</check>
+  <edit readOnly="1" width="80"></edit>
+  <text>(Kw)</text>
+  <check height="30">最低吸入绝压</check>
+  <edit readOnly="1" width="80"></edit>
+  <text>(hPa)</text>
+
+  <check pos="5,[20" height="30">转速</check>
+  <edit readOnly="1" width="80"></edit>
+  <check height="30">泵宽</check>
+  <edit readOnly="1" width="80"></edit>
+  <text>(mm)</text>
+  <check height="30">最大气量</check>
+  <edit readOnly="1" width="80"></edit>
+  <text>(m3/min)</text>
+  <check height="30">查看全部瓦斯泵</check>
+  <edit readOnly="1" width="80"></edit>
+  <text>(hPa)</text>
+
+  <check pos="5,[20" height="30">生产厂家</check>
+  <edit readOnly="1" width="200"></edit>
+
+
+	<listctrl name="lc_test" hotTrack="1" pos="5,[20,-10,-10" itemHeight="20" headerHeight="30" cursor="CUR_TST" font="underline:0" itemSkin="skin_tab_left">
+        <header align="center" itemSwapEnable="0" fixWidth="0" sortHeader="1">
+          <items>
+           <item width="150">姓名</item>
+            <item width="150">性别</item>
+            <item width="150">年龄</item>
+            <item width="150">成绩</item>
+          </items>
+        </header>
+      </listctrl>
+
+</include>

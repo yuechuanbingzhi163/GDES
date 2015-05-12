@@ -34,7 +34,8 @@ void CMainDlg::OnShowWindow( BOOL bShow, UINT nStatus )
 {
 	if(bShow)
 	{
- 		AnimateHostWindow(200,AW_CENTER);
+		//该行代码是实现窗口的动画启动效果（从小变大的过程）
+ 		//AnimateHostWindow(200,AW_CENTER);
 	}
 }
 

@@ -1,7 +1,15 @@
 ﻿<include>
   <text pos="10,10">泵站能力和备用泵能力</text>
-  <window pos="10,[5,-10,@210">
-    <include src="layout:pump_list" />
-  </window>
+     <listctrl name="pump_list" hotTrack="1" pos="10,[5,-10,@210" itemHeight="20" headerHeight="30" cursor="CUR_TST" font="underline:0" itemSkin="skin_tab_left">
+        <header align="center" itemSwapEnable="0" fixWidth="0" sortHeader="1">
+          <items>
+            <item width="150">姓名</item>
+            <item width="150">性别</item>
+            <item width="150">年龄</item>
+            <item width="150">成绩</item>
+          </items>
+        </header>
+      </listctrl>
+
    <gifplayer pos="10,[5,-5,-0" skin="gif_fan" />
 </include>
