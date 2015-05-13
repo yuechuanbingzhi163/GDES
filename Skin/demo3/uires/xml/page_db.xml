@@ -1,0 +1,69 @@
+﻿<include>
+      <listboxex name="lbe_test" pos="10,10,-10,%50" class="cls_edit" itemSkin="skin_tab_left" itemHeight="85">
+        <items>
+          <item>
+          	<group pos="5,0,-5,@80" align="left">
+    		型号参数
+	          	<check pos="5,20">型号</check>
+				<edit readOnly="0" width="80"></edit>
+				<check>生产厂家</check>
+		    	<edit readOnly="0" width="160"></edit>
+		    	<check>转速</check>
+		    	<edit readOnly="0" width="80"></edit>
+		    	<text>(r/min)</text>
+		    	<check>电机功率</check>
+		    	<edit readOnly="0" width="80"></edit>
+		    	<text>(Kw)</text>
+			</group>
+          </item>
+
+          <item>
+          	<group pos="5,0,-5,@80" align="left">
+    		尺寸
+  				<check pos="5,20">泵长</check>
+				<edit readOnly="0" width="80"></edit>
+				<text>(mm)</text>
+				<check>泵宽</check>
+		    	<edit readOnly="0" width="80"></edit>
+		    	<text>(mm)</text>
+		    	<check>泵高</check>
+		    	<edit readOnly="0" width="80"></edit>
+		    	<text>(mm)</text>
+			    <check>泵重</check>
+			    <edit readOnly="0" width="80"></edit>
+			    <text>(kg)</text>
+		    </group>
+          </item>
+
+		  <item>
+		  	<group pos="5,0,-5,@80" align="left">
+		  		压力参数
+			  	<check pos="5,20">吸入绝压</check>
+			    <edit readOnly="0" width="80"></edit>
+				<text>(hPa)</text>
+			    <check>极限压力</check>
+			    <edit readOnly="0" width="80"></edit>
+			    <text>(hPa)</text>
+			    <check>最低吸入绝压</check>
+			    <edit readOnly="0" width="80"></edit>
+			    <text>(hPa)</text>
+			    <check>最大气量</check>
+			    <edit readOnly="0" width="80"></edit>
+			    <text>(m3/min)</text>
+		    </group>
+		  </item>
+        </items>        
+      </listboxex>
+
+	<listctrl name="lc_test" hotTrack="1" pos="5,[20,-10,-10" itemHeight="20" headerHeight="30" cursor="CUR_TST" font="underline:0" itemSkin="skin_tab_left">
+        <header align="center" itemSwapEnable="0" fixWidth="0" sortHeader="1">
+          <items>
+           <item width="180">姓名</item>
+            <item width="180">性别</item>
+            <item width="180">年龄</item>
+            <item width="180">成绩</item>
+          </items>
+        </header>
+      </listctrl>
+
+</include>

@@ -23,14 +23,12 @@
     <file name="treectrl1" path="xml\treectrl1.xml" />
     <file name="treectrl2" path="xml\treectrl2.xml" />
     <file name="treectrl3" path="xml\treectrl3.xml" />
-    <file name="ground_list" path="xml\listctrlex1.xml" />
-    <file name="mobile_list" path="xml\listctrlex2.xml" />
-    <file name="pump_list" path="xml\listctrlex3.xml" />
     <file name="gas_sys" path="xml\gas_sys.xml" />
     <file name="gas_pump" path="xml\gas_pump.xml" />
     <file name="conclusion" path="xml\conclusion.xml" />
     <file name="page_script" path="xml\page_script.xml"/>
     <file name="dlg_formatmsg" path="xml\dlg_formatmsg.xml"/>
+    <file name="page_db" path="xml\page_db.xml"/>
   </LAYOUT>
   <IMGX>
 

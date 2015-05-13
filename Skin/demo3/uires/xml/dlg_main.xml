@@ -19,6 +19,8 @@
       <imgbtn id="5" skin="_skin.sys.btn.minimize" pos="-121,0" animate="1" />
       <imgbtn name="btn_menu" skin="skin_btn_menu" pos="-151,2" animate="1" />
     </caption>
+    <gifplayer pos="%88,%5,@72,@72" skin="gif_fan" />
+    <scrolltext show="1" pos="10,%95,@300,@30" colorText="#ff0000" speed="10">瓦斯抽采评价系统(唐山开滦集团与辽宁工程技术大学安全科学与工程学院合作开发)              </scrolltext>
     <tabctrl name="tab_main" pos="5,30,-5,-30" show="1" curSel="0" focusable="0" animateSteps="10" tabHeight="75" tabSkin="skin_tab_main" text-y="50" iconSkin="skin_page_icons" icon-x="10" colorTextHover="#ff0000" fontHover="italic:1">
       <page title="soui ctrl">
         <include src="layout:page_ctrls"/>
@@ -53,8 +55,11 @@
       <page title="about" tip="copy right(c) setoutsoft 2014.">
         <include src="layout:page_about"/>
       </page>
+
+      <page title="瓦斯泵选型">
+        <include src="layout:page_db" />
+      </page>
+
     </tabctrl>
-    <gifplayer pos="%88,%5,@72,@72" skin="gif_fan" />
-    <scrolltext show="1" pos="10,%95,@300,@30" colorText="#ff0000" speed="10">瓦斯抽采评价系统(唐山开滦集团与辽宁工程技术大学安全科学与工程学院合作开发)              </scrolltext>
   </root>
 </SOUI>
