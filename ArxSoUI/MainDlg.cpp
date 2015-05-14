@@ -22,6 +22,24 @@ using namespace SOUI;
 
 #include <shellapi.h>
 
+static BOOL IsNum(CString &str)
+{
+	int n=str.GetLength();
+	for(int i=0;i<n;i++)
+		if ((str[i]<'0'||str[i]>'9') && str[i] != '.') 
+			return FALSE;
+	return TRUE;
+}
+
+static BOOL IsInt(CString &str)
+{
+	int n=str.GetLength();
+	for(int i=0;i<n;i++)
+		if (str[i]<'0'||str[i]>'9') 
+			return FALSE;
+	return TRUE;
+}
+
 int CMainDlg::OnCreate( LPCREATESTRUCT lpCreateStruct )
 {
 	//MARGINS mar = {5,5,30,5};
@@ -313,8 +331,35 @@ void CMainDlg::OnTreeBoxQueryItemHeight( EventArgs * pEvt )
             pEvtTbQueryItemHeight->nItemHeight = 40;
         else
             pEvtTbQueryItemHeight->nItemHeight = 30;
-    }else
+    }
+	else
     {
         pEvtTbQueryItemHeight->nItemHeight = 50;
     }
 }
+
+bool CMainDlg::EditsHasEmpty()
+{
+	SEdit *pCheck = FindChildByName2<SEdit>(L"typeEdit");
+	pCheck->GetCueText();
+
+	return false;
+}
+
+void CMainDlg::OnBtnFindPump()
+{
+	//查找泵列表控件
+	SListCtrl *pumpList = FindChildByName2<SListCtrl>(L"pumpDbList");
+	if(pumpList)
+	{
+		SMessageBox(NULL,_T("this is a message box"),_T("haha"),MB_OK|MB_ICONEXCLAMATION);
+	}
+
+	//查找"型号"编辑框
+	SEdit *pType = FindChildByName2<SEdit>(L"typeEdit");
+	if(pType)
+	{
+		AfxMessageBox((LPCTSTR)pType->GetWindowText());
+	}
+}
+

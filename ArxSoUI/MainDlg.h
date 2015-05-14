@@ -80,6 +80,9 @@ protected:
     //DUI菜单响应函数
     void OnCommand(UINT uNotifyCode, int nID, HWND wndCtl);
         
+	//判断泵查询对话框的编辑框是否有为空的
+	bool EditsHasEmpty();
+
 protected:
     //////////////////////////////////////////////////////////////////////////
     // SOUI事件处理函数
@@ -106,6 +109,9 @@ protected:
     
     void OnTreeBoxQueryItemHeight(SOUI::EventArgs * pEvt);
     
+	//点击泵查询对话框中的"查询"按钮
+	void OnBtnFindPump();
+
     //UI控件的事件及响应函数映射表
 	EVENT_MAP_BEGIN()
 		EVENT_ID_COMMAND(1, OnClose)
@@ -121,6 +127,8 @@ protected:
         EVENT_NAME_HANDLER(L"lbe_test",EVT_OFPANEL,OnListBoxExEvent)//响应EVT_OFPANEL事件
         EVENT_NAME_HANDLER(L"tb_test",EVT_OFPANEL,OnTreeBoxEvent)//响应EVT_OFPANEL事件
         EVENT_NAME_HANDLER(L"tb_test",EVT_TB_QUERYITEMHEIGHT,OnTreeBoxQueryItemHeight)//响应动态查询高度事件
+	
+		EVENT_NAME_COMMAND(L"findPumpBtn",OnBtnFindPump)
 	EVENT_MAP_END()	
 
     //HOST消息及响应函数映射表
