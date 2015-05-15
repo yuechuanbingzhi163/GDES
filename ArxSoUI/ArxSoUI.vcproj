@@ -4,6 +4,7 @@
 	Version="9.00"
 	Name="ArxSoUI"
 	ProjectGUID="{C61AB560-2D97-44DF-8F35-8A3ADF2D212D}"
+	RootNamespace="ArxSoUI"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -45,7 +46,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
+				AdditionalIncludeDirectories="..;../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
 				PreprocessorDefinitions="WIN32;_WINDOWS;ARXSOUI_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -71,10 +72,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="soui.lib utilities.lib"
+				AdditionalDependencies="soui.lib utilities.lib sqlite3.lib"
 				OutputFile="$(outdir)/ArxSoUI.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="../ThirdParty/soui/bin"
+				AdditionalLibraryDirectories="../ThirdParty/soui/bin;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/ArxSoUI.pdb"
@@ -132,7 +133,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
+				AdditionalIncludeDirectories="..;../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
 				PreprocessorDefinitions="_WIN64;_WINDOWS;ARXSOUI_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -158,10 +159,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="soui.lib utilities.lib"
+				AdditionalDependencies="soui.lib utilities.lib sqlite3_x64.lib"
 				OutputFile="$(outdir)/ArxSoUI.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="../ThirdParty/soui/bin"
+				AdditionalLibraryDirectories="../ThirdParty/soui/bin;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/ArxSoUI.pdb"
@@ -219,7 +220,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
+				AdditionalIncludeDirectories="..;../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
 				PreprocessorDefinitions="WIN32;_WINDOWS;ARXSOUI_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -245,10 +246,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="soui.lib utilities.lib"
+				AdditionalDependencies="soui.lib utilities.lib sqlite3.lib"
 				OutputFile="$(outdir)/ArxSoUI.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="../ThirdParty/soui/bin"
+				AdditionalLibraryDirectories="../ThirdParty/soui/bin;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
@@ -306,7 +307,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components"
+				AdditionalIncludeDirectories="..;../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
 				PreprocessorDefinitions="WIN32;_WINDOWS;ARXSOUI_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -332,10 +333,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="soui.lib utilities.lib"
+				AdditionalDependencies="soui.lib utilities.lib sqlite3_x64.lib"
 				OutputFile="$(outdir)/ArxSoUI.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="../ThirdParty/soui/bin"
+				AdditionalLibraryDirectories="../ThirdParty/soui/bin;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
@@ -384,24 +385,14 @@
 			<File
 				RelativePath=".\FormatMsgDlg.cpp"
 				>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\MainDlg.cpp"
 				>
-				<FileConfiguration
-					Name="Debug|x64"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\PathBuild.cpp"
+				>
 			</File>
 			<File
 				RelativePath=".\RealWndDlg.cpp"
@@ -506,6 +497,10 @@
 			</File>
 			<File
 				RelativePath=".\MainDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PathBuild.h"
 				>
 			</File>
 			<File

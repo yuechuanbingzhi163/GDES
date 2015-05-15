@@ -1,7 +1,7 @@
 ﻿<include>
 	<window pos="10,10,-10,@35">
 		<button pos="5,0,@150,@30" name="findPumpBtn">查询</button>
-		<button pos="[20,0,@150,@30" name="addPumpBtn">插入数据</button>
+		<button pos="[20,0,@150,@30" name="updatePumpBtn">插入数据</button>
 		<text>提示：数字条件的查询可以增加查询条件(&lt;=、&gt;=、&lt;、&gt;)</text>
 	</window>
 
@@ -9,8 +9,8 @@
 	型号参数
       	<check name="typeCheckBox" pos="5,20">型号</check>
 		<edit name="typeEdit" readOnly="0" width="80"></edit>
-		<check>生产厂家</check>
-    	<edit readOnly="0" width="160"></edit>
+		<check name="factoryCheckBox">生产厂家</check>
+    	<edit name="factoryEdit" readOnly="0" width="160"></edit>
     	<check name="speedCheckBox">转速</check>
     	<edit name="speedEdit" readOnly="0" width="80"></edit>
     	<text>(r/min)</text>

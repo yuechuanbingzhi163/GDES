@@ -13,6 +13,51 @@
 
 #pragma once
 
+#include <SqliteHelper/SqliteHelper.h>
+struct DBDatas 
+{
+	CString type;
+	CString weight;
+	CString speed;
+	CString maxp;
+	CString factory;
+	CString length;
+	CString height;
+	CString weidth;
+	CString absp;
+	CString power;
+	CString maxq;
+	CString minabsp;
+
+	void CopyFromType(const TypeTable& tt)
+	{
+		type = tt.type;
+		minabsp.Format(_T("%d"), tt.absP);
+		weight.Format(_T("%d"), tt.weight);
+		length.Format(_T("%d"), tt.length);
+		weidth.Format(_T("%d"), tt.weidth);
+		height.Format(_T("%d"), tt.heigth);
+		factory = tt.factName;
+	}
+
+	void CopyFromProperty(const PropertyTable& pt)
+	{
+		speed.Format(_T("%d"), pt.speed);
+		power.Format(_T("%.1f"), pt.power);
+		maxq.Format(_T("%.2f"), pt.maxQ);
+		maxp.Format(_T("%d"), pt.maxP);
+		absp.Format(_T("%d"), pt.absP);
+	}
+
+	void Print()
+	{
+		acutPrintf(_T("\n类型:%s,最低吸入绝压:%s,泵重:%s,长:%s,宽:%s,高:%s,厂家:%s,转速:%s,电机功率:%s,最大气量:%s,极限压力:%s,吸入绝压:%s"),
+			type,minabsp,weight,length,weidth,height,factory,speed,power,maxq,maxp,absp);
+	}
+};
+
+typedef std::vector<DBDatas> DBDatasVector;
+
 /**
 * @class      CMainDlg
 * @brief      主窗口实现
@@ -80,8 +125,6 @@ protected:
     //DUI菜单响应函数
     void OnCommand(UINT uNotifyCode, int nID, HWND wndCtl);
         
-	//判断泵查询对话框的编辑框是否有为空的
-	bool EditsHasEmpty();
 
 protected:
     //////////////////////////////////////////////////////////////////////////
@@ -111,6 +154,7 @@ protected:
     
 	//点击泵查询对话框中的"查询"按钮
 	void OnBtnFindPump();
+	void OnBtnUpdatePump();
 
     //UI控件的事件及响应函数映射表
 	EVENT_MAP_BEGIN()
@@ -129,6 +173,7 @@ protected:
         EVENT_NAME_HANDLER(L"tb_test",EVT_TB_QUERYITEMHEIGHT,OnTreeBoxQueryItemHeight)//响应动态查询高度事件
 	
 		EVENT_NAME_COMMAND(L"findPumpBtn",OnBtnFindPump)
+		EVENT_NAME_COMMAND(L"updatePumpBtn",OnBtnUpdatePump)
 	EVENT_MAP_END()	
 
     //HOST消息及响应函数映射表
@@ -148,6 +193,31 @@ protected:
     //////////////////////////////////////////////////////////////////////////
     //  辅助函数
     void InitListCtrl();
+	bool GetEditContents(TypeTable& tt,PropertyTable& pt);
+	//判断泵查询对话框的编辑框是否有为空的
+	bool EditsHasEmpty();
+	bool FindPumpsByCondition( DBDatasVector& datasV );
+	int CheckBoxTable();
+	bool DeletePump( const DBDatas& datas );
+	void OnlyTypesql(CString& ttsql,CString& msg);
+	void OnlyPropertysql(CString& ptsql,CString& msg);
+	int GetCheckBoxNum();
+	void InitPumpCheckBox();
+	void UpdateList( const DBDatasVector& datasV );
+
 private:
 	BOOL			m_bLayoutInited;/**<UI完成布局标志 */
+
+	SCheckBox *pTypeCheck;
+	SCheckBox *pFactoryCheck;
+	SCheckBox *pSpeedCheck;
+	SCheckBox *pPowerCheck;
+	SCheckBox *pLengthCheck; 
+	SCheckBox *pWidthCheck;
+	SCheckBox *pHeightCheck; 
+	SCheckBox *pWeightCheck;
+	SCheckBox *pAbsPCheck;
+	SCheckBox *pMaxPCheck; 
+	SCheckBox *pMinPCheck; 
+	SCheckBox *pMaxQCheck;
 };
