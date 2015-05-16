@@ -1,7 +1,8 @@
 ﻿<include>
 	<window pos="10,10,-10,@35">
 		<button pos="5,0,@150,@30" name="findPumpBtn">查询</button>
-		<button pos="[20,0,@150,@30" name="updatePumpBtn">插入数据</button>
+		<button pos="[20,0,@150,@30" name="updatePumpBtn">更新数据</button>
+        <button pos="[20,0,@150,@30" name="delPumpBtn">删除数据</button>
 		<text>提示：数字条件的查询可以增加查询条件(&lt;=、&gt;=、&lt;、&gt;)</text>
 	</window>
 
@@ -22,7 +23,7 @@
 	<group pos="10,[10,-10,@80" align="left">
 	尺寸
 		<check name="lengthCheckBox" pos="5,20">泵长</check>
-		<edit name="length" readOnly="0" width="80"></edit>
+		<edit name="lengthEdit" readOnly="0" width="80"></edit>
 		<text>(mm)</text>
 		<check name="widthCheckBox">泵宽</check>
     	<edit name="widthEdit" readOnly="0" width="80"></edit>
@@ -52,7 +53,7 @@
 	    <text>(m3/min)</text>
     </group>
 
-	<listctrl name="pumpDbList" hotTrack="1" pos="5,[20,-10,-10" itemHeight="20" headerHeight="30" cursor="CUR_TST" font="underline:0" itemSkin="skin_tab_left">
+	<listctrl2 name="pumpDbList" hotTrack="1" pos="5,[20,-10,-10" itemHeight="20" headerHeight="30" cursor="CUR_TST" font="underline:0" itemSkin="skin_tab_left">
         <header align="center" itemSwapEnable="0" fixWidth="0" sortHeader="1">
           <items>
             <item width="80">类型</item>

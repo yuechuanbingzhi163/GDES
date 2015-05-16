@@ -383,6 +383,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\EditPumpDBDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\FormatMsgDlg.cpp"
 				>
 			</File>
@@ -396,6 +400,10 @@
 			</File>
 			<File
 				RelativePath=".\RealWndDlg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SListCtrl2.cpp"
 				>
 			</File>
 			<File
@@ -509,6 +517,10 @@
 			</File>
 			<File
 				RelativePath=".\Resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SListCtrl2.h"
 				>
 			</File>
 			<File

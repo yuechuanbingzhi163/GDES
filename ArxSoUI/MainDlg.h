@@ -13,7 +13,9 @@
 
 #pragma once
 
+#include "SListCtrl2.h"
 #include <SqliteHelper/SqliteHelper.h>
+
 struct DBDatas 
 {
 	CString type;
@@ -155,6 +157,8 @@ protected:
 	//点击泵查询对话框中的"查询"按钮
 	void OnBtnFindPump();
 	void OnBtnUpdatePump();
+	void OnBtnDelPump();
+	void OnListCtrlDblClickEvent(SOUI::EventArgs *pEvt);
 
     //UI控件的事件及响应函数映射表
 	EVENT_MAP_BEGIN()
@@ -174,6 +178,8 @@ protected:
 	
 		EVENT_NAME_COMMAND(L"findPumpBtn",OnBtnFindPump)
 		EVENT_NAME_COMMAND(L"updatePumpBtn",OnBtnUpdatePump)
+		EVENT_NAME_COMMAND(L"delPumpBtn",OnBtnDelPump)
+		EVENT_NAME_HANDLER(L"pumpDbList",EVT_LC_DBL_CLICK,OnListCtrlDblClickEvent)//响应EVT_LC_SELCHANGED事件
 	EVENT_MAP_END()	
 
     //HOST消息及响应函数映射表
@@ -193,6 +199,10 @@ protected:
     //////////////////////////////////////////////////////////////////////////
     //  辅助函数
     void InitListCtrl();
+
+	/**
+	* 泵查询对话框辅助函数
+	*/
 	bool GetEditContents(TypeTable& tt,PropertyTable& pt);
 	//判断泵查询对话框的编辑框是否有为空的
 	bool EditsHasEmpty();
