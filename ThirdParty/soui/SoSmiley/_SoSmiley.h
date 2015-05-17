@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0500 */
-/* at Mon May 11 10:20:23 2015
+/* at Sun May 17 10:11:44 2015
  */
 /* Compiler settings for _SoSmiley.idl:
     Oicf, W1, Zp8, env=Win64 (32b run)
