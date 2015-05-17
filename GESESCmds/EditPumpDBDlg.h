@@ -116,7 +116,7 @@ private:
 	void SetAllCheckBox();
 	void OnInitListCtrl();
 	void UpdateList( const DBDatasVector& datasV );
-	void setCountFans();
+	void setCountPumps();
 	//检验查找条件
 	//1--只有类型表的数据
 	//2--只有属性表的数据

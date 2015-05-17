@@ -647,7 +647,7 @@ static void FindAllPumps(DBDatasVector& datasV)
 }
 
 
-void EditPumpDBDlg::setCountFans()
+void EditPumpDBDlg::setCountPumps()
 {
 	int itemNum = m_listCtrl.GetItemCount();
 	CString itemNumStr;
@@ -695,7 +695,7 @@ void EditPumpDBDlg::UpdateList( const DBDatasVector& datasV )
 	m_listCtrl.SetRedraw(TRUE);
 	m_listCtrl.Invalidate();
 	m_listCtrl.UpdateWindow();
-	setCountFans();
+	setCountPumps();
 }
 void EditPumpDBDlg::OnBnClickedFindPump()
 {
@@ -1136,7 +1136,7 @@ void EditPumpDBDlg::OnNMDblclkFindPumpRetList(NMHDR *pNMHDR, LRESULT *pResult)
 	m_power = datas.power;
 	m_minabsp = datas.minabsp;
 	m_factory = datas.factory;
-	setCountFans();
+	setCountPumps();
 	UpdateData(FALSE);
 	*pResult = 0;
 }
