@@ -243,11 +243,6 @@ bool PropertyDataDlgHelper::DisplayPropertyByFunName( const AcDbObjectId& objId,
 		AfxMessageBox( msg );
 		return false;
 	}
-	else
-	{
-		//AcStringArray funcs;
-		//funcs.append(funName);
-		InputPropertyDataDlg( dObjId, fields,funName );
-		return true;
-	}
+	InputPropertyDataDlg( dObjId, fields,funName );
+	return true;
 }

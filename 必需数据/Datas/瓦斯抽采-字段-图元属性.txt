@@ -127,8 +127,8 @@
 高位钻孔参数计算	DrillGE	抽采钻孔负压	DT_NUMERIC	0-9999999999	2	0	单位：Pa
 高位钻孔参数计算	DrillGE	工作面推进有效长度	DT_NUMERIC	0-9999999999	2	0	单位：m
 							
-瓦斯泵的流量计算	GasPumpGE	矿井抽放瓦斯总量（纯量）	DT_NUMERIC	0-9999999999	2	1	单位：m3/min
-瓦斯泵的流量计算	GasPumpGE	矿井抽放瓦斯浓度	DT_NUMERIC	0-99	2	1	单位：%
+瓦斯泵的流量计算	GasPumpGE	瓦斯抽采总量（纯量）	DT_NUMERIC	0-9999999999	2	1	单位：m3/min
+瓦斯泵的流量计算	GasPumpGE	瓦斯抽采浓度	DT_NUMERIC	0-99	2	1	单位：%
 瓦斯泵的流量计算	GasPumpGE	瓦斯泵流量备用系数	DT_NUMERIC	0-9999999999	2	1	瓦斯泵流量备用系数
 瓦斯泵的流量计算	GasPumpGE	瓦斯泵的机械效率	DT_NUMERIC	0-9999999999	2	1	一般取0.8
 瓦斯泵的流量计算	GasPumpGE	瓦斯泵的额定流量	DT_NUMERIC	0-9999999999	2	0	单位：m3/min
@@ -145,8 +145,8 @@
 瓦斯泵的压力计算	GasPumpGE	正压管路的全部阻力损失	DT_NUMERIC	0-9999999999	2	0	单位：Pa
 瓦斯泵的压力计算	GasPumpGE	瓦斯泵的压力	DT_NUMERIC	0-9999999999	2	0	单位：Pa
 							
-瓦斯泵计算	GasPumpGE	矿井抽放瓦斯总量（纯量）	DT_NUMERIC	0-9999999999	2	1	单位：m3/min
-瓦斯泵计算	GasPumpGE	矿井抽放瓦斯浓度	DT_NUMERIC	0-99	2	1	单位：%
+瓦斯泵计算	GasPumpGE	瓦斯抽采总量（纯量）	DT_NUMERIC	0-9999999999	2	1	单位：m3/min
+瓦斯泵计算	GasPumpGE	瓦斯抽采浓度	DT_NUMERIC	0-99	2	1	单位：%
 瓦斯泵计算	GasPumpGE	瓦斯泵流量备用系数	DT_NUMERIC	0-9999999999	2	1	瓦斯泵流量备用系数
 瓦斯泵计算	GasPumpGE	瓦斯泵的机械效率	DT_NUMERIC	0-9999999999	2	1	一般取0.8
 瓦斯泵计算	GasPumpGE	正压管路的摩擦阻力损失	DT_NUMERIC	0-9999999999	2	1	单位：Pa
@@ -162,15 +162,15 @@
 瓦斯泵计算	GasPumpGE	瓦斯泵的额定流量	DT_NUMERIC	0-9999999999	2	0	单位：m3/min
 瓦斯泵计算	GasPumpGE	瓦斯泵的压力	DT_NUMERIC	0-9999999999	2	0	单位：Pa
 
-瓦斯泵选型	GasPumpGE	型号		DT_STRING	""		0	0	瓦斯泵型号名称
-瓦斯泵选型	GasPumpGE	最低吸入绝压	DT_INT		0-9999999999	0	0	单位：hPa
-瓦斯泵选型	GasPumpGE	吸入绝压	DT_INT		0-9999999999	0	0	单位：hPa
-瓦斯泵选型	GasPumpGE	转速		DT_INT	0-9999999999		0	0	单位：r/min
-瓦斯泵选型	GasPumpGE	电机功率	DT_NUMERIC	0-9999999999	1	0	单位：Kw
-瓦斯泵选型	GasPumpGE	最大气量	DT_NUMERIC	0-9999999999	2	0	单位：m3/min	
-瓦斯泵选型	GasPumpGE	极限压力	DT_INT	0-9999999999		0	0	单位：hPa	
-瓦斯泵选型	GasPumpGE	泵重		DT_INT	0-9999999999	0	0	单位：Kg
-瓦斯泵选型	GasPumpGE	长		DT_INT	0-9999999999	0	0	单位：mm
-瓦斯泵选型	GasPumpGE	宽		DT_INT	0-9999999999	0	0	单位：mm
-瓦斯泵选型	GasPumpGE	高		DT_INT	0-9999999999	0	0	单位：mm
-瓦斯泵选型	GasPumpGE	厂家		DT_STRING	""	0	0	瓦斯泵生产厂家						
+瓦斯泵选型参考	GasPumpGE	型号		DT_STRING	""		0	0	瓦斯泵型号名称
+瓦斯泵选型参考	GasPumpGE	最低吸入绝压	DT_INT		0-9999999999	0	0	单位：hPa
+瓦斯泵选型参考	GasPumpGE	吸入绝压	DT_INT		0-9999999999	0	0	单位：hPa
+瓦斯泵选型参考	GasPumpGE	转速		DT_INT	0-9999999999		0	0	单位：r/min
+瓦斯泵选型参考	GasPumpGE	电机功率	DT_NUMERIC	0-9999999999	1	0	单位：Kw
+瓦斯泵选型参考	GasPumpGE	最大气量	DT_NUMERIC	0-9999999999	2	0	单位：m3/min	
+瓦斯泵选型参考	GasPumpGE	极限压力	DT_INT	0-9999999999		0	0	单位：hPa	
+瓦斯泵选型参考	GasPumpGE	泵重		DT_INT	0-9999999999	0	0	单位：Kg
+瓦斯泵选型参考	GasPumpGE	长		DT_INT	0-9999999999	0	0	单位：mm
+瓦斯泵选型参考	GasPumpGE	宽		DT_INT	0-9999999999	0	0	单位：mm
+瓦斯泵选型参考	GasPumpGE	高		DT_INT	0-9999999999	0	0	单位：mm
+瓦斯泵选型参考	GasPumpGE	厂家		DT_STRING	""	0	0	瓦斯泵生产厂家						

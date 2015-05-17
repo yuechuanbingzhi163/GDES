@@ -534,8 +534,8 @@ bool CaculFunc::tubeFrictionResisCacul()
 bool CaculFunc::pumbFlowCacul()
 {
 	CString strQz,strx,strkEnta,strEnta;
-	DataHelper::GetPropertyData(m_objId,_T("矿井抽放瓦斯总量（纯量）"),strQz);
-	DataHelper::GetPropertyData(m_objId,_T("矿井抽放瓦斯浓度"),strx);
+	DataHelper::GetPropertyData(m_objId,_T("瓦斯抽采总量（纯量）"),strQz);
+	DataHelper::GetPropertyData(m_objId,_T("瓦斯抽采浓度"),strx);
 	DataHelper::GetPropertyData(m_objId,_T("瓦斯泵流量备用系数"),strkEnta);
 	DataHelper::GetPropertyData(m_objId,_T("瓦斯泵的机械效率"),strEnta);
 

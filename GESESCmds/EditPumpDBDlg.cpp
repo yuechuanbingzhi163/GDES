@@ -138,6 +138,7 @@ BEGIN_MESSAGE_MAP(EditPumpDBDlg, CDialog)
 	ON_COMMAND(ID_DELETE_ITEM, &EditPumpDBDlg::OnDeleteItem)
 	ON_NOTIFY(NM_DBLCLK, IDC_FIND_PUMP_RET_LIST, &EditPumpDBDlg::OnNMDblclkFindPumpRetList)
 	ON_NOTIFY(LVN_COLUMNCLICK, IDC_FIND_PUMP_RET_LIST, &EditPumpDBDlg::OnLvnColumnclickFindPumpRetList)
+	ON_WM_CTLCOLOR() 
 END_MESSAGE_MAP()
 
 BOOL EditPumpDBDlg::OnInitDialog()
@@ -1118,4 +1119,24 @@ void EditPumpDBDlg::OnLvnColumnclickFindPumpRetList(NMHDR *pNMHDR, LRESULT *pRes
 	}
 	m_listCtrl.SortItems(MyCompareProc,(DWORD_PTR)&sort);//排序
 	*pResult = 0;
+}
+
+HBRUSH EditPumpDBDlg::OnCtlColor( CDC *pDC,CWnd *pWnd,UINT nCtlColor )
+{
+	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);  
+
+	//if (pWnd->GetDlgCtrlID()==IDC_PUMP_ABSP_CHECK)
+	//{
+	//	//pDC->SetBkMode(TRANSPARENT); 
+	//	pDC->SetTextColor(RGB(255, 0, 128));
+	//	//pDC->SetTextColor(RGB(125,125,125)); 
+	//	HBRUSH B = CreateSolidBrush(RGB(125,125,255)); 
+	//	return (HBRUSH) B; 
+	//	//pDC->SetTextColor(RGB(255,0,0));  //设置字体颜色
+	//	//pDC->SetBkMode(TRANSPARENT); //设置字体背景为透明
+	//	//// TODO: Return a different brush if the default is not desired
+	//	//return (HBRUSH)::GetStockObject(HOLLOW_BRUSH);  // 设置背景色
+	//}
+
+	return hbr;
 }

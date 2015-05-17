@@ -210,6 +210,7 @@ bool PropertyDataUpdater::BuildPropGridCtrl( CMFCPropertyGridCtrl* pPropDataList
 	ExcludeSpecial(funcCount,funcNames,_T("管路计算"));
 	ExcludeSpecial(funcCount,funcNames,_T("高位钻孔参数计算"));
 	ExcludeSpecial(funcCount,funcNames,_T("瓦斯泵计算"));
+	ExcludeSpecial(funcCount,funcNames,_T("瓦斯泵选型参考"));
 	ExcludeSpecial(funcCount,funcNames,_T("大小调节"));
 
 	for(int i = 0; i < funcCount; i++)
