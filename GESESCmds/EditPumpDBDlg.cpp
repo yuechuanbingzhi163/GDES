@@ -41,6 +41,49 @@ EditPumpDBDlg::~EditPumpDBDlg()
 {
 }
 
+static BOOL IsNum(CString &str)
+{
+	int n=str.GetLength();
+	for(int i=0;i<n;i++)
+		if ((str[i]<'0'||str[i]>'9') && str[i] != '.') 
+			return FALSE;
+	return TRUE;
+}
+
+static BOOL IsInt(CString &str)
+{
+	int n=str.GetLength();
+	for(int i=0;i<n;i++)
+		if (str[i]<'0'||str[i]>'9') 
+			return FALSE;
+	return TRUE;
+}
+
+
+// 排序用的比较函数
+
+static int CALLBACK MyCompareProc(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
+{
+	CString &lp1 = *((CString *)lParam1);
+	CString &lp2 = *((CString *)lParam2);
+	int &sort = *(int *)lParamSort;
+	if (sort == 0)
+	{
+		if(!IsNum(lp1) && !IsNum(lp2) && !IsInt(lp1) && !IsInt(lp2)) return lp1.CompareNoCase(lp2);
+		if(_tstof(lp1) < _tstof(lp2)) return -1;
+		if(_tstof(lp1) > _tstof(lp2)) return 1;
+		else return 0;
+		//return lp1.CompareNoCase(lp2);
+	}
+	else
+	{
+		if(!IsNum(lp1) && !IsNum(lp2) && !IsInt(lp1) && !IsInt(lp2)) return lp2.CompareNoCase(lp1);
+		if(_tstof(lp2) < _tstof(lp1)) return -1;
+		if(_tstof(lp2) > _tstof(lp1)) return 1;
+		else return 0;
+	}
+}
+
 void EditPumpDBDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
@@ -94,6 +137,7 @@ BEGIN_MESSAGE_MAP(EditPumpDBDlg, CDialog)
 	ON_NOTIFY(NM_RCLICK, IDC_FIND_PUMP_RET_LIST, &EditPumpDBDlg::OnNMRClickFindPumpRetList)
 	ON_COMMAND(ID_DELETE_ITEM, &EditPumpDBDlg::OnDeleteItem)
 	ON_NOTIFY(NM_DBLCLK, IDC_FIND_PUMP_RET_LIST, &EditPumpDBDlg::OnNMDblclkFindPumpRetList)
+	ON_NOTIFY(LVN_COLUMNCLICK, IDC_FIND_PUMP_RET_LIST, &EditPumpDBDlg::OnLvnColumnclickFindPumpRetList)
 END_MESSAGE_MAP()
 
 BOOL EditPumpDBDlg::OnInitDialog()
@@ -234,24 +278,6 @@ void EditPumpDBDlg::OnInitListCtrl()
 void EditPumpDBDlg::OnBnClickedExitButton()
 {
 	CDialog::OnCancel();
-}
-
-static BOOL IsNum(CString &str)
-{
-	int n=str.GetLength();
-	for(int i=0;i<n;i++)
-		if ((str[i]<'0'||str[i]>'9') && str[i] != '.') 
-			return FALSE;
-	return TRUE;
-}
-
-static BOOL IsInt(CString &str)
-{
-	int n=str.GetLength();
-	for(int i=0;i<n;i++)
-		if (str[i]<'0'||str[i]>'9') 
-			return FALSE;
-	return TRUE;
 }
 
 bool EditPumpDBDlg::EditsHasEmpty()
@@ -615,8 +641,7 @@ void EditPumpDBDlg::UpdateList( const DBDatasVector& datasV )
 
 	m_listCtrl.SetRedraw(TRUE);
 	m_listCtrl.Invalidate();
-	//m_listCtrl.UpdateWindow();
-
+	m_listCtrl.UpdateWindow();
 	setCountFans();
 }
 void EditPumpDBDlg::OnBnClickedFindPump()
@@ -1059,5 +1084,38 @@ void EditPumpDBDlg::OnNMDblclkFindPumpRetList(NMHDR *pNMHDR, LRESULT *pResult)
 	m_minabsp = datas.minabsp;
 	m_factory = datas.factory;
 	UpdateData(FALSE);
+	*pResult = 0;
+}
+
+void EditPumpDBDlg::OnLvnColumnclickFindPumpRetList(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+	int Length = m_listCtrl.GetItemCount();
+	CArray<CString,CString> ItemData;
+	ItemData.SetSize(Length);
+	for (int i = 0; i < Length; i++)
+	{
+		ItemData[i] = m_listCtrl.GetItemText(i,pNMLV->iSubItem);
+		m_listCtrl.SetItemData(i,(DWORD_PTR)&ItemData[i]);//设置排序关键字
+	}
+	static int sort = 0;
+	static int SubItem = 0;
+	if (SubItem != pNMLV->iSubItem)
+	{
+		sort = 0;
+		SubItem = pNMLV->iSubItem;
+	}
+	else
+	{
+		if (sort == 0)
+		{
+			sort = 1;
+		}
+		else
+		{
+			sort = 0;
+		}
+	}
+	m_listCtrl.SortItems(MyCompareProc,(DWORD_PTR)&sort);//排序
 	*pResult = 0;
 }

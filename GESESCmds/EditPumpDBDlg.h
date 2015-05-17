@@ -91,7 +91,7 @@ private:
 	CString m_minabsp;
 	CString m_itemsNum;
 	CListCtrl m_listCtrl;
-
+	//CListCtrlEx m_listCtrl;
 protected:
 	HICON m_hIcon;
 
@@ -133,4 +133,5 @@ public:
 	afx_msg void OnNMRClickFindPumpRetList(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnDeleteItem();
 	afx_msg void OnNMDblclkFindPumpRetList(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLvnColumnclickFindPumpRetList(NMHDR *pNMHDR, LRESULT *pResult);
 };
