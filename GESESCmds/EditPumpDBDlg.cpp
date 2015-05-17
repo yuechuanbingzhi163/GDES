@@ -114,6 +114,19 @@ void EditPumpDBDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_FIND_PUMP_MINABSP_EDIT, m_minabsp);
 	DDX_Text(pDX, IDC_PUMP_ITEMSNUM_EDIT, m_itemsNum);
 	DDX_Control(pDX, IDC_FIND_PUMP_RET_LIST, m_listCtrl);
+	DDX_Control(pDX, IDC_PUMP_POWER_CHECK, m_powerBtn);
+	DDX_Control(pDX, IDC_PUMP_ABSP_CHECK, m_abspBtn);
+	DDX_Control(pDX, IDC_PUMP_MAXQ_CHECK, m_maxqBtn);
+	DDX_Control(pDX, IDC_PUMP_NAME_CHECK, m_typeBtn);
+	DDX_Control(pDX, IDC_PUMP_WEIGHT_CHECK, m_weightBtn);
+	DDX_Control(pDX, IDC_PUMP_SPEED_CHECK, m_speedBtn);
+	DDX_Control(pDX, IDC_PUMP_FACTORY_CHECK, m_factoryBtn);
+	DDX_Control(pDX, IDC_PUMP_LENGTH_CHECK, m_lengthBtn);
+	DDX_Control(pDX, IDC_PUMP_HEIGHT_CHECK, m_heightBtn);
+	DDX_Control(pDX, IDC_PUMP_WEIDTH_CHECK, m_weidthBtn);
+	DDX_Control(pDX, IDC_PUMP_MINABSP_CHECK, m_minabspBtn);
+	DDX_Control(pDX, IDC_PUMP_MAXP_CHECK, m_maxpBtn);
+	DDX_Control(pDX, IDC_ALL_PUMP_CHECK, m_allBtn);
 }
 
 
@@ -141,12 +154,49 @@ BEGIN_MESSAGE_MAP(EditPumpDBDlg, CDialog)
 	ON_WM_CTLCOLOR() 
 END_MESSAGE_MAP()
 
+static void SetSpecialBtn(CButtonST& btn)
+{
+	btn.SetIcon(IDI_ON_ICON, IDI_OFF_ICON);
+	btn.DrawTransparent();
+	btn.SetColor(CButtonST::BTNST_COLOR_FG_OUT, RGB(255, 128, 128));
+	btn.SetColor(CButtonST::BTNST_COLOR_FG_IN, RGB(240, 0, 0));
+	btn.SetColor(CButtonST::BTNST_COLOR_FG_FOCUS, RGB(240, 0, 0));
+}
+
+static void SetNormalBtn(CButtonST& btn)
+{
+	btn.SetIcon(IDI_ON_ICON, IDI_OFF_ICON);
+	btn.DrawTransparent();
+	btn.SetColor(CButtonST::BTNST_COLOR_FG_OUT, RGB(100, 100, 100));
+	btn.SetColor(CButtonST::BTNST_COLOR_FG_IN, RGB(31, 31, 31));
+	btn.SetColor(CButtonST::BTNST_COLOR_FG_FOCUS, RGB(31, 31, 31));
+}
+
+void EditPumpDBDlg::SetCheckBoxIcon()
+{
+	SetSpecialBtn(m_powerBtn);
+	SetSpecialBtn(m_abspBtn);
+	SetSpecialBtn(m_maxqBtn);
+	
+	SetNormalBtn( m_typeBtn );
+	SetNormalBtn( m_weightBtn );
+	SetNormalBtn( m_speedBtn );
+	SetNormalBtn( m_factoryBtn );
+	SetNormalBtn( m_lengthBtn );
+	SetNormalBtn( m_heightBtn );
+	SetNormalBtn( m_weidthBtn );
+	SetNormalBtn( m_minabspBtn );
+	SetNormalBtn( m_maxpBtn );
+	SetNormalBtn( m_allBtn );
+}
+
 BOOL EditPumpDBDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 	OnInitListCtrl();
+	SetCheckBoxIcon();
 	return TRUE;
 }
 
@@ -612,9 +662,11 @@ void EditPumpDBDlg::setCountFans()
 	{
 		show = TRUE;
 	}
-	GetDlgItem(IDC_PUMP_ITEMSNUM_EDIT)->SetWindowText(itemNumStr);
+	//GetDlgItem(IDC_PUMP_ITEMSNUM_EDIT)->SetWindowText(itemNumStr);
+	m_itemsNum = itemNumStr;
 	GetDlgItem(IDC_NUM_STATIC)->ShowWindow(show);
 	GetDlgItem(IDC_GROUP_STATIC)->ShowWindow(show);
+	UpdateData(FALSE);
 }
 
 void EditPumpDBDlg::UpdateList( const DBDatasVector& datasV )
@@ -1084,6 +1136,7 @@ void EditPumpDBDlg::OnNMDblclkFindPumpRetList(NMHDR *pNMHDR, LRESULT *pResult)
 	m_power = datas.power;
 	m_minabsp = datas.minabsp;
 	m_factory = datas.factory;
+	setCountFans();
 	UpdateData(FALSE);
 	*pResult = 0;
 }
@@ -1130,6 +1183,10 @@ HBRUSH EditPumpDBDlg::OnCtlColor( CDC *pDC,CWnd *pWnd,UINT nCtlColor )
 	//	//pDC->SetBkMode(TRANSPARENT); 
 	//	pDC->SetTextColor(RGB(255, 0, 128));
 	//	//pDC->SetTextColor(RGB(125,125,125)); 
+	//	CFont font;
+	//	font.CreatePointFont(1,_T("Consolas"),NULL);
+	//	//GetDlgItem(IDC_PUMP_ABSP_CHECK)->SetFont(&font);
+	//	pWnd->SetFont(&font);
 	//	HBRUSH B = CreateSolidBrush(RGB(125,125,255)); 
 	//	return (HBRUSH) B; 
 	//	//pDC->SetTextColor(RGB(255,0,0));  //ÉèÖÃ×ÖÌåÑÕÉ«

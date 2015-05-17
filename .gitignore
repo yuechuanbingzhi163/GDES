@@ -65,5 +65,6 @@ CMakeCache.txt
 acad.err
 
 [Xx]64/
+[Ww]in32/
 
 *.dwl*

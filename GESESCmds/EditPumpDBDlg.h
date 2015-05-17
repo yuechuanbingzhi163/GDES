@@ -3,6 +3,8 @@
 #include "Resource.h"
 #include "afxcmn.h"
 #include <SqliteHelper/SqliteHelper.h>
+#include "afxwin.h"
+#include "BtnST.h"
 
 struct DBDatas 
 {
@@ -91,7 +93,22 @@ private:
 	CString m_minabsp;
 	CString m_itemsNum;
 	CListCtrl m_listCtrl;
+
+	CButtonST m_powerBtn;
+	CButtonST m_abspBtn;
+	CButtonST m_maxqBtn;
+	CButtonST m_typeBtn;
+	CButtonST m_weightBtn;
+	CButtonST m_speedBtn;
+	CButtonST m_factoryBtn;
+	CButtonST m_lengthBtn;
+	CButtonST m_heightBtn;
+	CButtonST m_weidthBtn;
+	CButtonST m_minabspBtn;
+	CButtonST m_maxpBtn;
+	CButtonST m_allBtn;
 	//CListCtrlEx m_listCtrl;
+
 protected:
 	HICON m_hIcon;
 
@@ -112,6 +129,7 @@ private:
 	int GetCheckBoxNum();
 	bool EditsHasEmpty();
 	bool GetEditContents(TypeTable& tt,PropertyTable& pt);
+	void SetCheckBoxIcon();
 
 public:
 	afx_msg void OnBnClickedAllPumpCheck();

@@ -121,18 +121,24 @@ bool InsertPumpToPropertyTable( const CString& szDbPath, const PropertyTable& pt
 	cmd.BindParam(4,pt.maxQ);
 	cmd.BindParam(5,pt.maxP);
 	cmd.BindParam(6,pt.absP);
+	bool ret;
 	if(!sqlite.ExcuteNonQuery(&cmd))
 	{
-		return false;
+		ret = false;
 		//_tprintf(_T("%s\n"),sqlite.GetLastErrorMsg());
 		//break;
 	}
 
+	else
+	{
+		ret = true;
+	}
 	// 清空cmd
 	cmd.Clear();
 	// 提交事务
 	sqlite.CommitTransaction();
-	return true;
+	sqlite.Close();
+	return ret;
 }
 
 static bool HaveSameType( const CString& szDbPath,const TypeTable& tt,int& id )
@@ -143,11 +149,11 @@ static bool HaveSameType( const CString& szDbPath,const TypeTable& tt,int& id )
 	int num = 0;
 	for (size_t i = 0; i < ttV.size(); i++)
 	{
-		TypeTable oldPT = ttV[i];
-		if(oldPT == tt)
+		TypeTable oldTT = ttV[i];
+		if(oldTT == tt)
 		{
 			num += 1;
-			id = oldPT.id;
+			id = oldTT.id;
 		}
 	}
 	if( num <= 0 ) return false;
@@ -183,16 +189,21 @@ bool InsertPumpToTypeTable( const CString& szDbPath, const TypeTable& tt ,int& n
 	cmd.BindParam(6,tt.weidth);
 	cmd.BindParam(7,tt.heigth);
 	cmd.BindParam(8,tt.factName);
+	bool ret;
 	if(!sqlite.ExcuteNonQuery(&cmd))
 	{
-		return false;
+		ret = false;
 	}
-
+	else
+	{
+		ret = true;
+	}
 	// 清空cmd
 	cmd.Clear();
 	// 提交事务
 	sqlite.CommitTransaction();
-	return true;
+	sqlite.Close();
+	return ret;
 
 }
 
@@ -211,5 +222,6 @@ bool DeletePumpFronTable( const CString& szDbPath,const CString& sql )
 
 	// 提交事务
 	sqlite.CommitTransaction();
+	sqlite.Close();
 	return true;
 }

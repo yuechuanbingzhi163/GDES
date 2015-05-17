@@ -4,6 +4,7 @@
 	Version="9.00"
 	Name="GESESCmds"
 	ProjectGUID="{7934B9CF-C3B8-44B4-A310-FEF18E1F3E97}"
+	RootNamespace="GESESCmds"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -380,6 +381,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\BCMenu.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\BtnST.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\DataList_DockBar.cpp"
 				>
 			</File>
@@ -449,6 +458,14 @@
 			Filter="h;hh;hxx"
 			>
 			<File
+				RelativePath=".\BCMenu.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BtnST.h"
+				>
+			</File>
+			<File
 				RelativePath=".\DataList_DockBar.h"
 				>
 			</File>
@@ -495,6 +512,14 @@
 			</File>
 			<File
 				RelativePath=".\icon.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\Off.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\On.ico"
 				>
 			</File>
 		</Filter>
