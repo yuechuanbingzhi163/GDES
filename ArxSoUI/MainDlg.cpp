@@ -9,8 +9,6 @@ using namespace SOUI;
 #include <controls.extend/gif/SGifPlayer.h>
 #include <controls.extend/reole/richeditole.h>
 
-using namespace SOUI;
-
 #ifdef _DEBUG
 #import "SoSmileyd.dll" named_guids
 #else
@@ -158,7 +156,8 @@ LRESULT CMainDlg::OnInitDialog( HWND hWnd, LPARAM lParam )
 {
     m_bLayoutInited=TRUE;
     InitListCtrl();
-        
+    InitPumpCheckBox();
+
     SRichEdit *pEdit = FindChildByName2<SRichEdit>(L"re_gifhost");
     if(pEdit)
     {
@@ -313,7 +312,8 @@ void CMainDlg::OnTreeBoxQueryItemHeight( EventArgs * pEvt )
             pEvtTbQueryItemHeight->nItemHeight = 40;
         else
             pEvtTbQueryItemHeight->nItemHeight = 30;
-    }else
+    }
+	else
     {
         pEvtTbQueryItemHeight->nItemHeight = 50;
     }

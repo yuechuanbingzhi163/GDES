@@ -3,6 +3,7 @@
 
 #include "SoUILoader.h"
 #include "MainDlg.h"
+#include "SListCtrl2.h"
 //#include "SouiRealWndHandler.h"
 //#include "MemFlash.h"
 //#include "httpsvr/HTTPServer.h"
@@ -67,7 +68,7 @@ public:
 		pSouiApp->RegisterWndFactory(TplSWindowFactory<SChatEdit>());//×¢²áChatEdit
 		pSouiApp->RegisterWndFactory(TplSWindowFactory<SScrollText>());//×¢²áSScrollText
 		pSouiApp->RegisterWndFactory(TplSWindowFactory<SListCtrlEx>());//×¢²áSListCtrlEx
-
+		pSouiApp->RegisterWndFactory(TplSWindowFactory<SListCtrl2>()); //×¢²áSListCtrl2
 		//if(SUCCEEDED(CUiAnimation::Init()))
 		//{
 		//	pSouiApp->RegisterWndFactory(TplSWindowFactory<SUiAnimationWnd>());//×¢²á¶¯»­¿Ø¼þ

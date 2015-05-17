@@ -1,67 +1,73 @@
 ﻿<include>
-      <listboxex name="lbe_test" pos="10,10,-10,%50" class="cls_edit" itemSkin="skin_tab_left" itemHeight="85">
-        <items>
-          <item>
-          	<group pos="5,0,-5,@80" align="left">
-    		型号参数
-	          	<check pos="5,20">型号</check>
-				<edit readOnly="0" width="80"></edit>
-				<check>生产厂家</check>
-		    	<edit readOnly="0" width="160"></edit>
-		    	<check>转速</check>
-		    	<edit readOnly="0" width="80"></edit>
-		    	<text>(r/min)</text>
-		    	<check>电机功率</check>
-		    	<edit readOnly="0" width="80"></edit>
-		    	<text>(Kw)</text>
-			</group>
-          </item>
+	<window pos="10,10,-10,@35">
+		<button pos="5,0,@150,@30" name="findPumpBtn">查询</button>
+		<button pos="[20,0,@150,@30" name="updatePumpBtn">更新数据</button>
+        <button pos="[20,0,@150,@30" name="delPumpBtn">删除数据</button>
+		<text>提示：数字条件的查询可以增加查询条件(&lt;=、&gt;=、&lt;、&gt;)</text>
+	</window>
 
-          <item>
-          	<group pos="5,0,-5,@80" align="left">
-    		尺寸
-  				<check pos="5,20">泵长</check>
-				<edit readOnly="0" width="80"></edit>
-				<text>(mm)</text>
-				<check>泵宽</check>
-		    	<edit readOnly="0" width="80"></edit>
-		    	<text>(mm)</text>
-		    	<check>泵高</check>
-		    	<edit readOnly="0" width="80"></edit>
-		    	<text>(mm)</text>
-			    <check>泵重</check>
-			    <edit readOnly="0" width="80"></edit>
-			    <text>(kg)</text>
-		    </group>
-          </item>
+     <group pos="10,[10,-10,@80" align="left">
+	型号参数
+      	<check name="typeCheckBox" pos="5,20">型号</check>
+		<edit name="typeEdit" readOnly="0" width="80"></edit>
+		<check name="factoryCheckBox">生产厂家</check>
+    	<edit name="factoryEdit" readOnly="0" width="160"></edit>
+    	<check name="speedCheckBox">转速</check>
+    	<edit name="speedEdit" readOnly="0" width="80"></edit>
+    	<text>(r/min)</text>
+    	<check name="powerCheckBox">电机功率</check>
+    	<edit name="powerEdit" readOnly="0" width="80"></edit>
+    	<text>(Kw)</text>
+	</group>
 
-		  <item>
-		  	<group pos="5,0,-5,@80" align="left">
-		  		压力参数
-			  	<check pos="5,20">吸入绝压</check>
-			    <edit readOnly="0" width="80"></edit>
-				<text>(hPa)</text>
-			    <check>极限压力</check>
-			    <edit readOnly="0" width="80"></edit>
-			    <text>(hPa)</text>
-			    <check>最低吸入绝压</check>
-			    <edit readOnly="0" width="80"></edit>
-			    <text>(hPa)</text>
-			    <check>最大气量</check>
-			    <edit readOnly="0" width="80"></edit>
-			    <text>(m3/min)</text>
-		    </group>
-		  </item>
-        </items>        
-      </listboxex>
+	<group pos="10,[10,-10,@80" align="left">
+	尺寸
+		<check name="lengthCheckBox" pos="5,20">泵长</check>
+		<edit name="lengthEdit" readOnly="0" width="80"></edit>
+		<text>(mm)</text>
+		<check name="widthCheckBox">泵宽</check>
+    	<edit name="widthEdit" readOnly="0" width="80"></edit>
+    	<text>(mm)</text>
+    	<check name="heightCheckBox">泵高</check>
+    	<edit name="heightEdit" readOnly="0" width="80"></edit>
+    	<text>(mm)</text>
+	    <check name="weightCheckBox">泵重</check>
+	    <edit name="weightEdit" readOnly="0" width="80"></edit>
+	    <text>(kg)</text>
+    </group>
 
-	<listctrl name="lc_test" hotTrack="1" pos="5,[20,-10,-10" itemHeight="20" headerHeight="30" cursor="CUR_TST" font="underline:0" itemSkin="skin_tab_left">
+
+  	<group pos="10,[10,-10,@80" align="left">
+  		压力参数
+	  	<check name="absPCheckBox" pos="5,20">吸入绝压</check>
+	    <edit name="absPEdit" readOnly="0" width="80"></edit>
+		<text>(hPa)</text>
+	    <check name="maxPCheckBox">极限压力</check>
+	    <edit name="maxPEdit" readOnly="0" width="80"></edit>
+	    <text>(hPa)</text>
+	    <check name="minPCheckBox">最低吸入绝压</check>
+	    <edit name="minPEdit" readOnly="0" width="80"></edit>
+	    <text>(hPa)</text>
+	    <check name="maxQCheckBox">最大气量</check>
+	    <edit name="maxQEdit" readOnly="0" width="80"></edit>
+	    <text>(m3/min)</text>
+    </group>
+
+	<listctrl2 name="pumpDbList" hotTrack="1" pos="5,[20,-10,-10" itemHeight="20" headerHeight="30" cursor="CUR_TST" font="underline:0" itemSkin="skin_tab_left">
         <header align="center" itemSwapEnable="0" fixWidth="0" sortHeader="1">
           <items>
-           <item width="180">姓名</item>
-            <item width="180">性别</item>
-            <item width="180">年龄</item>
-            <item width="180">成绩</item>
+            <item width="80">类型</item>
+            <item width="80">泵重</item>
+            <item width="80">泵长</item>
+            <item width="80">泵宽</item>
+            <item width="80">泵高</item>
+            <item width="80">转速</item>
+            <item width="110">吸入绝压</item>
+            <item width="110">极限压力</item>
+            <item width="110">最大气量</item>
+            <item width="110">电机功率</item>
+            <item width="130">最低吸入绝压</item>
+            <item width="110">生产厂家</item>
           </items>
         </header>
       </listctrl>
