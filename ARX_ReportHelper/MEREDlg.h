@@ -29,7 +29,10 @@ public:
 	afx_msg void OnBnClickedOk();
 	void setObjectName(const CString& txtSaveName);
 	void setBookMarks(const AcStringArray& bookMks);
+	void setDesText(const CString& des);
 
 private:
 	void writeDatasToFile(BOOL yesOrNo,const CString& strMethod);
+public:
+	CString m_des;
 };

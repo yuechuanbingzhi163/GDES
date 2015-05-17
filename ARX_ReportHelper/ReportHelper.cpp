@@ -201,6 +201,7 @@ void ReportHelper::ShowMeasureDlg()
 	CAcModuleResourceOverride myResources;
 	MEREDlg dlg;
 	dlg.setObjectName(RET_MERSURE_OBJCT_NAME);
+	dlg.setDesText(_T("抽采计量测点是否充足、计量器具是否符合计量标准要求"));
 	AcStringArray bookMks;
 	bookMks.append(_T("MESURE_Ret"));
 	bookMks.append(_T("MESURE_Method"));
@@ -215,6 +216,7 @@ void ReportHelper::ShowReleatedInfoDlg()
 	CAcModuleResourceOverride myResources;
 	MEREDlg dlg;
 	dlg.setObjectName(RET_REALATE_OBJCT_NAME);
+	dlg.setDesText(_T("抽采效果评判用相关测试条件是否符合标准要求"));
 	AcStringArray bookMks;
 	bookMks.append(_T("ReleatInfo_Ret"));
 	bookMks.append(_T("ReleatInfo_Method"));

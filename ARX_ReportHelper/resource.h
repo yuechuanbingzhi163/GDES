@@ -68,6 +68,8 @@
 #define IDC_CHECK1                      159
 #define IDC_MERE_YESNO_CHECK            159
 #define IDC_MERE_METHOD_COMBO           161
+#define IDC_EDIT1                       163
+#define IDC_DES_EDIT                    163
 #define ID_PERMSYS_NUM_EDIT             177
 #define ID_TEMPESYS_NUM_EDIT            178
 #define ID_ENSURE                       186
@@ -82,7 +84,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        126
 #define _APS_NEXT_COMMAND_VALUE         32772
-#define _APS_NEXT_CONTROL_VALUE         162
+#define _APS_NEXT_CONTROL_VALUE         164
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif

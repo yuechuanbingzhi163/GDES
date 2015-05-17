@@ -12,6 +12,7 @@ IMPLEMENT_DYNAMIC(MEREDlg, GasBaseAcesDlg)
 MEREDlg::MEREDlg(CWnd* pParent /*=NULL*/)
 	: GasBaseAcesDlg(MEREDlg::IDD, pParent)
 	, m_yesOrNo(TRUE)
+	, m_des(_T(""))
 {
 
 }
@@ -25,6 +26,7 @@ void MEREDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_MERE_METHOD_COMBO, m_methodCombBox);
 	DDX_Check(pDX, IDC_MERE_YESNO_CHECK, m_yesOrNo);
+	DDX_Text(pDX, IDC_DES_EDIT, m_des);
 }
 
 
@@ -101,4 +103,10 @@ void MEREDlg::writeDatasToFile(BOOL yesOrNo,const CString& strMethod)
 	dataVector.push_back(m_bookMks);
 	dataVector.push_back(datas);
 	ReportDataHelper::WriteDatas(m_objName,dataVector);
+}
+
+void MEREDlg::setDesText( const CString& des )
+{
+	m_des = des;
+	//UpdateData(FALSE);
 }
