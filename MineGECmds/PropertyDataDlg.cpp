@@ -538,7 +538,7 @@ bool PropertyDataDlg::caculate()
 
 	if (_T("瓦斯泵的流量计算") == m_func)
 	{
-		cacul.pumbFlowCacul();
+		if(!cacul.pumbFlowCacul()) return false;
 		return true;
 	}
 
@@ -550,8 +550,8 @@ bool PropertyDataDlg::caculate()
 
 	if(_T("瓦斯泵计算") == m_func)
 	{
-		if(!cacul.pumbFlowCacul()) return false;
 		if(!cacul.pumbPressCacul()) return false;
+		if(!cacul.pumbFlowCacul()) return false;
 		return true;
 	}
 

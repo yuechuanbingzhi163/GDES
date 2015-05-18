@@ -533,20 +533,35 @@ bool CaculFunc::tubeFrictionResisCacul()
 
 bool CaculFunc::pumbFlowCacul()
 {
-	CString strQz,strx,strkEnta,strEnta;
+	CString strQz,strx,strP,strH;
 	DataHelper::GetPropertyData(m_objId,_T("瓦斯抽采总量（纯量）"),strQz);
 	DataHelper::GetPropertyData(m_objId,_T("瓦斯抽采浓度"),strx);
-	DataHelper::GetPropertyData(m_objId,_T("瓦斯泵流量备用系数"),strkEnta);
-	DataHelper::GetPropertyData(m_objId,_T("瓦斯泵的机械效率"),strEnta);
+	DataHelper::GetPropertyData(m_objId,_T("当地大气压"),strP);
+	DataHelper::GetPropertyData(m_objId,_T("瓦斯泵的压力"),strH);
 
 	pureMineDrainGas = _tstof(strQz);
-	llReserveFactor = _tstof(strkEnta);
+	double p = _tstof(strP);
 	mineDrainGasDencity = _tstof(strx);
-	pumbEfficiency = _tstof(strEnta);
+	double h = _tstof(strH);
 
-	double part1 = 100 * pureMineDrainGas * llReserveFactor;
-	double part2 = mineDrainGasDencity * pumbEfficiency;
-	pumbFlow = part1 / part2;
+	//double part1 = 100 * pureMineDrainGas * llReserveFactor;
+	//double part2 = mineDrainGasDencity * pumbEfficiency;
+	//pumbFlow = part1 / part2;
+
+	if(LESSTHANZERO(h))
+	{
+		AfxMessageBox(_T("请先计算瓦斯泵压力"));
+		return false;
+	}
+
+	if(!LESSTHANZERO(p - h) && !LESSTHANZERO(mineDrainGasDencity))
+	{
+		pumbFlow = (2 * 100 * pureMineDrainGas * 101325) / (mineDrainGasDencity * (p - h));
+	}
+	else
+	{
+		pumbFlow = 0;
+	}
 
 	if (LESSTHANZERO(pumbFlow))
 	{
