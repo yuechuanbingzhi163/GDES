@@ -2,10 +2,11 @@
 #include "../MineGE/DataObject.h"
 #include "../MineGE/DataListHelper.h"
 #include "config.h"
+#include "dlimexp.h"
 
 #define ISNULL _T("**")
 
-class ReportDataHelper
+class ARX_REPORTHELPER_DLLIMPEXP ReportDataHelper
 {
 public:
 	static void	ReadDatas(const CString& name, ArrayVector& datasVector,int unitCount);

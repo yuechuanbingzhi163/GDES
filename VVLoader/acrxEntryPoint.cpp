@@ -247,6 +247,7 @@ public:
 #if INCLUDE_GESES_MODULE
 		if( !loadArxModule( _T( "GraphTool" ) ) ) return false;
 		if( !loadArxModule( _T( "GESESCmds" ) ) ) return false;
+		if( !loadArxModule( _T( "GDESAddFunc" ) ) ) return false;
 #endif
 
 #if INCLUDE_GAS_MODULE
@@ -277,6 +278,7 @@ public:
 #if INCLUDE_GESES_MODULE
 		unloadArxModule( _T( "GESESCmds" ) ) ;
 		unloadArxModule( _T( "GraphTool" ) ) ;
+		unloadArxModule( _T("GDESAddFunc") );
 #endif
 
 #if INCLUDE_GAS_MODULE

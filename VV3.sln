@@ -112,6 +112,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArxSoUI", "ArxSoUI\ArxSoUI.
 		{E73D4DDF-2EB8-499B-9468-C8A7770734D7} = {E73D4DDF-2EB8-499B-9468-C8A7770734D7}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDESAddFunc", "GDESAddFunc\GDESAddFunc.vcproj", "{A35EEF98-7B17-4F5B-BD51-1D12FBD6C202}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -276,6 +278,14 @@ Global
 		{C61AB560-2D97-44DF-8F35-8A3ADF2D212D}.Release|Win32.Build.0 = Release|Win32
 		{C61AB560-2D97-44DF-8F35-8A3ADF2D212D}.Release|x64.ActiveCfg = Release|x64
 		{C61AB560-2D97-44DF-8F35-8A3ADF2D212D}.Release|x64.Build.0 = Release|x64
+		{A35EEF98-7B17-4F5B-BD51-1D12FBD6C202}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A35EEF98-7B17-4F5B-BD51-1D12FBD6C202}.Debug|Win32.Build.0 = Debug|Win32
+		{A35EEF98-7B17-4F5B-BD51-1D12FBD6C202}.Debug|x64.ActiveCfg = Debug|x64
+		{A35EEF98-7B17-4F5B-BD51-1D12FBD6C202}.Debug|x64.Build.0 = Debug|x64
+		{A35EEF98-7B17-4F5B-BD51-1D12FBD6C202}.Release|Win32.ActiveCfg = Release|Win32
+		{A35EEF98-7B17-4F5B-BD51-1D12FBD6C202}.Release|Win32.Build.0 = Release|Win32
+		{A35EEF98-7B17-4F5B-BD51-1D12FBD6C202}.Release|x64.ActiveCfg = Release|x64
+		{A35EEF98-7B17-4F5B-BD51-1D12FBD6C202}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
