@@ -10,6 +10,7 @@
 #include "../MineGE/config.h"
 
 #define LESSTHANZERO(x) x <= TOLERANCE
+#define NOTZERO(x) abs(x) <= TOLERANCE 
 
 bool CaculFunc::coalResrevesCacul()
 {
@@ -554,7 +555,7 @@ bool CaculFunc::pumbFlowCacul()
 		return false;
 	}
 
-	if(!LESSTHANZERO(p - h) && !LESSTHANZERO(mineDrainGasDencity))
+	if(NOTZERO(p - h) && NOTZERO(mineDrainGasDencity))
 	{
 		pumbFlow = (2 * 100 * pureMineDrainGas * 101325) / (mineDrainGasDencity * (p - h));
 	}

@@ -1,4 +1,4 @@
-//Microsoft Visual C++ generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -12,31 +12,40 @@
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE 
 BEGIN
-	"resource.h\0"
+    "resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE 
 BEGIN
-	"#include ""afxres.h""\r\n"
+    "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE 
 BEGIN
-	"\0"
+    "\0"
 END
 
 #endif    // APSTUDIO_INVOKED
 
-#ifndef _MAC
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -55,47 +64,77 @@ VS_VERSION_INFO VERSIONINFO
  FILETYPE 0x2L
  FILESUBTYPE 0x0L
 BEGIN
-	BLOCK "StringFileInfo"
-	BEGIN
-		BLOCK "040904B0"
-		BEGIN
-			VALUE "CompanyName", "\0"
-			VALUE "FileDescription", "GDESAddFunc ObjectARX application\0"
-			VALUE "FileVersion", "1, 0, 0, 1\0"
-			VALUE "InternalName", "GDESAddFunc\0"
-			VALUE "LegalCopyright", "Copyright ?2002\0"
-			VALUE "OriginalFilename", "GDESAddFunc.arx\0"
-			VALUE "ProductName", "GDESAddFunc Application\0"
-			VALUE "ProductVersion", "1, 0, 0, 1\0"
-		END
-	END
-	BLOCK "VarFileInfo"
-	BEGIN
-		VALUE "Translation", 0x0409, 0x04B0
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", "GDESAddFunc ObjectARX application"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "GDESAddFunc"
+            VALUE "LegalCopyright", "Copyright ?2002"
+            VALUE "OriginalFilename", "GDESAddFunc.arx"
+            VALUE "ProductName", "GDESAddFunc Application"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
     END
 END
 
-#endif    // !_MAC
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PUMP_ABILITY_DIALOG DIALOGEX 0, 0, 404, 211
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "按矿井瓦斯抽采泵站装机能力核定"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,205,196,50,14
+    PUSHBUTTON      "取消",IDCANCEL,354,196,50,14
+    LTEXT           "矿井相对瓦斯涌出量",IDC_STATIC,6,5,73,9
+    EDITTEXT        IDC_ABS_GAS_EDIT,79,3,49,14,ES_AUTOHSCROLL
+    LTEXT           "(m3/t)",IDC_STATIC,133,6,21,8
+    LTEXT           "矿井总回风巷瓦斯浓度",IDC_STATIC,164,7,83,10
+    EDITTEXT        IDC_CONCENTRA_GAS_EDIT,247,5,49,14,ES_AUTOHSCROLL
+    LTEXT           "(%)",IDC_STATIC,301,8,14,8
+    LTEXT           "当地大气压",IDC_STATIC,5,24,42,10
+    EDITTEXT        IDC_LOCAL_AP_EDIT,53,22,49,14,ES_AUTOHSCROLL
+    LTEXT           "(kPa)",IDC_STATIC,109,26,18,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PUMP_ABILITY_DIALOG, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 210
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
-	IDS_PROJNAME					"GDESAddFunc"
+    IDS_PROJNAME            "GDESAddFunc"
 END
 
-
-
+#endif    // 中文(中华人民共和国) resources
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef APSTUDIO_INVOKED
-/////////////////////////////////////////////////////////////////////////////
-//
-// Generated from the TEXTINCLUDE 3 resource.
-//
-/////////////////////////////////////////////////////////////////////////////
-#endif    // not APSTUDIO_INVOKED
 
