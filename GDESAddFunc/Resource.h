@@ -8,6 +8,12 @@
 #define IDD_PUMP_ABILITY_DIALOG         102
 #define IDC_CONCENTRA_GAS_EDIT2         102
 #define IDC_LOCAL_AP_EDIT               102
+#define IDC_MINE_MAXQ_EDIT              103
+#define IDC_OVERFLOWER_EDIT             104
+#define IDC_SYS_CON_EDIT                105
+#define IDC_LIST1                       106
+#define IDC_PUMP_LIST                   106
+#define IDC_EDIT4                       107
 
 // Next default values for new objects
 // 
@@ -15,7 +21,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        103
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         101
+#define _APS_NEXT_CONTROL_VALUE         108
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif
