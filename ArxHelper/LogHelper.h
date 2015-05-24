@@ -16,7 +16,7 @@ public:
 	static log4cplus::Logger& get_logger();
 
 public:
-	~cruise_log4cplus();
+	//~cruise_log4cplus();
 	void log_init(log4cplus::tchar* prop_file, log4cplus::tchar* prefix_log_flie = NULL, log4cplus::tchar* sub_logger_name = NULL);
 	void log_uinit();
 

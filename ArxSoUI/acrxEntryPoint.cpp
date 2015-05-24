@@ -28,7 +28,7 @@ public:
 		acrxRegisterService( ARX_SOUI_SERVICE_NAME );
 
 		acutPrintf( _T( "\nArxSoUI::On_kInitAppMsg\n" ) );
-		//LOG_TRACE( _T( "\nArxSoUI::On_kInitAppMsg\n" ) );
+		LOG_TRACE( _T( "ArxSoUI::On_kInitAppMsg" ) );
 
 		return (retCode) ;
 	}
@@ -42,6 +42,7 @@ public:
 		delete acrxServiceDictionary->remove( ARX_SOUI_SERVICE_NAME );
 
 		acutPrintf( _T( "\nArxSoUI::On_kUnloadAppMsg\n" ) );
+		LOG_TRACE( _T( "ArxSoUI::On_kUnloadAppMsg" ) );
 
 		return (retCode) ;
 	}

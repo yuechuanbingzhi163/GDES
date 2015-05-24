@@ -98,6 +98,9 @@ void cruise_log4cplus::log_init(log4cplus::tchar* prop_file,
 			  log4cplus::tchar* prefix_log_flie,
 			  log4cplus::tchar* sub_logger_name)
 {
+	//为了使log4cplus输出中文，需要设置locale为中文
+	m_origin_locale = std::locale::global(std::locale("chs"));
+
 	log4cplus::initialize();
 	m_logger = log4cplus::Logger::getRoot();
 
@@ -122,6 +125,8 @@ void cruise_log4cplus::log_init(log4cplus::tchar* prop_file,
 	catch (...)
 	{
 		LOG4CPLUS_FATAL(m_logger, LOG4CPLUS_TEXT("Exception occured..."));
+		//恢复原来的locale设置
+		std::locale::global(m_origin_locale);
 		abort();
 	}
 }
@@ -129,19 +134,19 @@ void cruise_log4cplus::log_init(log4cplus::tchar* prop_file,
 void cruise_log4cplus::log_uinit()
 {
 	LOG4CPLUS_INFO(m_logger, LOG4CPLUS_TEXT("Log System Stop."));
-
 	log4cplus::Logger::shutdown();
+	//恢复原来的locale设置
+	std::locale::global(m_origin_locale);
 }
 
 cruise_log4cplus::cruise_log4cplus()
 {
-	m_origin_locale = std::locale::global(std::locale("chs"));
 }
 
-cruise_log4cplus::~cruise_log4cplus()
-{
-	std::locale::global(m_origin_locale);
-}
+//cruise_log4cplus::~cruise_log4cplus()
+//{
+//	
+//}
 
 cruise_log4cplus::cruise_log4cplus(const cruise_log4cplus& obj) : m_logger(obj.m_logger)
 {
@@ -169,6 +174,7 @@ log4cplus::Logger& cruise_log4cplus::get_logger()
 
 void log_init(tchar* prop_file, tchar* prefix_log_flie, tchar* sub_logger_name)
 {
+	g_Log4cplus;  // 通过该语句提前构造全局静态对象
 	g_Log4cplus.log_init(prop_file, prefix_log_flie, sub_logger_name);
 }
 
