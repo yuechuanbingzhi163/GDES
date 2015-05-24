@@ -1,4 +1,0 @@
-Tunnel		巷道
-TTunnel		掘进面
-GasTube		瓦斯抽采管路
-计算参数	计算参数

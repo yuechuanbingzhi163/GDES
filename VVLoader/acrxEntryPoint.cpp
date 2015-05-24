@@ -9,6 +9,7 @@
 #include "TolSetter.h"
 
 #include "../MineGEDraw/MineGEDrawSystem.h"
+#include "../ArxHelper/HelperClass.h"
 
 // 获取当前模块的路径
 static CString GetAppPathDir()
@@ -95,6 +96,10 @@ public:
 		acutPrintf( _T( "\nVVLoader::On_kInitAppMsg\n" ) );
 
 		SetWindowTitle();
+
+		//初始化log4cplus日志系统
+		log_init(_T(".\\Datas\\log4cplus.properties"));
+
 		return ( retCode ) ;
 	}
 
@@ -120,6 +125,9 @@ public:
 		unInitDrawSystem();
 
 		acutPrintf( _T( "\nVVLoader::On_kUnloadAppMsg\n" ) );
+
+		//关闭log4cplus日志系统
+		log_uinit();
 
 		return ( retCode ) ;
 	}
@@ -246,8 +254,8 @@ public:
 
 #if INCLUDE_GESES_MODULE
 		if( !loadArxModule( _T( "GraphTool" ) ) ) return false;
+		if( !loadArxModule( _T( "ARX_ReportHelper" ) ) ) return false;
 		if( !loadArxModule( _T( "GESESCmds" ) ) ) return false;
-		if( !loadArxModule( _T( "GDESAddFunc" ) ) ) return false;
 #endif
 
 #if INCLUDE_GAS_MODULE
@@ -276,9 +284,9 @@ public:
 #endif
 
 #if INCLUDE_GESES_MODULE
+		unloadArxModule( _T( "ARX_ReportHelper" ) );
 		unloadArxModule( _T( "GESESCmds" ) ) ;
 		unloadArxModule( _T( "GraphTool" ) ) ;
-		unloadArxModule( _T("GDESAddFunc") );
 #endif
 
 #if INCLUDE_GAS_MODULE
