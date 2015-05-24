@@ -46,7 +46,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".."
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\sqlite3\sqlite3;..\ThirdParty\lemon-1.3.1"
 				AdditionalUsingDirectories="&quot;D:\Program Files\AutoCAD 2010&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;TVNSCACUL_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -72,9 +72,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="lemon.lib sqlite3.lib log4cplusSU.lib"
 				OutputFile="$(outdir)/TVNSCacul.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\Sqlite\SQLite\lib"
+				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\sqlite3\lib;..\ThirdParty\lemon-1.3.1\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/TVNSCacul.pdb"
@@ -133,7 +134,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\Sqlite\SQLite\include"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\sqlite3\sqlite3;..\ThirdParty\lemon-1.3.1"
 				AdditionalUsingDirectories="&quot;D:\Program Files\AutoCAD 2010&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;TVNSCACUL_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -159,9 +160,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="lemon_x64.lib sqlite3_x64.lib log4cplusSU-x64.lib"
 				OutputFile="$(outdir)/TVNSCacul.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\Sqlite\SQLite\lib"
+				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\sqlite3\lib;..\ThirdParty\lemon-1.3.1\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/TVNSCacul.pdb"
@@ -219,7 +221,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories=".."
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\sqlite3\sqlite3;..\ThirdParty\lemon-1.3.1"
 				AdditionalUsingDirectories="c:\Program Files\AutoCAD"
 				PreprocessorDefinitions="WIN32;_WINDOWS;TVNSCACUL_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -245,9 +247,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="lemon.lib sqlite3.lib log4cplusSU.lib"
 				OutputFile="$(outdir)/TVNSCacul.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\PropertyGrid;"
+				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\sqlite3\lib;..\ThirdParty\lemon-1.3.1\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
@@ -306,7 +309,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\sqlite3\sqlite3;..\ThirdParty\lemon-1.3.1"
 				AdditionalUsingDirectories="c:\Program Files\AutoCAD"
 				PreprocessorDefinitions="WIN32;_WINDOWS;TVNSCACUL_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -332,9 +335,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="lemon_x64.lib sqlite3_x64.lib log4cplusSU-x64.lib"
 				OutputFile="$(outdir)/TVNSCacul.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\PropertyGrid;"
+				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\sqlite3\lib;..\ThirdParty\lemon-1.3.1\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""

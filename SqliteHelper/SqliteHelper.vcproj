@@ -45,7 +45,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\sqlite3\sqlite3&quot;"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\sqlite3\sqlite3;..\ThirdParty\lemon-1.3.1"
 				PreprocessorDefinitions="WIN32;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,8 +65,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="sqlite3.lib"
-				AdditionalLibraryDirectories="..\ThirdParty\sqlite3\lib"
+				AdditionalDependencies="lemon.lib sqlite3.lib log4cplusSU.lib"
+				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\sqlite3\lib;..\ThirdParty\lemon-1.3.1\lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -111,7 +111,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\ThirdParty\sqlite3\sqlite3"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\sqlite3\sqlite3;..\ThirdParty\lemon-1.3.1"
 				PreprocessorDefinitions="WIN32;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -131,8 +131,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="sqlite3_x64.lib"
-				AdditionalLibraryDirectories="..\ThirdParty\sqlite3\lib"
+				AdditionalDependencies="lemon_x64.lib sqlite3_x64.lib log4cplusSU-x64.lib"
+				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\sqlite3\lib;..\ThirdParty\lemon-1.3.1\lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -152,8 +152,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
+			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="4"
 			UseOfMFC="2"
 			CharacterSet="1"
@@ -178,7 +178,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\ThirdParty\sqlite3\sqlite3"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\sqlite3\sqlite3;..\ThirdParty\lemon-1.3.1"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -197,8 +197,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="sqlite3.lib"
-				AdditionalLibraryDirectories="..\ThirdParty\sqlite3\lib"
+				AdditionalDependencies="lemon.lib sqlite3.lib log4cplusSU.lib"
+				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\sqlite3\lib;..\ThirdParty\lemon-1.3.1\lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -245,7 +245,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\ThirdParty\sqlite3\sqlite3"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\sqlite3\sqlite3;..\ThirdParty\lemon-1.3.1"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -264,8 +264,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="sqlite3_x64.lib"
-				AdditionalLibraryDirectories="..\ThirdParty\sqlite3\lib"
+				AdditionalDependencies="lemon_x64.lib sqlite3_x64.lib log4cplusSU-x64.lib"
+				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\sqlite3\lib;..\ThirdParty\lemon-1.3.1\lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
