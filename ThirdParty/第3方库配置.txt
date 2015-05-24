@@ -1,0 +1,38 @@
+为了方便使用，所有的项目都要统一添加这些头文件、库文件、依赖项的路径设置，减少项目配置的麻烦
+
+第3方库的所需要的lib已经编译好了，解压到GDES根目录下，直接覆盖ThirdParty文件夹即可
+下载地址：http://pan.baidu.com/s/1c030qJ2
+
+头文件路径：全部配置(win32/x64)
+..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\sqlite3\sqlite3;..\ThirdParty\lemon-1.3.1
+
+库文件路径：全部配置(win32/x64)
+..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\sqlite3\lib;..\ThirdParty\lemon-1.3.1\lib
+
+依赖项：win32(debug/release)    
+lemon.lib sqlite3.lib log4cplusSU.lib
+
+依赖项：x64(debug/release)
+lemon_x64.lib sqlite3_x64.lib log4cplusSU-x64.lib
+
+
+===>如果某个项目使用soui做界面，需要将soui的头文件、库文件路径包含进来
+注：由于soui编译的问题，不能像其他的第3方库那样将lib文件改名，所以只能分开存放
+soui/bin (win32版本的lib和exe）
+soui/bin64（x64版本的lib和exe）
+
+头文件路径：全部配置(win32/x64)
+..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\sqlite3\sqlite3;..\ThirdParty\lemon-1.3.1;../ThirdParty/soui;../ThirdParty/soui/soui/include;../ThirdParty/soui/utilities/include;../ThirdParty/soui/config;../ThirdParty/soui/components
+
+库文件路径：
+win32配置
+..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\sqlite3\lib;..\ThirdParty\lemon-1.3.1\lib;../ThirdParty/soui/bin
+
+x64配置
+..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\sqlite3\lib;..\ThirdParty\lemon-1.3.1\lib;../ThirdParty/soui/bin64
+
+依赖项：win32(debug/release) 
+lemon.lib sqlite3.lib log4cplusSU.lib soui.lib utilities.lib
+
+依赖项：x64(debug/release)
+lemon_x64.lib sqlite3_x64.lib log4cplusSU-x64.lib soui.lib utilities.lib
