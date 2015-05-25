@@ -7,6 +7,8 @@
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
 
+#define DATABASE_SQLITE
+
 #include "database.hxx" // create_database
 
 #include "person.hxx"
@@ -15,8 +17,7 @@
 using namespace std;
 using namespace odb::core;
 
-int
-main (int argc, char* argv[])
+int test(int argc, char* argv[])
 {
   try
   {

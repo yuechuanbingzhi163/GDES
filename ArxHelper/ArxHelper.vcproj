@@ -405,6 +405,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\EncodeHelper.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\LayerHelper.cpp"
 				>
 			</File>
@@ -479,6 +483,10 @@
 			</File>
 			<File
 				RelativePath=".\dlimexp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\EncodeHelper.h"
 				>
 			</File>
 			<File
