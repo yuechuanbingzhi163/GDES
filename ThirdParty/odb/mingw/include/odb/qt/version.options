@@ -1,0 +1,17 @@
+# file      : odb/qt/version.options
+# copyright : Copyright (c) 2009-2015 Code Synthesis Tools CC
+# license   : GNU GPL v2; see accompanying LICENSE file
+
+# Include the config file first so that it can do its thing before we
+# include any Qt headers.
+#
+--odb-prologue '#include <odb/qt/details/config.hxx>'
+
+# Make sure the options files as seen by the ODB compiler and header
+# files as seen by the C++ compiler have the same Qt interface version.
+#
+--hxx-prologue '#include <odb/qt/version.hxx>'
+
+--hxx-prologue '#if ODB_QT_VERSION != 2040000 // 2.4.0'
+--hxx-prologue '#  error ODB and C++ compilers see different libodb-qt interface versions'
+--hxx-prologue '#endif'

@@ -1,0 +1,51 @@
+ODB is an object-relational mapping (ORM) system for C++. It provides
+tools, APIs, and library support that allow you to persist C++ objects
+to a relational database (RDBMS) without having to deal with tables,
+columns, or SQL and without manually writing any of the mapping code.
+For more information see:
+
+http://www.codesynthesis.com/products/odb/
+
+This package contains the pre-compiled binary distribution of the ODB
+compiler for Windows. The top-level directory structure of this package
+is as follows:
+
+bin\          ODB compiler binary
+etc\          ODB compiler configuration
+doc\          ODB system documentation
+man\          man pages for the ODB compiler
+mingw\        GCC compiler, MinGW, and MSYS binaries, see manifest
+              inside for details
+
+To install this package simply unpack it into a directory of your choice,
+for example C:\tools. The ODB compiler binary will be in the bin\
+directory inside the package directory, for example
+C:\tools\odb-x.y.z-i686-windows\bin\. You can run the ODB compiler by
+either using the absolute path, for example:
+
+C:\tools\odb-x.y.z-i686-windows\bin\odb --version
+
+Or you can add the bin\ directory to the Path environment variable. To
+accomplish this, open Control Panel, then System, select the Advanced tab
+and click on the Environment Variables button. If you have administrator
+privileges, select the Path variable from the System variables list.
+Otherwise, select (or create) the Path variable from the User variables
+list. Click the Edit button and add the bin\ directory to the list. Click
+Ok, then log off and log on again for the changes to take effect. Once this
+is done, you should be able to run the ODB compiler by using just its name,
+for example:
+
+odb --version
+
+If you would like to add commonly-used libraries, such as Boost or Qt,
+to the ODB compiler header search list, you can add them to the
+etc\odb\default.options file (this file serves a similar purpose in ODB
+as the VC++ Directories dialog in VC++). For more information, refer to
+the instructions at the beginning of this file.
+
+Note also that while you can move the ODB compiler directory around, you
+cannot move the individual sub-directories or files inside it. For example,
+copying the ODB compiler executable to C:\Windows will not work.
+
+Send questions, bug reports, or any other feedback to the
+odb-users@codesynthesis.com mailing list.

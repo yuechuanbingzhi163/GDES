@@ -1,0 +1,15 @@
+# file      : libodb.pc.in
+# copyright : Copyright (c) 2009-2015 Code Synthesis Tools CC
+# license   : GNU GPL v2; see accompanying LICENSE file
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libodb
+Description: Object-relational mapping (ORM) system for C++, common runtime library
+URL: http://www.codesynthesis.com/products/odb/
+Version: @VERSION@
+Libs: -L${libdir} -lodb
+Cflags: -I${includedir}

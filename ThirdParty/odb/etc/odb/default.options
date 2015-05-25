@@ -1,0 +1,8 @@
+# Default ODB options file. This file is automatically loaded by the ODB
+# compiler and can be used for installation-wide customizations, such as
+# adding an include search path for a commonly used library. In this
+# regard, the default options file in ODB serves a role similar to the
+# VC++ Directories dialog in VC++. For example:
+#
+# -I C:\boost_1_45_0
+#
