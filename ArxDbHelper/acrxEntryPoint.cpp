@@ -36,8 +36,16 @@ public:
 	virtual void RegisterServerComponents () {
 	}
 
+	static void JL_TestPoco()
+	{
+		extern void testxx();
+		//testxx();
+		extern int test();
+		test();
+	}
 } ;
 
 //-----------------------------------------------------------------------------
 IMPLEMENT_ARX_ENTRYPOINT(CArxDbHelperApp)
 
+ACED_ARXCOMMAND_ENTRY_AUTO( CArxDbHelperApp, JL, _TestPoco, TestPoco, ACRX_CMD_TRANSPARENT, NULL )

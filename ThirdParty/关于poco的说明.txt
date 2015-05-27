@@ -19,3 +19,10 @@ poco-1.6.0
 由于我只编译了静态库版本的poco，所以在使用poco的时候，除了设置头文件路径和库文件路径外，还需要定义POCO_STATIC预处理器符号
 
 poco的文档和教程请参见poco-1.6.0/doc文件夹
+
+poco的编译方法：
+poco自带的一些批处理文件（*.cmd），为了编译32位和64位版本，将build_vs90.cmd复制了2份，分别命名为
+build_vs90_win32.cmd和 build_vs90_x64.cmd，并修改其中的内容
+
+build_vs90.cmd它内部调用的就死buildwin.cmd这个批处理，该批处理可以传入一些参数，用于生成不同的版本
+具体的参数，可以参见buildwin.cmd里代码的开头和结尾部分

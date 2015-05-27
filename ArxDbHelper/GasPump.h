@@ -1,10 +1,12 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 struct PumpType 
 {
-	unsigned long id;
+	int id;
+	int catagory_id;
 	std::string type;
 	std::string factName;
 	int absP;
@@ -23,3 +25,6 @@ struct PumpProperty
 	int maxP;
 	int absP;
 };
+
+typedef std::vector<PumpType> PumpTypeTable;
+typedef std::vector<PumpProperty> PumpPropertyTable;
