@@ -27,9 +27,9 @@ main (int argc, char* argv[])
     // Create a few persistent person objects.
     //
     {
-      person john ("John", "Doe", 33);
-      person jane ("Jane", "Doe", 32);
-      person joe ("Joe", "Dirt", 30);
+      person john ("ÕÔJohn", "Doe", 33);
+      person jane ("ÕÅJane", "Doe", 32);
+      person joe ("ÀîJoe", "Dirt", 30);
 
       transaction t (db->begin ());
 

@@ -1,0 +1,12 @@
+CppUnit
+Foundation
+XML
+JSON
+Util
+Net
+Crypto
+Data
+Data/SQLite
+Data/ODBC
+MongoDB
+Zip

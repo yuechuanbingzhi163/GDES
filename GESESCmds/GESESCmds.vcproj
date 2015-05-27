@@ -46,7 +46,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\odb;..\ThirdParty\odb\sqlite3"
+				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\log4cplus-1.2.0\include&quot;;&quot;..\ThirdParty\lemon-1.3.1&quot;;&quot;..\ThirdParty\poco-1.6.0\Foundation&quot;;&quot;..\ThirdParty\poco-1.6.0\XML&quot;;&quot;..\ThirdParty\poco-1.6.0\JSON&quot;;&quot;..\ThirdParty\poco-1.6.0\Util&quot;;&quot;..\ThirdParty\poco-1.6.0\Net&quot;;&quot;..\ThirdParty\poco-1.6.0\Crypto&quot;;&quot;..\ThirdParty\poco-1.6.0\Data&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\SQLite&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\ODBC&quot;;&quot;..\ThirdParty\poco-1.6.0\MongoDB&quot;;&quot;..\ThirdParty\poco-1.6.0\Zip&quot;;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="c:\Program Files\AutoCAD"
 				PreprocessorDefinitions="WIN32;_WINDOWS;GESESCMDS_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -72,10 +72,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU.lib lemon.lib odb.lib odb-sqlite.lib sqlite3.lib"
+				AdditionalDependencies="log4cplusSU.lib lemon.lib poco.lib sqlite3.lib"
 				OutputFile="$(outdir)/GESESCmds.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\lemon-1.3.1\lib;..\ThirdParty\odb\lib"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib&quot;;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/GESESCmds.pdb"
@@ -134,7 +134,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\odb;..\ThirdParty\odb\sqlite3"
+				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\log4cplus-1.2.0\include&quot;;&quot;..\ThirdParty\lemon-1.3.1&quot;;&quot;..\ThirdParty\poco-1.6.0\Foundation&quot;;&quot;..\ThirdParty\poco-1.6.0\XML&quot;;&quot;..\ThirdParty\poco-1.6.0\JSON&quot;;&quot;..\ThirdParty\poco-1.6.0\Util&quot;;&quot;..\ThirdParty\poco-1.6.0\Net&quot;;&quot;..\ThirdParty\poco-1.6.0\Crypto&quot;;&quot;..\ThirdParty\poco-1.6.0\Data&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\SQLite&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\ODBC&quot;;&quot;..\ThirdParty\poco-1.6.0\MongoDB&quot;;&quot;..\ThirdParty\poco-1.6.0\Zip&quot;;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="c:\Program Files\AutoCAD"
 				PreprocessorDefinitions="WIN32;_WINDOWS;GESESCMDS_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -160,10 +160,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib odb-x64.lib odb-sqlite-x64.lib sqlite3-x64.lib"
+				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib poco-x64.lib sqlite3-x64.lib"
 				OutputFile="$(outdir)/GESESCmds.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\lemon-1.3.1\lib;..\ThirdParty\odb\lib"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib&quot;;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/GESESCmds.pdb"
@@ -221,7 +221,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\odb;..\ThirdParty\odb\sqlite3"
+				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\log4cplus-1.2.0\include&quot;;&quot;..\ThirdParty\lemon-1.3.1&quot;;&quot;..\ThirdParty\poco-1.6.0\Foundation&quot;;&quot;..\ThirdParty\poco-1.6.0\XML&quot;;&quot;..\ThirdParty\poco-1.6.0\JSON&quot;;&quot;..\ThirdParty\poco-1.6.0\Util&quot;;&quot;..\ThirdParty\poco-1.6.0\Net&quot;;&quot;..\ThirdParty\poco-1.6.0\Crypto&quot;;&quot;..\ThirdParty\poco-1.6.0\Data&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\SQLite&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\ODBC&quot;;&quot;..\ThirdParty\poco-1.6.0\MongoDB&quot;;&quot;..\ThirdParty\poco-1.6.0\Zip&quot;;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="c:\Program Files\AutoCAD"
 				PreprocessorDefinitions="WIN32;_WINDOWS;GESESCMDS_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -247,10 +247,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU.lib lemon.lib odb.lib odb-sqlite.lib sqlite3.lib"
+				AdditionalDependencies="log4cplusSU.lib lemon.lib poco.lib sqlite3.lib"
 				OutputFile="$(outdir)/GESESCmds.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\lemon-1.3.1\lib;..\ThirdParty\odb\lib"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib&quot;;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
@@ -309,7 +309,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\odb;..\ThirdParty\odb\sqlite3"
+				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\log4cplus-1.2.0\include&quot;;&quot;..\ThirdParty\lemon-1.3.1&quot;;&quot;..\ThirdParty\poco-1.6.0\Foundation&quot;;&quot;..\ThirdParty\poco-1.6.0\XML&quot;;&quot;..\ThirdParty\poco-1.6.0\JSON&quot;;&quot;..\ThirdParty\poco-1.6.0\Util&quot;;&quot;..\ThirdParty\poco-1.6.0\Net&quot;;&quot;..\ThirdParty\poco-1.6.0\Crypto&quot;;&quot;..\ThirdParty\poco-1.6.0\Data&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\SQLite&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\ODBC&quot;;&quot;..\ThirdParty\poco-1.6.0\MongoDB&quot;;&quot;..\ThirdParty\poco-1.6.0\Zip&quot;;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="c:\Program Files\AutoCAD"
 				PreprocessorDefinitions="WIN32;_WINDOWS;GESESCMDS_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -335,10 +335,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib odb-x64.lib odb-sqlite-x64.lib sqlite3-x64.lib"
+				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib poco-x64.lib sqlite3-x64.lib"
 				OutputFile="$(outdir)/GESESCmds.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\lemon-1.3.1\lib;..\ThirdParty\odb\lib"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib&quot;;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
