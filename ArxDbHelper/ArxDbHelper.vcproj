@@ -45,9 +45,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\log4cplus-1.2.0\include&quot;;&quot;..\ThirdParty\lemon-1.3.1&quot;;&quot;..\ThirdParty\poco-1.6.0\Foundation&quot;;&quot;..\ThirdParty\poco-1.6.0\XML&quot;;&quot;..\ThirdParty\poco-1.6.0\JSON&quot;;&quot;..\ThirdParty\poco-1.6.0\Util&quot;;&quot;..\ThirdParty\poco-1.6.0\Net&quot;;&quot;..\ThirdParty\poco-1.6.0\Crypto&quot;;&quot;..\ThirdParty\poco-1.6.0\Data&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\SQLite&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\ODBC&quot;;&quot;..\ThirdParty\poco-1.6.0\MongoDB&quot;;&quot;..\ThirdParty\poco-1.6.0\Zip&quot;;..\ThirdParty\sqlite3\sqlite3"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\poco-1.6.0\include;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
-				PreprocessorDefinitions="WIN32;_WINDOWS;ARXDBHELPER_MODULE;_AFXEXT;_ACRXAPP"
+				PreprocessorDefinitions="WIN32;_WINDOWS;ARXDBHELPER_MODULE;_AFXEXT;_ACRXAPP;POCO_STATIC"
 				StringPooling="false"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -71,7 +71,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU.lib lemon.lib poco.lib sqlite3.lib"
+				AdditionalDependencies="log4cplusSU.lib lemon.lib  sqlite3.lib"
 				OutputFile="$(outdir)/ArxDbHelper.arx"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib&quot;;..\ThirdParty\sqlite3\lib"
@@ -132,9 +132,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\log4cplus-1.2.0\include&quot;;&quot;..\ThirdParty\lemon-1.3.1&quot;;&quot;..\ThirdParty\poco-1.6.0\Foundation&quot;;&quot;..\ThirdParty\poco-1.6.0\XML&quot;;&quot;..\ThirdParty\poco-1.6.0\JSON&quot;;&quot;..\ThirdParty\poco-1.6.0\Util&quot;;&quot;..\ThirdParty\poco-1.6.0\Net&quot;;&quot;..\ThirdParty\poco-1.6.0\Crypto&quot;;&quot;..\ThirdParty\poco-1.6.0\Data&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\SQLite&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\ODBC&quot;;&quot;..\ThirdParty\poco-1.6.0\MongoDB&quot;;&quot;..\ThirdParty\poco-1.6.0\Zip&quot;;..\ThirdParty\sqlite3\sqlite3"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\poco-1.6.0\include;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
-				PreprocessorDefinitions="_WIN64;_WINDOWS;ARXDBHELPER_MODULE;_AFXEXT;_ACRXAPP"
+				PreprocessorDefinitions="_WIN64;_WINDOWS;ARXDBHELPER_MODULE;_AFXEXT;_ACRXAPP;POCO_STATIC"
 				StringPooling="false"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -158,10 +158,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib poco-x64.lib sqlite3-x64.lib"
+				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib sqlite3-x64.lib"
 				OutputFile="$(outdir)/ArxDbHelper.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib&quot;;..\ThirdParty\sqlite3\lib"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib64&quot;;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/ArxDbHelper.pdb"
@@ -219,9 +219,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\log4cplus-1.2.0\include&quot;;&quot;..\ThirdParty\lemon-1.3.1&quot;;&quot;..\ThirdParty\poco-1.6.0\Foundation&quot;;&quot;..\ThirdParty\poco-1.6.0\XML&quot;;&quot;..\ThirdParty\poco-1.6.0\JSON&quot;;&quot;..\ThirdParty\poco-1.6.0\Util&quot;;&quot;..\ThirdParty\poco-1.6.0\Net&quot;;&quot;..\ThirdParty\poco-1.6.0\Crypto&quot;;&quot;..\ThirdParty\poco-1.6.0\Data&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\SQLite&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\ODBC&quot;;&quot;..\ThirdParty\poco-1.6.0\MongoDB&quot;;&quot;..\ThirdParty\poco-1.6.0\Zip&quot;;..\ThirdParty\sqlite3\sqlite3"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\poco-1.6.0\include;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
-				PreprocessorDefinitions="WIN32;_WINDOWS;ARXDBHELPER_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
+				PreprocessorDefinitions="WIN32;_WINDOWS;ARXDBHELPER_MODULE;NDEBUG;_AFXEXT;_ACRXAPP;POCO_STATIC"
 				StringPooling="true"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -245,7 +245,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU.lib lemon.lib poco.lib sqlite3.lib"
+				AdditionalDependencies="log4cplusSU.lib lemon.lib  sqlite3.lib"
 				OutputFile="$(outdir)/ArxDbHelper.arx"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib&quot;;..\ThirdParty\sqlite3\lib"
@@ -306,9 +306,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="..;&quot;..\ThirdParty\log4cplus-1.2.0\include&quot;;&quot;..\ThirdParty\lemon-1.3.1&quot;;&quot;..\ThirdParty\poco-1.6.0\Foundation&quot;;&quot;..\ThirdParty\poco-1.6.0\XML&quot;;&quot;..\ThirdParty\poco-1.6.0\JSON&quot;;&quot;..\ThirdParty\poco-1.6.0\Util&quot;;&quot;..\ThirdParty\poco-1.6.0\Net&quot;;&quot;..\ThirdParty\poco-1.6.0\Crypto&quot;;&quot;..\ThirdParty\poco-1.6.0\Data&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\SQLite&quot;;&quot;..\ThirdParty\poco-1.6.0\Data\ODBC&quot;;&quot;..\ThirdParty\poco-1.6.0\MongoDB&quot;;&quot;..\ThirdParty\poco-1.6.0\Zip&quot;;..\ThirdParty\sqlite3\sqlite3"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\poco-1.6.0\include;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="C:\Program Files\AutoCAD 2010\"
-				PreprocessorDefinitions="_WIN64;_WINDOWS;ARXDBHELPER_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
+				PreprocessorDefinitions="_WIN64;_WINDOWS;ARXDBHELPER_MODULE;NDEBUG;_AFXEXT;_ACRXAPP;POCO_STATIC"
 				StringPooling="true"
 				MinimalRebuild="false"
 				BasicRuntimeChecks="0"
@@ -332,10 +332,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib poco-x64.lib sqlite3-x64.lib"
+				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib  sqlite3-x64.lib"
 				OutputFile="$(outdir)/ArxDbHelper.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib&quot;;..\ThirdParty\sqlite3\lib"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib64&quot;;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
@@ -417,6 +417,10 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\test_poco.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Include Files"
@@ -424,6 +428,10 @@
 			>
 			<File
 				RelativePath=".\dlimexp.h"
+				>
+			</File>
+			<File
+				RelativePath=".\GasPump.h"
 				>
 			</File>
 			<File

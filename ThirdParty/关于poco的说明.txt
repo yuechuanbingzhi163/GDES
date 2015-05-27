@@ -1,0 +1,21 @@
+poco原本的代码结构不太合理，我在poco的根目录下额外新建了一个include文件夹
+将各子模块中include文件夹里的东西都拷贝到这个include文件夹里，这样便于项目配置
+
+原来的代码结构：
+poco-1.6.0
+        |-- Crypto
+	|-- include
+	          |-- Poco
+		|-- Crypto
+		        |-- xxx.h
+        |-- Data
+	|-- include
+	          |-- Poco
+		|-- Data
+		        |-- xxx.h
+
+另外，poco在windows下使用会使用自动链接技术，不需要我们在项目属性里手工指定依赖的lib（poco的lib太多了，手动输入太麻烦）
+
+由于我只编译了静态库版本的poco，所以在使用poco的时候，除了设置头文件路径和库文件路径外，还需要定义POCO_STATIC预处理器符号
+
+poco的文档和教程请参见poco-1.6.0/doc文件夹
