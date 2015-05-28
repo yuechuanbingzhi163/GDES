@@ -27,6 +27,7 @@ struct PumpProperty
 };
 
 typedef std::vector<PumpType> PumpTypeTable;
+typedef std::vector<PumpProperty> PumpPropertyTable;
 
 class DBHelper
 {
@@ -36,8 +37,14 @@ public:
 
 	bool createPumpTypeTable();
 	bool insertPumpType(const PumpType& pump);
-	bool insertPumpTypeTable(const PumpTypeTable& pump_tables);
-	bool getPumpTypeTable(PumpTypeTable& pump_tables);
+	bool insertPumpTypeTable(const PumpTypeTable& tbls);
+	bool getPumpTypeTable(PumpTypeTable& tbls);
+
+	bool createPumpPropertyTable();
+	bool insertPumpProperty(const PumpProperty& pump);
+	bool insertPumpPropertyTable(const PumpPropertyTable& tbls);
+	bool getPumpPropertyTable(PumpPropertyTable& tbls);
+
 private:
 	struct DBHelperImpl* d;
 };

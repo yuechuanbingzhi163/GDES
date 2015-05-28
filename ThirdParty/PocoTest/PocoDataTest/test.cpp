@@ -273,11 +273,80 @@ void test_dbHelper()
 	std::cout<<"泵类型个数:"<<tbls.size()<<std::endl;
 }
 
+#include <fstream>
+#include <vector>
+typedef std::vector<std::string> StringArray;
+
+void ReadTypeTable(StringArray& fields, PumpTypeTable& tbls)
+{
+	std::ifstream infile("pump_type.txt");
+	if(!infile) return ;
+
+	std::string field;
+	for(int i=0;i<8;i++)
+	{
+		infile>>field;
+		fields.push_back(field);
+	}
+
+	PumpType pump;
+	while(!infile.eof())
+	{
+		infile>> pump.id >> pump.type >> pump.absP >> pump.weight >> pump.length >> pump.width >> pump.height >> pump.factName;
+		tbls.push_back(pump);
+		if(infile.fail()) break;
+	}
+	infile.close();
+}
+
+void ReadPropertyTable(StringArray& fields, PumpPropertyTable& tbls)
+{
+	std::ifstream infile("pump_property.txt");
+	if(!infile) return ;
+
+	std::string field;
+	for(int i=0;i<7;i++)
+	{
+		infile>>field;
+		fields.push_back(field);
+	}
+
+	PumpProperty pump;
+	while(!infile.eof())
+	{
+		infile>> pump.id >> pump.catagory_id >> pump.speed >> pump.power >> pump.maxQ >> pump.maxP >> pump.absP;
+		tbls.push_back(pump);
+		if(infile.fail()) break;
+	}
+	infile.close();
+}
+
+void CreatePumpDB()
+{
+	StringArray type_fields;
+	PumpTypeTable type_tbls;
+	ReadTypeTable(type_fields, type_tbls);
+
+	StringArray prop_fields;
+	PumpPropertyTable prop_tbls;
+	ReadPropertyTable(prop_fields, prop_tbls);
+
+	//新建sqlite数据库
+	DBHelper db("SQLite", "pump.db");
+	//新建TypeTable表并插入数据
+	db.createPumpTypeTable();
+	db.insertPumpTypeTable(type_tbls);
+	//新建PropertyTable表并插入数据
+	db.createPumpPropertyTable();
+	db.insertPumpPropertyTable(prop_tbls);
+}
+
 int main(int argc, char** argv)
 {
-	test1();
-	test2();
+	//test1();
+	//test2();
 	test_dbHelper();
+	//CreatePumpDB();
 
 	return 0;
 }
