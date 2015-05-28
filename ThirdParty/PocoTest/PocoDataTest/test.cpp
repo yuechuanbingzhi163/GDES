@@ -240,7 +240,7 @@ void test2()
 	ShutDownDbSystem();
 }
 
-#include "DBHelper.h"
+#include "PumpDatabase.h"
 
 void test_dbHelper()
 {

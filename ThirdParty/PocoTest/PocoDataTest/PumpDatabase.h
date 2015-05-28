@@ -35,6 +35,7 @@ class DBHelper
 public:
 	DBHelper(const std::string& connector, const std::string& connectionString);
 	~DBHelper();
+
 	//建表
 	bool createPumpTypeTable();
 	//增加一个数据
@@ -53,6 +54,8 @@ public:
 	bool getLastPumpTypeId(int& id);
 	//根据id查找数据
 	bool getPumpType(int id, PumpType& pump);
+	//根据id查找一系列的数据
+	bool getPumpTypeTableByIDs(const IDArray& ids, PumpTypeTable& tbls);
 
 	//建表
 	bool createPumpPropertyTable();
@@ -72,6 +75,8 @@ public:
 	bool getLastPumpPropertyId(int& id);
 	//根据id查找数据
 	bool getPumpProperty(int id, PumpProperty& pump);
+	//根据id查找一系列的数据
+	bool getPumpPropertyTableByIDs(const IDArray& ids, PumpPropertyTable& tbls);
 
 private:
 	struct DBHelperImpl* d;

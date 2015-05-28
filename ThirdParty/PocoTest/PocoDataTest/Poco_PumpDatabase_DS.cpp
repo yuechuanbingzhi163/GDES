@@ -12,7 +12,7 @@
 * 注:sql是数据的集合,顺序并不重要,所以poco的这种限制有点不合理
 */
 
-#include "DBHelper.h"
+#include "PumpDatabase.h"
 
 #include <Poco/Data/Session.h>
 #include <Poco/Data/SQLite/Connector.h>
@@ -262,6 +262,7 @@ bool DBHelper::getPumpTypeTable(PumpTypeTable& tbls, const std::string& conditio
 	}
 	catch(DataException& e)
 	{
+		tbls.clear();
 		ret = false;
 	}
 	return ret;
@@ -362,6 +363,47 @@ bool DBHelper::delPumpTypes(const IDArray& ids)
 	return ret;
 }
 
+bool DBHelper::getPumpType(int id, PumpType& pump)
+{
+	bool ret = true;
+	try
+	{
+		Statement select(SESSION);
+		select << "select * from TypeTable where id=?", into(pump), use(id), now;
+	}
+	catch(DataException& e)
+	{
+		ret = false;
+	}
+	return ret;
+}
+
+
+bool DBHelper::getPumpTypeTableByIDs(const IDArray& ids, PumpTypeTable& tbls)
+{
+	bool ret = true;
+	try
+	{
+		int id;
+		PumpType pump;
+		Statement select(SESSION);
+		select << "select * from TypeTable where id=?", into(pump), use(id);
+
+		for(IDArray::const_iterator itr=ids.begin(); itr!=ids.end(); ++itr)
+		{
+			id = *itr;
+			select.execute();
+			tbls.push_back(pump);
+		}
+	}
+	catch(DataException& e)
+	{
+		tbls.clear();
+		ret = false;
+	}
+	return ret;
+}
+
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -441,6 +483,7 @@ bool DBHelper::getPumpPropertyTable(PumpPropertyTable& tbls, const std::string& 
 	}
 	catch(DataException& e)
 	{
+		tbls.clear();
 		ret = false;
 	}
 	return ret;
@@ -499,20 +542,6 @@ bool DBHelper::getLastPumpPropertyId(int& id)
 	return ret;
 }
 
-bool DBHelper::getPumpType(int id, PumpType& pump)
-{
-	bool ret = true;
-	try
-	{
-		Statement select(SESSION);
-		select << "select * from TypeTable where id=?", into(pump), use(id), now;
-	}
-	catch(DataException& e)
-	{
-		ret = false;
-	}
-	return ret;
-}
 
 bool DBHelper::getPumpProperty(int id, PumpProperty& pump)
 {
@@ -546,6 +575,31 @@ bool DBHelper::delPumpProperties(const IDArray& ids)
 	}
 	catch(DataException& e)
 	{
+		ret = false;
+	}
+	return ret;
+}
+
+bool DBHelper::getPumpPropertyTableByIDs(const IDArray& ids, PumpPropertyTable& tbls)
+{
+	bool ret = true;
+	try
+	{
+		int id;
+		PumpProperty pump;
+		Statement select(SESSION);
+		select << "select * from PropertyTable where id=?", into(pump), use(id);
+
+		for(IDArray::const_iterator itr=ids.begin(); itr!=ids.end(); ++itr)
+		{
+			id = *itr;
+			select.execute();
+			tbls.push_back(pump);
+		}
+	}
+	catch(DataException& e)
+	{
+		tbls.clear();
 		ret = false;
 	}
 	return ret;
