@@ -8,6 +8,10 @@ using namespace Poco::Data::Keywords;
 using Poco::Data::Session;
 using Poco::Data::Statement;
 
+/**
+ * 参考：http://www.cyqdata.com/cnblogs/article-detail-25077
+ * 这篇文章的末尾提出了一种方法，还不错
+ */
 struct Person
 {
 	std::string name;
@@ -15,7 +19,7 @@ struct Person
 	int         age;
 };
 
-struct PumpType 
+struct GasPump
 {
 	int id;
 	int catagory_id;
@@ -32,15 +36,20 @@ namespace Poco {
 	namespace Data {
 
 		template <>
-		class TypeHandler<PumpType>
+		class TypeHandler<GasPump>
 		{
 		public:
-			static void bind(std::size_t pos, const PumpType& obj, AbstractBinder::Ptr pBinder, AbstractBinder::Direction dir)
+			//bind是在使用use到一个数据结构(不是基本的int、string)的时候被调用
+			static void bind(std::size_t pos, const GasPump& obj, AbstractBinder::Ptr pBinder, AbstractBinder::Direction dir)
 			{
 				poco_assert_dbg (!pBinder.isNull());
+
+				std::cout<<"bind................."<<std::endl;
+
 				// the table is defined as Person (FirstName VARCHAR(30), lastName VARCHAR, SocialSecNr INTEGER(3))
 				// Note that we advance pos by the number of columns the datatype uses! For string/int this is one.
-				TypeHandler<int>::bind(pos++, obj.id, pBinder, dir);
+				pos++;
+				//TypeHandler<int>::bind(pos++, obj.id, pBinder, dir);
 				TypeHandler<int>::bind(pos++, obj.catagory_id, pBinder, dir);
 				TypeHandler<std::string>::bind(pos++, obj.type, pBinder, dir);
 				TypeHandler<int>::bind(pos++, obj.absP, pBinder, dir);
@@ -56,8 +65,10 @@ namespace Poco {
 				return 9; // we handle three columns of the Table!
 			}
 
-			static void prepare(std::size_t pos, const PumpType& obj, AbstractPreparator::Ptr pPrepare)
+			//prepare是在使用prepareStatement的时候被调用
+			static void prepare(std::size_t pos, const GasPump& obj, AbstractPreparator::Ptr pPrepare)
 			{
+				std::cout<<"prepare................."<<std::endl;
 				poco_assert_dbg (!pPrepare.isNull());
 				// the table is defined as Person (FirstName VARCHAR(30), lastName VARCHAR, SocialSecNr INTEGER(3))
 				// Note that we advance pos by the number of columns the datatype uses! For string/int this is one.
@@ -73,9 +84,12 @@ namespace Poco {
 				TypeHandler<std::string>::prepare(pos++, obj.factName, pPrepare);
 			}
 
-			static void extract(std::size_t pos, PumpType& obj, const PumpType& defVal, AbstractExtractor::Ptr pExt)
+			static void extract(std::size_t pos, GasPump& obj, const GasPump& defVal, AbstractExtractor::Ptr pExt)
 				/// obj will contain the result, defVal contains values we should use when one column is NULL
 			{
+				//extract是在使用into到一个数据结构(不是基本的int、string)的时候被调用
+				std::cout<<"extract................."<<std::endl;
+
 				poco_assert_dbg (!pExt.isNull());
 
 				TypeHandler<int>::extract(pos++, obj.id, defVal.id, pExt);
@@ -95,96 +109,22 @@ namespace Poco {
 			TypeHandler(const TypeHandler&);
 			TypeHandler& operator=(const TypeHandler&);
 		};
-
 	} } // namespace Poco::Data
 
-void test2()
+void InitDbSystem()
 {
-	// create a session
-	Session session("SQLite", "test_pump.db");
+	Poco::Data::SQLite::Connector::registerConnector();
+}
 
-	// drop sample table, if it exists
-	session << "DROP TABLE IF EXISTS TypeTable", now;
-
-	// (re)create table
-	session << "CREATE TABLE TypeTable ([id] INTEGER NOT NULL PRIMARY KEY, [catagory_id] INTEGER REFERENCES [Category]([id]), [type] NVARCHAR(20), [absP] INTEGER, [weight] INTEGER, [length] INTEGER,[weidth] INTEGER,[heigth] INTEGER,[factoryName] NVARCHAR(100))", now;
-//session << "CREATE TABLE TypeTable ([catagory_id] INTEGER, [type] NVARCHAR(20), [absP] INTEGER, [weight] INTEGER, [length] INTEGER,[weidth] INTEGER,[heigth] INTEGER,[factoryName] NVARCHAR(100))", now;
-	PumpType pump;
-
-	// insert some rows
-	pump.catagory_id=1;
-	pump.type="2BEA-101-0";
-	pump.absP=33;
-	pump.weight=90;
-	pump.length=638;
-	pump.width=375;
-	pump.height=355;
-	pump.factName="淄博水环真空泵厂有限公司";
-
-	Statement insert(session);
-	insert << "INSERT INTO TypeTable(catagory_id,type,absP,weight,length,weidth,heigth,factoryName) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-		use(pump.catagory_id),
-		use(pump.type),
-		use(pump.absP),
-		use(pump.weight),
-		use(pump.length),
-		use(pump.width),
-		use(pump.height),
-		use(pump.factName);
-
-	insert.execute();
-
-	pump.catagory_id=2;
-	pump.type="2BEA-101-0";
-	pump.absP=33;
-	pump.weight=110;
-	pump.length=741;
-	pump.width=375;
-	pump.height=355;
-	pump.factName="淄博水环真空泵厂有限公司";
-
-	insert.execute();
-
-	std::vector<int> ids;
-	int id=0;
-	Statement select(session);
-	select << "select catagory_id from TypeTable",
-		into(ids), now;
-
-	//select << "select id from TypeTable",
-	//	into(id),range(0,1);
-
-	//while (!select.done())
-	//{
-	//	select.execute();
-	//	std::cout << id<<std::endl;
-	//}
-
-	std::vector<std::string> types;
-	Statement select2(session);
-	select2 << "select type from TypeTable",
-		into(types),
-		now;
-
-	std::vector<PumpType> pumps;
-	Statement select3(session);
-	select3 << "select * from TypeTable",
-		into(pumps),
-		now;
-
-	//while (!select.done())
-	//{
-	//	select.execute();
-	//	std::cout << pump.id<<std::endl;
-	//}
-
-	std::cout<<pumps[0].factName<<std::endl;
-	std::cout<<pumps[1].factName<<std::endl;
-	int aa=10;
+void ShutDownDbSystem()
+{
+	Poco::Data::SQLite::Connector::unregisterConnector();
 }
 
 void test1()
 {
+	InitDbSystem();
+
 	// create a session
 	Session session("SQLite", "sample.db");
 
@@ -230,15 +170,159 @@ void test1()
 		select.execute();
 		std::cout << person.name << " " << person.address << " " << person.age << std::endl;
 	}
+
+	ShutDownDbSystem();
+}
+
+void test2()
+{
+	InitDbSystem();
+
+	// create a session
+	Session session("SQLite", "test_pump2.db");
+
+	// drop sample table, if it exists
+	session << "DROP TABLE IF EXISTS TypeTable", now;
+
+	// (re)create table
+	session << "CREATE TABLE TypeTable ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [catagory_id] INTEGER REFERENCES [Category]([id]), [type] NVARCHAR(20), [absP] INTEGER, [weight] INTEGER, [length] INTEGER,[weidth] INTEGER,[heigth] INTEGER,[factoryName] NVARCHAR(100))", now;
+//session << "CREATE TABLE TypeTable ([catagory_id] INTEGER, [type] NVARCHAR(20), [absP] INTEGER, [weight] INTEGER, [length] INTEGER,[weidth] INTEGER,[heigth] INTEGER,[factoryName] NVARCHAR(100))", now;
+	GasPump pump;
+
+	// insert some rows
+	pump.id = 1;
+	pump.catagory_id=1;
+	pump.type="2BEA-101-0";
+	pump.absP=33;
+	pump.weight=90;
+	pump.length=638;
+	pump.width=375;
+	pump.height=355;
+	pump.factName="淄博水环真空泵厂有限公司";
+
+	Statement obj_insert(session);
+	obj_insert << "INSERT INTO TypeTable VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", use(pump), now;
+
+	std::cout<<"11111--------------------------------------------111111"<<std::endl;
+
+	Statement insert(session);
+	insert << "INSERT INTO TypeTable(catagory_id,type,absP,weight,length,weidth,heigth,factoryName) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
+		use(pump.catagory_id),
+		use(pump.type),
+		use(pump.absP),
+		use(pump.weight),
+		use(pump.length),
+		use(pump.width),
+		use(pump.height),
+		use(pump.factName);
+
+	insert.execute();
+
+	std::cout<<"2222--------------------------------------------2222"<<std::endl;
+
+	pump.id = 2;
+	pump.catagory_id=2;
+	pump.type="2BEA-101-0";
+	pump.absP=33;
+	pump.weight=110;
+	pump.length=741;
+	pump.width=375;
+	pump.height=355;
+	pump.factName="淄博水环真空泵厂有限公司";
+
+	insert.execute();
+
+	std::vector<int> ids;
+	int id=0;
+	Statement select(session);
+	select << "select catagory_id from TypeTable",
+		into(ids), now;
+
+	select << "select id from TypeTable",
+		into(id),range(0,1);
+
+	while (!select.done())
+	{
+		select.execute();
+		std::cout << id<<std::endl;
+	}
+
+	std::vector<std::string> types;
+	Statement select2(session);
+	select2 << "select type from TypeTable",
+		into(types),
+		now;
+
+	std::cout<<"3333--------------------------------------------333"<<std::endl;
+
+	std::vector<GasPump> pumps;
+	Statement select3(session);
+	select3 << "select * from TypeTable",
+		into(pumps),
+		now;
+
+	std::cout<<"444--------------------------------------------444"<<std::endl;
+
+	std::cout<<pumps[0].id<<std::endl;
+	std::cout<<pumps[1].id<<std::endl;
+	int aa=10;
+
+	ShutDownDbSystem();
+}
+
+#include "DBHelper.h"
+
+void test_dbHelper()
+{
+	DBHelper db("SQLite", "test_pump.db");
+	db.createPumpTypeTable();
+
+	PumpType pump;
+	pump.catagory_id=2;
+	pump.type="2BEA-101-0";
+	pump.absP=33;
+	pump.weight=110;
+	pump.length=741;
+	pump.width=375;
+	pump.height=355;
+	pump.factName="淄博水环真空泵厂有限公司";
+
+	db.insertPumpType(pump);
+
+	pump.catagory_id=2;
+	pump.type="2BEA-101-0";
+	pump.absP=33;
+	pump.weight=90;
+	pump.length=638;
+	pump.width=375;
+	pump.height=355;
+	pump.factName="淄博水环真空泵厂有限公司";
+	db.insertPumpType(pump);
+
+	PumpTypeTable tbls;
+	tbls.push_back(pump);
+	tbls.push_back(pump);
+	tbls.push_back(pump);
+	tbls.push_back(pump);
+	tbls.push_back(pump);
+	tbls.push_back(pump);
+	tbls.push_back(pump);
+	tbls.push_back(pump);
+	tbls.push_back(pump);
+	tbls.push_back(pump);
+	db.insertPumpTypeTable(tbls);
+
+	tbls.clear();
+	db.getPumpTypeTable(tbls);
+
+	std::cout<<"泵类型个数:"<<tbls.size()<<std::endl;
 }
 
 int main(int argc, char** argv)
 {
-	// register SQLite connector
-	Poco::Data::SQLite::Connector::registerConnector();
-
 	//test1();
 	test2();
+	test_dbHelper();
 
 	return 0;
 }
