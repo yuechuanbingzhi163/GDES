@@ -23,6 +23,8 @@ using Poco::Data::Session;
 using Poco::Data::Statement;
 using Poco::Data::DataException;
 
+#include <sstream>
+
 static void InitDbSystem()
 {
 	Poco::Data::SQLite::Connector::registerConnector();
@@ -54,6 +56,7 @@ namespace Poco {
 				// the table is defined as Person (FirstName VARCHAR(30), lastName VARCHAR, SocialSecNr INTEGER(3))
 				// Note that we advance pos by the number of columns the datatype uses! For string/int this is one.
 				pos++;
+				//Poco::Nullable<int> id;
 				//TypeHandler<int>::bind(pos++, obj.id, pBinder, dir);
 				TypeHandler<std::string>::bind(pos++, obj.type, pBinder, dir);
 				TypeHandler<int>::bind(pos++, obj.absP, pBinder, dir);
@@ -92,7 +95,7 @@ namespace Poco {
 			static void extract(std::size_t pos, PumpType& obj, const PumpType& defVal, AbstractExtractor::Ptr pExt)
 				/// obj will contain the result, defVal contains values we should use when one column is NULL
 			{
-				std::cout<<"extract................."<<std::endl;
+				//std::cout<<"extract................."<<std::endl;
 				poco_assert_dbg (!pExt.isNull());
 
 				TypeHandler<int>::extract(pos++, obj.id, defVal.id, pExt);
@@ -228,10 +231,10 @@ bool DBHelper::insertPumpType(const PumpType& pump_)
 	bool ret = true;
 	try
 	{
-		//去掉const修饰，否则use会报错
+		//去掉const修饰，否则into/use会报错
 		PumpType& pump = const_cast<PumpType&>(pump_);
 		Statement insert(SESSION);
-		insert << "insert info TypeTable values(?, ?, ?, ?, ?, ?, ?, ?)", use(pump), now;
+		insert << "insert into TypeTable values(?, ?, ?, ?, ?, ?, ?, ?)", use(pump), now;
 	}
 	catch(DataException& e)
 	{
@@ -240,13 +243,22 @@ bool DBHelper::insertPumpType(const PumpType& pump_)
 	return ret;
 }
 
-bool DBHelper::getPumpTypeTable(PumpTypeTable& tbls)
+bool DBHelper::getPumpTypeTable(PumpTypeTable& tbls, const std::string& condition)
 {
+	std::stringstream ss;
+	ss<<"select * from TypeTable ";
+	if(!condition.empty())
+	{
+		ss << "where "<< condition;
+	}
+	std::string sql = ss.str();
+
 	bool ret = true;
 	try
 	{
 		Statement select(SESSION);
-		select << "select * from TypeTable", into(tbls), now;
+		//select << "select * from TypeTable", into(tbls), now;
+		select << sql, into(tbls), now;
 	}
 	catch(DataException& e)
 	{
@@ -262,7 +274,7 @@ bool DBHelper::insertPumpTypeTable(const PumpTypeTable& tbls)
 	bool ret = true;
 	try
 	{
-		//去掉const修饰，否则use会报错
+		//去掉const修饰，否则into/use会报错
 		PumpTypeTable& pump_tables = const_cast<PumpTypeTable&>(tbls);
 
 		Statement insert(SESSION);
@@ -274,6 +286,86 @@ bool DBHelper::insertPumpTypeTable(const PumpTypeTable& tbls)
 	}
 	return ret;
 }
+
+bool DBHelper::updatePumpType(const PumpType& pump_)
+{
+	bool ret = true;
+	try
+	{
+		//去掉const修饰，否则into/use会报错
+		PumpType& pump = const_cast<PumpType&>(pump_);
+
+		Statement update(SESSION);
+		update << "update TypeTable set type=?, absP=?, weight=?, length=?, weidth=?, heigth=?, factoryName=? where id=?", 
+			use(pump.type), use(pump.absP), use(pump.weight),
+			use(pump.length), use(pump.width), use(pump.height), 
+			use(pump.factName), use(pump.id), now;
+	}
+	catch(DataException& e)
+	{
+		ret = false;
+	}
+	return ret;
+}
+
+bool DBHelper::delPumpType(int id)
+{
+	bool ret = true;
+	try
+	{
+		Statement del(SESSION);
+		del << "delete FROM TypeTable where id=?", use(id), now;
+	}
+	catch(DataException& e)
+	{
+		ret = false;
+	}
+	return ret;
+}
+
+bool DBHelper::getLastPumpTypeId(int& id)
+{
+	bool ret = true;
+	try
+	{
+		Statement select(SESSION);
+		select << "select max(id) from TypeTable", into(id), now; // 通用方法
+		select << "select last_insert_rowid() from TypeTable", into(id), now; // sqlite
+		//select << "select last_insert_id() from TypeTable", into(id), now;  // mysql
+	}
+	catch(DataException& e)
+	{
+		ret = false;
+	}
+	return ret;
+}
+
+bool DBHelper::delPumpTypes(const IDArray& ids)
+{
+	bool ret = true;
+	try
+	{
+		int id = 0;
+		Statement del(SESSION);
+		del << "delete from TypeTable where id=?", use(id);
+
+		for(IDArray::const_iterator itr=ids.begin(); itr!=ids.end(); ++itr)
+		{
+			del.execute();
+			id = *itr;
+		}
+	}
+	catch(DataException& e)
+	{
+		ret = false;
+	}
+	return ret;
+}
+
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
 
 bool DBHelper::createPumpPropertyTable()
 {
@@ -298,7 +390,7 @@ bool DBHelper::insertPumpProperty(const PumpProperty& pump_)
 	bool ret = true;
 	try
 	{
-		//去掉const修饰，否则use会报错
+		//去掉const修饰，否则into/use会报错
 		PumpProperty& pump = const_cast<PumpProperty&>(pump_);
 		Statement insert(SESSION);
 		insert << "insert into PropertyTable values(?, ?, ?, ?, ?, ?, ?)", use(pump), now;
@@ -317,7 +409,7 @@ bool DBHelper::insertPumpPropertyTable(const PumpPropertyTable& tbls)
 	bool ret = true;
 	try
 	{
-		//去掉const修饰，否则use会报错
+		//去掉const修饰，否则into/use会报错
 		PumpPropertyTable& pump_tables = const_cast<PumpPropertyTable&>(tbls);
 
 		Statement insert(SESSION);
@@ -330,13 +422,127 @@ bool DBHelper::insertPumpPropertyTable(const PumpPropertyTable& tbls)
 	return ret;
 }
 
-bool DBHelper::getPumpPropertyTable(PumpPropertyTable& tbls)
+bool DBHelper::getPumpPropertyTable(PumpPropertyTable& tbls, const std::string& condition)
+{
+	std::stringstream ss;
+	ss<<"select * from PropertyTable ";
+	if(!condition.empty())
+	{
+		ss << "where "<< condition;
+	}
+	std::string sql = ss.str();
+
+	bool ret = true;
+	try
+	{
+		Statement select(SESSION);
+		//select << "select * from PropertyTable", into(tbls), now;
+		select << sql, into(tbls), now;
+	}
+	catch(DataException& e)
+	{
+		ret = false;
+	}
+	return ret;
+}
+
+bool DBHelper::updatePumpProperty(const PumpProperty& pump_)
+{
+	bool ret = true;
+	try
+	{
+		//去掉const修饰，否则into/use会报错
+		PumpProperty& pump = const_cast<PumpProperty&>(pump_);
+
+		Statement update(SESSION);
+		update << "update PropertyTable set catagory_id=?, speed=?, power=?, maxQ=?, maxP=?, absP=? where id=?", 
+			use(pump.catagory_id), use(pump.speed), use(pump.power),
+			use(pump.maxQ), use(pump.maxP), use(pump.absP), 
+			use(pump.id), now;
+	}
+	catch(DataException& e)
+	{
+		ret = false;
+	}
+	return ret;
+}
+
+bool DBHelper::delPumpProperty(int& id)
+{
+	bool ret = true;
+	try
+	{
+		Statement del(SESSION);
+		del << "delete FROM PropertyTable where id=?", use(id), now;
+	}
+	catch(DataException& e)
+	{
+		ret = false;
+	}
+	return ret;
+}
+
+bool DBHelper::getLastPumpPropertyId(int& id)
 {
 	bool ret = true;
 	try
 	{
 		Statement select(SESSION);
-		select << "select * from PropertyTable", into(tbls), now;
+		select << "select max(id) from PropertyTable", into(id), now; // 通用方法
+		//select << "select last_insert_rowid() from PropertyTable", into(id), now; // sqlite
+		//select << "select last_insert_id() from PropertyTable", into(id), now;  // mysql
+	}
+	catch(DataException& e)
+	{
+		ret = false;
+	}
+	return ret;
+}
+
+bool DBHelper::getPumpType(int id, PumpType& pump)
+{
+	bool ret = true;
+	try
+	{
+		Statement select(SESSION);
+		select << "select * from TypeTable where id=?", into(pump), use(id), now;
+	}
+	catch(DataException& e)
+	{
+		ret = false;
+	}
+	return ret;
+}
+
+bool DBHelper::getPumpProperty(int id, PumpProperty& pump)
+{
+	bool ret = true;
+	try
+	{
+		Statement select(SESSION);
+		select << "select * from PropertyTable where id=?", into(pump), use(id), now;
+	}
+	catch(DataException& e)
+	{
+		ret = false;
+	}
+	return ret;
+}
+
+bool DBHelper::delPumpProperties(const IDArray& ids)
+{
+	bool ret = true;
+	try
+	{
+		int id = 0;
+		Statement del(SESSION);
+		del << "delete from PropertyTable where id=?", use(id);
+
+		for(IDArray::const_iterator itr=ids.begin(); itr!=ids.end(); ++itr)
+		{
+			del.execute();
+			id = *itr;
+		}
 	}
 	catch(DataException& e)
 	{

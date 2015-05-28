@@ -254,6 +254,10 @@ void test_dbHelper()
 	pump.type="2BEA-101-0";pump.absP=33;pump.weight=90;	pump.length=638;pump.width=375;	pump.height=355;pump.factName="淄博水环真空泵厂有限公司";
 	db.insertPumpType(pump);
 
+	int id = -1;
+	db.getLastPumpTypeId(id);
+	std::cout<<"最后插入的id是"<<id<<std::endl;
+
 	PumpTypeTable tbls;
 	tbls.push_back(pump);
 	tbls.push_back(pump);
@@ -267,10 +271,28 @@ void test_dbHelper()
 	tbls.push_back(pump);
 	db.insertPumpTypeTable(tbls);
 
+	id = -1;
+	db.getLastPumpTypeId(id);
+	std::cout<<"最后插入的id是"<<id<<std::endl;
+
+	tbls.clear();
+	db.getPumpTypeTable(tbls, "weight=90");
+	std::cout<<"泵类型个数:"<<tbls.size()<<std::endl;
+
+	PumpType new_pump = tbls[2];
+	new_pump.id = 3; new_pump.absP=30335;
+	db.updatePumpType(new_pump);
+
+	//删除id=4的所有行
+	db.delPumpType(4);
+
 	tbls.clear();
 	db.getPumpTypeTable(tbls);
-
 	std::cout<<"泵类型个数:"<<tbls.size()<<std::endl;
+
+	PumpType pump3;
+	db.getPumpType(3, pump3);
+	std::cout<<"获取第id=3的泵类型, id="<<pump3.id<<" absP="<<pump3.absP<<std::endl;
 }
 
 #include <fstream>
