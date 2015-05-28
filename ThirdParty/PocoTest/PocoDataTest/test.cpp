@@ -363,6 +363,27 @@ void CreatePumpDB()
 	db.insertPumpPropertyTable(prop_tbls);
 }
 
+#include <Poco/TextConverter.h>
+#include <poco/Windows1252Encoding.h>
+#include <Poco/ASCIIEncoding.h>
+#include <Poco/Latin1Encoding.h>
+#include <Poco/UTF8Encoding.h>
+#include <Poco/UTF16Encoding.h>
+
+void test4()
+{
+	std::string latin1String("This is Latin-1 encoded text."); 
+	std::string utf8String; 
+
+	Poco::Latin1Encoding latin1;
+	Poco::UTF8Encoding utf8; 
+
+	Poco::TextConverter converter(latin1, utf8); 
+	converter.convert(latin1String, utf8String); 
+
+	std::cout << utf8String << std::endl; 
+}
+
 int main(int argc, char** argv)
 {
 	//test1();

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "dlimexp.h"
+
 #include <string>
 #include <vector>
 
@@ -30,7 +32,7 @@ typedef std::vector<PumpType> PumpTypeTable;
 typedef std::vector<PumpProperty> PumpPropertyTable;
 typedef std::vector<int> IDArray;
 
-class DBHelper
+class ARXDBHELPER_DLLIMPEXP DBHelper
 {
 public:
 	DBHelper(const std::string& connector, const std::string& connectionString);

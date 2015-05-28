@@ -38,10 +38,6 @@ public:
 
 	static void JL_TestPoco()
 	{
-		extern void testxx();
-		//testxx();
-		extern int test();
-		test();
 	}
 } ;
 

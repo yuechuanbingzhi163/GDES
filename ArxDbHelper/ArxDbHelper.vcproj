@@ -378,11 +378,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\ArxDbHelper.cpp"
+				RelativePath=".\ArxDbHelper_DllMain.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\ArxDbHelper_DllMain.cpp"
+				RelativePath=".\PumpDatabase.cpp"
 				>
 			</File>
 			<File
@@ -421,10 +421,6 @@
 					/>
 				</FileConfiguration>
 			</File>
-			<File
-				RelativePath=".\test_poco.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Include Files"
@@ -435,7 +431,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\GasPump.h"
+				RelativePath=".\PumpDatabase.h"
 				>
 			</File>
 			<File
