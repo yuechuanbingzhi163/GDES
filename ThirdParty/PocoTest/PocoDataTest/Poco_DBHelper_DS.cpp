@@ -54,7 +54,6 @@ namespace Poco {
 				// Note that we advance pos by the number of columns the datatype uses! For string/int this is one.
 				pos++;
 				//TypeHandler<int>::bind(pos++, obj.id, pBinder, dir);
-				TypeHandler<int>::bind(pos++, obj.catagory_id, pBinder, dir);
 				TypeHandler<std::string>::bind(pos++, obj.type, pBinder, dir);
 				TypeHandler<int>::bind(pos++, obj.absP, pBinder, dir);
 				TypeHandler<int>::bind(pos++, obj.weight, pBinder, dir);
@@ -67,7 +66,7 @@ namespace Poco {
 			//字段的个数
 			static std::size_t size()
 			{
-				return 9; // we handle three columns of the Table!
+				return 8; // we handle three columns of the Table!
 			}
 
 			//prepare是在使用prepareStatement的时候被调用
@@ -79,7 +78,6 @@ namespace Poco {
 				// Note that we advance pos by the number of columns the datatype uses! For string/int this is one.
 
 				TypeHandler<int>::prepare(pos++, obj.id, pPrepare);
-				TypeHandler<int>::prepare(pos++, obj.catagory_id, pPrepare);
 				TypeHandler<std::string>::prepare(pos++, obj.type, pPrepare);
 				TypeHandler<int>::prepare(pos++, obj.absP, pPrepare);
 				TypeHandler<int>::prepare(pos++, obj.weight, pPrepare);
@@ -97,7 +95,6 @@ namespace Poco {
 				poco_assert_dbg (!pExt.isNull());
 
 				TypeHandler<int>::extract(pos++, obj.id, defVal.id, pExt);
-				TypeHandler<int>::extract(pos++, obj.catagory_id, defVal.catagory_id, pExt);
 				TypeHandler<std::string>::extract(pos++, obj.type, defVal.type,pExt);
 				TypeHandler<int>::extract(pos++, obj.absP, defVal.absP, pExt);
 				TypeHandler<int>::extract(pos++, obj.weight, defVal.weight, pExt);
@@ -147,7 +144,7 @@ bool DBHelper::createPumpTypeTable()
 		SESSION << "DROP TABLE IF EXISTS TypeTable", now;
 
 		// (re)create table
-		SESSION << "CREATE TABLE TypeTable ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [catagory_id] INTEGER REFERENCES [Category]([id]), [type] NVARCHAR(20), [absP] INTEGER, [weight] INTEGER, [length] INTEGER,[weidth] INTEGER,[heigth] INTEGER,[factoryName] NVARCHAR(100))", now;
+		SESSION << "CREATE TABLE TypeTable ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [type] NVARCHAR(20), [absP] INTEGER, [weight] INTEGER, [length] INTEGER,[weidth] INTEGER,[heigth] INTEGER,[factoryName] NVARCHAR(100))", now;
 	}
 	catch(DataException& e)
 	{
@@ -164,7 +161,7 @@ bool DBHelper::insertPumpType(const PumpType& pump_)
 		//去掉const修饰，否则use会报错
 		PumpType& pump = const_cast<PumpType&>(pump_);
 		Statement insert(SESSION);
-		insert << "INSERT INTO TypeTable VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+		insert << "INSERT INTO TypeTable VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
 			use(pump), now;
 	}
 	catch(DataException& e)
@@ -180,8 +177,7 @@ bool DBHelper::getPumpTypeTable(PumpTypeTable& pump_tables)
 	try
 	{
 		Statement select(SESSION);
-		select << "select * from TypeTable",
-			into(pump_tables),now;
+		select << "select * from TypeTable", into(pump_tables), now;
 	}
 	catch(DataException& e)
 	{
@@ -201,9 +197,7 @@ bool DBHelper::insertPumpTypeTable(const PumpTypeTable& pump_tables_)
 		PumpTypeTable& pump_tables = const_cast<PumpTypeTable&>(pump_tables_);
 
 		Statement insert(SESSION);
-		insert << "INSERT INTO TypeTable VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-			use(pump_tables), now;
-		//insert.execute();
+		insert << "INSERT INTO TypeTable VALUES(?, ?, ?, ?, ?, ?, ?, ?)", use(pump_tables), now;
 	}
 	catch(DataException& e)
 	{

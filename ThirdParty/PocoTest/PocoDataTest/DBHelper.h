@@ -6,7 +6,6 @@
 struct PumpType 
 {
 	int id;
-	int catagory_id;
 	std::string type;
 	std::string factName;
 	int absP;
@@ -14,6 +13,17 @@ struct PumpType
 	int length;
 	int width;
 	int height;
+};
+
+struct PumpProperty 
+{
+	int id;
+	int catagory_id;
+	int speed;
+	double power;
+	double maxQ;
+	int maxP;
+	int absP;
 };
 
 typedef std::vector<PumpType> PumpTypeTable;

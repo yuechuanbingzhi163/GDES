@@ -50,7 +50,7 @@ bool DBHelper::createPumpTypeTable()
 		SESSION << "DROP TABLE IF EXISTS TypeTable", now;
 
 		// (re)create table
-		SESSION << "CREATE TABLE TypeTable ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [catagory_id] INTEGER REFERENCES [Category]([id]), [type] NVARCHAR(20), [absP] INTEGER, [weight] INTEGER, [length] INTEGER,[weidth] INTEGER,[heigth] INTEGER,[factoryName] NVARCHAR(100))", now;
+		SESSION << "CREATE TABLE TypeTable ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [type] NVARCHAR(20), [absP] INTEGER, [weight] INTEGER, [length] INTEGER,[weidth] INTEGER,[heigth] INTEGER,[factoryName] NVARCHAR(100))", now;
 	}
 	catch(DataException& e)
 	{
@@ -69,8 +69,7 @@ bool DBHelper::insertPumpType(const PumpType& pump_)
 		PumpType& pump = const_cast<PumpType&>(pump_);
 
 		Statement insert(SESSION);
-		insert << "INSERT INTO TypeTable(catagory_id, type, absP, weight, length, weidth, heigth, factoryName) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-			use(pump.catagory_id),
+		insert << "INSERT INTO TypeTable(type, absP, weight, length, weidth, heigth, factoryName) VALUES(?, ?, ?, ?, ?, ?, ?)",
 			use(pump.type),
 			use(pump.absP),
 			use(pump.weight),
@@ -96,9 +95,8 @@ bool DBHelper::getPumpTypeTable(PumpTypeTable& pump_tables)
 		PumpType pump;
 
 		Statement select(SESSION);
-		select << "select id, catagory_id, type, absP, weight, length, weidth, heigth, factoryName from TypeTable",
+		select << "select id, type, absP, weight, length, weidth, heigth, factoryName from TypeTable",
 			into(pump.id),
-			into(pump.catagory_id),
 			into(pump.type),
 			into(pump.absP),
 			into(pump.weight),
@@ -135,8 +133,7 @@ bool DBHelper::insertPumpTypeTable(const PumpTypeTable& pump_tables)
 		PumpType pump = pump_tables[0];
 
 		Statement insert(SESSION);
-		insert << "INSERT INTO TypeTable(catagory_id, type, absP, weight, length, weidth, heigth, factoryName) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-			use(pump.catagory_id),
+		insert << "INSERT INTO TypeTable(type, absP, weight, length, weidth, heigth, factoryName) VALUES(?, ?, ?, ?, ?, ?, ?)",
 			use(pump.type),
 			use(pump.absP),
 			use(pump.weight),

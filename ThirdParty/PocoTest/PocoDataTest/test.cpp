@@ -22,7 +22,6 @@ struct Person
 struct GasPump
 {
 	int id;
-	int catagory_id;
 	std::string type;
 	std::string factName;
 	int absP;
@@ -50,7 +49,6 @@ namespace Poco {
 				// Note that we advance pos by the number of columns the datatype uses! For string/int this is one.
 				pos++;
 				//TypeHandler<int>::bind(pos++, obj.id, pBinder, dir);
-				TypeHandler<int>::bind(pos++, obj.catagory_id, pBinder, dir);
 				TypeHandler<std::string>::bind(pos++, obj.type, pBinder, dir);
 				TypeHandler<int>::bind(pos++, obj.absP, pBinder, dir);
 				TypeHandler<int>::bind(pos++, obj.weight, pBinder, dir);
@@ -62,7 +60,7 @@ namespace Poco {
 
 			static std::size_t size()
 			{
-				return 9; // we handle three columns of the Table!
+				return 8; // we handle three columns of the Table!
 			}
 
 			//prepare是在使用prepareStatement的时候被调用
@@ -74,7 +72,6 @@ namespace Poco {
 				// Note that we advance pos by the number of columns the datatype uses! For string/int this is one.
 
 				TypeHandler<int>::prepare(pos++, obj.id, pPrepare);
-				TypeHandler<int>::prepare(pos++, obj.catagory_id, pPrepare);
 				TypeHandler<std::string>::prepare(pos++, obj.type, pPrepare);
 				TypeHandler<int>::prepare(pos++, obj.absP, pPrepare);
 				TypeHandler<int>::prepare(pos++, obj.weight, pPrepare);
@@ -93,7 +90,6 @@ namespace Poco {
 				poco_assert_dbg (!pExt.isNull());
 
 				TypeHandler<int>::extract(pos++, obj.id, defVal.id, pExt);
-				TypeHandler<int>::extract(pos++, obj.catagory_id, defVal.catagory_id, pExt);
 				TypeHandler<std::string>::extract(pos++, obj.type, defVal.type,pExt);
 				TypeHandler<int>::extract(pos++, obj.absP, defVal.absP, pExt);
 				TypeHandler<int>::extract(pos++, obj.weight, defVal.weight, pExt);
@@ -185,29 +181,19 @@ void test2()
 	session << "DROP TABLE IF EXISTS TypeTable", now;
 
 	// (re)create table
-	session << "CREATE TABLE TypeTable ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [catagory_id] INTEGER REFERENCES [Category]([id]), [type] NVARCHAR(20), [absP] INTEGER, [weight] INTEGER, [length] INTEGER,[weidth] INTEGER,[heigth] INTEGER,[factoryName] NVARCHAR(100))", now;
-//session << "CREATE TABLE TypeTable ([catagory_id] INTEGER, [type] NVARCHAR(20), [absP] INTEGER, [weight] INTEGER, [length] INTEGER,[weidth] INTEGER,[heigth] INTEGER,[factoryName] NVARCHAR(100))", now;
+	session << "CREATE TABLE TypeTable ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [type] NVARCHAR(20), [absP] INTEGER, [weight] INTEGER, [length] INTEGER,[weidth] INTEGER,[heigth] INTEGER,[factoryName] NVARCHAR(100))", now;
+	
 	GasPump pump;
-
 	// insert some rows
-	pump.id = 1;
-	pump.catagory_id=1;
-	pump.type="2BEA-101-0";
-	pump.absP=33;
-	pump.weight=90;
-	pump.length=638;
-	pump.width=375;
-	pump.height=355;
-	pump.factName="淄博水环真空泵厂有限公司";
+	pump.type="2BEA-101-0";pump.absP=33;pump.weight=90;pump.length=638;pump.width=375;pump.height=355;pump.factName="淄博水环真空泵厂有限公司";
 
 	Statement obj_insert(session);
-	obj_insert << "INSERT INTO TypeTable VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", use(pump), now;
+	obj_insert << "INSERT INTO TypeTable VALUES(?, ?, ?, ?, ?, ?, ?, ?)", use(pump), now;
 
 	std::cout<<"11111--------------------------------------------111111"<<std::endl;
 
 	Statement insert(session);
-	insert << "INSERT INTO TypeTable(catagory_id,type,absP,weight,length,weidth,heigth,factoryName) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",
-		use(pump.catagory_id),
+	insert << "INSERT INTO TypeTable(type,absP,weight,length,weidth,heigth,factoryName) VALUES(?, ?, ?, ?, ?, ?, ?)",
 		use(pump.type),
 		use(pump.absP),
 		use(pump.weight),
@@ -220,27 +206,15 @@ void test2()
 
 	std::cout<<"2222--------------------------------------------2222"<<std::endl;
 
-	pump.id = 2;
-	pump.catagory_id=2;
-	pump.type="2BEA-101-0";
-	pump.absP=33;
-	pump.weight=110;
-	pump.length=741;
-	pump.width=375;
-	pump.height=355;
-	pump.factName="淄博水环真空泵厂有限公司";
-
+	pump.type="2BEA-101-0";pump.absP=33;pump.weight=110;pump.length=741;pump.width=375;pump.height=355;pump.factName="淄博水环真空泵厂有限公司";
 	insert.execute();
 
 	std::vector<int> ids;
-	int id=0;
 	Statement select(session);
-	select << "select catagory_id from TypeTable",
-		into(ids), now;
+	select << "select id from TypeTable", into(ids), now;
 
-	select << "select id from TypeTable",
-		into(id),range(0,1);
-
+	int id=0;
+	select << "select id from TypeTable",into(id),range(0,1);
 	while (!select.done())
 	{
 		select.execute();
@@ -249,17 +223,13 @@ void test2()
 
 	std::vector<std::string> types;
 	Statement select2(session);
-	select2 << "select type from TypeTable",
-		into(types),
-		now;
+	select2 << "select type from TypeTable",into(types),now;
 
 	std::cout<<"3333--------------------------------------------333"<<std::endl;
 
 	std::vector<GasPump> pumps;
 	Statement select3(session);
-	select3 << "select * from TypeTable",
-		into(pumps),
-		now;
+	select3 << "select * from TypeTable",into(pumps),now;
 
 	std::cout<<"444--------------------------------------------444"<<std::endl;
 
@@ -278,25 +248,10 @@ void test_dbHelper()
 	db.createPumpTypeTable();
 
 	PumpType pump;
-	pump.catagory_id=2;
-	pump.type="2BEA-101-0";
-	pump.absP=33;
-	pump.weight=110;
-	pump.length=741;
-	pump.width=375;
-	pump.height=355;
-	pump.factName="淄博水环真空泵厂有限公司";
-
+	pump.type="2BEA-101-0";	pump.absP=33;pump.weight=110;pump.length=741;pump.width=375;pump.height=355;pump.factName="淄博水环真空泵厂有限公司";
 	db.insertPumpType(pump);
 
-	pump.catagory_id=2;
-	pump.type="2BEA-101-0";
-	pump.absP=33;
-	pump.weight=90;
-	pump.length=638;
-	pump.width=375;
-	pump.height=355;
-	pump.factName="淄博水环真空泵厂有限公司";
+	pump.type="2BEA-101-0";pump.absP=33;pump.weight=90;	pump.length=638;pump.width=375;	pump.height=355;pump.factName="淄博水环真空泵厂有限公司";
 	db.insertPumpType(pump);
 
 	PumpTypeTable tbls;
@@ -320,7 +275,7 @@ void test_dbHelper()
 
 int main(int argc, char** argv)
 {
-	//test1();
+	test1();
 	test2();
 	test_dbHelper();
 
