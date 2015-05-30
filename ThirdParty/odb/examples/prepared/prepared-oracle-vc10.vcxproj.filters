@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{5B08563A-5D12-43F0-A12E-388B226AC776}</UniqueIdentifier>
+      <Extensions>cxx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{120B96E2-8A2F-45D9-8839-F3EFF99D878C}</UniqueIdentifier>
+      <Extensions>h;hxx;ixx;txx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="person.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="person-odb.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="person-odb.ixx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+
+    <ClInclude Include="oracle.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="driver.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="person-odb.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+
+  </ItemGroup>
+</Project>

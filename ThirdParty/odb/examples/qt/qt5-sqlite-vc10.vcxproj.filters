@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{D178C84D-D65F-4F23-BB0A-636D84CA33EF}</UniqueIdentifier>
+      <Extensions>cxx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{D536A631-773F-46A5-991F-6097D72498B3}</UniqueIdentifier>
+      <Extensions>h;hxx;ixx;txx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="employee.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="employee-odb.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="employee-odb.ixx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+
+    <ClInclude Include="sqlite.hxx">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="driver.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="employee-odb.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+
+  </ItemGroup>
+</Project>

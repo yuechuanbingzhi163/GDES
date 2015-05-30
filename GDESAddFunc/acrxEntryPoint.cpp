@@ -2,7 +2,7 @@
 #include "resource.h"
 
 #ifndef GDES_ADDFUNC_SERVICE_NAME
-#define GDES_ADDFUNC_SERVICE_NAME _T("GDES_ADDFUNC_SERVICE_NAME")
+#define GDES_ADDFUNC_SERVICE_NAME _T("GDESADDFUNC_SERVICE_NAME")
 #endif
 
 class CGDESAddFuncApp : public AcRxArxApp {

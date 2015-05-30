@@ -1,0 +1,15 @@
+This directory contains components from the MinGW-W64 and MSYS systems
+as well as the GCC compiler.
+
+The MinGW-W64 and GCC distributions are comprised of several different
+packages. Each of the various packages is governed by its own
+individual copyright and licensing terms. Some of those packages are
+licensed by the GNU Public License (GPL) or the GNU Lesser General
+Public License(LGPL), some are licensed in the Public Domain and some
+have their own open-source licenses.
+
+For full source code and licensing details see:
+
+MinGW-W64:  http://mingw-w64.sourceforge.net
+MSYS:       http://www.mingw.org
+GCC:        http://gcc.gnu.org

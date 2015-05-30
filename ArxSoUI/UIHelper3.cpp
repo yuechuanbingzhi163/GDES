@@ -106,6 +106,8 @@ void UIHelper::ShowSoUIDlg3()
 	// 切换资源
 	CAcModuleResourceOverride myResources;
 
+	LOG_TRACE(_T("启动新的soui界面"));
+
 	//加载soui相关的组建和资源
 	MySoUiLoader3 suLoader(_hdllInstance);
 	if(!suLoader.init()) return;

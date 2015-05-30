@@ -9,3 +9,4 @@
 #include "ArxEntityHelper.h"
 #include "ArxUtilHelper.h"
 #include "LayerHelper.h"
+#include "LogHelper.h"

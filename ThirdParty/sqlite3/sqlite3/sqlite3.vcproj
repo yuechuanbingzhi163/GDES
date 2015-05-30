@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="../lib/sqlite3_d.lib"
+				OutputFile="../lib/sqlite3-d.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -126,7 +126,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="../lib/sqlite3_x64_d.lib"
+				OutputFile="../lib/sqlite3-x64-d.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -253,7 +253,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="../lib/sqlite3_x64.lib"
+				OutputFile="../lib/sqlite3-x64.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"

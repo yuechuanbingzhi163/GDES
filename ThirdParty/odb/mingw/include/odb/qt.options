@@ -1,0 +1,8 @@
+# file      : odb/qt.options
+# copyright : Copyright (c) 2009-2015 Code Synthesis Tools CC
+# license   : GNU GPL v2; see accompanying LICENSE file
+
+--profile qt/basic
+--profile qt/containers
+--profile qt/date-time
+--profile qt/smart-ptr

@@ -1,0 +1,15 @@
+# file      : libodb-boost.pc.in
+# copyright : Copyright (c) 2009-2015 Code Synthesis Tools CC
+# license   : GNU GPL v2; see accompanying LICENSE file
+
+prefix=/mingw
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libodb-boost
+Description: Object-relational mapping (ORM) system for C++, Boost profile library
+URL: http://www.codesynthesis.com/products/odb/
+Version: 2.4.0
+Libs: -L${libdir} -lodb-boost
+Cflags: -I${includedir}
