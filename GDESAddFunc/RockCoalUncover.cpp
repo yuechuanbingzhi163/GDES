@@ -17,6 +17,7 @@ void vector_to_angle(const AcGeVector3d& v, double& ang1, double& ang2)
 {
 	//向量在xoy平面上的投影
 	AcGeVector3d u = v.orthoProject(AcGeVector3d::kZAxis);
+	acutPrintf(_T("\n投影值:x=%.3f, y=%.3f z=%.3f"), u.x, u.y, u.z);
 	ang1 = u.angleTo(AcGeVector3d::kXAxis, AcGeVector3d::kZAxis);
 	ang2 = u.angleTo(v);
 }
