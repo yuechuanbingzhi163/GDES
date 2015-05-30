@@ -44,9 +44,20 @@ public:
 		AcGeVector3d v(1,1,1);
 		double ang1, ang2;
 		vector_to_angle(v, ang1, ang2);
-
+		acutPrintf(_T("\n向量:(%.3f, %.3f, %.3f)"), v.x, v.y, v.z);
 		acutPrintf(_T("\n弧度-->方向角1:%f  仰角：%f"), ang1, ang2);
+		acutPrintf(_T("\n角度-->方向角1:%f  仰角：%f"), ang1*57.295, ang2*57.295);
 
+		AcGeVector3d v1(1,0,0);
+		vector_to_angle(v1, ang1, ang2);
+		acutPrintf(_T("\n向量:(%.3f, %.3f, %.3f)"), v1.x, v1.y, v1.z);
+		acutPrintf(_T("\n弧度-->方向角1:%f  仰角：%f"), ang1, ang2);
+		acutPrintf(_T("\n角度-->方向角1:%f  仰角：%f"), ang1*57.295, ang2*57.295);
+
+		AcGeVector3d v2(-1,-1,1);
+		vector_to_angle(v2, ang1, ang2);
+		acutPrintf(_T("\n向量:(%.3f, %.3f, %.3f)"), v2.x, v2.y, v2.z);
+		acutPrintf(_T("\n弧度-->方向角1:%f  仰角：%f"), ang1, ang2);
 		acutPrintf(_T("\n角度-->方向角1:%f  仰角：%f"), ang1*57.295, ang2*57.295);
 	}
 
