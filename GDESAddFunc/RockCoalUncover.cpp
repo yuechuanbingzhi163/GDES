@@ -1,5 +1,4 @@
 #include "StdAfx.h"
-
 #include <math.h>
 
 #define PI 3.1415926535897932384626433832795
@@ -101,6 +100,7 @@ public:
 		this->h1 = h1;
 		this->h2 = h2;
 	}
+	//设置钻孔直径
 	void setDrillDiameter(double r0)
 	{
 		this->r0 = r0;
@@ -109,6 +109,16 @@ public:
 	//////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////
+
+	//向量在水平面的方向角和仰角
+	void twoAngesOfVector(const AcGeVector3d& v, double& ang1, double& ang2)
+	{
+		//向量在xoy平面上的投影
+		AcGeVector3d u = v.orthoProject(AcGeVector3d::kZAxis);
+		acutPrintf(_T("\n投影值:x=%.3f, y=%.3f z=%.3f"), u.x, u.y, u.z);
+		ang1 = u.angleTo(AcGeVector3d::kXAxis, AcGeVector3d::kZAxis);
+		ang2 = u.angleTo(v);
+	}
 
 	//计算见煤平面方程
 	void beginCoalSurface(AcGePlane& plane)
