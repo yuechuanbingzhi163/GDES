@@ -198,10 +198,10 @@ struct DBHelperImpl
 //¼ò»¯Ð´·¨
 #define SESSION d->session
 
-DBHelper::DBHelper(const std::string& connector, const std::string& connectionString)
+DBHelper::DBHelper(const std::string& connectionString)
 {
 	InitDbSystem();
-	d = new DBHelperImpl(connector, connectionString);
+	d = new DBHelperImpl("sqlite3", connectionString);
 }
 
 DBHelper::~DBHelper()
