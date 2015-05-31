@@ -20,14 +20,13 @@ using namespace soci;
 using namespace soci::tests;
 
 std::string connectString;
-backend_factory const &backEnd = *soci::factory_sqlite3();
 
 // ROWID test
 // In sqlite3 the row id can be called ROWID, _ROWID_ or oid
 void test1()
 {
     {
-        session sql(backEnd, connectString);
+		session sql(soci::sqlite3, connectString);
 
         try { sql << "drop table test1"; }
         catch (soci_error const &) {} // ignore if error
@@ -75,7 +74,7 @@ struct blob_table_creator : public table_creator_base
 void test2()
 {
     {
-        session sql(backEnd, connectString);
+        session sql(soci::sqlite3, connectString);
 
         blob_table_creator tableCreator(sql);
 
@@ -129,7 +128,7 @@ struct test3_table_creator : table_creator_base
 void test3()
 {
     {
-        session sql(backEnd, connectString);
+        session sql(soci::sqlite3, connectString);
 
         test3_table_creator tableCreator(sql);
 
@@ -178,7 +177,7 @@ void test4()
 {
     {
         // we need to have an table that uses autoincrement to test this.
-        session sql(backEnd, connectString);
+        session sql(soci::sqlite3, connectString);
 
         test4_table_creator tableCreator(sql);
 
@@ -214,7 +213,7 @@ struct longlong_table_creator : table_creator_base
 void test5()
 {
     {
-        session sql(backEnd, connectString);
+        session sql(soci::sqlite3, connectString);
 
         longlong_table_creator tableCreator(sql);
 
@@ -231,7 +230,7 @@ void test5()
 
     // vector<long long>
     {
-        session sql(backEnd, connectString);
+        session sql(soci::sqlite3, connectString);
 
         longlong_table_creator tableCreator(sql);
 
@@ -269,7 +268,7 @@ struct test6_table_creator : table_creator_base
 void test6()
 {
     {
-        session sql(backEnd, connectString);
+        session sql(soci::sqlite3, connectString);
 
         test6_table_creator tableCreator(sql);
 
@@ -398,7 +397,7 @@ int main(int argc, char** argv)
 
     try
     {
-        test_context tc(backEnd, connectString);
+        test_context tc(soci::sqlite3, connectString);
         common_tests tests(tc);
         tests.run();
 

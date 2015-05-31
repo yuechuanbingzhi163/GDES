@@ -382,7 +382,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\PumpDatabase.cpp"
+				RelativePath=".\PumpDatabase_Poco.cpp"
 				>
 			</File>
 			<File

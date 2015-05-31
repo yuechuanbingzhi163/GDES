@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="SociTest"
-	ProjectGUID="{0838531A-7AD7-4BC6-BF3D-59EDD4FCFEBB}"
-	RootNamespace="SociTest"
+	Name="SociTest2"
+	ProjectGUID="{7820A678-7AE7-495F-8862-0B3B872178C7}"
+	RootNamespace="SociTest2"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -117,7 +117,6 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;..\..\soci-3.2.3\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -136,9 +135,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="soci_core.lib soci_sqlite3.lib sqlite3.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;..\..\soci-3.2.3\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -177,26 +174,8 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\PumpDatabase.cpp"
+				RelativePath=".\test-sqlite3.cpp"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\test.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
@@ -204,10 +183,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\PumpDatabase.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="资源文件"
