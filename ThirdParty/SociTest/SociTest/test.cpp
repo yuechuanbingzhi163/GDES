@@ -82,7 +82,8 @@ void test1()
 {
 	try {
 		// create a sql
-		session sql(soci::sqlite3, "sample.db");
+		//session sql(soci::sqlite3, "sample.db");
+		session sql(soci::sqlite3, ":memory:");
 		//indicator ind;
 
 		// drop sample table, if it exists
@@ -136,7 +137,8 @@ void test2()
 {
 	try {
 		// create a sql
-		session sql(soci::sqlite3, "test_pump2.db");
+		//session sql(soci::sqlite3, "test_pump2.db");
+		session sql(soci::sqlite3, ":memory:");
 
 		// drop sample table, if it exists
 		sql << "drop table if exists TypeTable";
