@@ -3,6 +3,7 @@
 #include "ResultDlg.h"
 #include "afxwin.h"
 #include "CGridListCtrlGroups.h"
+#include "CListCtrl_DataModel.h"
 //#include "CListCtrl_DataModel.h"
 
 class GasSysDlg : public GasBaseAcesDlg

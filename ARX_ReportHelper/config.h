@@ -1,4 +1,5 @@
 #pragma once
+
 #define PERMENT_OBJCT_NAME	_T("地面永久瓦斯抽放系统")
 #define TEMPGAS_OBJCT_NAME	_T("井下移动瓦斯抽放系统")
 #define GAS_PUMP_OBJCT_NAME	_T("瓦斯抽采泵站能力")
@@ -23,6 +24,3 @@
 #define DESC_INSPECT_OBJCT_NAME	_T("瓦斯抽采工程验收资料描述")
 #define DESC_SM_OBJCT_NAME	_T("自我评价体系和管理制度描述")
 #define DESC_GASPUMP_OBJCT_NAME	_T("泵站能力和备用泵站能力描述")
-
-typedef vector<int> IntArray;
-typedef vector<AcStringArray> ArrayVector;

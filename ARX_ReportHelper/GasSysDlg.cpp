@@ -7,6 +7,7 @@
 #include "CGridColumnTraitHyperLink.h"
 #include "CGridRowTraitXP.h"
 #include "ViewConfigSection.h"
+#include "config.h"
 
 IMPLEMENT_DYNAMIC(GasSysDlg, GasBaseAcesDlg)
 

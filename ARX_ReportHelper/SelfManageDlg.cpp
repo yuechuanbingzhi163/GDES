@@ -1,9 +1,6 @@
-// SelfManageDlg.cpp : 实现文件
-//
-
 #include "stdafx.h"
 #include "SelfManageDlg.h"
-
+#include "config.h"
 
 // SelfManageDlg 对话框
 

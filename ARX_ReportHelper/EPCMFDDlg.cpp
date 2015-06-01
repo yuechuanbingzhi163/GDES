@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "EPCMFDDlg.h"
+#include "config.h"
 
 
 // EPCMFDDlg ¶Ô»°¿ò

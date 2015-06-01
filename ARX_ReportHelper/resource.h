@@ -59,7 +59,6 @@
 #define IDC_CHECK5                      146
 #define IDC_OID_CHECK                   146
 #define IDC_GAS_PUMP_LIST               150
-#define IDC_LIST1                       152
 #define IDC_RESULT_LIST                 152
 #define IDC_COMBO1                      153
 #define IDC_YesOrNo_CHECK               155

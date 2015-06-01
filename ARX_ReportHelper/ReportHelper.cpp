@@ -8,6 +8,7 @@
 #include "InspectionDataDlg.h"
 #include "GasPumpDlg.h"
 #include "MEREDlg.h"
+#include "config.h"
 
 static CString GetAppPathDir()
 {

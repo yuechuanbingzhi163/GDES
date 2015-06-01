@@ -100,7 +100,7 @@ BEGIN
     EDITTEXT        IDC_LOCAL_AP_EDIT,250,21,49,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_OVERFLOWER_EDIT,82,36,49,14,ES_AUTOHSCROLL
     EDITTEXT        IDC_SYS_CON_EDIT,250,38,49,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT4,68,54,44,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT4,81,54,49,14,ES_AUTOHSCROLL
     DEFPUSHBUTTON   "确定",IDOK,90,209,50,14
     CONTROL         "",IDC_PUMP_LIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,0,72,325,131
     LTEXT           "矿井相对瓦斯涌出量",IDC_STATIC,7,5,73,9
@@ -108,14 +108,14 @@ BEGIN
     LTEXT           "(m3/t)",IDC_STATIC,135,6,21,8
     LTEXT           "矿井总回风巷瓦斯浓度",IDC_STATIC,167,6,83,10
     LTEXT           "(%)",IDC_STATIC,305,7,14,8
-    LTEXT           "当地大气压(泵站标高)",IDC_STATIC,167,23,83,10
+    LTEXT           "当地大气压",IDC_STATIC,167,23,83,10
     LTEXT           "(kPa)",IDC_STATIC,305,23,18,8
     LTEXT           "矿井最大总回风风量",IDC_STATIC,7,22,73,8
     LTEXT           "(m3/min)",IDC_STATIC,134,23,29,8
     LTEXT           "抽采泵富余系数",IDC_STATIC,7,39,70,8
     LTEXT           "抽采系统工矿系数",IDC_STATIC,167,40,83,10
     LTEXT           "瓦斯抽采泵台数",IDC_STATIC,7,56,57,8
-    LTEXT           "(台)",IDC_STATIC,117,57,14,8
+    LTEXT           "(台)",IDC_STATIC,135,57,14,8
 END
 
 

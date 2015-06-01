@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GasBaseAcesDlg.h"
+#include "Resource.h"
 
 CString GasBaseAcesDlg::GetAppPathDir()
 {

@@ -1,8 +1,9 @@
 #pragma once
-#include "Resource.h"
-#include "CListCtrl_DataModel.h"
+//#include "Resource.h"
+//#include "CListCtrl_DataModel.h"
 //#include "config.h"
 #include "ReportDataHelper.h"
+#include "dlimexp.h"
 
 #include <iostream>
 #include <fstream>
@@ -11,7 +12,7 @@ using namespace std;
 
 //基础达标评价对话框基类
 //实现的是图标的显示和读取文件函数
-class GasBaseAcesDlg : public CDialog
+class ARX_REPORTHELPER_DLLIMPEXP GasBaseAcesDlg : public CDialog
 {
 	DECLARE_DYNAMIC(GasBaseAcesDlg)
 

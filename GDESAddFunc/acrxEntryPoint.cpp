@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "resource.h"
+#include "UIHelper.h"
 
 #ifndef GDES_ADDFUNC_SERVICE_NAME
 #define GDES_ADDFUNC_SERVICE_NAME _T("GDESADDFUNC_SERVICE_NAME")
@@ -37,8 +38,14 @@ public:
 	virtual void RegisterServerComponents () {
 	}
 
+	static void JL_PumpCapacityDlg( void )
+	{
+		UIHelper::ShowPumpCapacityDlg();
+	}
+
 } ;
 
 //-----------------------------------------------------------------------------
 IMPLEMENT_ARX_ENTRYPOINT(CGDESAddFuncApp)
-
+ACED_ARXCOMMAND_ENTRY_AUTO( CGDESAddFuncApp, JL, _PumpCapacityDlg, PumpCapacityDlg, ACRX_CMD_TRANSPARENT, NULL )
+//ACED_ARXCOMMAND_ENTRY_AUTO( CARX_ReportHelperApp, WordTest, _HELP, HELP, ACRX_CMD_TRANSPARENT, NULL )

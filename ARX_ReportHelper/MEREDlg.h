@@ -1,6 +1,7 @@
 #pragma once
 #include "GasBaseAcesDlg.h"
 #include "afxwin.h"
+#include "Resource.h"
 
 // MEREDlg ¶Ô»°¿ò
 

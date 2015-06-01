@@ -3,8 +3,7 @@
 
 #include "stdafx.h"
 #include "GasPlanDlg.h"
-
-// GasPlanDlg ¶Ô»°¿ò
+#include "config.h"
 
 IMPLEMENT_DYNAMIC(GasPlanDlg, GasBaseAcesDlg)
 

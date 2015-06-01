@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "InspectionDataDlg.h"
+#include "config.h"
 
 
 IMPLEMENT_DYNAMIC(InspectionDataDlg, GasBaseAcesDlg)

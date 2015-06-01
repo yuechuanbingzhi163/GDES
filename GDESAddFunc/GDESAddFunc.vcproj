@@ -383,6 +383,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PumpCapacityDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RockCoalUncover.cpp"
 				>
 			</File>
@@ -422,17 +426,29 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\UIHelper.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Include Files"
 			Filter="h;hh;hxx"
 			>
 			<File
+				RelativePath=".\PumpCapacityDlg.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource.h"
 				>
 			</File>
 			<File
 				RelativePath=".\StdAfx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\UIHelper.h"
 				>
 			</File>
 		</Filter>
@@ -452,5 +468,9 @@
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="GDESAddFunc.rc"
+		/>
 	</Globals>
 </VisualStudioProject>

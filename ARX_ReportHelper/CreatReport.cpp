@@ -2,6 +2,7 @@
 #include "Resource.h"
 #include "CmyWord.h"
 #include "CreatReport.h"
+#include "config.h"
 
 #include "ReportDataHelper.h"
 

@@ -3,6 +3,7 @@
 #include "afxcmn.h"
 #include "CGridListCtrlGroups.h"
 #include "afxwin.h"
+#include "Resource.h"
 
 class ResultDlg : public GasBaseAcesDlg
 {

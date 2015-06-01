@@ -10,6 +10,7 @@
 #include "CGridRowTraitXP.h"
 #include "ViewConfigSection.h"
 #include <sqliteHelper/SqliteHelper.h>
+#include "config.h"
 
 IMPLEMENT_DYNAMIC(GasPumpDlg, GasBaseAcesDlg)
 
