@@ -116,10 +116,10 @@ void test1()
 		person.name    = "Lisa Simpson";
 		person.address = "Springfield";
 		person.age     = 10;
-		sql << "insert into Person values(:name, :address, :age)", use(person);
+		sql << "insert into Person values( :name, :address, :age)", use(person);
 
 		Person aPerson;
-		statement st = (sql.prepare <<"select name, address, age from Person", into(aPerson));
+		statement st = (sql.prepare<<"select name, address, age from Person", into(aPerson));
 		st.execute();
 		while (st.fetch())
 		{
@@ -128,9 +128,8 @@ void test1()
 	}
 	catch(soci_error const & e)
 	{
-		std::string xx = e.what();
+		std::cout<<"soci error:"<<e.what()<<std::endl;
 	}
-
 }
 
 void test2()
@@ -151,9 +150,19 @@ void test2()
 
 		sql << "insert into TypeTable values(NULL, :type,:absP,:weight,:length,:weidth,:heigth,:factoryName)", use(pump);
 		sql << "insert into TypeTable values(NULL, :type,:absP,:weight,:length,:weidth,:heigth,:factoryName)", use(pump);
+		sql << "insert into TypeTable values(NULL, :type,:absP,:weight,:length,:weidth,:heigth,:factoryName)", use(pump);
+		sql << "insert into TypeTable values(NULL, :type,:absP,:weight,:length,:weidth,:heigth,:factoryName)", use(pump);
 
 		std::cout<<"11111--------------------------------------------111111"<<std::endl;
 
+		sql << "insert into TypeTable(type,absP,weight,length,weidth,heigth,factoryName) values(:type,:absP,:weight,:length,:weidth,:heigth,:factoryName)",
+			use(pump.type),
+			use(pump.absP),
+			use(pump.weight),
+			use(pump.length),
+			use(pump.width),
+			use(pump.height),
+			use(pump.factName);
 		sql << "insert into TypeTable(type,absP,weight,length,weidth,heigth,factoryName) values(:type,:absP,:weight,:length,:weidth,:heigth,:factoryName)",
 			use(pump.type),
 			use(pump.absP),
@@ -194,7 +203,7 @@ void test2()
 	}
 	catch(soci_error const & e)
 	{
-		std::string xx = e.what();
+		std::cout<<"soci error:"<<e.what()<<std::endl;
 	}
 }
 
@@ -228,12 +237,14 @@ void test_dbHelper()
 	tbls.push_back(pump);
 	tbls.push_back(pump);
 	db.insertPumpTypeTable(tbls);
+	std::cout<<"插入多个数据"<<std::endl;
 
 	IDArray ids;
 	ids.push_back(2);
 	ids.push_back(5);
 	ids.push_back(7);
 	db.delPumpTypes(ids);
+	std::cout<<"删除多个数据"<<std::endl;
 
 	id = -1;
 	db.getLastPumpTypeId(id);
@@ -318,7 +329,7 @@ void CreatePumpDB()
 	ReadPropertyTable(prop_fields, prop_tbls);
 
 	//新建sqlite数据库
-	DBHelper db("pump.db");
+	DBHelper db("new_pump.db");
 	//新建TypeTable表并插入数据
 	db.createPumpTypeTable();
 	db.insertPumpTypeTable(type_tbls);
