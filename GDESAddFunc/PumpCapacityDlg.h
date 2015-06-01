@@ -1,6 +1,8 @@
 #pragma once
 #include "Resource.h"
 #include "../ARX_ReportHelper/GasBaseAcesDlg.h"
+#include "CGridListCtrlEx/CGridListCtrlGroups.h"
+
 #include "afxcmn.h"
 
 // PumpCapacityDlg 对话框
@@ -21,7 +23,8 @@ protected:
 	virtual BOOL OnInitDialog();
 
 	DECLARE_MESSAGE_MAP()
-public:
+
+private:
 	// 矿井相对瓦斯涌出量
 	CString m_absGas;
 	// 总回风巷瓦斯浓度
@@ -36,5 +39,8 @@ public:
 	CString m_workCondiction;
 	// 瓦斯抽采泵台数
 	CString m_numPump;
-	CListCtrl m_pumpListCtrl;
+	CGridListCtrlGroups m_pumpListCtrl;
+
+public:
+	afx_msg void OnBnClickedOk();
 };

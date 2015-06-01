@@ -257,12 +257,12 @@ bool SingleDataObjectHelper::GetObjectId( const CString& name, AcDbObjectId& obj
     return ret;
 }
 
-void ReporterDataObjectHelper::GetAllNames( AcStringArray& names )
+void GDESDataObjectHelper::GetAllNames( AcStringArray& names )
 {
 	ArxDictHelper::GetAllKeys( REPORTER_INFO_DICT, names );
 }
 
-bool ReporterDataObjectHelper::AddObject( const CString& name )
+bool GDESDataObjectHelper::AddObject( const CString& name )
 {
 	if( name.GetLength() == 0 ) return false;
 
@@ -275,7 +275,7 @@ bool ReporterDataObjectHelper::AddObject( const CString& name )
 	return ret;
 }
 
-bool ReporterDataObjectHelper::RemoveObject( const CString& name )
+bool GDESDataObjectHelper::RemoveObject( const CString& name )
 {
 	if( name.GetLength() == 0 ) return false;
 
@@ -285,7 +285,7 @@ bool ReporterDataObjectHelper::RemoveObject( const CString& name )
 	return ret;
 }
 
-bool ReporterDataObjectHelper::GetObjectId( const CString& name, AcDbObjectId& objId )
+bool GDESDataObjectHelper::GetObjectId( const CString& name, AcDbObjectId& objId )
 {
 	if( name.GetLength() == 0 ) return false;
 

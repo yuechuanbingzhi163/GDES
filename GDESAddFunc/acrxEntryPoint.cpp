@@ -2,9 +2,23 @@
 #include "resource.h"
 #include "UIHelper.h"
 
+#include "../MineGE/DataListHelper.h"
+#include "../MineGE/DataObject.h"
+#include "../MineGE/config.h"
+#include "../ArxHelper/HelperClass.h"
+
+#include "config.h"
+
+
 #ifndef GDES_ADDFUNC_SERVICE_NAME
 #define GDES_ADDFUNC_SERVICE_NAME _T("GDESADDFUNC_SERVICE_NAME")
 #endif
+
+static void AddReportObject()
+{
+	GDESDataObjectHelper::AddObject(MINE_GAS_PUMP_CAPACITY);
+	GDESDataObjectHelper::AddObject(PUMP_CAPACITY_LIST);
+}
 
 class CGDESAddFuncApp : public AcRxArxApp {
 
@@ -18,7 +32,8 @@ public:
 
 		// You *must* call On_kInitAppMsg here
 		AcRx::AppRetCode retCode =AcRxArxApp::On_kInitAppMsg (pkt) ;
-		
+		ArxDataTool::RegDict( ADDFUN_INFO_DICT );
+		AddReportObject();
 		// TODO: Add your initialization code here
 
 		return (retCode) ;

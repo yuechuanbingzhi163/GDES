@@ -29,6 +29,7 @@
 
 //报告相关词典
 #define REPORTER_INFO_DICT _T("词典-数据对象-报告")
+#define ADDFUN_INFO_DICT _T("词典-数据对象-附加功能")
 
 #define TOLERANCE 0.00001
 #define NUM_TOLERANCE 4

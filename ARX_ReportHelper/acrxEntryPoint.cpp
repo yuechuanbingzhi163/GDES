@@ -15,30 +15,30 @@
 
 static void AddReportObject()
 {
-	ReporterDataObjectHelper::AddObject(PERMENT_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(TEMPGAS_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(RUNNING_SYS_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(GAS_PLAN_BOOKMKS_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(INSPECT_BOOKMKS_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(SM_BOOKMKS_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(EPCMFD_BOOKMKS_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(GAS_PUMP_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(PERMENT_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(TEMPGAS_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(RUNNING_SYS_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(GAS_PLAN_BOOKMKS_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(INSPECT_BOOKMKS_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(SM_BOOKMKS_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(EPCMFD_BOOKMKS_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(GAS_PUMP_OBJCT_NAME);
 	
-	ReporterDataObjectHelper::AddObject(RET_GASSYS_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(RET_EPCMFD_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(RET_GASPLAN_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(RET_INSPECT_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(RET_SM_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(RET_GASPUMP_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(RET_MERSURE_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(RET_REALATE_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(RET_GASSYS_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(RET_EPCMFD_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(RET_GASPLAN_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(RET_INSPECT_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(RET_SM_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(RET_GASPUMP_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(RET_MERSURE_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(RET_REALATE_OBJCT_NAME);
 
-	ReporterDataObjectHelper::AddObject(DESC_EPCMFD_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(DESC_GASPLAN_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(DESC_INSPECT_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(DESC_SM_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(DESC_GASPUMP_OBJCT_NAME);
-	ReporterDataObjectHelper::AddObject(DESC_GASSYS_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(DESC_EPCMFD_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(DESC_GASPLAN_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(DESC_INSPECT_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(DESC_SM_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(DESC_GASPUMP_OBJCT_NAME);
+	GDESDataObjectHelper::AddObject(DESC_GASSYS_OBJCT_NAME);
 
 }
 //-----------------------------------------------------------------------------

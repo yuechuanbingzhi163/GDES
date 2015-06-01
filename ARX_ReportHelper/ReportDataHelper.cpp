@@ -73,7 +73,7 @@ void ReportDataHelper::ReadDatas( const CString& name, ArrayVector& datasVector,
 {
 	AcStringArray getDatas;
 	AcDbObjectId objId;
-	ReporterDataObjectHelper::GetObjectId(name,objId);
+	GDESDataObjectHelper::GetObjectId(name,objId);
 	GetObjectDatas(objId,getDatas);
 	//AcStringArray strName,strIsRunning,strReason;
 	ArrayVector datas;
@@ -104,7 +104,7 @@ void ReportDataHelper::ReadDatas( const CString& name, ArrayVector& datasVector,
 void ReportDataHelper::WriteDatas( const CString& name,const ArrayVector& datas )
 {
 	AcDbObjectId objId;
-	ReporterDataObjectHelper::GetObjectId(name,objId);
+	GDESDataObjectHelper::GetObjectId(name,objId);
 	AcStringArray values;
 	for(int i = 0; i < datas[0].length();i++)
 	{

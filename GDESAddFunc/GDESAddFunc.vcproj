@@ -436,6 +436,10 @@
 			Filter="h;hh;hxx"
 			>
 			<File
+				RelativePath=".\config.h"
+				>
+			</File>
+			<File
 				RelativePath=".\PumpCapacityDlg.h"
 				>
 			</File>
@@ -465,6 +469,130 @@
 			Name="Miscellaneous Files"
 			Filter="reg;rgs;mak;clw;vsdir;vsz;css;inf;vcproj;csproj"
 			>
+		</Filter>
+		<Filter
+			Name="CGridListCtrlEx"
+			>
+			<Filter
+				Name="Include Files"
+				>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTrait.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitCombo.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitDateTime.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitEdit.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitHyperLink.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitImage.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitMultilineEdit.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitText.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitVisitor.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridListCtrlEx.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridListCtrlGroups.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridRowTrait.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridRowTraitText.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridRowTraitVisitor.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridRowTraitXP.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\ViewConfigSection.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Source Files"
+				>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitCombo.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitDateTime.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitEdit.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitHyperLink.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitImage.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitMultilineEdit.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridColumnTraitText.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridListCtrlEx.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridListCtrlGroups.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridRowTraitText.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\CGridRowTraitXP.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CGridListCtrlEx\ViewConfigSection.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

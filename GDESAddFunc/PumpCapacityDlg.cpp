@@ -1,9 +1,6 @@
-// PumpCapacityDlg.cpp : 实现文件
-//
-
 #include "stdafx.h"
 #include "PumpCapacityDlg.h"
-
+#include "config.h"
 
 // PumpCapacityDlg 对话框
 
@@ -41,12 +38,47 @@ void PumpCapacityDlg::DoDataExchange(CDataExchange* pDX)
 
 
 BEGIN_MESSAGE_MAP(PumpCapacityDlg, CDialog)
+	ON_BN_CLICKED(IDOK, &PumpCapacityDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 BOOL PumpCapacityDlg::OnInitDialog()
 {
 	GasBaseAcesDlg::OnInitDialog();
+
+	ArrayVector datasVector;
+	ReportDataHelper::ReadDatas(MINE_GAS_PUMP_CAPACITY,datasVector,1);
+	if(!datasVector.empty())
+	{
+		m_absGas = datasVector[0][0].kACharPtr();
+		m_gasConcentration = datasVector[1][0].kACharPtr();
+		m_maxQ = datasVector[2][0].kACharPtr();
+		m_localP = datasVector[3][0].kACharPtr();
+		m_surplus = datasVector[4][0].kACharPtr();
+		m_workCondiction = datasVector[5][0].kACharPtr();
+		m_numPump = datasVector[6][0].kACharPtr();
+	}
+
+	UpdateData(FALSE);
+
 	return TRUE;
 }
 
 // PumpCapacityDlg 消息处理程序
+
+void PumpCapacityDlg::OnBnClickedOk()
+{
+	UpdateData(TRUE);
+	ArrayVector dataVector;
+	AcStringArray dataArray;
+	dataArray.append(m_absGas);
+	dataArray.append(m_gasConcentration);
+	dataArray.append(m_maxQ);
+	dataArray.append(m_localP);
+	dataArray.append(m_surplus);
+	dataArray.append(m_workCondiction);
+	dataArray.append(m_numPump);
+
+	dataVector.push_back(dataArray);
+
+	ReportDataHelper::WriteDatas(MINE_GAS_PUMP_CAPACITY,dataVector);
+}

@@ -49,7 +49,7 @@ public:
 	static bool GetObjectId(const CString& name, AcDbObjectId& objId);
 };
 
-class MINEGE_DLLIMPEXP ReporterDataObjectHelper
+class MINEGE_DLLIMPEXP GDESDataObjectHelper
 {
 public:
 	static void GetAllNames(AcStringArray& names);
