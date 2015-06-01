@@ -2,6 +2,7 @@
 #include "Resource.h"
 #include "../ARX_ReportHelper/GasBaseAcesDlg.h"
 #include "CGridListCtrlEx/CGridListCtrlGroups.h"
+#include "CListCtrl_DataModel.h"
 
 #include "afxcmn.h"
 
@@ -40,7 +41,14 @@ private:
 	// 瓦斯抽采泵台数
 	CString m_numPump;
 	CGridListCtrlGroups m_pumpListCtrl;
+	CListCtrl_DataModel m_dataModel;
+	vector<CListCtrl_DataRecord> m_records;
 
 public:
 	afx_msg void OnBnClickedOk();
+
+private:
+	void OnInitList();
+public:
+	afx_msg void OnEnKillfocusPumpNumEdit();
 };

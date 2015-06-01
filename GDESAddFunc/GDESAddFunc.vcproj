@@ -379,6 +379,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Caculate.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\GDESAddFunc_DllMain.cpp"
 				>
 			</File>
@@ -435,6 +439,14 @@
 			Name="Include Files"
 			Filter="h;hh;hxx"
 			>
+			<File
+				RelativePath=".\Caculate.h"
+				>
+			</File>
+			<File
+				RelativePath=".\CListCtrl_DataModel.h"
+				>
+			</File>
 			<File
 				RelativePath=".\config.h"
 				>
