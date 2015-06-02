@@ -391,6 +391,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RealGasQDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RockCoalUncover.cpp"
 				>
 			</File>
@@ -453,6 +457,10 @@
 			</File>
 			<File
 				RelativePath=".\PumpCapacityDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RealGasQDlg.h"
 				>
 			</File>
 			<File

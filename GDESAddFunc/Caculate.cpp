@@ -69,3 +69,27 @@ bool Calculate::MineGasCapacityCacul( const AcStringArray& baseDatas,const AcStr
 	//acutPrintf(_T("\n第一个值:%.2lf\t第二个值:%.2lf\t第三个值:%.2lf"),dBaseDatas[1]*0.01*dBaseDatas[3],sumPump,330 * 1440 * 0.0001 / dBaseDatas[0]);
 	return true;
 }
+
+/*
+ * 参数1代表
+ *	|-0矿井上年度实际抽采瓦斯量
+ *	|-1预开采区域瓦斯含量最大煤层应抽瓦斯吨煤含量
+ *	|-2矿井总回风巷瓦斯浓度
+ *	|-3矿井最大总回风风量
+ *	|-4矿井超前抽采系数
+*/
+
+bool Calculate::MineGasRealCacul( const AcStringArray& datas,CString& strYearRet )
+{
+	if(datas.isEmpty()) return false;
+	doubleVector dDatas;
+	StringsToNum(datas,dDatas);
+
+	if(dDatas[4] <= 0) return false;
+	double ret = (dDatas[2]*0.01*dDatas[3] + dDatas[0]/dDatas[4]/365/1440) * 330 * 1440 * 0.0001 / dDatas[1];
+	//acutPrintf(_T("\nQs:%.2lf,k:%.2lf"),dDatas[0],dDatas[4]);
+	//acutPrintf(_T("\n第一个值:%.2lf\t第二个值:%.2lf\t第三个值:%.2lf"),dDatas[2]*0.01*dDatas[3], dDatas[0]/dDatas[4]/365/1440,330 * 1440 * 0.0001 / dDatas[1]);
+
+	strYearRet.Format(_T("%.2lf"),ret);
+	return true;
+}

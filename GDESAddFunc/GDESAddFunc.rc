@@ -123,6 +123,33 @@ BEGIN
     LTEXT           "(万t/a)",IDC_STATIC,486,164,24,8
 END
 
+IDD_YEAR_GASQ_DIALOG DIALOGEX 0, 0, 445, 124
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "按矿井实际抽采瓦斯量核定"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_YEAR_ABS_GAS_EDIT,109,6,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_YEAR_CONCENTRA_GAS_EDIT,90,28,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_YEAR_MINE_MAXQ_EDIT,240,28,49,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "计算",IDOK,133,99,54,22
+    LTEXT           "矿井上年度实际抽采瓦斯量",IDC_STATIC,7,7,101,9
+    PUSHBUTTON      "退出",IDCANCEL,257,99,54,22
+    LTEXT           "(m3)",IDC_STATIC,165,9,16,8
+    LTEXT           "矿井总回风巷瓦斯浓度",IDC_STATIC,7,30,83,10
+    LTEXT           "(%)",IDC_STATIC,143,31,14,8
+    LTEXT           "矿井最大总回风风量",IDC_STATIC,164,31,73,8
+    LTEXT           "(m3/min)",IDC_STATIC,294,31,29,8
+    LTEXT           "按矿井实际抽瓦斯含量核定年产量",IDC_STATIC,121,65,121,8
+    EDITTEXT        IDC_YEAR_RET_EDIT,244,64,52,12,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "(万t/a)",IDC_STATIC,300,66,24,8
+    GROUPBOX        "核定结果",IDC_STATIC,6,50,437,35
+    LTEXT           "预开采区域瓦斯含量最大煤层应抽瓦斯吨煤含量",IDC_STATIC,191,10,169,8
+    LTEXT           "(m3/t)",IDC_STATIC,417,10,21,8
+    EDITTEXT        IDC_YEAR_MAXQ_EDIT,362,8,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_YEAR_K_EDIT,391,28,46,14,ES_AUTOHSCROLL
+    LTEXT           "矿井超前抽采系数",IDC_STATIC,326,31,65,8
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
