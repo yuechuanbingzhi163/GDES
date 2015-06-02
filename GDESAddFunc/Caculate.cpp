@@ -19,35 +19,49 @@ static void StringsToNum( const AcStringArray& strDatas, doubleVector& doubleDat
  *	|-1矿井总回风巷瓦斯浓度
  *	|-2当地大气压
  *	|-3矿井最大总回风风量
- *	|-4抽采泵富余系数
- *	|-5抽采系统工况系数
- *	|-6瓦斯泵台数
- * 参数2代表单台瓦斯泵额定流量、瓦斯抽采浓度、瓦斯泵压力
+ *	|-4抽采系统工况系数
+ *	|-5瓦斯泵台数
+ * 参数2代表
+ * 单台瓦斯泵额定流量、瓦斯抽采浓度、瓦斯泵压力、抽采泵富余系数、每套抽采主管道实际内径、每套管道混合经济流速、管道富余系数
  * 参数3代表计算结果
 */
-bool Calculate::PumpCapacityCacul( const AcStringArray& baseDatas,const AcStringArray& pumpDatas,CString& strRet )
+bool Calculate::MineGasCapacityCacul( const AcStringArray& baseDatas,const AcStringArray& pumpDatas,CString& strPumpRet,CString& strSysRet )
 {
 	if(baseDatas.isEmpty() || pumpDatas.isEmpty()) return false;
 	doubleVector dBaseDatas,dPumpDatas;
 	StringsToNum(baseDatas,dBaseDatas);
 	StringsToNum(pumpDatas,dPumpDatas);
 	if(dBaseDatas[0] <= 0) return false;
-	int pumpNum = (int)dBaseDatas[6];
+	int pumpNum = (int)dBaseDatas[5];
 	double sumPump = 0;
+	double sumTube = 0;
 	for(int j = 0; j < pumpNum; j++)
 	{
-		double pumpQ = dPumpDatas[3*j];
-		double pumpCon = dPumpDatas[3*j+1];
-		double pumpP = dPumpDatas[3*j+2];
+		double pumpQ = dPumpDatas[7*j];
+		double pumpCon = dPumpDatas[7*j+1];
+		double pumpP = dPumpDatas[7*j+2];
+		double pumpKP = dPumpDatas[7*j + 3];
+		double tubeD = dPumpDatas[7*j+4];
+		double tubeV = dPumpDatas[7*j+5];
+		double tubeKS = dPumpDatas[7*j+6];
 
-		double tmp1 = pumpQ * pumpCon* 0.01 * dBaseDatas[5] * (dBaseDatas[2]-pumpP);
-		double temp = tmp1 / 2.0 / 101.325;
+		double tmp1 = pumpQ * pumpCon* 0.01 * dBaseDatas[4] * (dBaseDatas[2]-pumpP);
+		double temp = tmp1 / pumpKP / 101.325;
 		sumPump += temp;
+
+		double tmp2 = (tubeD / 0.1457) * (tubeD / 0.1457) * tubeV * pumpCon * 0.01  * (dBaseDatas[2]-pumpP);
+		double temp2 = tmp2 / tubeKS / 101.325;
+		sumTube += temp2;
+
 		//acutPrintf(_T("\n第%d台泵\t Q:%.2lf,C:%.2lf,P:%.2lf"),j+1,pumpQ,pumpCon,pumpP);
 	}
 
 	double ret = (dBaseDatas[1]*0.01*dBaseDatas[3] + sumPump) * 330 * 1440 * 0.0001 / dBaseDatas[0];
-	strRet.Format(_T("%.2lf"),ret);
+	strPumpRet.Format(_T("%.2lf"),ret);
+
+	ret = (dBaseDatas[1]*0.01*dBaseDatas[3] + sumTube) * 330 * 1440 * 0.0001 / dBaseDatas[0];
+	strSysRet.Format(_T("%.2lf"),ret);
+
 	//for(int i = 0 ; i < dBaseDatas.size(); i++)
 	//{
 	//	acutPrintf(_T("\n第%d个值:%.2lf"),i+1,dBaseDatas[i]);

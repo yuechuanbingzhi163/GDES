@@ -8,12 +8,11 @@
 #define IDD_PUMP_ABILITY_DIALOG         102
 #define IDC_LOCALAP_EDIT                102
 #define IDC_MINE_MAXQ_EDIT              103
-#define IDC_OVERFLOWER_EDIT             104
 #define IDC_SYS_CON_EDIT                105
 #define IDC_PUMP_LIST                   106
 #define IDC_PUMP_NUM_EDIT               107
-#define IDC_EDIT1                       108
 #define IDC_PUMP_RET_EDIT               108
+#define IDC_SYS_RET_EDIT                109
 
 // Next default values for new objects
 // 

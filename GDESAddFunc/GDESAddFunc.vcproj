@@ -444,11 +444,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\CListCtrl_DataModel.h"
+				RelativePath=".\config.h"
 				>
 			</File>
 			<File
-				RelativePath=".\config.h"
+				RelativePath=".\GasCapacity_DataModel.h"
 				>
 			</File>
 			<File

@@ -16,7 +16,7 @@
 
 static void AddReportObject()
 {
-	GDESDataObjectHelper::AddObject(MINE_GAS_PUMP_CAPACITY);
+	GDESDataObjectHelper::AddObject(MINE_GAS_CAPACITY);
 	GDESDataObjectHelper::AddObject(PUMP_CAPACITY_LIST);
 }
 

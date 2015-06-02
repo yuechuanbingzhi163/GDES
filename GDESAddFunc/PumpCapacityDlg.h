@@ -2,7 +2,7 @@
 #include "Resource.h"
 #include "../ARX_ReportHelper/GasBaseAcesDlg.h"
 #include "CGridListCtrlEx/CGridListCtrlGroups.h"
-#include "CListCtrl_DataModel.h"
+#include "GasCapacity_DataModel.h"
 
 #include "afxcmn.h"
 
@@ -34,25 +34,23 @@ private:
 	CString m_maxQ;
 	// 当地大气压
 	CString m_localP;
-	// 抽采泵富余系数
-	CString m_surplus;
 	// 抽采系统工况系数
 	CString m_workCondiction;
 	// 瓦斯抽采泵台数
 	CString m_numPump;
 	// 计算结果
-	CString m_ret;
+	CString m_pumpRet;
+	CString m_sysRet;
 
 	CGridListCtrlGroups m_pumpListCtrl;
-	CListCtrl_DataModel m_dataModel;
-	vector<CListCtrl_DataRecord> m_records;
+	GasCapacity_DataModel m_dataModel;
+	vector<GasCapacity_DataRecord> m_records;
 
 public:
 	afx_msg void OnBnClickedOk();
 
 private:
 	void OnInitList();
-	bool Caculate(const AcStringArray& baseData,const AcStringArray& pumpData,CString& strRet);
 public:
 	afx_msg void OnEnKillfocusPumpNumEdit();
 };

@@ -20,10 +20,10 @@ PumpCapacityDlg::PumpCapacityDlg(CWnd* pParent /*=NULL*/)
 	, m_gasConcentration(_T(""))
 	, m_maxQ(_T(""))
 	, m_localP(_T(""))
-	, m_surplus(_T(""))
 	, m_workCondiction(_T(""))
 	, m_numPump(_T(""))
-	, m_ret(_T(""))
+	, m_pumpRet(_T(""))
+	, m_sysRet(_T(""))
 {
 
 }
@@ -39,11 +39,11 @@ void PumpCapacityDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_CONCENTRA_GAS_EDIT, m_gasConcentration);
 	DDX_Text(pDX, IDC_MINE_MAXQ_EDIT, m_maxQ);
 	DDX_Text(pDX, IDC_LOCALAP_EDIT, m_localP);
-	DDX_Text(pDX, IDC_OVERFLOWER_EDIT, m_surplus);
 	DDX_Text(pDX, IDC_SYS_CON_EDIT, m_workCondiction);
 	DDX_Text(pDX, IDC_PUMP_NUM_EDIT, m_numPump);
 	DDX_Control(pDX, IDC_PUMP_LIST, m_pumpListCtrl);
-	DDX_Text(pDX, IDC_PUMP_RET_EDIT, m_ret);
+	DDX_Text(pDX, IDC_PUMP_RET_EDIT, m_pumpRet);
+	DDX_Text(pDX, IDC_SYS_RET_EDIT, m_sysRet);
 }
 
 
@@ -52,7 +52,7 @@ BEGIN_MESSAGE_MAP(PumpCapacityDlg, CDialog)
 	ON_EN_KILLFOCUS(IDC_PUMP_NUM_EDIT, &PumpCapacityDlg::OnEnKillfocusPumpNumEdit)
 END_MESSAGE_MAP()
 
-static void setRecord(vector<CListCtrl_DataRecord>& records,const ArrayVector& datasVector,CString& num)
+static void setRecord(vector<GasCapacity_DataRecord>& records,const ArrayVector& datasVector,CString& num)
 {
 	for (int i = 0; i < datasVector.size(); i++)
 	{
@@ -60,7 +60,12 @@ static void setRecord(vector<CListCtrl_DataRecord>& records,const ArrayVector& d
 		CString strQ = datasVector[i][1].kACharPtr();
 		CString strCon =  datasVector[i][2].kACharPtr();
 		CString strP = datasVector[i][3].kACharPtr();
-		records.push_back(CListCtrl_DataRecord(strIndx,strQ,strCon,strP));
+		CString strKP = datasVector[i][4].kACharPtr();
+		CString strD = datasVector[i][5].kACharPtr();
+		CString strV =  datasVector[i][6].kACharPtr();
+		CString strKS = datasVector[i][7].kACharPtr();
+
+		records.push_back(GasCapacity_DataRecord(strIndx,strQ,strCon,strP,strKP,strD,strV,strKS));
 	}
 	num.Format(_T("%d"),datasVector.size());
 
@@ -84,7 +89,7 @@ static BOOL IsInt(CString &str)
 	return TRUE;
 }
 
-static void SetItems(vector<CListCtrl_DataRecord>& records,CListCtrl_DataModel&dataModel,CGridListCtrlGroups& listCtrl,int num)
+static void SetItems(vector<GasCapacity_DataRecord>& records,GasCapacity_DataModel&dataModel,CGridListCtrlGroups& listCtrl,int num)
 {
 	if(!records.empty())
 	{
@@ -130,22 +135,28 @@ void PumpCapacityDlg::OnInitList()
 		}
 		if(1 == col)
 		{
-			m_pumpListCtrl.InsertColumnTrait(col+1, title, LVCFMT_LEFT, 4.5*rect.Width()/13, col, pTrait);
+			m_pumpListCtrl.InsertColumnTrait(col+1, title, LVCFMT_LEFT, 10*rect.Width()/56, col, pTrait);
 		}
 		else if(0 == col)
 		{
-			m_pumpListCtrl.InsertColumnTrait(col+1, title, LVCFMT_CENTER, rect.Width()/13, col, pTrait);
+			m_pumpListCtrl.InsertColumnTrait(col+1, title, LVCFMT_CENTER, 3*rect.Width()/56, col, pTrait);
 		}
+
+		else if(2 == col)
+		{
+			m_pumpListCtrl.InsertColumnTrait(col+1, title, LVCFMT_LEFT, 8*rect.Width()/56, col, pTrait);
+		}
+
 		else
 		{
-			m_pumpListCtrl.InsertColumnTrait(col+1, title, LVCFMT_LEFT, 3.5*rect.Width()/13, col, pTrait);
+			m_pumpListCtrl.InsertColumnTrait(col+1, title, LVCFMT_LEFT, rect.Width()/8, col, pTrait);
 		}
 	}
 
 	ArrayVector datasVector;
 
 	//获取瓦斯泵数据
-	ReportDataHelper::ReadDatas(PUMP_CAPACITY_LIST,datasVector,4);
+	ReportDataHelper::ReadDatas(PUMP_CAPACITY_LIST,datasVector,8);
 	//vector<CListCtrl_DataRecord> records;
 	if(datasVector.size() > 0) 
 	{
@@ -169,8 +180,7 @@ BOOL PumpCapacityDlg::OnInitDialog()
 	GasBaseAcesDlg::OnInitDialog();
 
 	ArrayVector datasVector;
-	ReportDataHelper::ReadDatas(MINE_GAS_PUMP_CAPACITY,datasVector,1);
-	m_surplus = _T("2.0");
+	ReportDataHelper::ReadDatas(MINE_GAS_CAPACITY,datasVector,1);
 	m_workCondiction = _T("0.75");
 	if(!datasVector.empty())
 	{
@@ -178,10 +188,10 @@ BOOL PumpCapacityDlg::OnInitDialog()
 		m_gasConcentration = datasVector[1][0].kACharPtr();
 		m_localP = datasVector[2][0].kACharPtr();
 		m_maxQ = datasVector[3][0].kACharPtr();
-		m_surplus = datasVector[4][0].kACharPtr();
-		m_workCondiction = datasVector[5][0].kACharPtr();
-		m_numPump = datasVector[6][0].kACharPtr();
-		m_ret = datasVector[7][0].kACharPtr();
+		m_workCondiction = datasVector[4][0].kACharPtr();
+		m_numPump = datasVector[5][0].kACharPtr();
+		m_pumpRet = datasVector[6][0].kACharPtr();
+		m_sysRet = datasVector[7][0].kACharPtr();
 	}
 
 	UpdateData(FALSE);
@@ -192,7 +202,7 @@ BOOL PumpCapacityDlg::OnInitDialog()
 
 static void GetDatasFromList(const CGridListCtrlGroups& listCtrl,ArrayVector& datas,AcStringArray& dataArray)
 {
-	AcStringArray strIndx, strQ, strCon, strP;
+	AcStringArray strIndx, strQ, strCon, strP,strKP, strD, strV, strKS;
 	for(size_t i = 0; i < listCtrl.GetItemCount(); i++)
 	{
 		CString	indx = listCtrl.GetItemText(i,1);
@@ -225,11 +235,49 @@ static void GetDatasFromList(const CGridListCtrlGroups& listCtrl,ArrayVector& da
 		}
 		strP.append(p);
 		dataArray.append(p);
+
+		CString kp = listCtrl.GetItemText(i,5);
+		if (kp.IsEmpty())
+		{
+			kp = ISNULL;
+		}
+		strKP.append(kp);
+		dataArray.append(kp);
+
+		CString d = listCtrl.GetItemText(i,6);
+		if (d.IsEmpty())
+		{
+			d = ISNULL;
+		}
+		strD.append(d);
+		dataArray.append(d);
+
+		CString v = listCtrl.GetItemText(i,7);
+		if (v.IsEmpty())
+		{
+			v = ISNULL;
+		}
+		strV.append(v);
+		dataArray.append(v);
+
+		CString ks = listCtrl.GetItemText(i,8);
+		if (ks.IsEmpty())
+		{
+			ks = ISNULL;
+		}
+		strKS.append(ks);
+		dataArray.append(ks);
+
 	}
 	datas.push_back(strIndx);
 	datas.push_back(strQ);
 	datas.push_back(strCon);
 	datas.push_back(strP);
+	datas.push_back(strKP);
+	datas.push_back(strD);
+	datas.push_back(strV);
+	datas.push_back(strKS);
+
 }
 
 void PumpCapacityDlg::OnBnClickedOk()
@@ -241,7 +289,6 @@ void PumpCapacityDlg::OnBnClickedOk()
 	dataArray.append(m_gasConcentration);
 	dataArray.append(m_localP);
 	dataArray.append(m_maxQ);
-	dataArray.append(m_surplus);
 	dataArray.append(m_workCondiction);
 	dataArray.append(m_numPump);
 
@@ -249,18 +296,24 @@ void PumpCapacityDlg::OnBnClickedOk()
 	AcStringArray pumpListArray;
 	GetDatasFromList(m_pumpListCtrl,datas,pumpListArray);
 
-	CString strRet;
-	Caculate(dataArray,pumpListArray,strRet);
-	dataArray.append(strRet);
+	CString strPumpRet,strSysRet;
+	if(!Calculate::MineGasCapacityCacul(dataArray,pumpListArray,strPumpRet,strSysRet))
+	{
+		AfxMessageBox(_T("数据错误!"));
+	}
+
+	dataArray.append(strPumpRet);
+	dataArray.append(strSysRet);
 	dataVector.push_back(dataArray);
 
-	ReportDataHelper::WriteDatas(MINE_GAS_PUMP_CAPACITY,dataVector);
+	ReportDataHelper::WriteDatas(MINE_GAS_CAPACITY,dataVector);
 	if(!datas.empty())
 	{
 		ReportDataHelper::WriteDatas(PUMP_CAPACITY_LIST,datas);
 	}
 
-	m_ret = strRet;
+	m_pumpRet = strPumpRet;
+	m_sysRet = strSysRet;
 	UpdateData(FALSE);
 }
 
@@ -275,14 +328,4 @@ void PumpCapacityDlg::OnEnKillfocusPumpNumEdit()
 		}
 
 	}
-}
-
-bool PumpCapacityDlg::Caculate(const AcStringArray& baseData,const AcStringArray& pumpData,CString& strRet)
-{
-	if(!Calculate::PumpCapacityCacul(baseData,pumpData,strRet))
-	{
-		AfxMessageBox(_T("数据错误!"));
-		return false;
-	}
-	return true;
 }

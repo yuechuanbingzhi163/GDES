@@ -1,46 +1,59 @@
 #pragma once
 
-struct CListCtrl_DataRecord
+struct GasCapacity_DataRecord
 {
-	CListCtrl_DataRecord()
+	GasCapacity_DataRecord()
 	{}
 
-	CListCtrl_DataRecord(const CString& strIndx, const CString& strQ, const CString& strCon,  const CString& strP)
+	GasCapacity_DataRecord(const CString& strIndx, const CString& strQ, const CString& strCon,  const CString& strP, const CString& strKP, const CString& strD, const CString& strV, const CString& strKS)
 		:m_strIndx(strIndx)
 		,m_strQ(strQ)
 		,m_strCon(strCon)
 		,m_strP(strP)
+		,m_strKP(strKP)
+		,m_strD(strD)
+		,m_strV(strV)
+		,m_strKS(strKS)
 	{}
 
 	CString	m_strIndx;
 	CString	m_strQ;
 	CString	m_strCon;
 	CString m_strP;
+	CString	m_strKP;
+	CString	m_strD;
+	CString m_strV;
+	CString m_strKS;
+
 
 	CString GetCellText(int col, bool title) const
 	{
 		switch(col)
 		{
 		case 0: { static const CString title0(_T("序号")); return title ? title0 : m_strIndx; }
-		case 1: { static const CString title1(_T("瓦斯泵的额定流量(m3/min)")); return title ? title1 : m_strQ; }
+		case 1: { static const CString title1(_T("泵的额定流量(m3/min)")); return title ? title1 : m_strQ; }
 		case 2: { static const CString title2(_T("瓦斯抽采浓度(%)")); return title ? title2 : m_strCon; }
-		case 3: { static const CString title3(_T("瓦斯泵压力(kPa)")); return title ? title3 : m_strP; }
+		case 3: { static const CString title3(_T("泵压力(kPa)")); return title ? title3 : m_strP; }
+		case 4: { static const CString title4(_T("泵富余系数")); return title ? title4 : m_strKP; }
+		case 5: { static const CString title5(_T("管道内经(m)")); return title ? title5 : m_strD; }
+		case 6: { static const CString title6(_T("管道流速(m/s)")); return title ? title6 : m_strV; }
+		case 7: { static const CString title7(_T("管道富余系数")); return title ? title7 : m_strKS; }
 		default:{ static const CString emptyStr; return emptyStr; }
 		}
 	}
 
-	int  GetColCount() const { return 4; }
+	int  GetColCount() const { return 8; }
 };
 
-class CListCtrl_DataModel
+class GasCapacity_DataModel
 {
-	vector<CListCtrl_DataRecord> m_Records;
+	vector<GasCapacity_DataRecord> m_Records;
 	int	m_LookupTime;
 	int m_RowMultiplier;
 	int m_RowCount;
 
 public:
-	CListCtrl_DataModel()
+	GasCapacity_DataModel()
 		:m_RowMultiplier(0)
 		,m_LookupTime(0)
 		,m_RowCount(0)
@@ -65,7 +78,7 @@ public:
 		{
 			CString strIndx;
 			strIndx.Format(_T("%d"),i+oldCount+1);
-			m_Records.push_back( CListCtrl_DataRecord(strIndx,_T(""), _T(""), _T("") ));
+			m_Records.push_back( GasCapacity_DataRecord(strIndx,_T(""), _T(""), _T(""),_T("2.0"), _T(""), _T(""), _T("1.6") ));
 		}
 
 		//if (m_RowMultiplier > 1)
@@ -109,12 +122,12 @@ public:
 	//}
 
 	size_t GetRowIds() const { return m_Records.size(); }
-	int GetColCount() const { return CListCtrl_DataRecord().GetColCount(); }
-	CString GetColTitle(int col) const { return CListCtrl_DataRecord().GetCellText(col, true); }
+	int GetColCount() const { return GasCapacity_DataRecord().GetColCount(); }
+	CString GetColTitle(int col) const { return GasCapacity_DataRecord().GetCellText(col, true); }
 
-	vector<CListCtrl_DataRecord>& GetRecords() { return m_Records; }
+	vector<GasCapacity_DataRecord>& GetRecords() { return m_Records; }
 	void SetRowMultiplier(int multiply) { if (m_RowMultiplier != multiply ) { m_RowMultiplier = multiply; InitDataModel(); } }
 	void SetRowCount(int rowCount) { if (m_RowCount != rowCount ) { m_RowCount = rowCount;InitDataModel(); } }
-	void SetRecords(vector<CListCtrl_DataRecord> records){ m_Records.clear();copy(records.begin(),records.end(),back_inserter(m_Records));}
+	void SetRecords(vector<GasCapacity_DataRecord> records){ m_Records.clear();copy(records.begin(),records.end(),back_inserter(m_Records));}
 	//vector<CListCtrl_DataRecord> GetRecords(){ return m_Records;}
 };
