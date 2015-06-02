@@ -40,6 +40,9 @@ private:
 	CString m_workCondiction;
 	// 瓦斯抽采泵台数
 	CString m_numPump;
+	// 计算结果
+	CString m_ret;
+
 	CGridListCtrlGroups m_pumpListCtrl;
 	CListCtrl_DataModel m_dataModel;
 	vector<CListCtrl_DataRecord> m_records;
@@ -49,6 +52,7 @@ public:
 
 private:
 	void OnInitList();
+	bool Caculate(const AcStringArray& baseData,const AcStringArray& pumpData,CString& strRet);
 public:
 	afx_msg void OnEnKillfocusPumpNumEdit();
 };

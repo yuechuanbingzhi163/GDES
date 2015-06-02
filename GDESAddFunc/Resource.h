@@ -12,6 +12,8 @@
 #define IDC_SYS_CON_EDIT                105
 #define IDC_PUMP_LIST                   106
 #define IDC_PUMP_NUM_EDIT               107
+#define IDC_EDIT1                       108
+#define IDC_PUMP_RET_EDIT               108
 
 // Next default values for new objects
 // 
@@ -19,7 +21,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        103
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         108
+#define _APS_NEXT_CONTROL_VALUE         109
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif

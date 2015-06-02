@@ -3,5 +3,5 @@
 class Calculate
 {
 	public:
-		bool PumpCapacityCacul(const AcStringArray& baseDatas,const AcStringArray& pumpDatas,CString& strRet);
+		static bool PumpCapacityCacul(const AcStringArray& baseDatas,const AcStringArray& pumpDatas,CString& strRet);
 };

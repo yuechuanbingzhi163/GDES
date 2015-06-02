@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "PumpCapacityDlg.h"
+#include "Caculate.h"
+#include "config.h"
 
 #include "CGridListCtrlEx/CGridColumnTraitDateTime.h"
 #include "CGridListCtrlEx/CGridColumnTraitEdit.h"
@@ -8,7 +10,6 @@
 #include "CGridListCtrlEx/CGridRowTraitXP.h"
 #include "CGridListCtrlEx/ViewConfigSection.h"
 
-#include "config.h"
 // PumpCapacityDlg 对话框
 
 IMPLEMENT_DYNAMIC(PumpCapacityDlg, GasBaseAcesDlg)
@@ -22,6 +23,7 @@ PumpCapacityDlg::PumpCapacityDlg(CWnd* pParent /*=NULL*/)
 	, m_surplus(_T(""))
 	, m_workCondiction(_T(""))
 	, m_numPump(_T(""))
+	, m_ret(_T(""))
 {
 
 }
@@ -41,6 +43,7 @@ void PumpCapacityDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_SYS_CON_EDIT, m_workCondiction);
 	DDX_Text(pDX, IDC_PUMP_NUM_EDIT, m_numPump);
 	DDX_Control(pDX, IDC_PUMP_LIST, m_pumpListCtrl);
+	DDX_Text(pDX, IDC_PUMP_RET_EDIT, m_ret);
 }
 
 
@@ -64,6 +67,15 @@ static void setRecord(vector<CListCtrl_DataRecord>& records,const ArrayVector& d
 }
 
 static BOOL IsNum(CString &str)
+{
+	int n=str.GetLength();
+	for(int i=0;i<n;i++)
+		if ((str[i]<'0'||str[i]>'9') && str[i] != '.') 
+			return FALSE;
+	return TRUE;
+}
+
+static BOOL IsInt(CString &str)
 {
 	int n=str.GetLength();
 	for(int i=0;i<n;i++)
@@ -141,7 +153,7 @@ void PumpCapacityDlg::OnInitList()
 	}
 
 	UpdateData(FALSE);
-	if(IsNum(m_numPump))
+	if(IsInt(m_numPump))
 	{ 
 		if(_ttoi(m_numPump) > 0)
 		{
@@ -158,15 +170,18 @@ BOOL PumpCapacityDlg::OnInitDialog()
 
 	ArrayVector datasVector;
 	ReportDataHelper::ReadDatas(MINE_GAS_PUMP_CAPACITY,datasVector,1);
+	m_surplus = _T("2.0");
+	m_workCondiction = _T("0.75");
 	if(!datasVector.empty())
 	{
 		m_absGas = datasVector[0][0].kACharPtr();
 		m_gasConcentration = datasVector[1][0].kACharPtr();
-		m_maxQ = datasVector[2][0].kACharPtr();
-		m_localP = datasVector[3][0].kACharPtr();
+		m_localP = datasVector[2][0].kACharPtr();
+		m_maxQ = datasVector[3][0].kACharPtr();
 		m_surplus = datasVector[4][0].kACharPtr();
 		m_workCondiction = datasVector[5][0].kACharPtr();
 		m_numPump = datasVector[6][0].kACharPtr();
+		m_ret = datasVector[7][0].kACharPtr();
 	}
 
 	UpdateData(FALSE);
@@ -175,7 +190,7 @@ BOOL PumpCapacityDlg::OnInitDialog()
 	return TRUE;
 }
 
-static void GetDatasFromList(const CGridListCtrlGroups& listCtrl,ArrayVector& datas)
+static void GetDatasFromList(const CGridListCtrlGroups& listCtrl,ArrayVector& datas,AcStringArray& dataArray)
 {
 	AcStringArray strIndx, strQ, strCon, strP;
 	for(size_t i = 0; i < listCtrl.GetItemCount(); i++)
@@ -193,6 +208,7 @@ static void GetDatasFromList(const CGridListCtrlGroups& listCtrl,ArrayVector& da
 			q = ISNULL;
 		}
 		strQ.append(q);
+		dataArray.append(q);
 
 		CString concentration = listCtrl.GetItemText(i,3);
 		if (concentration.IsEmpty())
@@ -200,6 +216,7 @@ static void GetDatasFromList(const CGridListCtrlGroups& listCtrl,ArrayVector& da
 			concentration = ISNULL;
 		}
 		strCon.append(concentration);
+		dataArray.append(concentration);
 
 		CString p = listCtrl.GetItemText(i,4);
 		if (p.IsEmpty())
@@ -207,6 +224,7 @@ static void GetDatasFromList(const CGridListCtrlGroups& listCtrl,ArrayVector& da
 			p = ISNULL;
 		}
 		strP.append(p);
+		dataArray.append(p);
 	}
 	datas.push_back(strIndx);
 	datas.push_back(strQ);
@@ -221,29 +239,35 @@ void PumpCapacityDlg::OnBnClickedOk()
 	AcStringArray dataArray;
 	dataArray.append(m_absGas);
 	dataArray.append(m_gasConcentration);
-	dataArray.append(m_maxQ);
 	dataArray.append(m_localP);
+	dataArray.append(m_maxQ);
 	dataArray.append(m_surplus);
 	dataArray.append(m_workCondiction);
 	dataArray.append(m_numPump);
 
+	ArrayVector datas;
+	AcStringArray pumpListArray;
+	GetDatasFromList(m_pumpListCtrl,datas,pumpListArray);
+
+	CString strRet;
+	Caculate(dataArray,pumpListArray,strRet);
+	dataArray.append(strRet);
 	dataVector.push_back(dataArray);
 
 	ReportDataHelper::WriteDatas(MINE_GAS_PUMP_CAPACITY,dataVector);
-
-	ArrayVector datas;
-	GetDatasFromList(m_pumpListCtrl,datas);
 	if(!datas.empty())
 	{
 		ReportDataHelper::WriteDatas(PUMP_CAPACITY_LIST,datas);
 	}
 
+	m_ret = strRet;
+	UpdateData(FALSE);
 }
 
 void PumpCapacityDlg::OnEnKillfocusPumpNumEdit()
 {
 	UpdateData(TRUE);
-	if(IsNum(m_numPump))
+	if(IsInt(m_numPump))
 	{ 
 		if(_ttoi(m_numPump) > 0)
 		{
@@ -251,4 +275,14 @@ void PumpCapacityDlg::OnEnKillfocusPumpNumEdit()
 		}
 
 	}
+}
+
+bool PumpCapacityDlg::Caculate(const AcStringArray& baseData,const AcStringArray& pumpData,CString& strRet)
+{
+	if(!Calculate::PumpCapacityCacul(baseData,pumpData,strRet))
+	{
+		AfxMessageBox(_T("数据错误!"));
+		return false;
+	}
+	return true;
 }
