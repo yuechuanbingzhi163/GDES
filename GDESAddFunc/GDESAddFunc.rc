@@ -203,6 +203,40 @@ BEGIN
     EDITTEXT        IDC_RATE_ABS_GAS_EDIT,310,5,49,14,ES_AUTOHSCROLL
 END
 
+IDD_RET_DIALOG DIALOGEX 0, 0, 277, 161
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "核定结果查看"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,81,144,50,14
+    PUSHBUTTON      "取消",IDCANCEL,147,144,50,14
+    GROUPBOX        "煤矿瓦斯抽采达标生产能力核定",IDC_STATIC,0,6,277,88
+    LTEXT           "按矿井瓦斯抽采泵站装机能力核定年产量....",IDC_STATIC,25,21,156,8
+    EDITTEXT        IDC_RET_PUMP_EDIT,184,19,52,12,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "(万t/a)",IDC_STATIC,240,21,24,8
+    LTEXT           "按矿井瓦斯抽采主管道系统能力核定年产量..",IDC_STATIC,25,35,156,8
+    EDITTEXT        IDC_RET_SYS_EDIT,184,34,52,12,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "(万t/a)",IDC_STATIC,240,36,24,8
+    LTEXT           "按矿井实际抽瓦斯含量核定年产量.............",IDC_STATIC,25,49,156,8
+    EDITTEXT        IDC_RET_YEAR_EDIT,184,49,52,12,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "(万t/a)",IDC_STATIC,240,51,24,8
+    LTEXT           "按矿井满足防突要求核定的年产量.............",IDC_STATIC,25,63,156,8
+    EDITTEXT        IDC_RET_PRE_EDIT,184,64,52,12,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "(万t/a)",IDC_STATIC,240,66,24,8
+    LTEXT           "按矿井瓦斯抽采率核定............................",IDC_STATIC,25,77,156,8
+    EDITTEXT        IDC_RET_RATE_EDIT,184,79,52,12,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "(万t/a)",IDC_STATIC,240,81,24,8
+    LTEXT           "①",IDC_STATIC,13,21,9,8
+    LTEXT           "②",IDC_STATIC,13,35,9,8
+    LTEXT           "③",IDC_STATIC,13,49,9,8
+    LTEXT           "④",IDC_STATIC,13,63,9,8
+    LTEXT           "⑤",IDC_STATIC,13,77,9,8
+    GROUPBOX        "最终核定结果",IDC_STATIC,1,97,276,40
+    LTEXT           "煤矿瓦斯抽采达标生产能力核定为",IDC_STATIC,39,117,121,8
+    EDITTEXT        IDC_RET_EDIT,163,117,47,14,ES_AUTOHSCROLL | WS_DISABLED | NOT WS_BORDER
+    LTEXT           "(万t/a)",IDC_STATIC,211,117,24,8
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -226,6 +260,11 @@ BEGIN
     IDD_GAS_RATE_DIALOG, DIALOG
     BEGIN
         BOTTOMMARGIN, 91
+    END
+
+    IDD_RET_DIALOG, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 158
     END
 END
 #endif    // APSTUDIO_INVOKED

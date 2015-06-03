@@ -403,6 +403,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RetDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RockCoalUncover.cpp"
 				>
 			</File>
@@ -485,6 +489,10 @@
 			</File>
 			<File
 				RelativePath=".\Resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RetDlg.h"
 				>
 			</File>
 			<File

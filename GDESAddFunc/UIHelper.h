@@ -7,5 +7,6 @@ public:
 	static void ShowRealGasDlg();
 	static void ShowPreGasDlg();
 	static void ShowRateGasDlg();
+	static void ShowRetDlg();
 };
 

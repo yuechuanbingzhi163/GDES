@@ -4,6 +4,7 @@
 #include "RealGasQDlg.h"
 #include "PreGasDlg.h"
 #include "RateGasDlg.h"
+#include "RetDlg.h"
 
 void UIHelper::ShowPumpCapacityDlg()
 {
@@ -31,5 +32,12 @@ void UIHelper::ShowRateGasDlg()
 {
 	CAcModuleResourceOverride myResources;
 	RateGasDlg dlg;
+	dlg.DoModal();
+}
+
+void UIHelper::ShowRetDlg()
+{
+	CAcModuleResourceOverride myResources;
+	RetDlg dlg;
 	dlg.DoModal();
 }
