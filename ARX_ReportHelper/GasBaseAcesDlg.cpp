@@ -50,9 +50,29 @@ BOOL GasBaseAcesDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
+	EnableToolTips(TRUE);
+	m_tt.Create(this);
+	m_tt.Activate(TRUE);
+
 	return TRUE;
 }
 
+BOOL GasBaseAcesDlg::PreTranslateMessage( MSG* pMsg )
+{
+	if (NULL != m_tt.GetSafeHwnd())
+	{
+		m_tt.RelayEvent(pMsg);
+	}
+
+	return CDialog::PreTranslateMessage(pMsg);
+
+}
+
+void GasBaseAcesDlg::SetToolTip( int itemID,const CString& tooltip )
+{
+	CWnd* pW=GetDlgItem(itemID);//得到控件的指针
+	m_tt.AddTool(pW,tooltip);//为此控件添加tip
+}
 //BOOL GasBaseAcesDlg::readDataFromFile( const CString& txtName, AcStringArray& datasArray )
 //{
 //	CString dataDirName = _T( "Datas\\BaseTemp\\" );

@@ -35,4 +35,5 @@ private:
 	CString m_k;
 	// ¼ÆËã½á¹û
 	CString m_yearRet;
+
 };

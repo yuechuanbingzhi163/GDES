@@ -23,15 +23,19 @@ public:
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
 	virtual BOOL OnInitDialog();
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
 
 	//virtual BOOL readDataFromFile(const CString& txtName, AcStringArray& datasArray);
 	//virtual BOOL WriteDataToFile(const CString& txtName,const AcStringArray& nameArray,const AcStringArray& datasArray);
 	
 	CString GetAppPathDir();
 	CString BuildPath( const CString& dir, const CString& fileName );
-
+	void SetToolTip(int itemID,const CString& tooltip);
+	
 	DECLARE_MESSAGE_MAP()
 
 protected:
 	HICON m_hIcon;
+	CToolTipCtrl m_tt;
+
 };

@@ -58,6 +58,16 @@ BOOL RealGasQDlg::OnInitDialog()
 
 
 	UpdateData(FALSE);
+
+	SetToolTip(IDC_YEAR_MAXQ_EDIT,_T("最大抽采吨煤量"));
+	//EnableToolTips(TRUE);
+	//m_tt.Create(this);
+	//m_tt.Activate(TRUE);
+	//CWnd* pW=GetDlgItem(IDC_YEAR_ABS_GAS_EDIT);//得到控件的指针
+	//m_tt.AddTool(pW,L"Check1lakjsfasfdasfd");//为此控件添加tip
+	//pW=GetDlgItem(IDC_YEAR_MAXQ_EDIT);//得到控件的指针
+	//m_tt.AddTool(pW,L"是不是");//为此控件添加tip
+
 	return TRUE;
 }
 
