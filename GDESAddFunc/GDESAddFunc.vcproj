@@ -387,7 +387,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PreGasDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\PumpCapacityDlg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RateGasDlg.cpp"
 				>
 			</File>
 			<File
@@ -456,7 +464,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PreGas_DataModel.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PreGasDlg.h"
+				>
+			</File>
+			<File
 				RelativePath=".\PumpCapacityDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RateGasDlg.h"
 				>
 			</File>
 			<File

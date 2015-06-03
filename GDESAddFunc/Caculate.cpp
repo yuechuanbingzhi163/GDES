@@ -93,3 +93,62 @@ bool Calculate::MineGasRealCacul( const AcStringArray& datas,CString& strYearRet
 	strYearRet.Format(_T("%.2lf"),ret);
 	return true;
 }
+
+/*
+ * 参数1代表
+ * |-0核定区域内煤层的最大瓦斯含量
+ * |-1抽采后满足防突要求的残余瓦斯含量
+ * |-2矿井回采率
+ * |-3矿井年实际预抽瓦斯量
+ * |-4邻近层和围岩瓦斯储量系数
+ * |-5矿井掘进出煤系数
+ * |-6工作面数
+ * 参数2代表
+ * 工作面平均长度、平均采高、原煤视密度、平均日推进度、工作面回采率
+*/
+
+bool Calculate::MinePreGasCacul( const AcStringArray& baseDatas,const AcStringArray& listDatas,CString& strRet )
+{
+	if(baseDatas.isEmpty() || listDatas.isEmpty()) return false;
+	doubleVector dBaseDatas,dListDatas;
+	StringsToNum(baseDatas,dBaseDatas);
+	StringsToNum(listDatas,dListDatas);
+	if(dBaseDatas[4] <= 0) return false;
+	if(abs(dBaseDatas[0] - dBaseDatas[1]) < 0.00001) return false;
+	int faceNum = (int)dBaseDatas[6];
+	double sumFace = 0;
+	for(int j = 0; j < faceNum; j++)
+	{
+		double length = dListDatas[5*j];
+		double height = dListDatas[5*j+1];
+		double dencity = dListDatas[5*j+2];
+		double dayAdvance = dListDatas[5*j + 3];
+		double recovRate = dListDatas[5*j+4];
+
+		double temp = length*height*dencity*dayAdvance*0.01*recovRate;
+		sumFace += temp;
+	}
+
+	double ret = dBaseDatas[3]*0.01*dBaseDatas[2]*0.0001/dBaseDatas[4]/(dBaseDatas[0] - dBaseDatas[1]) + dBaseDatas[5]*330*0.0001*sumFace;
+	strRet.Format(_T("%.2lf"),ret);
+	return true;
+
+}
+
+/*
+ * 参数1代表
+ * |-0矿井相对瓦斯涌出量
+ * |-1瓦斯抽采达标允许最大矿井绝对瓦斯涌出量
+*/
+
+bool Calculate::MineRateGasCacul( const AcStringArray& datas,CString& strRet )
+{
+	if(datas.isEmpty()) return false;
+	doubleVector dDatas;
+	StringsToNum(datas,dDatas);
+
+	if(dDatas[0] <= 0) return false;
+	double ret = dDatas[1] * 330 * 1440 * 0.0001 / dDatas[0];
+	strRet.Format(_T("%.2lf"),ret);
+	return true;
+}

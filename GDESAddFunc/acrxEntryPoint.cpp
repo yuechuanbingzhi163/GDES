@@ -19,6 +19,9 @@ static void AddReportObject()
 	GDESDataObjectHelper::AddObject(MINE_GAS_CAPACITY);
 	GDESDataObjectHelper::AddObject(PUMP_CAPACITY_LIST);
 	GDESDataObjectHelper::AddObject(YEAR_REAL_GAS);
+	GDESDataObjectHelper::AddObject(PRE_GAS);
+	GDESDataObjectHelper::AddObject(PRE_GAS_LIST);
+	GDESDataObjectHelper::AddObject(RATE_GAS);
 }
 
 class CGDESAddFuncApp : public AcRxArxApp {
@@ -65,6 +68,15 @@ public:
 		UIHelper::ShowRealGasDlg();
 	}
 
+	static void JL_PreGasDlg( void )
+	{
+		UIHelper::ShowPreGasDlg();
+	}
+
+	static void JL_RateGasDlg( void )
+	{
+		UIHelper::ShowRateGasDlg();
+	}
 
 } ;
 
@@ -72,3 +84,5 @@ public:
 IMPLEMENT_ARX_ENTRYPOINT(CGDESAddFuncApp)
 ACED_ARXCOMMAND_ENTRY_AUTO( CGDESAddFuncApp, JL, _PumpCapacityDlg, PumpCapacityDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGDESAddFuncApp, JL, _RealGasDlg, RealGasDlg, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CGDESAddFuncApp, JL, _PreGasDlg, PreGasDlg, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CGDESAddFuncApp, JL, _RateGasDlg, RateGasDlg, ACRX_CMD_TRANSPARENT, NULL )
