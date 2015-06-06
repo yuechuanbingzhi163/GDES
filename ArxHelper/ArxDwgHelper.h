@@ -14,7 +14,7 @@ public:
 	//更新图形
 	static void UpdateDwg();
 
-	//获取当前模块运行路径
+	//获取模块运行路径
 	static CString GetAppPathDir(HINSTANCE hInstance);
 
 	//构造路径
