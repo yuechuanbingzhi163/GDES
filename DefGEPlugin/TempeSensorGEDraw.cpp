@@ -75,7 +75,7 @@ Adesk::Boolean TempeSensorGEDraw::subWorldDraw( AcGiWorldDraw* mode )
 		pt += 0.2 * m_radius * v;
 	}
 
-	DrawMText(mode,pt,m_angle,_T("T"),0.6 * m_radius);
+	DrawMText(mode,pt,m_angle,_T("C"),0.6 * m_radius);
 	
 	v.rotateBy( PI,AcGeVector3d::kZAxis );
 	pt = m_insertPt + 0.5 * m_radius * v;
