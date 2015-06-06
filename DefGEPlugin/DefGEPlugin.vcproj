@@ -640,6 +640,14 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Pore"
+				>
+				<File
+					RelativePath=".\SimplePoreGEDraw.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Include Files"
@@ -878,6 +886,14 @@
 				>
 				<File
 					RelativePath=".\GasSensorGEDraw.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Pore"
+				>
+				<File
+					RelativePath=".\SimplePoreGEDraw.h"
 					>
 				</File>
 			</Filter>

@@ -437,6 +437,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\PoreGE.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\QTagGE.cpp"
 				>
 			</File>
@@ -579,6 +583,10 @@
 			</File>
 			<File
 				RelativePath=".\Joint.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PoreGE.h"
 				>
 			</File>
 			<File

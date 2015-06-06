@@ -79,6 +79,9 @@
 //ÍßË¹´«¸ÐÆ÷
 #include "GasSensorGEDraw.h"
 
+//×ê¿×
+#include "SimplePoreGEDraw.h"
+
 // ¾®Í²
 //#include "DoubleShaftDraw.h"
 
@@ -187,6 +190,9 @@ void DefGEPlugin::initialize( MineGEDrawManager* pGEDrawManager )
 	//ÍßË¹´«¸ÐÆ÷
 	REGISTER_MINEGE_DRAW( GasSensorGE, GasSensorGEDraw );
 
+	//×ê¿×
+	REGISTER_MINEGE_DRAW( PoreGE, SimplePoreGEDraw );
+
     END_REGISTER_MINEGE_DRAW
 }
 
@@ -270,6 +276,9 @@ void DefGEPlugin::unInitialize( MineGEDrawManager* pGEDrawManager )
 
 	//ÍßË¹´«¸ÐÆ÷
 	UNREGISTER_MINEGE_DRAW( GasSensorGE, GasSensorGEDraw );
+
+	//×ê¿×
+	UNREGISTER_MINEGE_DRAW( PoreGE, SimplePoreGEDraw );
 
     END_UNREGISTER_MINEGE_DRAW
 }
