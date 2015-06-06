@@ -386,10 +386,10 @@ void test4()
 
 int main(int argc, char** argv)
 {
-	//test1();
-	//test2();
+	test1();
+	test2();
 	test_dbHelper();
-	//CreatePumpDB();
+	CreatePumpDB();
 
 	return 0;
 }

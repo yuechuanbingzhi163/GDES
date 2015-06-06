@@ -1,0 +1,465 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", "DrawGasCmd ObjectARX application"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "DrawGasCmd"
+            VALUE "LegalCopyright", "Copyright ?2002"
+            VALUE "OriginalFilename", "DrawGasCmd.arx"
+            VALUE "ProductName", "DrawGasCmd Application"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_GOP_DLG DIALOGEX 0, 0, 282, 160
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "瓦斯突出点参数"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,37,127,71,23
+    PUSHBUTTON      "取消",IDCANCEL,166,127,71,23
+    GROUPBOX        "基点",IDC_STATIC,7,23,68,99
+    CONTROL         "Button1",IDC_GOP_PT_BTN,"Button",BS_OWNERDRAW | WS_TABSTOP,8,34,19,15
+    LTEXT           "X:",IDC_STATIC,11,52,8,8
+    EDITTEXT        IDC_GOP_X_POS,24,53,49,14,ES_AUTOHSCROLL
+    LTEXT           "Y:",IDC_STATIC,11,76,8,8
+    EDITTEXT        IDC_GOP_Y_POS,24,77,49,14,ES_AUTOHSCROLL
+    LTEXT           "Z:",IDC_STATIC,11,100,8,8
+    EDITTEXT        IDC_GOP_Z_POS,24,101,49,14,ES_AUTOHSCROLL
+    LTEXT           "突出煤量",IDC_STATIC,92,35,33,8
+    EDITTEXT        IDC_GOP_COAL_MINE,145,30,66,16,ES_AUTOHSCROLL
+    LTEXT           "涌出瓦斯总量",IDC_STATIC,92,59,49,8
+    EDITTEXT        IDC_GOP_GAS,145,54,66,16,ES_AUTOHSCROLL
+    LTEXT           "标高",IDC_STATIC,92,83,17,8
+    EDITTEXT        IDC_GOP_LEVEL,145,78,66,16,ES_AUTOHSCROLL
+    LTEXT           "突出年月日",IDC_STATIC,92,107,41,8
+    GROUPBOX        "参数",IDC_STATIC,85,23,190,100
+    LTEXT           "（单位：t）",IDC_STATIC,215,35,44,8
+    LTEXT           "（单位：万m3）",IDC_STATIC,215,59,58,8
+    LTEXT           "（单位：m）",IDC_STATIC,215,83,46,8
+    EDITTEXT        IDC_GOP_DATE,145,102,66,16,ES_AUTOHSCROLL
+    LTEXT           "突出规模",IDC_STATIC,10,8,33,8
+    COMBOBOX        IDC_GOP_TYPE,56,7,67,61,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_GCP_DLG DIALOGEX 0, 0, 282, 143
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "测点瓦斯含量参数"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,45,112,73,24
+    PUSHBUTTON      "取消",IDCANCEL,179,112,73,24
+    GROUPBOX        "基点",IDC_STATIC,7,7,68,99
+    CONTROL         "Button1",IDC_GCP_PT_BTN,"Button",BS_OWNERDRAW | WS_TABSTOP,8,18,19,15
+    LTEXT           "X:",IDC_STATIC,11,36,8,8
+    EDITTEXT        IDC_GCP_X_POS,24,37,49,14,ES_AUTOHSCROLL
+    LTEXT           "Y:",IDC_STATIC,11,60,8,8
+    EDITTEXT        IDC_GCP_Y_POS,24,61,49,14,ES_AUTOHSCROLL
+    LTEXT           "Z:",IDC_STATIC,11,84,8,8
+    EDITTEXT        IDC_GCP_Z_POS,24,85,49,14,ES_AUTOHSCROLL
+    LTEXT           "瓦斯含量",IDC_STATIC,92,16,33,8
+    EDITTEXT        IDC_GCP_GAS,145,11,66,16,ES_AUTOHSCROLL
+    LTEXT           "测点标高",IDC_STATIC,92,49,33,8
+    EDITTEXT        IDC_GCP_LEVEL,145,44,66,16,ES_AUTOHSCROLL
+    LTEXT           "埋深",IDC_STATIC,92,82,17,8
+    GROUPBOX        "参数",IDC_STATIC,85,3,190,100
+    LTEXT           "（单位：m3/t）",IDC_STATIC,215,16,56,8
+    LTEXT           "（单位：m）",IDC_STATIC,215,48,46,8
+    EDITTEXT        IDC_GCP_HEIGHT,145,77,66,16,ES_AUTOHSCROLL
+    LTEXT           "（单位：m）",IDC_STATIC,215,80,46,8
+END
+
+IDD_GPP_DLG DIALOGEX 0, 0, 282, 145
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "测点瓦斯压力参数"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,40,112,63,26
+    PUSHBUTTON      "取消",IDCANCEL,181,112,63,26
+    GROUPBOX        "基点",IDC_STATIC,7,7,68,99
+    CONTROL         "Button1",IDC_GPP_PT_BTN,"Button",BS_OWNERDRAW | WS_TABSTOP,8,18,19,15
+    LTEXT           "X:",IDC_STATIC,11,36,8,8
+    EDITTEXT        IDC_GPP_X_POS,24,37,49,14,ES_AUTOHSCROLL
+    LTEXT           "Y:",IDC_STATIC,11,60,8,8
+    EDITTEXT        IDC_GPP_Y_POS,24,61,49,14,ES_AUTOHSCROLL
+    LTEXT           "Z:",IDC_STATIC,11,84,8,8
+    EDITTEXT        IDC_GPP_Z_POS,24,85,49,14,ES_AUTOHSCROLL
+    LTEXT           "瓦斯压力值",IDC_STATIC,92,16,41,8
+    EDITTEXT        IDC_GPP_PRESSURE,145,11,66,16,ES_AUTOHSCROLL
+    LTEXT           "测点标高",IDC_STATIC,92,49,33,8
+    EDITTEXT        IDC_GPP_LEVEL,145,44,66,16,ES_AUTOHSCROLL
+    LTEXT           "埋深",IDC_STATIC,92,82,17,8
+    GROUPBOX        "参数",IDC_STATIC,85,3,190,100
+    LTEXT           "（单位：MPa）",IDC_STATIC,215,16,54,8
+    LTEXT           "（单位：m）",IDC_STATIC,215,48,46,8
+    EDITTEXT        IDC_GPP_HEIGHT,145,77,66,16,ES_AUTOHSCROLL
+    LTEXT           "（单位：m）",IDC_STATIC,215,80,46,8
+END
+
+IDD_PPP_DLG DIALOGEX 0, 0, 282, 140
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "动力现象点参数"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,39,112,60,21
+    PUSHBUTTON      "取消",IDCANCEL,176,112,60,21
+    GROUPBOX        "基点",IDC_STATIC,7,5,68,99
+    CONTROL         "Button1",IDC_PPP_PT_BTN,"Button",BS_OWNERDRAW | WS_TABSTOP,8,16,19,15
+    EDITTEXT        IDC_PPP_X_POS,24,35,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PPP_Y_POS,24,59,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ppP_Z_POS,24,83,49,14,ES_AUTOHSCROLL
+    LTEXT           "突出煤岩量",IDC_STATIC,92,17,41,8
+    EDITTEXT        IDC_PPP_COAL_MINE,145,12,66,16,ES_AUTOHSCROLL
+    LTEXT           "涌出瓦斯总量",IDC_STATIC,92,41,49,8
+    EDITTEXT        IDC_PPP_GAS,145,36,66,16,ES_AUTOHSCROLL
+    LTEXT           "标高",IDC_STATIC,92,65,17,8
+    EDITTEXT        IDC_PPP_LEVEL,145,60,66,16,ES_AUTOHSCROLL
+    LTEXT           "突出年月日",IDC_STATIC,92,89,41,8
+    GROUPBOX        "参数",IDC_STATIC,85,5,190,100
+    LTEXT           "（单位：t）",IDC_STATIC,215,17,44,8
+    LTEXT           "（单位：m3）",IDC_STATIC,215,41,50,8
+    LTEXT           "（单位：m）",IDC_STATIC,215,65,46,8
+    EDITTEXT        IDC_PPP_DATE,145,84,66,16,ES_AUTOHSCROLL
+    LTEXT           "X:",IDC_STATIC,11,38,8,8
+    LTEXT           "Y:",IDC_STATIC,11,62,8,8
+    LTEXT           "Z:",IDC_STATIC,11,86,8,8
+END
+
+IDD_CSDCI_DLG DIALOGEX 0, 0, 282, 142
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,35,112,68,22
+    PUSHBUTTON      "取消",IDCANCEL,169,112,68,22
+    GROUPBOX        "基点",IDC_STATIC,7,5,68,99
+    CONTROL         "Button1",IDC_CSDCI_PT_BTN,"Button",BS_OWNERDRAW | WS_TABSTOP,8,16,19,15
+    EDITTEXT        IDC_CSDCI_X_POS,24,35,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CSDCI_Y_POS,24,59,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CSDCI_Z_POS,24,83,49,14,ES_AUTOHSCROLL
+    LTEXT           "瓦斯放散初速度",IDC_STATIC,92,20,57,8
+    EDITTEXT        IDC_CSDCI_VELOCITY,127,34,66,16,ES_AUTOHSCROLL
+    LTEXT           "煤的坚固性系数",IDC_STATIC,92,64,57,8
+    EDITTEXT        IDC_CSDCI_COEFF,129,79,66,16,ES_AUTOHSCROLL
+    GROUPBOX        "参数",IDC_STATIC,85,5,190,100
+    LTEXT           "（单位：m/s）",IDC_STATIC,201,36,52,8
+    LTEXT           "X:",IDC_STATIC,11,38,8,8
+    LTEXT           "Y:",IDC_STATIC,11,62,8,8
+    LTEXT           "Z:",IDC_STATIC,11,86,8,8
+END
+
+IDD_WDCI1_DLG DIALOGEX 0, 0, 282, 142
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "工作面突出危险性预测指标值1"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,35,112,68,22
+    PUSHBUTTON      "取消",IDCANCEL,169,112,68,22
+    GROUPBOX        "基点",IDC_STATIC,7,5,68,99
+    CONTROL         "Button1",IDC_WDCI1_PT_BTN,"Button",BS_OWNERDRAW | WS_TABSTOP,8,16,19,15
+    EDITTEXT        IDC_WDCI1_X_POS,24,35,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_WDCI1_Y_POS,24,59,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_WDCI1_Z_POS,24,83,49,14,ES_AUTOHSCROLL
+    LTEXT           "钻屑解吸指标",IDC_STATIC,92,20,49,8
+    EDITTEXT        IDC_WDCI1_DELTA_H2,127,34,66,16,ES_AUTOHSCROLL
+    LTEXT           "钻孔最大钻屑量",IDC_STATIC,92,64,57,8
+    EDITTEXT        IDC_WDCI1_S_MAX,129,79,66,16,ES_AUTOHSCROLL
+    GROUPBOX        "参数",IDC_STATIC,85,5,190,100
+    LTEXT           "（单位：Pa）",IDC_STATIC,201,36,49,8
+    LTEXT           "X:",IDC_STATIC,11,38,8,8
+    LTEXT           "Y:",IDC_STATIC,11,62,8,8
+    LTEXT           "Z:",IDC_STATIC,11,86,8,8
+    LTEXT           "（单位：L/m）",IDC_STATIC,201,81,52,8
+END
+
+IDD_WDCI2_DLG DIALOGEX 0, 0, 282, 152
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "工作面突出危险性预测指标值2"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,35,122,68,22
+    PUSHBUTTON      "取消",IDCANCEL,169,122,68,22
+    GROUPBOX        "基点",IDC_STATIC,7,5,68,109
+    CONTROL         "Button1",IDC_WDCI2_PT_BTN,"Button",BS_OWNERDRAW | WS_TABSTOP,8,16,19,15
+    EDITTEXT        IDC_WDCI2_X_POS,24,35,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_WDCI2_Y_POS,24,59,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_WDCI2_Z_POS,24,83,49,14,ES_AUTOHSCROLL
+    LTEXT           "钻孔最大瓦斯涌出初速度",IDC_STATIC,92,14,89,8
+    EDITTEXT        IDC_WDCI2_VELOCITY,127,28,66,16,ES_AUTOHSCROLL
+    LTEXT           "钻孔最大钻屑量",IDC_STATIC,92,48,57,8
+    EDITTEXT        IDC_WDCI2_S_MAX,129,63,66,16,ES_AUTOHSCROLL
+    GROUPBOX        "参数",IDC_STATIC,85,5,190,111
+    LTEXT           "（单位：L/(m?min)）",IDC_STATIC,201,30,72,8
+    LTEXT           "X:",IDC_STATIC,11,38,8,8
+    LTEXT           "Y:",IDC_STATIC,11,62,8,8
+    LTEXT           "Z:",IDC_STATIC,11,86,8,8
+    LTEXT           "（单位：L/m）",IDC_STATIC,201,65,52,8
+    LTEXT           "R值指标",IDC_STATIC,93,82,30,8
+    EDITTEXT        IDC_WDCI2_R,131,95,66,16,ES_AUTOHSCROLL
+END
+
+IDD_WGFP_DLG DIALOGEX 0, 0, 291, 138
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "回采工作面瓦斯涌出量点参数"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,37,108,71,23
+    PUSHBUTTON      "取消",IDCANCEL,166,108,71,23
+    GROUPBOX        "基点",-1,7,4,68,99
+    CONTROL         "Button1",IDC_WGFP_PT_BTN,"Button",BS_OWNERDRAW | WS_TABSTOP,8,15,19,15
+    LTEXT           "X:",-1,11,33,8,8
+    EDITTEXT        IDC_WGFP_X_POS,24,34,49,14,ES_AUTOHSCROLL
+    LTEXT           "Y:",-1,11,57,8,8
+    EDITTEXT        IDC_WGFP_Y_POS,24,58,49,14,ES_AUTOHSCROLL
+    LTEXT           "Z:",-1,11,81,8,8
+    EDITTEXT        IDC_WGFP_Z_POS,24,82,49,14,ES_AUTOHSCROLL
+    LTEXT           "绝对瓦斯涌出量",-1,92,16,57,8
+    EDITTEXT        IDC_WGFP_AQ,152,11,66,16,ES_AUTOHSCROLL
+    LTEXT           "相对瓦斯涌出量",-1,92,40,57,8
+    EDITTEXT        IDC_WGFP_RQ,152,35,66,16,ES_AUTOHSCROLL
+    LTEXT           "工作面日产量",-1,92,64,49,8
+    EDITTEXT        IDC_WGFP_T,152,59,66,16,ES_AUTOHSCROLL
+    LTEXT           "回采年月",-1,92,88,33,8
+    GROUPBOX        "参数",-1,83,4,201,100
+    LTEXT           "（单位：(m3/min）",-1,222,16,66,8
+    LTEXT           "（单位：(m3/t）",-1,222,40,58,8
+    LTEXT           "（单位：t）",-1,222,64,44,8
+    EDITTEXT        IDC_WGFP_DATE,152,83,66,16,ES_AUTOHSCROLL
+END
+
+IDD_TGFP_DLG DIALOGEX 0, 0, 262, 138
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "掘进工作面绝对瓦斯涌出量点参数"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,37,108,71,23
+    PUSHBUTTON      "取消",IDCANCEL,155,108,71,23
+    GROUPBOX        "基点",-1,7,4,68,99
+    CONTROL         "Button1",IDC_TGFP_PT_BTN,"Button",BS_OWNERDRAW | WS_TABSTOP,8,15,19,15
+    LTEXT           "X:",-1,11,33,8,8
+    EDITTEXT        IDC_TGFP_X_POS,24,34,49,14,ES_AUTOHSCROLL
+    LTEXT           "Y:",-1,11,57,8,8
+    EDITTEXT        IDC_TGFP_Y_POS,24,58,49,14,ES_AUTOHSCROLL
+    LTEXT           "Z:",-1,11,81,8,8
+    EDITTEXT        IDC_TGFP_Z_POS,24,82,49,14,ES_AUTOHSCROLL
+    LTEXT           "绝对瓦斯涌出量",-1,92,19,57,8
+    EDITTEXT        IDC_TGFP_AQ,118,33,66,16,ES_AUTOHSCROLL
+    LTEXT           "掘进年月",-1,92,64,33,8
+    GROUPBOX        "参数",-1,83,4,172,100
+    LTEXT           "（单位：(m3/min）",-1,188,36,66,8
+    EDITTEXT        IDC_TGFP_DATE,118,81,66,16,ES_AUTOHSCROLL
+END
+
+IDD_CDH_DLG DIALOGEX 0, 0, 270, 139
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "见煤钻孔 "
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,34,109,71,23
+    PUSHBUTTON      "取消",IDCANCEL,160,109,71,23
+    GROUPBOX        "基点",IDC_STATIC,7,5,68,99
+    CONTROL         "Button1",IDC_CDH_PT_BTN,"Button",BS_OWNERDRAW | WS_TABSTOP,8,16,19,15
+    LTEXT           "X:",IDC_STATIC,11,34,8,8
+    EDITTEXT        IDC_CDH_X_POS,24,35,49,14,ES_AUTOHSCROLL
+    LTEXT           "Y:",IDC_STATIC,11,58,8,8
+    EDITTEXT        IDC_CDH_Y_POS,24,59,49,14,ES_AUTOHSCROLL
+    LTEXT           "Z:",IDC_STATIC,11,82,8,8
+    EDITTEXT        IDC_CDH_Z_POS,24,83,49,14,ES_AUTOHSCROLL
+    LTEXT           "孔号",IDC_STATIC,92,17,17,8
+    EDITTEXT        IDC_CDH_NUM,145,12,66,16,ES_AUTOHSCROLL
+    LTEXT           "地面标高",IDC_STATIC,92,41,33,8
+    EDITTEXT        IDC_CDH_H1,145,36,66,16,ES_AUTOHSCROLL
+    LTEXT           "煤层底板标高",IDC_STATIC,92,65,49,8
+    EDITTEXT        IDC_CDH_H2,145,60,66,16,ES_AUTOHSCROLL
+    LTEXT           "煤厚",IDC_STATIC,92,89,17,8
+    GROUPBOX        "参数",IDC_STATIC,85,5,178,100
+    LTEXT           "（单位：m）",IDC_STATIC,215,41,46,8
+    LTEXT           "（单位：m）",IDC_STATIC,215,65,46,8
+    EDITTEXT        IDC_CDH_THICKNESS,145,84,66,16,ES_AUTOHSCROLL
+    LTEXT           "（单位：m）",IDC_STATIC,215,88,46,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_GOP_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 275
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 153
+    END
+
+    IDD_GCP_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 275
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 136
+    END
+
+    IDD_GPP_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 275
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 138
+    END
+
+    IDD_PPP_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 275
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 133
+    END
+
+    IDD_CSDCI_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 275
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 135
+    END
+
+    IDD_WDCI1_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 275
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 135
+    END
+
+    IDD_WDCI2_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 275
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 145
+    END
+
+    IDD_WGFP_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 284
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 131
+    END
+
+    IDD_TGFP_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 255
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 131
+    END
+
+    IDD_CDH_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 263
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 132
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_PROJNAME            "DrawGasCmd"
+END
+
+#endif    // 中文(中华人民共和国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+

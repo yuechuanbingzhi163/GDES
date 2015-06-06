@@ -35,7 +35,7 @@ typedef std::vector<int> IDArray;
 class ARXDBHELPER_DLLIMPEXP DBHelper
 {
 public:
-	DBHelper(const std::string& connector, const std::string& connectionString);
+	DBHelper(const std::string& connectionString);
 	~DBHelper();
 
 	//建表(该函数会删除已建立的表格并重建)

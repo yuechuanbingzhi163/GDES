@@ -50,8 +50,8 @@ namespace Poco {
 			//bind是在使用use到一个数据结构(不是基本的int、string)的时候被调用
 			static void bind(std::size_t pos, const PumpType& obj, AbstractBinder::Ptr pBinder, AbstractBinder::Direction dir)
 			{
-				//std::cout<<"bind................."<<std::endl;
-				poco_assert_dbg (!pBinder.isNull());
+				//std::cout<<"PumpType bind................."<<std::endl;
+				//poco_assert_dbg (!pBinder.isNull());
 
 				// the table is defined as Person (FirstName VARCHAR(30), lastName VARCHAR, SocialSecNr INTEGER(3))
 				// Note that we advance pos by the number of columns the datatype uses! For string/int this is one.
@@ -76,8 +76,8 @@ namespace Poco {
 			//prepare是在使用prepareStatement的时候被调用
 			static void prepare(std::size_t pos, const PumpType& obj, AbstractPreparator::Ptr pPrepare)
 			{
-				//std::cout<<"prepare................."<<std::endl;
-				poco_assert_dbg (!pPrepare.isNull());
+				//std::cout<<"PumpType prepare................."<<std::endl;
+				//poco_assert_dbg (!pPrepare.isNull());
 				// the table is defined as Person (FirstName VARCHAR(30), lastName VARCHAR, SocialSecNr INTEGER(3))
 				// Note that we advance pos by the number of columns the datatype uses! For string/int this is one.
 
@@ -95,8 +95,8 @@ namespace Poco {
 			static void extract(std::size_t pos, PumpType& obj, const PumpType& defVal, AbstractExtractor::Ptr pExt)
 				/// obj will contain the result, defVal contains values we should use when one column is NULL
 			{
-				//std::cout<<"extract................."<<std::endl;
-				poco_assert_dbg (!pExt.isNull());
+				//std::cout<<"PumpType extract................."<<std::endl;
+				//poco_assert_dbg (!pExt.isNull());
 
 				TypeHandler<int>::extract(pos++, obj.id, defVal.id, pExt);
 				TypeHandler<std::string>::extract(pos++, obj.type, defVal.type,pExt);
@@ -123,8 +123,8 @@ namespace Poco {
 			//bind是在使用use到一个数据结构(不是基本的int、string)的时候被调用
 			static void bind(std::size_t pos, const PumpProperty& obj, AbstractBinder::Ptr pBinder, AbstractBinder::Direction dir)
 			{
-				//std::cout<<"bind................."<<std::endl;
-				poco_assert_dbg (!pBinder.isNull());
+				//std::cout<<"PumpProperty bind................."<<std::endl;
+				//poco_assert_dbg (!pBinder.isNull());
 
 				// the table is defined as Person (FirstName VARCHAR(30), lastName VARCHAR, SocialSecNr INTEGER(3))
 				// Note that we advance pos by the number of columns the datatype uses! For string/int this is one.
@@ -148,7 +148,7 @@ namespace Poco {
 			static void prepare(std::size_t pos, const PumpProperty& obj, AbstractPreparator::Ptr pPrepare)
 			{
 				//std::cout<<"prepare................."<<std::endl;
-				poco_assert_dbg (!pPrepare.isNull());
+				//poco_assert_dbg (!pPrepare.isNull());
 				// the table is defined as Person (FirstName VARCHAR(30), lastName VARCHAR, SocialSecNr INTEGER(3))
 				// Note that we advance pos by the number of columns the datatype uses! For string/int this is one.
 
@@ -165,8 +165,8 @@ namespace Poco {
 			static void extract(std::size_t pos, PumpProperty& obj, const PumpProperty& defVal, AbstractExtractor::Ptr pExt)
 				/// obj will contain the result, defVal contains values we should use when one column is NULL
 			{
-				std::cout<<"extract................."<<std::endl;
-				poco_assert_dbg (!pExt.isNull());
+				//std::cout<<"extract................."<<std::endl;
+				//poco_assert_dbg (!pExt.isNull());
 
 				TypeHandler<int>::extract(pos++, obj.id, defVal.id, pExt);
 				TypeHandler<int>::extract(pos++, obj.catagory_id, defVal.catagory_id, pExt);
@@ -331,7 +331,7 @@ bool DBHelper::getLastPumpTypeId(int& id)
 	{
 		Statement select(SESSION);
 		select << "select max(id) from TypeTable", into(id), now; // 通用方法
-		select << "select last_insert_rowid() from TypeTable", into(id), now; // sqlite
+		//select << "select last_insert_rowid() from TypeTable", into(id), now; // sqlite
 		//select << "select last_insert_id() from TypeTable", into(id), now;  // mysql
 	}
 	catch(DataException& e)
