@@ -46,7 +46,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\poco-1.6.0\include;..\ThirdParty\sqlite3\sqlite3"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\soci-3.2.3\include;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="D:\Program Files\Common\AutoCAD 2010\AutoCAD 2010 x64\"
 				PreprocessorDefinitions="WIN32;_WINDOWS;GDESADDFUNC_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -72,10 +72,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU.lib lemon.lib  sqlite3.lib"
+				AdditionalDependencies="log4cplusSU.lib lemon.lib soci_core.lib soci_sqlite3.lib sqlite3.lib"
 				OutputFile="$(outdir)/GDESAddFunc.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib&quot;;..\ThirdParty\sqlite3\lib"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\soci-3.2.3\lib&quot;;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/GDESAddFunc.pdb"
@@ -133,7 +133,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\poco-1.6.0\include;..\ThirdParty\sqlite3\sqlite3"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\soci-3.2.3\include;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="D:\Program Files\Common\AutoCAD 2010\AutoCAD 2010 x64\"
 				PreprocessorDefinitions="_WIN64;_WINDOWS;GDESADDFUNC_MODULE;_AFXEXT;_ACRXAPP"
 				StringPooling="false"
@@ -159,10 +159,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib  sqlite3-x64.lib"
+				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib soci_core-x64.lib soci_sqlite3-x64.lib sqlite3-x64.lib"
 				OutputFile="$(outdir)/GDESAddFunc.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib64&quot;;..\ThirdParty\sqlite3\lib"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\soci-3.2.3\lib&quot;;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/GDESAddFunc.pdb"
@@ -220,7 +220,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\poco-1.6.0\include;..\ThirdParty\sqlite3\sqlite3"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\soci-3.2.3\include;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="D:\Program Files\Common\AutoCAD 2010\AutoCAD 2010 x64\"
 				PreprocessorDefinitions="WIN32;_WINDOWS;GDESADDFUNC_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -246,10 +246,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU.lib lemon.lib  sqlite3.lib"
+				AdditionalDependencies="log4cplusSU.lib lemon.lib soci_core.lib soci_sqlite3.lib sqlite3.lib"
 				OutputFile="$(outdir)/GDESAddFunc.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib&quot;;..\ThirdParty\sqlite3\lib"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\soci-3.2.3\lib&quot;;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
@@ -307,7 +307,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
-				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\poco-1.6.0\include;..\ThirdParty\sqlite3\sqlite3"
+				AdditionalIncludeDirectories="..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\soci-3.2.3\include;..\ThirdParty\sqlite3\sqlite3"
 				AdditionalUsingDirectories="D:\Program Files\Common\AutoCAD 2010\AutoCAD 2010 x64\"
 				PreprocessorDefinitions="_WIN64;_WINDOWS;GDESADDFUNC_MODULE;NDEBUG;_AFXEXT;_ACRXAPP"
 				StringPooling="true"
@@ -333,10 +333,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib  sqlite3-x64.lib"
+				AdditionalDependencies="log4cplusSU-x64.lib lemon_x64.lib soci_core-x64.lib soci_sqlite3-x64.lib sqlite3-x64.lib"
 				OutputFile="$(outdir)/GDESAddFunc.arx"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\poco-1.6.0\lib64&quot;;..\ThirdParty\sqlite3\lib"
+				AdditionalLibraryDirectories="&quot;..\ThirdParty\log4cplus-1.2.0\lib&quot;;&quot;..\ThirdParty\lemon-1.3.1\lib&quot;;&quot;..\ThirdParty\soci-3.2.3\lib&quot;;..\ThirdParty\sqlite3\lib"
 				LinkDLL="true"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
