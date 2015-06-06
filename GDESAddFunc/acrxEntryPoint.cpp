@@ -63,7 +63,6 @@ public:
 		UIHelper::ShowPumpCapacityDlg();
 	}
 
-
 	static void JL_RealGasDlg( void )
 	{
 		UIHelper::ShowRealGasDlg();
@@ -84,6 +83,30 @@ public:
 		UIHelper::ShowRetDlg();
 	}
 
+	static void JL_TestRCU()
+	{
+		extern void vector_to_angle(const AcGeVector3d& v, double& ang1, double& ang2);
+
+		AcGeVector3d v(1,1,1);
+		double ang1, ang2;
+		vector_to_angle(v, ang1, ang2);
+		acutPrintf(_T("\n向量:(%.3f, %.3f, %.3f)"), v.x, v.y, v.z);
+		acutPrintf(_T("\n弧度-->方向角1:%f  仰角：%f"), ang1, ang2);
+		acutPrintf(_T("\n角度-->方向角1:%f  仰角：%f"), ang1*57.295, ang2*57.295);
+
+		AcGeVector3d v1(1,0,0);
+		vector_to_angle(v1, ang1, ang2);
+		acutPrintf(_T("\n向量:(%.3f, %.3f, %.3f)"), v1.x, v1.y, v1.z);
+		acutPrintf(_T("\n弧度-->方向角1:%f  仰角：%f"), ang1, ang2);
+		acutPrintf(_T("\n角度-->方向角1:%f  仰角：%f"), ang1*57.295, ang2*57.295);
+
+		AcGeVector3d v2(-1,-1,1);
+		vector_to_angle(v2, ang1, ang2);
+		acutPrintf(_T("\n向量:(%.3f, %.3f, %.3f)"), v2.x, v2.y, v2.z);
+		acutPrintf(_T("\n弧度-->方向角1:%f  仰角：%f"), ang1, ang2);
+		acutPrintf(_T("\n角度-->方向角1:%f  仰角：%f"), ang1*57.295, ang2*57.295);
+	}
+
 } ;
 
 //-----------------------------------------------------------------------------
@@ -93,3 +116,4 @@ ACED_ARXCOMMAND_ENTRY_AUTO( CGDESAddFuncApp, JL, _RealGasDlg, RealGasDlg, ACRX_C
 ACED_ARXCOMMAND_ENTRY_AUTO( CGDESAddFuncApp, JL, _PreGasDlg, PreGasDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGDESAddFuncApp, JL, _RateGasDlg, RateGasDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CGDESAddFuncApp, JL, _RetDlg, RetDlg, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CGDESAddFuncApp, JL, _TestRCU, TestRCU, ACRX_CMD_TRANSPARENT, NULL )

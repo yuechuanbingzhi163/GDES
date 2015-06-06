@@ -10,8 +10,12 @@ Poco::DataÄ£¿é¿ÉÒÔÓÃÓÚÊı¾İ¿âµÄ¿ª·¢£¬Ä¿Ç°Ö»±àÒëÁËsqlite3ºÍodbcµÄÇı¶¯£¬ºóÆÚÈç¹ûĞèÒ
 Í·ÎÄ¼şÂ·¾¶£ºÈ«²¿ÅäÖÃ(win32/x64)
 ..;..\ThirdParty\log4cplus-1.2.0\include;..\ThirdParty\lemon-1.3.1;..\ThirdParty\poco-1.6.0\include;..\ThirdParty\sqlite3\sqlite3
 
-¿âÎÄ¼şÂ·¾¶£ºÈ«²¿ÅäÖÃ(win32/x64)
+¿âÎÄ¼şÂ·¾¶£ºÈ«²¿ÅäÖÃ
+32Î»£¨win32)
 ..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\lemon-1.3.1\lib;..\ThirdParty\poco-1.6.0\lib;..\ThirdParty\sqlite3\lib
+
+64Î»(x64)
+..\ThirdParty\log4cplus-1.2.0\lib;..\ThirdParty\lemon-1.3.1\lib;..\ThirdParty\poco-1.6.0\lib64;..\ThirdParty\sqlite3\lib
 
 ÒÀÀµÏî£ºwin32(debug/release)    
 log4cplusSU.lib lemon.lib sqlite3.lib

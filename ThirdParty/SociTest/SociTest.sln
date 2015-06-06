@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SociTest", "SociTest\SociTest.vcproj", "{0838531A-7AD7-4BC6-BF3D-59EDD4FCFEBB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SociTest2", "SociTest2\SociTest2.vcproj", "{7820A678-7AE7-495F-8862-0B3B872178C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0838531A-7AD7-4BC6-BF3D-59EDD4FCFEBB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0838531A-7AD7-4BC6-BF3D-59EDD4FCFEBB}.Debug|Win32.Build.0 = Debug|Win32
+		{0838531A-7AD7-4BC6-BF3D-59EDD4FCFEBB}.Release|Win32.ActiveCfg = Release|Win32
+		{0838531A-7AD7-4BC6-BF3D-59EDD4FCFEBB}.Release|Win32.Build.0 = Release|Win32
+		{7820A678-7AE7-495F-8862-0B3B872178C7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7820A678-7AE7-495F-8862-0B3B872178C7}.Debug|Win32.Build.0 = Debug|Win32
+		{7820A678-7AE7-495F-8862-0B3B872178C7}.Release|Win32.ActiveCfg = Release|Win32
+		{7820A678-7AE7-495F-8862-0B3B872178C7}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
