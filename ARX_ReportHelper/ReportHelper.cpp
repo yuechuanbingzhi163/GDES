@@ -134,6 +134,14 @@ void ReportHelper::OpenCHMFile()
 	OpenWordDocument(filePath);
 }
 
+//矿上自己的条例
+void ReportHelper::OpenCHMFile2()
+{
+	CString fileName,filePath;
+	fileName = _T("\\help\\瓦斯抽采达标评价工作体系(试行).chm");
+	filePath = BuildPath( GetAppPathDir(), fileName );
+	OpenWordDocument(filePath);
+}
 void ReportHelper::CreatBaseReport()
 {
 	CAcModuleResourceOverride myResources;

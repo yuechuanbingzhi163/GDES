@@ -1,0 +1,17 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=瓦斯抽采达标评价工作体系(试行).chm
+Contents file=瓦斯抽采达标评价工作体系(试行).hhc
+Index file=瓦斯抽采达标评价工作体系(试行).hhk
+Create CHI file=Yes
+Binary TOC=Yes
+Binary Index=Yes
+Enhanced decompilation=Yes
+Full-text search=Yes
+Language=0x0804
+Title=瓦斯抽采达标评价工作体系(试行)
+Default Window=main
+
+[WINDOWS]
+main="瓦斯抽采达标评价工作体系(试行)","瓦斯抽采达标评价工作体系(试行).hhc","瓦斯抽采达标评价工作体系(试行).hhk","瓦斯抽采达标评价工作体系(试行)\outline_0.htm","瓦斯抽采达标评价工作体系(试行)\outline_0.htm",,,,,0x41520,240,0x184E,[262,184,762,584],0x30000,0x20,,0,0,0,0
+
