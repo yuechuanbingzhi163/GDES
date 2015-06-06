@@ -49,27 +49,27 @@ public:
 	CARX_ReportHelperApp () : AcRxArxApp () {}
 
 	virtual AcRx::AppRetCode On_kInitAppMsg (void *pkt) {
-		// TODO: Load dependencies here
 
-		acrxRegisterService( ARX_REPORTHELPER_SERVICE_NAME );
-		// You *must* call On_kInitAppMsg here
 		AcRx::AppRetCode retCode =AcRxArxApp::On_kInitAppMsg (pkt) ;
+		acrxRegisterService( ARX_REPORTHELPER_SERVICE_NAME );
+
 		ArxDataTool::RegDict( REPORTER_INFO_DICT );
 		AddReportObject();
 		//DataObject* pDO = new DataObject();
 		//pDO->initData();
 		//acutPrintf(_T("\n加载%s报告数据对象..."),PERMENT_OBJCT_NAME);
+
+		acutPrintf( _T( "\nARX_ReportHelper::On_kLoadAppMsg\n" ) );
+
 		return (retCode) ;
 	}
 
 	virtual AcRx::AppRetCode On_kUnloadAppMsg (void *pkt) {
-		// TODO: Add your code here
 
-		delete acrxServiceDictionary->remove( ARX_REPORTHELPER_SERVICE_NAME );
-		// You *must* call On_kUnloadAppMsg here
 		AcRx::AppRetCode retCode =AcRxArxApp::On_kUnloadAppMsg (pkt) ;
 
-		// TODO: Unload dependencies here
+		delete acrxServiceDictionary->remove( ARX_REPORTHELPER_SERVICE_NAME );
+		acutPrintf( _T( "\nARX_ReportHelper::On_kUnloadAppMsg\n" ) );
 
 		return (retCode) ;
 	}

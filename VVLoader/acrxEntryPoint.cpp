@@ -257,6 +257,7 @@ public:
 		if( !loadArxModule( _T( "ARX_ReportHelper" ) ) ) return false;
 		if( !loadArxModule( _T( "GESESCmds" ) ) ) return false;
 		if( !loadArxModule( _T( "GDESAddFunc" ) ) ) return false;
+		if( !loadArxModule( _T( "ARX_RCU" ) ) ) return false;
 #endif
 
 #if INCLUDE_GAS_MODULE
@@ -285,11 +286,11 @@ public:
 #endif
 
 #if INCLUDE_GESES_MODULE
+		unloadArxModule( _T( "ARX_RCU" ) );
 		unloadArxModule( _T( "GDESAddFunc" ) );
 		unloadArxModule( _T( "ARX_ReportHelper" ) );
 		unloadArxModule( _T( "GESESCmds" ) ) ;
 		unloadArxModule( _T( "GraphTool" ) ) ;
-		unloadArxModule( _T( "GDESAddFunc" ) );
 #endif
 
 #if INCLUDE_GAS_MODULE
