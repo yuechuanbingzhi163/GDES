@@ -64,4 +64,18 @@ public:
 
 	// 生成GUID字符串
 	static bool NewGUID(CString& strGUID);
+
+	//获取模块运行路径
+	static CString GetAppPathDir(HINSTANCE hInstance);
+
+	//构造路径
+	static CString BuildPath( const CString& dir, const CString& fileName );
+
+	//cstring <--> acgepoint3d之间的转换
+	static CString Point3dToString(const AcGePoint3d& pt);
+	static bool StringToPoint3d(const CString& value, AcGePoint3d& pt);
+
+	//分隔字符串
+	// tokens表示分隔符(可以有多个分隔符)
+	static void SplitCString(const CString& str, const CString& tokens, CStringArray& values);
 };
