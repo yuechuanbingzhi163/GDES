@@ -420,6 +420,14 @@ public:
 
 	//    acutPrintf( _T( "\nxxx\n" ) );
 	//    //acedSSGet(NULL, NULL, NULL, NULL, ssname);
+
+		//AcGeVector3d v(-1, 1, 0);
+		//acutPrintf(_T("\n...........\n"));
+		//acutPrintf(_T("\n投影前:(%.3f, %.3f, %.3f)"), v.x, v.y, v.z);
+
+		//v = v.dotProduct( AcGeVector3d::kXAxis ) * AcGeVector3d::kXAxis;
+		//acutPrintf(_T("\n投影后:(%.3f, %.3f, %.3f)"), v.x, v.y, v.z);
+
 	//}
 
 } ;

@@ -291,7 +291,7 @@ CString ArxUtilHelper::BuildPath( const CString& dir, const CString& fileName )
 CString ArxUtilHelper::Point3dToString(const AcGePoint3d& pt)
 {
 	CString value;
-	value.Format(_T("%.6f %.6f %.6f"), pt.x*1.0, pt.y*1.0, pt.z*1.0);
+	value.Format(_T("%.6f,%.6f,%.6f"), pt.x*1.0, pt.y*1.0, pt.z*1.0);
 	return value;
 }
 
@@ -310,7 +310,7 @@ void ArxUtilHelper::SplitCString(const CString& str, const CString& tokens, CStr
 bool ArxUtilHelper::StringToPoint3d(const CString& value, AcGePoint3d& pt)
 {
 	CStringArray values;
-	ArxUtilHelper::SplitCString(value, _T(" \t\n"), values);
+	ArxUtilHelper::SplitCString(value, _T(" \t\n,;_-"), values);
 	if(values.GetCount() < 3) return false;
 
 	double x=0,y=0,z=0;

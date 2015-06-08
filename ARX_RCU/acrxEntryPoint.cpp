@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "resource.h"
+//#include "ReactorHelper.h"
 
 #ifndef ARX_RCU_SERVICE_NAME
 #define ARX_RCU_SERVICE_NAME _T("ARX_RCU_SERVICE_NAME")
@@ -15,8 +16,9 @@ public:
 	virtual AcRx::AppRetCode On_kInitAppMsg (void *pkt) {
 
 		AcRx::AppRetCode retCode =AcRxArxApp::On_kInitAppMsg (pkt) ;
-		
+
 		acrxRegisterService( ARX_RCU_SERVICE_NAME );
+		//ReactorHelper::CreateDocumentReactorMap();
 		acutPrintf( _T( "\nARX_RCU::On_kLoadAppMsg\n" ) );
 
 		return (retCode) ;
@@ -26,10 +28,31 @@ public:
 
 		AcRx::AppRetCode retCode =AcRxArxApp::On_kUnloadAppMsg (pkt) ;
 
+		//ReactorHelper::RemoveDocumentReactorMap();
 		delete acrxServiceDictionary->remove( ARX_RCU_SERVICE_NAME );
 		acutPrintf( _T( "\nARX_RCU::On_kUnloadAppMsg\n" ) );
 
 		return (retCode) ;
+	}
+
+	virtual AcRx::AppRetCode On_kLoadDwgMsg( void* pkt )
+	{
+		AcRx::AppRetCode retCode = AcRxArxApp::On_kLoadDwgMsg ( pkt ) ;
+
+		//ReactorHelper::AddDocumentReactor( curDoc() );
+		acutPrintf( _T( "\nARX_RCU::On_kLoadDwgMsg\n" ) );
+
+		return retCode;
+	}
+
+	virtual AcRx::AppRetCode On_kUnloadDwgMsg( void* pkt )
+	{
+		AcRx::AppRetCode retCode = AcRxArxApp::On_kUnloadDwgMsg ( pkt ) ;
+
+		//ReactorHelper::RemoveDocumentReactor( curDoc() );
+		acutPrintf( _T( "\nARX_RCU::On_kUnloadDwgMsg\n" ) );
+
+		return retCode;
 	}
 
 	virtual void RegisterServerComponents () {

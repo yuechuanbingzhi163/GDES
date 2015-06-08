@@ -30,6 +30,7 @@ CString BuildPath( const CString& dir, const CString& fileName )
 void InitAllData( const CString& dirPath )
 {
 #if INCLUDE_TVNS_MODULE
+	DataInitHelper::InitDataField( BuildPath( dirPath, _T( "石门揭煤-字段-图元属性.txt" ) ) );
 	DataInitHelper::InitDataField( BuildPath( dirPath, _T( "瓦斯抽采-字段-图元属性.txt" ) ) );
 	DataInitHelper::InitIntStrList( BuildPath( dirPath, _T( "瓦斯抽采-字符串-整数列表.txt" ) ) );
 	DataInitHelper::InitDataField( BuildPath( dirPath, _T( "瓦斯抽采-字段-数据对象.txt" ) ) );

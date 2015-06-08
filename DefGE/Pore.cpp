@@ -1,51 +1,51 @@
 #include "StdAfx.h"
-#include "PoreGE.h"
+#include "Pore.h"
 
-Adesk::UInt32 PoreGE::kCurrentVersionNumber = 1 ;
+Adesk::UInt32 Pore::kCurrentVersionNumber = 1 ;
 
-ACRX_NO_CONS_DEFINE_MEMBERS( PoreGE, MineGE )
+ACRX_DXF_DEFINE_MEMBERS (
+	Pore, RcuTagGE,
+	AcDb::kDHL_CURRENT, AcDb::kMReleaseCurrent,
+	AcDbProxyEntity::kNoOperation,
+	×ê¿×, DEFGEAPP
+)
 
-PoreGE::PoreGE()
+Pore::Pore()
 {
 
 }
 
-PoreGE::PoreGE( const AcGePoint3d& insertPt ) : m_insertPt( insertPt )
-{
-
-}
-
-AcGePoint3d PoreGE::getInsertPt() const
+AcGePoint3d Pore::getInsertPt() const
 {
     assertReadEnabled();
     return m_insertPt;
 }
 
-void PoreGE::setInsertPt( const AcGePoint3d& pt )
+void Pore::setInsertPt( const AcGePoint3d& pt )
 {
     assertWriteEnabled();
     m_insertPt = pt;
 }
 
-void PoreGE::readKeyParam( DrawParamReader& reader )
+void Pore::readKeyParam( DrawParamReader& reader )
 {
     reader.readPoint( m_insertPt );
 }
 
-void PoreGE::writeKeyParam( DrawParamWriter& writer ) const
+void Pore::writeKeyParam( DrawParamWriter& writer ) const
 {
     writer.writePoint( m_insertPt );
 }
 
-Acad::ErrorStatus PoreGE::dwgOutFields ( AcDbDwgFiler* pFiler ) const
+Acad::ErrorStatus Pore::dwgOutFields ( AcDbDwgFiler* pFiler ) const
 {
     assertReadEnabled () ;
     //----- Save parent class information first.
-    Acad::ErrorStatus es = MineGE::dwgOutFields ( pFiler ) ;
+    Acad::ErrorStatus es = RcuTagGE::dwgOutFields ( pFiler ) ;
     if ( es != Acad::eOk )
         return ( es ) ;
     //----- Object version number needs to be saved first
-    if ( ( es = pFiler->writeUInt32 ( PoreGE::kCurrentVersionNumber ) ) != Acad::eOk )
+    if ( ( es = pFiler->writeUInt32 ( Pore::kCurrentVersionNumber ) ) != Acad::eOk )
         return ( es ) ;
 
     pFiler->writeItem( m_insertPt );
@@ -53,18 +53,18 @@ Acad::ErrorStatus PoreGE::dwgOutFields ( AcDbDwgFiler* pFiler ) const
     return ( pFiler->filerStatus () ) ;
 }
 
-Acad::ErrorStatus PoreGE::dwgInFields ( AcDbDwgFiler* pFiler )
+Acad::ErrorStatus Pore::dwgInFields ( AcDbDwgFiler* pFiler )
 {
     assertWriteEnabled () ;
     //----- Read parent class information first.
-    Acad::ErrorStatus es = MineGE::dwgInFields ( pFiler ) ;
+    Acad::ErrorStatus es = RcuTagGE::dwgInFields ( pFiler ) ;
     if ( es != Acad::eOk )
         return ( es ) ;
     //----- Object version number needs to be read first
     Adesk::UInt32 version = 0 ;
     if ( ( es = pFiler->readUInt32 ( &version ) ) != Acad::eOk )
         return ( es ) ;
-    if ( version > PoreGE::kCurrentVersionNumber )
+    if ( version > Pore::kCurrentVersionNumber )
         return ( Acad::eMakeMeProxy ) ;
 
     pFiler->readItem( &m_insertPt );

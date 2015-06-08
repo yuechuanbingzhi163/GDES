@@ -644,7 +644,19 @@
 				Name="Pore"
 				>
 				<File
-					RelativePath=".\SimplePoreGEDraw.cpp"
+					RelativePath=".\SimpleCoalSurfaceDraw.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SimpleDrillSiteDraw.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SimplePoreDraw.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SimpleRockGateDraw.cpp"
 					>
 				</File>
 			</Filter>
@@ -893,7 +905,19 @@
 				Name="Pore"
 				>
 				<File
-					RelativePath=".\SimplePoreGEDraw.h"
+					RelativePath=".\SimpleCoalSurfaceDraw.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SimpleDrillSiteDraw.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SimplePoreDraw.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SimpleRockGateDraw.h"
 					>
 				</File>
 			</Filter>

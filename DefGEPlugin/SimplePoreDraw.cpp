@@ -1,62 +1,67 @@
 #include "StdAfx.h"
-#include "SimplePoreGEDraw.h"
+#include "SimplePoreDraw.h"
 #include "DrawTool.h"
 #include "DrawSpecial.h"
 
-ACRX_CONS_DEFINE_MEMBERS ( SimplePoreGEDraw, MineGEDraw, 1 )
+#include "../ArxHelper/HelperClass.h"
 
-SimplePoreGEDraw::SimplePoreGEDraw () : MineGEDraw ()
+ACRX_CONS_DEFINE_MEMBERS ( SimplePoreDraw, MineGEDraw, 1 )
+
+SimplePoreDraw::SimplePoreDraw () : MineGEDraw ()
 {
 }
 
-SimplePoreGEDraw::~SimplePoreGEDraw ()
+SimplePoreDraw::~SimplePoreDraw ()
 {
 }
 
-void SimplePoreGEDraw::setAllExtraParamsToDefault()
+void SimplePoreDraw::setAllExtraParamsToDefault()
 {
 	m_radius = 1;
+	m_id = _T("");
 }
 
-void SimplePoreGEDraw::configExtraParams()
+void SimplePoreDraw::configExtraParams()
 {
 
 }
-void SimplePoreGEDraw::updateExtraParams()
+void SimplePoreDraw::updateExtraParams()
 {
 
 }
 
-void SimplePoreGEDraw::readKeyParam(DrawParamReader& reader)
+void SimplePoreDraw::readKeyParam(DrawParamReader& reader)
 {
 	reader.readPoint( m_insertPt );
 }
 
-void SimplePoreGEDraw::writeKeyParam(DrawParamWriter& writer)
+void SimplePoreDraw::writeKeyParam(DrawParamWriter& writer)
 {
 	writer.writePoint(m_insertPt);
 }
 
-void SimplePoreGEDraw::readExtraParam( DrawParamReader& reader )
+void SimplePoreDraw::readExtraParam( DrawParamReader& reader )
 {
     //MineGEDraw::readExtraParam( reader );
 }
 
-void SimplePoreGEDraw::writeExtraParam( DrawParamWriter& writer )
+void SimplePoreDraw::writeExtraParam( DrawParamWriter& writer )
 {
     //MineGEDraw::writeExtraParam( writer );
 }
 
-void SimplePoreGEDraw::regPropertyDataNames( AcStringArray& names ) const
+void SimplePoreDraw::regPropertyDataNames( AcStringArray& names ) const
 {
     names.append( _T( "±àºÅ" ) );
     names.append( _T( "¿×¾¶" ) );
+	//names.append( _T( "×ø±ê" ) );
 }
 
-void SimplePoreGEDraw::readPropertyDataFromGE( const AcStringArray& values )
+void SimplePoreDraw::readPropertyDataFromGE( const AcStringArray& values )
 {
-    id = values[0].kACharPtr();
+    m_id = values[0].kACharPtr();
 	m_radius = abs(_tstof(values[1].kACharPtr()));
+	//ArxUtilHelper::StringToPoint3d(values[2].kACharPtr(), m_insertPt);
 }
 
 static AcGePoint3d CaclLeftBottomPt( const AcGePoint3d& pt, double angle, double width, double height )
@@ -72,7 +77,7 @@ static AcGePoint3d CaclLeftBottomPt( const AcGePoint3d& pt, double angle, double
     return ( pt + v * width / 2 + v2 * height / 2 );
 }
 
-Adesk::Boolean SimplePoreGEDraw::subWorldDraw( AcGiWorldDraw* mode )
+Adesk::Boolean SimplePoreDraw::subWorldDraw( AcGiWorldDraw* mode )
 {
     assertReadEnabled () ;
 
@@ -84,32 +89,32 @@ Adesk::Boolean SimplePoreGEDraw::subWorldDraw( AcGiWorldDraw* mode )
     // »æÖÆ±àºÅ
     AcGePoint3d pt1, pt2;
 	AcGePoint3d pt = CaclLeftBottomPt(m_insertPt, 0, m_radius, m_radius);
-	DrawMText(mode, pt, 0, id, 2*m_radius);
+	DrawMText(mode, pt, 0, m_id, 2*m_radius);
 
     return Adesk::kTrue;
 }
 
-Acad::ErrorStatus SimplePoreGEDraw::subGetGripPoints( AcGePoint3dArray& gripPoints, AcDbIntArray& osnapModes, AcDbIntArray& geomIds ) const
+Acad::ErrorStatus SimplePoreDraw::subGetGripPoints( AcGePoint3dArray& gripPoints, AcDbIntArray& osnapModes, AcDbIntArray& geomIds ) const
 {
     assertReadEnabled () ;
 
     return Acad::eOk;
 }
 
-Acad::ErrorStatus SimplePoreGEDraw::subMoveGripPointsAt ( const AcDbIntArray& indices, const AcGeVector3d& offset )
+Acad::ErrorStatus SimplePoreDraw::subMoveGripPointsAt ( const AcDbIntArray& indices, const AcGeVector3d& offset )
 {
     assertWriteEnabled () ;
 
     return Acad::eOk;
 }
 
-Acad::ErrorStatus SimplePoreGEDraw::subTransformBy( const AcGeMatrix3d& xform )
+Acad::ErrorStatus SimplePoreDraw::subTransformBy( const AcGeMatrix3d& xform )
 {
 	m_insertPt.transformBy(xform);
 	return Acad::eOk;
 }
 
-Acad::ErrorStatus SimplePoreGEDraw::subGetOsnapPoints (
+Acad::ErrorStatus SimplePoreDraw::subGetOsnapPoints (
 	AcDb::OsnapMode osnapMode,
 	Adesk::GsMarker gsSelectionMark,
 	const AcGePoint3d& pickPoint,

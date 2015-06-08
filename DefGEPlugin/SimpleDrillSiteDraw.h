@@ -3,14 +3,14 @@
 #include "../MineGEDraw/MineGEDraw.h"
 
 //简单钻孔绘制效果
-class SimplePoreGEDraw : public MineGEDraw {
+class SimpleDrillSiteDraw : public MineGEDraw {
 
 public:
-	ACRX_DECLARE_MEMBERS(SimplePoreGEDraw) ;
+	ACRX_DECLARE_MEMBERS(SimpleDrillSiteDraw) ;
 
 public:
-	SimplePoreGEDraw () ;
-	virtual ~SimplePoreGEDraw () ;
+	SimpleDrillSiteDraw () ;
+	virtual ~SimpleDrillSiteDraw () ;
 
 	virtual void setAllExtraParamsToDefault();
 	virtual void configExtraParams();
@@ -40,11 +40,14 @@ protected:
 		AcDbIntArray &geomIds) const ;
 
 public:
-	AcGePoint3d m_insertPt;   // 插入点坐标
-	double m_radius;   // 孔径
-	CString id;        // 钻孔编号
+	//key param
+	AcGePoint3d m_insertPt;     // 插入点坐标
+	AcGePoint3d m_linkPt;       // 连接点坐标
+	//data
+	double m_width, m_height;   // 钻场宽度和高度    
+	CString m_id;				// 钻场编号
 } ;
 
 #ifdef DEFGEPLUGIN_MODULE
-ACDB_REGISTER_OBJECT_ENTRY_AUTO(SimplePoreGEDraw)
+ACDB_REGISTER_OBJECT_ENTRY_AUTO(SimpleDrillSiteDraw)
 #endif
