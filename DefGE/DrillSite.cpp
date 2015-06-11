@@ -4,7 +4,7 @@
 Adesk::UInt32 DrillSite::kCurrentVersionNumber = 1 ;
 
 ACRX_DXF_DEFINE_MEMBERS (
-	DrillSite, RcuTagGE,
+	DrillSite, RcuGE,
 	AcDb::kDHL_CURRENT, AcDb::kMReleaseCurrent,
 	AcDbProxyEntity::kNoOperation,
 	×ê³¡, DEFGEAPP
@@ -55,7 +55,7 @@ Acad::ErrorStatus DrillSite::dwgOutFields ( AcDbDwgFiler* pFiler ) const
 {
     assertReadEnabled () ;
     //----- Save parent class information first.
-    Acad::ErrorStatus es = RcuTagGE::dwgOutFields ( pFiler ) ;
+    Acad::ErrorStatus es = RcuGE::dwgOutFields ( pFiler ) ;
     if ( es != Acad::eOk )
         return ( es ) ;
     //----- Object version number needs to be saved first
@@ -72,7 +72,7 @@ Acad::ErrorStatus DrillSite::dwgInFields ( AcDbDwgFiler* pFiler )
 {
     assertWriteEnabled () ;
     //----- Read parent class information first.
-    Acad::ErrorStatus es = RcuTagGE::dwgInFields ( pFiler ) ;
+    Acad::ErrorStatus es = RcuGE::dwgInFields ( pFiler ) ;
     if ( es != Acad::eOk )
         return ( es ) ;
     //----- Object version number needs to be read first

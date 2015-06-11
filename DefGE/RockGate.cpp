@@ -4,7 +4,7 @@
 Adesk::UInt32 RockGate::kCurrentVersionNumber = 1 ;
 
 ACRX_DXF_DEFINE_MEMBERS (
-	RockGate, RcuGE,
+	RockGate, MineGE,
 	AcDb::kDHL_CURRENT, AcDb::kMReleaseCurrent,
 	AcDbProxyEntity::kNoOperation,
 	й╞це, DEFGEAPP
@@ -40,7 +40,7 @@ Acad::ErrorStatus RockGate::dwgOutFields ( AcDbDwgFiler* pFiler ) const
 {
     assertReadEnabled () ;
     //----- Save parent class information first.
-    Acad::ErrorStatus es = RcuGE::dwgOutFields ( pFiler ) ;
+    Acad::ErrorStatus es = MineGE::dwgOutFields ( pFiler ) ;
     if ( es != Acad::eOk )
         return ( es ) ;
     //----- Object version number needs to be saved first
@@ -56,7 +56,7 @@ Acad::ErrorStatus RockGate::dwgInFields ( AcDbDwgFiler* pFiler )
 {
     assertWriteEnabled () ;
     //----- Read parent class information first.
-    Acad::ErrorStatus es = RcuGE::dwgInFields ( pFiler ) ;
+    Acad::ErrorStatus es = MineGE::dwgInFields ( pFiler ) ;
     if ( es != Acad::eOk )
         return ( es ) ;
     //----- Object version number needs to be read first

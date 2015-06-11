@@ -3,7 +3,7 @@
 #include "RcuGE.h"
 
 //×ê¿×Í¼Ôª(¿ª¿×£¬ÖÕ¿×)
-class DEFGE_EXPORT_API Pore : public RcuTagGE
+class DEFGE_EXPORT_API Pore : public RcuGE
 {
 public:
 	ACRX_DECLARE_MEMBERS(Pore) ;

@@ -1,4 +1,4 @@
-//Microsoft Visual C++ generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -12,31 +12,40 @@
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
 
+/////////////////////////////////////////////////////////////////////////////
+// 中文(中华人民共和国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+#endif //_WIN32
+
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE 
 BEGIN
-	"resource.h\0"
+    "resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE 
 BEGIN
-	"#include ""afxres.h""\r\n"
+    "#include ""afxres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE 
 BEGIN
-	"\0"
+    "\0"
 END
 
 #endif    // APSTUDIO_INVOKED
 
-#ifndef _MAC
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
@@ -55,47 +64,177 @@ VS_VERSION_INFO VERSIONINFO
  FILETYPE 0x2L
  FILESUBTYPE 0x0L
 BEGIN
-	BLOCK "StringFileInfo"
-	BEGIN
-		BLOCK "040904B0"
-		BEGIN
-			VALUE "CompanyName", "\0"
-			VALUE "FileDescription", "ARX_RCU ObjectARX application\0"
-			VALUE "FileVersion", "1, 0, 0, 1\0"
-			VALUE "InternalName", "ARX_RCU\0"
-			VALUE "LegalCopyright", "Copyright ?2002\0"
-			VALUE "OriginalFilename", "ARX_RCU.arx\0"
-			VALUE "ProductName", "ARX_RCU Application\0"
-			VALUE "ProductVersion", "1, 0, 0, 1\0"
-		END
-	END
-	BLOCK "VarFileInfo"
-	BEGIN
-		VALUE "Translation", 0x0409, 0x04B0
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", "ARX_RCU ObjectARX application"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "ARX_RCU"
+            VALUE "LegalCopyright", "Copyright ?2002"
+            VALUE "OriginalFilename", "ARX_RCU.arx"
+            VALUE "ProductName", "ARX_RCU Application"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
     END
 END
 
-#endif    // !_MAC
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_RCU_NEW_DLG DIALOGEX 0, 0, 325, 143
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "开始设计石门"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,187,119,55,17
+    PUSHBUTTON      "取消",IDCANCEL,263,119,55,17
+    LTEXT           "长:",IDC_STATIC,92,27,12,8
+    EDITTEXT        IDC_EDIT1,105,24,49,14,ES_AUTOHSCROLL
+    LTEXT           "宽:",IDC_STATIC,92,59,9,8
+    EDITTEXT        IDC_EDIT2,105,56,49,14,ES_AUTOHSCROLL
+    LTEXT           "高:",IDC_STATIC,92,91,9,8
+    EDITTEXT        IDC_EDIT3,105,88,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT5,23,24,52,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT7,23,56,52,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT9,23,88,52,14,ES_AUTOHSCROLL
+    LTEXT           "X:",IDC_STATIC,14,27,8,8
+    LTEXT           "Y:",IDC_STATIC,14,59,8,8
+    LTEXT           "Z:",IDC_STATIC,14,91,8,8
+    LTEXT           "左帮:",IDC_STATIC,177,24,20,8
+    EDITTEXT        IDC_EDIT10,201,21,40,14,ES_AUTOHSCROLL
+    LTEXT           "右帮:",IDC_STATIC,246,24,20,8
+    EDITTEXT        IDC_EDIT11,268,20,40,14,ES_AUTOHSCROLL
+    LTEXT           "上帮:",IDC_STATIC,177,43,20,8
+    EDITTEXT        IDC_EDIT12,201,40,40,14,ES_AUTOHSCROLL
+    LTEXT           "下帮:",IDC_STATIC,246,43,20,8
+    EDITTEXT        IDC_EDIT13,268,39,40,14,ES_AUTOHSCROLL
+    LTEXT           "煤厚:",IDC_STATIC,176,76,20,8
+    EDITTEXT        IDC_EDIT14,202,74,40,14,ES_AUTOHSCROLL
+    LTEXT           "倾角:",IDC_STATIC,247,76,20,8
+    EDITTEXT        IDC_EDIT15,271,73,40,14,ES_AUTOHSCROLL
+    LTEXT           "迎头到煤层的最小法距:",IDC_STATIC,176,98,84,8
+    EDITTEXT        IDC_EDIT16,268,96,44,14,ES_AUTOHSCROLL
+    GROUPBOX        "迎头底板中心坐标",IDC_STATIC,7,7,76,106
+    GROUPBOX        "石门大小",IDC_STATIC,85,7,81,107
+    GROUPBOX        "石门保护间距",IDC_STATIC,171,8,145,50
+    GROUPBOX        "煤层参数",IDC_STATIC,170,60,148,54
+    LTEXT           "钻孔抽采半径:",IDC_STATIC,14,123,52,8
+    EDITTEXT        IDC_EDIT17,74,120,63,14,ES_AUTOHSCROLL
+END
+
+IDD_RCU_DESIGN_DLG DIALOGEX 0, 0, 325, 180
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "石门揭煤设计"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "石门揭煤设计",IDC_STATIC,6,8,49,8
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,19,309,126
+    PUSHBUTTON      "新建",IDC_BUTTON1,6,148,62,25
+    PUSHBUTTON      "删除",IDC_BUTTON2,89,148,62,25
+    PUSHBUTTON      "设计",IDC_BUTTON3,172,148,62,25
+    PUSHBUTTON      "输出",IDC_BUTTON4,256,148,62,25
+END
+
+IDD_RCU_EDIT_DLG DIALOGEX 0, 0, 331, 296
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "石门设计"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "长:",IDC_STATIC,92,33,12,8
+    EDITTEXT        IDC_EDIT1,105,31,49,14,ES_AUTOHSCROLL
+    LTEXT           "宽:",IDC_STATIC,92,51,9,8
+    EDITTEXT        IDC_EDIT2,105,49,49,14,ES_AUTOHSCROLL
+    LTEXT           "高:",IDC_STATIC,92,70,9,8
+    EDITTEXT        IDC_EDIT3,105,69,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT5,23,31,52,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT7,23,49,52,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT9,23,69,52,14,ES_AUTOHSCROLL
+    LTEXT           "X:",IDC_STATIC,14,33,8,8
+    LTEXT           "Y:",IDC_STATIC,14,51,8,8
+    LTEXT           "Z:",IDC_STATIC,14,70,8,8
+    LTEXT           "左帮:",IDC_STATIC,177,35,20,8
+    EDITTEXT        IDC_EDIT10,201,33,40,14,ES_AUTOHSCROLL
+    LTEXT           "右帮:",IDC_STATIC,246,35,20,8
+    EDITTEXT        IDC_EDIT11,268,32,40,14,ES_AUTOHSCROLL
+    LTEXT           "上帮:",IDC_STATIC,177,55,20,8
+    EDITTEXT        IDC_EDIT12,201,52,40,14,ES_AUTOHSCROLL
+    LTEXT           "下帮:",IDC_STATIC,246,54,20,8
+    EDITTEXT        IDC_EDIT13,268,51,40,14,ES_AUTOHSCROLL
+    LTEXT           "煤厚:",IDC_STATIC,13,113,20,8
+    EDITTEXT        IDC_EDIT14,39,111,40,14,ES_AUTOHSCROLL
+    LTEXT           "倾角:",IDC_STATIC,85,113,20,8
+    EDITTEXT        IDC_EDIT15,109,110,40,14,ES_AUTOHSCROLL
+    LTEXT           "迎头到煤层的最小法距:",IDC_STATIC,166,114,84,8
+    EDITTEXT        IDC_EDIT16,258,112,44,14,ES_AUTOHSCROLL
+    GROUPBOX        "迎头底板中心坐标",IDC_STATIC,7,19,76,67
+    GROUPBOX        "石门大小",IDC_STATIC,85,19,81,68
+    GROUPBOX        "石门保护间距",IDC_STATIC,171,20,140,50
+    LTEXT           "钻孔抽采半径:",IDC_STATIC,177,76,52,8
+    EDITTEXT        IDC_EDIT17,237,74,63,14,ES_AUTOHSCROLL
+    LTEXT           "-----------------------------------------------------石门参数-----------------------------------------------------",IDC_STATIC,7,7,317,8
+    LTEXT           "-----------------------------------------------------煤层参数-----------------------------------------------------",IDC_STATIC,7,95,317,8
+    LTEXT           "-----------------------------------------------------钻场参数-----------------------------------------------------",IDC_STATIC,7,133,317,8
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,147,317,114
+    PUSHBUTTON      "增加钻场",IDC_BUTTON4,25,266,74,23
+    PUSHBUTTON      "删除钻场",IDC_BUTTON5,129,266,74,23
+    PUSHBUTTON      "修改钻场参数",IDC_BUTTON6,233,265,74,23
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_RCU_NEW_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 318
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 136
+    END
+
+    IDD_RCU_DESIGN_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 318
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 173
+    END
+
+    IDD_RCU_EDIT_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 324
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 289
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
-	IDS_PROJNAME					"ARX_RCU"
+    IDS_PROJNAME            "ARX_RCU"
 END
 
-
-
+#endif    // 中文(中华人民共和国) resources
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef APSTUDIO_INVOKED
-/////////////////////////////////////////////////////////////////////////////
-//
-// Generated from the TEXTINCLUDE 3 resource.
-//
-/////////////////////////////////////////////////////////////////////////////
-#endif    // not APSTUDIO_INVOKED
 

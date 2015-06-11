@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "resource.h"
 //#include "ReactorHelper.h"
+#include "DrawCmd.h"
 
 #ifndef ARX_RCU_SERVICE_NAME
 #define ARX_RCU_SERVICE_NAME _T("ARX_RCU_SERVICE_NAME")
@@ -82,9 +83,15 @@ public:
 		acutPrintf(_T("\n½Ç¶È-->·½Ïò½Ç1:%f  Ñö½Ç£º%f"), ang1*57.295, ang2*57.295);
 	}
 
+	static void JL_TestRCUDlg()
+	{
+		DrawCmd::DrawRcu();
+	}
+
 } ;
 
 //-----------------------------------------------------------------------------
 IMPLEMENT_ARX_ENTRYPOINT(CARX_RCUApp)
 
 ACED_ARXCOMMAND_ENTRY_AUTO( CARX_RCUApp, JL, _TestRCU, TestRCU, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CARX_RCUApp, JL, _TestRCUDlg, TestRCUDlg, ACRX_CMD_TRANSPARENT, NULL )

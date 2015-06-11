@@ -3,7 +3,7 @@
 #include "RcuGE.h"
 
 //Ãº²ã
-class DEFGE_EXPORT_API CoalSurface : public RcuTagGE
+class DEFGE_EXPORT_API CoalSurface : public RcuGE
 {
 public:
 	ACRX_DECLARE_MEMBERS(CoalSurface) ;

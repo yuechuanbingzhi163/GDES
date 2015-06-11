@@ -4,7 +4,7 @@
 Adesk::UInt32 Pore::kCurrentVersionNumber = 1 ;
 
 ACRX_DXF_DEFINE_MEMBERS (
-	Pore, RcuTagGE,
+	Pore, RcuGE,
 	AcDb::kDHL_CURRENT, AcDb::kMReleaseCurrent,
 	AcDbProxyEntity::kNoOperation,
 	×ê¿×, DEFGEAPP
@@ -41,7 +41,7 @@ Acad::ErrorStatus Pore::dwgOutFields ( AcDbDwgFiler* pFiler ) const
 {
     assertReadEnabled () ;
     //----- Save parent class information first.
-    Acad::ErrorStatus es = RcuTagGE::dwgOutFields ( pFiler ) ;
+    Acad::ErrorStatus es = RcuGE::dwgOutFields ( pFiler ) ;
     if ( es != Acad::eOk )
         return ( es ) ;
     //----- Object version number needs to be saved first
@@ -57,7 +57,7 @@ Acad::ErrorStatus Pore::dwgInFields ( AcDbDwgFiler* pFiler )
 {
     assertWriteEnabled () ;
     //----- Read parent class information first.
-    Acad::ErrorStatus es = RcuTagGE::dwgInFields ( pFiler ) ;
+    Acad::ErrorStatus es = RcuGE::dwgInFields ( pFiler ) ;
     if ( es != Acad::eOk )
         return ( es ) ;
     //----- Object version number needs to be read first

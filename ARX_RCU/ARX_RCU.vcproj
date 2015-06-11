@@ -4,6 +4,7 @@
 	Version="9.00"
 	Name="ARX_RCU"
 	ProjectGUID="{DCF9260D-BEF6-4BAC-9C1D-BFF1AED9D26F}"
+	RootNamespace="ARX_RCU"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -382,6 +383,22 @@
 				>
 			</File>
 			<File
+				RelativePath=".\DrawCmd.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RcuDesignDlg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RcuEditDlg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RcuNewDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RockCoalUncover.cpp"
 				>
 			</File>
@@ -427,6 +444,22 @@
 			Filter="h;hh;hxx"
 			>
 			<File
+				RelativePath=".\DrawCmd.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RcuDesignDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RcuEditDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RcuNewDlg.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Resource.h"
 				>
 			</File>
@@ -451,5 +484,9 @@
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="ARX_RCU.rc"
+		/>
 	</Globals>
 </VisualStudioProject>

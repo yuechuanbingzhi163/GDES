@@ -3,7 +3,7 @@
 #include "RcuGE.h"
 
 //×ê³¡
-class DEFGE_EXPORT_API DrillSite : public RcuTagGE
+class DEFGE_EXPORT_API DrillSite : public RcuGE
 {
 public:
 	ACRX_DECLARE_MEMBERS(DrillSite) ;

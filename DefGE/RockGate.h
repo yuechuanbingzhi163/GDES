@@ -3,7 +3,7 @@
 #include "RcuGE.h"
 
 //й╞це
-class DEFGE_EXPORT_API RockGate : public RcuGE
+class DEFGE_EXPORT_API RockGate : public MineGE
 {
 public:
 	ACRX_DECLARE_MEMBERS(RockGate) ;
