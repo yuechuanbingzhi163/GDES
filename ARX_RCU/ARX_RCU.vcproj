@@ -395,6 +395,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RcuHelper.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RcuNewDlg.cpp"
 				>
 			</File>
@@ -453,6 +457,10 @@
 			</File>
 			<File
 				RelativePath=".\RcuEditDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RcuHelper.h"
 				>
 			</File>
 			<File

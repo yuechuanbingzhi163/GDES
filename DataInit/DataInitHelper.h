@@ -8,6 +8,7 @@ class DataInitHelper
 {
 public:
 	static void InitDataField(const CString& fileName);
+	static void InitDataFieldWithMoreInfo(const CString& fileName);
 
 	static void InitStrList(const CString& fileName);
 	static void InitIntStrList(const CString& fileName);

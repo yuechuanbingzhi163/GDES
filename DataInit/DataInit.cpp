@@ -31,14 +31,14 @@ void InitAllData( const CString& dirPath )
 {
 #if INCLUDE_TVNS_MODULE
 	DataInitHelper::InitDataField( BuildPath( dirPath, _T( "石门揭煤-字段-图元属性.txt" ) ) );
-	DataInitHelper::InitDataField( BuildPath( dirPath, _T( "瓦斯抽采-字段-图元属性.txt" ) ) );
+	DataInitHelper::InitDataFieldWithMoreInfo( BuildPath( dirPath, _T( "瓦斯抽采-字段-图元属性.txt" ) ) );
 	DataInitHelper::InitIntStrList( BuildPath( dirPath, _T( "瓦斯抽采-字符串-整数列表.txt" ) ) );
-	DataInitHelper::InitDataField( BuildPath( dirPath, _T( "瓦斯抽采-字段-数据对象.txt" ) ) );
+	DataInitHelper::InitDataFieldWithMoreInfo( BuildPath( dirPath, _T( "瓦斯抽采-字段-数据对象.txt" ) ) );
 	DataInitHelper::InitSingleDataObject( BuildPath( dirPath, _T( "瓦斯抽采-全局信息对象列表.txt" ) ) );
 #endif
 
 #if INCLUDE_EVAL_MODULE
-    DataInitHelper::InitDataField( BuildPath( dirPath, _T( "通风评价-字段-数据对象.txt" ) ) );
+    DataInitHelper::InitDataFieldWithMoreInfo( BuildPath( dirPath, _T( "通风评价-字段-数据对象.txt" ) ) );
     DataInitHelper::InitStrList( BuildPath( dirPath, _T( "通风评价-字符串列表.txt" ) ) );
     DataInitHelper::InitIntStrList( BuildPath( dirPath, _T( "通风评价-字符串-整数列表.txt" ) ) );
     DataInitHelper::InitDataObjectList( BuildPath( dirPath, _T( "通风评价-字符串-数据对象列表.txt" ) ) );
@@ -46,22 +46,22 @@ void InitAllData( const CString& dirPath )
 #endif
 
 #if INCLUDE_VNC_MODULE
-    DataInitHelper::InitDataField( BuildPath( dirPath, _T( "VNC-字段-通风图元.txt" ) ) );
+    DataInitHelper::InitDataFieldWithMoreInfo( BuildPath( dirPath, _T( "VNC-字段-通风图元.txt" ) ) );
 #endif
 
 #if INCLUDE_MVSS_MODULE
     // 添加属性数据字段
-    DataInitHelper::InitDataField( BuildPath( dirPath, _T( "MVSS-字段-通风图元.txt" ) ) );
+    DataInitHelper::InitDataFieldWithMoreInfo( BuildPath( dirPath, _T( "MVSS-字段-通风图元.txt" ) ) );
 #endif
 
 #if INCLUDE_GAS_MODULE
     // 添加属性数据字段
-    DataInitHelper::InitDataField( BuildPath( dirPath, _T( "瓦斯地质图-字段-瓦斯图元.txt" ) ) );
+    DataInitHelper::InitDataFieldWithMoreInfo( BuildPath( dirPath, _T( "瓦斯地质图-字段-瓦斯图元.txt" ) ) );
 #endif
 
 #if INCLUDE_VNG_GEN_MODULE
     // 添加属性数据字段
-    DataInitHelper::InitDataField( BuildPath( dirPath, _T( "通风网络图-字段-网络图元.txt" ) ) );
+    DataInitHelper::InitDataFieldWithMoreInfo( BuildPath( dirPath, _T( "通风网络图-字段-网络图元.txt" ) ) );
 #endif
 
 }

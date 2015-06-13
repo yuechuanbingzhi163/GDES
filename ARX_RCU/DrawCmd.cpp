@@ -1,6 +1,8 @@
 #include "StdAfx.h"
 #include "DrawCmd.h"
 #include "RcuNewDlg.h"
+#include "RcuDesignDlg.h"
+#include "RcuEditDlg.h"
 
 #include "../ArxHelper/HelperClass.h"
 #include "../MineGE/HelperClass.h"
@@ -16,7 +18,7 @@
 void DrawCmd::DrawRcu()
 {
 	CAcModuleResourceOverride myResources;
-	RcuNewDlg dlg;
+	RcuDesignDlg dlg;
 	dlg.DoModal();
 
 	AcGePoint3d pt;
