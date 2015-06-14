@@ -2,10 +2,11 @@
 
 #include "acui.h"
 #include "resource.h"
+#include "DockBarChildDlg.h"
 
 // RcuDesignDlg ¶Ô»°¿ò
 
-class RcuDesignDlg : public CAcUiDialog
+class RcuDesignDlg : public DockBarChildDlg
 {
 	DECLARE_DYNAMIC(RcuDesignDlg)
 
@@ -28,4 +29,5 @@ public:
 	afx_msg void OnBnClickedButton4();
 	afx_msg void OnHdnItemdblclickList1(NMHDR *pNMHDR, LRESULT *pResult);
 	virtual BOOL OnInitDialog();
+	virtual void OnClosing();
 };

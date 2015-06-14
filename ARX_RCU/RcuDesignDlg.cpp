@@ -13,10 +13,10 @@ struct ItemData
 
 // RcuDesignDlg 对话框
 
-IMPLEMENT_DYNAMIC(RcuDesignDlg, CAcUiDialog)
+IMPLEMENT_DYNAMIC(RcuDesignDlg, DockBarChildDlg)
 
 RcuDesignDlg::RcuDesignDlg(CWnd* pParent /*=NULL*/)
-	: CAcUiDialog(RcuDesignDlg::IDD, pParent)
+	: DockBarChildDlg(RcuDesignDlg::IDD, pParent)
 {
 
 }
@@ -27,12 +27,12 @@ RcuDesignDlg::~RcuDesignDlg()
 
 void RcuDesignDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CAcUiDialog::DoDataExchange(pDX);
+	DockBarChildDlg::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST1, m_rcuList);
 }
 
 
-BEGIN_MESSAGE_MAP(RcuDesignDlg, CAcUiDialog)
+BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
 	ON_BN_CLICKED(IDC_BUTTON1, &RcuDesignDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON2, &RcuDesignDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON3, &RcuDesignDlg::OnBnClickedButton3)
@@ -42,6 +42,9 @@ END_MESSAGE_MAP()
 
 static void FillDatas( CListCtrl& m_list, const AcStringArray fields, const AcDbObjectIdArray& objIds )
 {
+	//首先删除所有行
+	m_list.DeleteAllItems();
+
 	int len = objIds.length();
 	for( int i = 0; i < len; i++ )
 	{
@@ -104,9 +107,22 @@ static void CrackHeadColumnWidth( CListCtrl& m_list)
 	m_list.SetColumnWidth(7, int(m_list.GetColumnWidth(7)*1.5));
 }
 
+static void ClearList( CListCtrl& m_list )
+{
+	//首先删除所有行
+	m_list.DeleteAllItems();
+	//得到列数
+	int n = m_list.GetHeaderCtrl()->GetItemCount();
+	//删除所有列
+	for( int i = 0; i < n; i++ )
+	{
+		m_list.DeleteColumn( 0 );
+	}
+}
+
 BOOL RcuDesignDlg::OnInitDialog()
 {
-	CAcUiDialog::OnInitDialog();
+	DockBarChildDlg::OnInitDialog();
 
 	m_rcuList.SetExtendedStyle( m_rcuList.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES );
 	
@@ -116,13 +132,25 @@ BOOL RcuDesignDlg::OnInitDialog()
 	BuildHeadColumns( m_rcuList, fields );
 	CrackHeadColumnWidth(m_rcuList);
 
+	acDocManager->lockDocument( curDoc() );
+
 	AcDbObjectIdArray objIds;
 	RcuHelper::FindAllRockGates(objIds);
+
+	acDocManager->unlockDocument( curDoc() );
 
 	FillDatas(m_rcuList, fields, objIds);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
+}
+
+void RcuDesignDlg::OnClosing()
+{
+	//删除列表中每一行附带的数据(这些数据都是new出来的)
+	ClearItemData(m_rcuList);
+	// 清空链表
+	//ClearList(m_rcuList);
 }
 
 // RcuDesignDlg 消息处理程序

@@ -383,7 +383,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DrawCmd.cpp"
+				RelativePath=".\DockBarChildDlg.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RcuDesiginDockBarDlg.cpp"
 				>
 			</File>
 			<File
@@ -442,13 +446,21 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\UIHelper.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Include Files"
 			Filter="h;hh;hxx"
 			>
 			<File
-				RelativePath=".\DrawCmd.h"
+				RelativePath=".\DockBarChildDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RcuDesiginDockBarDlg.h"
 				>
 			</File>
 			<File
@@ -473,6 +485,10 @@
 			</File>
 			<File
 				RelativePath=".\StdAfx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\UIHelper.h"
 				>
 			</File>
 		</Filter>

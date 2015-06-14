@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "resource.h"
 //#include "ReactorHelper.h"
-#include "DrawCmd.h"
+#include "UIHelper.h"
 
 #ifndef ARX_RCU_SERVICE_NAME
 #define ARX_RCU_SERVICE_NAME _T("ARX_RCU_SERVICE_NAME")
@@ -32,6 +32,8 @@ public:
 		//ReactorHelper::RemoveDocumentReactorMap();
 		delete acrxServiceDictionary->remove( ARX_RCU_SERVICE_NAME );
 		acutPrintf( _T( "\nARX_RCU::On_kUnloadAppMsg\n" ) );
+		//Ïú»ÙÍ£¿¿¶Ô»°¿ò
+		UIHelper::DestroyRcuDesignDockBar();
 
 		return (retCode) ;
 	}
@@ -85,7 +87,7 @@ public:
 
 	static void JL_TestRCUDlg()
 	{
-		DrawCmd::DrawRcu();
+		UIHelper::ShowRcuDesignDockBar();
 	}
 
 } ;
