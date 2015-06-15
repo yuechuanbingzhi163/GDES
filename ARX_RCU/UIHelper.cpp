@@ -7,14 +7,6 @@
 #include "../ArxHelper/HelperClass.h"
 #include "../MineGE/HelperClass.h"
 
-#include "../MineGE/DataObject.h"
-#include "../ArxHelper/HelperClass.h"
-#include "../DefGE/RcuGE.h"
-#include "../DefGE/Pore.h"
-#include "../DefGE/DrillSite.h"
-#include "../DefGE/RockGate.h"
-#include "../DefGE/CoalSurface.h"
-
 #include "RcuDesiginDockBarDlg.h"
 
 RcuDesiginDockBarDlg* pRcuDesiginDockBarDlg = 0;

@@ -63,6 +63,9 @@ public:
 	// 查找与图元objId关联的指定类型的标签图元(包括从geType派生的图元类型)
 	static void GetTagGEById2(const AcDbObjectId& objId, const CString& geType, AcDbObjectIdArray& objIds);
 
+	// 查找与objIds关联的所有的宿主图元
+	static void GetHosts(const AcDbObjectIdArray& objIds, AcDbObjectIdArray& hosts);
+
 	// 查找所有以objId为宿主的模型图元ModelGE
 	static void GetModelGEById(const AcDbObjectId& objId, AcDbObjectIdArray& objIds);
 

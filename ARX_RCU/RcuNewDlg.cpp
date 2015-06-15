@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "RcuNewDlg.h"
 
-// RcuDlg 对话框
+#include "../ArxHelper/HelperClass.h"
+#include "../MineGE/HelperClass.h"
 
 IMPLEMENT_DYNAMIC(RcuNewDlg, CAcUiDialog)
 
@@ -46,6 +47,7 @@ void RcuNewDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT15, m_angle);
 	DDX_Text(pDX, IDC_EDIT16, m_dist);
 	DDX_Text(pDX, IDC_EDIT17, m_radius);
+	DDX_Text(pDX, IDC_EDIT18, m_name);
 }
 
 
@@ -62,9 +64,7 @@ void RcuNewDlg::OnBnClickedOk()
 	//AcGePoint3d pt;
 	//ArxUtilHelper::PromptPt( _T( "\n请选择插入点坐标: " ), pt );
 	//CompleteEditorCommand();
-
-	UpdateData( FALSE );
-
+	UpdateData( TRUE );
 	OnOK();
 }
 
@@ -74,4 +74,24 @@ BOOL RcuNewDlg::OnInitDialog()
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
+}
+
+void RcuNewDlg::readData(RockGateLink& rg_link, CoalSurfaceLink& cs_link)
+{
+	//提取石门数据
+	rg_link.m_name = m_name;
+	rg_link.m_pt = ArxUtilHelper::Point3dToString(AcGePoint3d(m_x, m_y, m_z));
+	rg_link.m_length = m_length;
+	rg_link.m_width = m_width;
+	rg_link.m_height = m_height;
+	rg_link.m_left = m_left;
+	rg_link.m_right = m_right;
+	rg_link.m_top = m_top;
+	rg_link.m_bottom = m_bottom;
+	rg_link.m_radius = m_radius;
+	rg_link.m_dist = m_dist;
+
+	//提取煤层数据
+	cs_link.m_thick = m_thick;
+	cs_link.m_angle = m_angle;
 }

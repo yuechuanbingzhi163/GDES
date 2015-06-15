@@ -460,6 +460,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RcuDataLink.h"
+				>
+			</File>
+			<File
 				RelativePath=".\RcuDesiginDockBarDlg.h"
 				>
 			</File>

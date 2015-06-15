@@ -42,6 +42,7 @@ protected:
 public:
 	//key param
 	AcGePoint3d m_insertPt;   // 插入点坐标
+	//data
 	double m_width, m_height; // 宽度和高度
 } ;
 

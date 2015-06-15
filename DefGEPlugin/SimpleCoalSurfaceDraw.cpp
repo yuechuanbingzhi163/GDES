@@ -30,15 +30,15 @@ void SimpleCoalSurfaceDraw::updateExtraParams()
 void SimpleCoalSurfaceDraw::readKeyParam(DrawParamReader& reader)
 {
 	reader.readPoint(m_insertPt);
-	reader.readDouble(m_width);
-	reader.readDouble(m_height);
+	//reader.readDouble(m_width);
+	//reader.readDouble(m_height);
 }
 
 void SimpleCoalSurfaceDraw::writeKeyParam(DrawParamWriter& writer)
 {
 	writer.writePoint(m_insertPt);
-	writer.writeDouble(m_width);
-	writer.writeDouble(m_height);
+	//writer.writeDouble(m_width);
+	//writer.writeDouble(m_height);
 }
 
 void SimpleCoalSurfaceDraw::readExtraParam( DrawParamReader& reader )
@@ -53,15 +53,15 @@ void SimpleCoalSurfaceDraw::writeExtraParam( DrawParamWriter& writer )
 
 void SimpleCoalSurfaceDraw::regPropertyDataNames( AcStringArray& names ) const
 {
-    //names.append( _T( "厚度" ) );
-    //names.append( _T( "倾角" ) );
+    names.append( _T( "投影宽度" ) );
+    names.append( _T( "投影高度" ) );
 	//names.append( _T( "迎头煤层投影点坐标" ) );
 }
 
 void SimpleCoalSurfaceDraw::readPropertyDataFromGE( const AcStringArray& values )
 {
-    //m_thick = abs(_tstofvalues[0].kACharPtr());
-	//m_angle = abs(_tstofvalues[1].kACharPtr());
+    m_width = abs(_tstof(values[0].kACharPtr()));
+	m_height = abs(_tstof(values[1].kACharPtr()));
 	//ArxUtilHelper::StringToPoint3d(values[2].kACharPtr(), m_pt);
 }
 
@@ -89,10 +89,9 @@ Acad::ErrorStatus SimpleCoalSurfaceDraw::subMoveGripPointsAt ( const AcDbIntArra
 {
     assertWriteEnabled () ;
 
-	    for( int i = 0; i < indices.length(); i++ )
+	for( int i = 0; i < indices.length(); i++ )
     {
         int idx = indices.at( i );
-
         if ( idx == 0 )
         {
             m_insertPt += offset;

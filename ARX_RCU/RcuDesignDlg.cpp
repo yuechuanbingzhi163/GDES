@@ -1,9 +1,18 @@
 #include "stdafx.h"
 #include "RcuDesignDlg.h"
+#include "RcuNewDlg.h"
+#include "RcuEditDlg.h"
 #include "RcuHelper.h"
+#include "RcuDataLink.h"
 
 #include "../ArxHelper/HelperClass.h"
 #include "../MineGE/HelperClass.h"
+
+#include "../DefGE/RcuGE.h"
+#include "../DefGE/Pore.h"
+#include "../DefGE/DrillSite.h"
+#include "../DefGE/RockGate.h"
+#include "../DefGE/CoalSurface.h"
 
 struct ItemData
 {
@@ -11,36 +20,110 @@ struct ItemData
 	AcDbObjectId objId;   // 数据id
 };
 
-// RcuDesignDlg 对话框
-
-IMPLEMENT_DYNAMIC(RcuDesignDlg, DockBarChildDlg)
-
-RcuDesignDlg::RcuDesignDlg(CWnd* pParent /*=NULL*/)
-	: DockBarChildDlg(RcuDesignDlg::IDD, pParent)
+static bool GetRockGateDataFromDlg(RockGateLink& rg_link, CoalSurfaceLink& cs_link)
 {
+	CAcModuleResourceOverride resourceOverride;
+	RcuNewDlg dlg;
+	if(IDOK != dlg.DoModal()) return false;
 
+	//从对话框中提取数据
+	dlg.readData(rg_link, cs_link);
+
+	return true;
 }
 
-RcuDesignDlg::~RcuDesignDlg()
+static void ShowRcuEditDlg(const AcDbObjectId& rock_gate)
 {
+	CAcModuleResourceOverride resourceOverride;
+	RcuEditDlg dlg;
+	//关联一个石门
+	dlg.rock_gate = rock_gate;
+	/*IDOK == */dlg.DoModal();
 }
 
-void RcuDesignDlg::DoDataExchange(CDataExchange* pDX)
-{
-	DockBarChildDlg::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_LIST1, m_rcuList);
+static void InsertRockGateToListCtrl(CListCtrl& m_list, const AcDbObjectId& objId, RockGateLink& rg_link)
+{	
+	int n = m_list.GetItemCount();
+
+	//增加一行数据
+	m_list.InsertItem( n, _T( "xx" ) );
+
+	//设置编号
+	CString num;
+	num.Format( _T( "%d" ), n + 1 );
+	m_list.SetItemText( n, 0, num );
+
+	//给每一行附加数据
+	ItemData* pData = new ItemData();
+	pData->iItem = n;
+	pData->objId = objId;
+	m_list.SetItemData( n, ( LPARAM )pData ); // 设置数据
+
+	{
+		m_list.SetItemText( n, 1, rg_link.m_name );
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(rg_link.m_length, value);
+		m_list.SetItemText( n, 2, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(rg_link.m_width, value);
+		m_list.SetItemText( n, 3, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(rg_link.m_height, value);
+		m_list.SetItemText( n, 4, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(rg_link.m_dist, value);
+		m_list.SetItemText( n, 5, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(rg_link.m_radius, value);
+		m_list.SetItemText( n, 6, value);
+	}
+	{
+		m_list.SetItemText( n, 7, rg_link.m_pt);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(rg_link.m_left, value);
+		m_list.SetItemText( n, 8, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(rg_link.m_right, value);
+		m_list.SetItemText( n, 9, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(rg_link.m_top, value);
+		m_list.SetItemText( n, 10, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(rg_link.m_bottom, value);
+		m_list.SetItemText( n, 11, value);
+	}
 }
 
+static void ClearListCtrlItem( CListCtrl& m_list, int row )
+{
+	int n = m_list.GetItemCount();
+	if(row != LB_ERR && n > 0 && row < n) 
+	{
+		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
+		delete pData;
+		m_list.DeleteItem(row);
+	}
+}
 
-BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
-	ON_BN_CLICKED(IDC_BUTTON1, &RcuDesignDlg::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_BUTTON2, &RcuDesignDlg::OnBnClickedButton2)
-	ON_BN_CLICKED(IDC_BUTTON3, &RcuDesignDlg::OnBnClickedButton3)
-	ON_BN_CLICKED(IDC_BUTTON4, &RcuDesignDlg::OnBnClickedButton4)
-	ON_NOTIFY(HDN_ITEMDBLCLICK, 0, &RcuDesignDlg::OnHdnItemdblclickList1)
-END_MESSAGE_MAP()
-
-static void FillDatas( CListCtrl& m_list, const AcStringArray fields, const AcDbObjectIdArray& objIds )
+static void InsertDatasToListCtrl( CListCtrl& m_list, const AcStringArray fields, const AcDbObjectIdArray& objIds )
 {
 	//首先删除所有行
 	m_list.DeleteAllItems();
@@ -70,7 +153,7 @@ static void FillDatas( CListCtrl& m_list, const AcStringArray fields, const AcDb
 	}
 }
 
-static void ClearItemData( CListCtrl& m_list )
+static void ClearListCtrlItemDatas( CListCtrl& m_list )
 {
 	int n = m_list.GetItemCount();
 	for( int i = 0; i < n; i++ )
@@ -80,7 +163,7 @@ static void ClearItemData( CListCtrl& m_list )
 	}
 }
 
-static void BuildHeadColumns( CListCtrl& m_list, const AcStringArray fields )
+static void BuildListCtrlHeadColumns( CListCtrl& m_list, const AcStringArray fields )
 {
 	int len = fields.length();
 
@@ -98,8 +181,9 @@ static void BuildHeadColumns( CListCtrl& m_list, const AcStringArray fields )
 	}
 }
 
-static void CrackHeadColumnWidth( CListCtrl& m_list)
+static void CrackHeadColumnWidth(CListCtrl& m_list)
 {
+	m_list.SetColumnWidth(1, int(m_list.GetColumnWidth(1)*1.2));
 	for(int i=5;i<m_list.GetHeaderCtrl()->GetItemCount()+1;i++)
 	{
 		m_list.SetColumnWidth(i, int(m_list.GetColumnWidth(i)*1.5));
@@ -107,7 +191,7 @@ static void CrackHeadColumnWidth( CListCtrl& m_list)
 	m_list.SetColumnWidth(7, int(m_list.GetColumnWidth(7)*1.5));
 }
 
-static void ClearList( CListCtrl& m_list )
+static void ClearListCtrl( CListCtrl& m_list )
 {
 	//首先删除所有行
 	m_list.DeleteAllItems();
@@ -120,17 +204,79 @@ static void ClearList( CListCtrl& m_list )
 	}
 }
 
+static void ZoomToEntity( const AcDbObjectId& objId )
+{
+	// 在非模态对话框下无法使用
+	//ads_name en;
+	//if(Acad::eOk != acdbGetAdsName(en, objId)) return;
+	//acedCommand(RTSTR, _T("ZOOM"), RTSTR, _T("O"), RTENAME, en, RTSTR, _T(""), 0);
+
+	// 临时使用sendStringToExecute解决缩放定位问题
+	CString cmd;
+	cmd.Format( _T( "ZOOM O \003" ) ); // 按空格结束选择对象，然后esc(防止多余的空格重复执行命令)
+	acDocManager->sendStringToExecute( curDoc(), cmd, true, false, false );
+}
+
+//获取当前选择的行
+static int GetCurSelOfList(CListCtrl& m_list)
+{
+	int row = LB_ERR;
+	for( int i = 0; i < m_list.GetItemCount(); i++ )
+	{
+		if( LVIS_SELECTED == m_list.GetItemState( i, LVIS_SELECTED ) )
+		{
+			row = i;
+			break;
+		}
+	}
+	return row;
+}
+
+// RcuDesignDlg 对话框
+
+IMPLEMENT_DYNAMIC(RcuDesignDlg, DockBarChildDlg)
+
+RcuDesignDlg::RcuDesignDlg(CWnd* pParent /*=NULL*/)
+	: DockBarChildDlg(RcuDesignDlg::IDD, pParent)
+{
+
+}
+
+RcuDesignDlg::~RcuDesignDlg()
+{
+	ClearListCtrlItemDatas(m_list);
+}
+
+void RcuDesignDlg::DoDataExchange(CDataExchange* pDX)
+{
+	DockBarChildDlg::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST1, m_list);
+}
+
+BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
+	ON_BN_CLICKED(IDC_BUTTON1, &RcuDesignDlg::OnBnClickedNew)
+	ON_BN_CLICKED(IDC_BUTTON2, &RcuDesignDlg::OnBnClickedDelete)
+	ON_BN_CLICKED(IDC_BUTTON3, &RcuDesignDlg::OnBnClickedModify)
+	ON_BN_CLICKED(IDC_BUTTON4, &RcuDesignDlg::OnBnClickedExport)
+	ON_NOTIFY(NM_DBLCLK, IDC_LIST1, &RcuDesignDlg::OnNMDblclkList1)
+	ON_NOTIFY(NM_RCLICK, IDC_LIST1, &RcuDesignDlg::OnNMRclickList1)
+	ON_COMMAND(ID_RCU_LIST_HILIGHT, &RcuDesignDlg::OnHilightCommand)
+	ON_COMMAND(ID_RCU_LIST_MODIFY, &RcuDesignDlg::OnModifyCommand)
+	ON_COMMAND(ID_RCU_LIST_DELETE, &RcuDesignDlg::OnDeleteCommand)
+	ON_COMMAND(ID_RCU_LIST_ADD, &RcuDesignDlg::OnAddCommand)
+END_MESSAGE_MAP()
+
 BOOL RcuDesignDlg::OnInitDialog()
 {
 	DockBarChildDlg::OnInitDialog();
 
-	m_rcuList.SetExtendedStyle( m_rcuList.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES );
+	m_list.SetExtendedStyle( m_list.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES );
 	
 	AcStringArray fields;
 	FieldHelper::GetAllFields(_T("RockGate"), fields);
 	// 构建Column
-	BuildHeadColumns( m_rcuList, fields );
-	CrackHeadColumnWidth(m_rcuList);
+	BuildListCtrlHeadColumns( m_list, fields );
+	CrackHeadColumnWidth(m_list);
 
 	acDocManager->lockDocument( curDoc() );
 
@@ -139,7 +285,7 @@ BOOL RcuDesignDlg::OnInitDialog()
 
 	acDocManager->unlockDocument( curDoc() );
 
-	FillDatas(m_rcuList, fields, objIds);
+	InsertDatasToListCtrl(m_list, fields, objIds);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
@@ -148,37 +294,268 @@ BOOL RcuDesignDlg::OnInitDialog()
 void RcuDesignDlg::OnClosing()
 {
 	//删除列表中每一行附带的数据(这些数据都是new出来的)
-	ClearItemData(m_rcuList);
+	//ClearListCtrlItemDatas(m_list);
 	// 清空链表
-	//ClearList(m_rcuList);
+	//ClearList(m_list);
 }
 
 // RcuDesignDlg 消息处理程序
 
-void RcuDesignDlg::OnBnClickedButton1()
+void RcuDesignDlg::OnBnClickedNew()
+{
+	acDocManager->lockDocument( curDoc() );
+
+	//切换controlbar的显示
+	ControlBarShowSwitch cb_switch(this);
+
+	AcGePoint3d pt;
+	if(!ArxUtilHelper::PromptPt(_T("\n请选择石门的插入点坐标："), pt)) return;
+	
+	//创建Datalink对象,减少字符串格式化代码
+	RockGateLink rg_link;
+	CoalSurfaceLink cs_link;
+	if(!GetRockGateDataFromDlg(rg_link, cs_link)) return;
+	
+	//新建石门并设置插入点坐标
+	RockGate* pRG = new RockGate();
+	pRG->setInsertPt(pt);
+
+	CoalSurface* pCS = new CoalSurface();
+	pCS->setInsertPt(AcGePoint3d(pt.x, pt.y+500, pt.z));
+
+	//添加石门到cad图形数据库
+	if(!ArxUtilHelper::PostToModelSpace(pRG))
+	{
+		delete pRG; pRG = 0;
+	}
+	else
+	{
+		//煤层关联到石门
+		pCS->setRelatedGE(pRG->objectId());
+		//添加煤层到cad图形数据库
+		if(!ArxUtilHelper::PostToModelSpace(pCS))
+		{
+			delete pCS; pCS = 0;
+			//煤层提交失败,则删除已添加的石门
+			ArxEntityHelper::EraseObject(pRG->objectId(), true);
+		}
+		else
+		{
+			//通过DataLink关联数据对象,并写入到图元中
+			rg_link.setDataSource(pRG->objectId());
+			rg_link.updateData(true);
+			cs_link.setDataSource(pCS->objectId());
+			cs_link.updateData(true);
+
+			//向listctrl中插入一行
+			InsertRockGateToListCtrl(m_list, pRG->objectId(), rg_link);
+		}
+	}
+	acDocManager->unlockDocument( curDoc() );
+}
+
+void RcuDesignDlg::OnBnClickedDelete()
+{
+	int row = GetCurSelOfList(m_list);
+	if(row == LB_ERR)
+	{
+		MessageBox( _T( "请确保当前有一行被选中!" ) );
+	}
+	else
+	{
+		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
+
+		//删除石门图元
+		acDocManager->lockDocument( curDoc() );
+		ArxEntityHelper::EraseObject(pData->objId, true);
+		acDocManager->unlockDocument( curDoc() );
+
+		//删除选择的行
+		ClearListCtrlItem(m_list, row);
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
+	}
+}
+
+void RcuDesignDlg::OnBnClickedModify()
+{
+	int row = GetCurSelOfList(m_list);
+	if(row == LB_ERR)
+	{
+		MessageBox( _T( "请确保当前有一行被选中!" ) );
+	}
+	else
+	{
+		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
+	
+		//切换controlbar的显示
+		ControlBarShowSwitch cb_switch(this);
+
+		acDocManager->lockDocument( curDoc() );
+		ShowRcuEditDlg(pData->objId);
+		acDocManager->unlockDocument( curDoc() );
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
+	}
+}
+
+void RcuDesignDlg::OnBnClickedExport()
 {
 	// TODO: 在此添加控件通知处理程序代码
 }
 
-void RcuDesignDlg::OnBnClickedButton2()
+void RcuDesignDlg::OnNMDblclkList1(NMHDR *pNMHDR, LRESULT *pResult)
 {
-	// TODO: 在此添加控件通知处理程序代码
+	//第几行
+	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	int row = pNMItemActivate->iItem;
+	if( row != LB_ERR )
+	{
+		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
+
+		acDocManager->lockDocument( curDoc() );
+		//高亮选择图元
+		ArxEntityHelper::SelectEntity(pData->objId);
+		//定位到图元
+		//ArxEntityHelper::ZoomToEntity(pData->objId);
+		ZoomToEntity(pData->objId);
+		acDocManager->unlockDocument( curDoc() );
+	}
+	//设置pResult为1,屏蔽父窗口响应该消息
+	*pResult = 1;
 }
 
-void RcuDesignDlg::OnBnClickedButton3()
+void RcuDesignDlg::OnNMRclickList1(NMHDR *pNMHDR, LRESULT *pResult)
 {
-	// TODO: 在此添加控件通知处理程序代码
+	//第几行
+	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	int row = pNMItemActivate->iItem;
+	//防止在空白区点击弹出菜单
+	//if (m_list.GetSelectedCount() > 0)
+	{
+		//下面的这段代码, 不单单适应于ListCtrl
+		CMenu menu, *pPopup;
+		menu.LoadMenu(IDR_RCU_LIST_MENU);
+		pPopup = menu.GetSubMenu(0);
+		CPoint myPoint;
+		ClientToScreen(&myPoint);
+		GetCursorPos(&myPoint); //鼠标位置
+		pPopup->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, myPoint.x, myPoint.y,this);  
+	}
+	//设置pResult为1,屏蔽父窗口响应该消息
+	*pResult = 1;
 }
 
-void RcuDesignDlg::OnBnClickedButton4()
+void RcuDesignDlg::OnHilightCommand()
 {
-	// TODO: 在此添加控件通知处理程序代码
+	//MessageBox(_T("RcuDesignDlg::OnHilightCommand"));
+	int row = GetCurSelOfList(m_list);
+	if(row != LB_ERR)
+	{
+		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
+
+		//高亮选中石门图元
+		acDocManager->lockDocument( curDoc() );
+		ArxEntityHelper::SelectEntity(pData->objId);
+		acDocManager->unlockDocument( curDoc() );
+
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
+	}
 }
 
-void RcuDesignDlg::OnHdnItemdblclickList1(NMHDR *pNMHDR, LRESULT *pResult)
+void RcuDesignDlg::OnModifyCommand()
 {
-	LPNMHEADER phdr = reinterpret_cast<LPNMHEADER>(pNMHDR);
-	// TODO: 在此添加控件通知处理程序代码
-	*pResult = 0;
+	//MessageBox(_T("RcuDesignDlg::OnLocateCommand"));
+	int row = GetCurSelOfList(m_list);
+	if(row == LB_ERR)
+	{
+		MessageBox( _T( "请确保当前有一行被选中!" ) );
+	}
+	else
+	{
+		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
+
+		//切换controlbar的显示
+		ControlBarShowSwitch cb_switch(this);
+
+		acDocManager->lockDocument( curDoc() );
+		ShowRcuEditDlg(pData->objId);
+		acDocManager->unlockDocument( curDoc() );
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
+	}
 }
 
+void RcuDesignDlg::OnDeleteCommand()
+{
+	//MessageBox(_T("RcuDesignDlg::OnDeleteCommand"));
+	int row = GetCurSelOfList(m_list);
+	if(row != LB_ERR)
+	{
+		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
+
+		//删除石门图元
+		acDocManager->lockDocument( curDoc() );
+		ArxEntityHelper::EraseObject(pData->objId, true);
+		acDocManager->unlockDocument( curDoc() );
+
+		//删除选择的行
+		ClearListCtrlItem(m_list, row);
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
+	}
+}
+
+void RcuDesignDlg::OnAddCommand()
+{
+	acDocManager->lockDocument( curDoc() );
+
+	//切换controlbar的显示
+	ControlBarShowSwitch cb_switch(this);
+
+	AcGePoint3d pt;
+	if(!ArxUtilHelper::PromptPt(_T("\n请选择石门的插入点坐标："), pt)) return;
+
+	//创建Datalink对象,减少字符串格式化代码
+	RockGateLink rg_link;
+	CoalSurfaceLink cs_link;
+	if(!GetRockGateDataFromDlg(rg_link, cs_link)) return;
+
+	//新建石门并设置插入点坐标
+	RockGate* pRG = new RockGate();
+	pRG->setInsertPt(pt);
+
+	CoalSurface* pCS = new CoalSurface();
+	pCS->setInsertPt(AcGePoint3d(pt.x, pt.y+500, pt.z));
+
+	//添加石门到cad图形数据库
+	if(!ArxUtilHelper::PostToModelSpace(pRG))
+	{
+		delete pRG; pRG = 0;
+	}
+	else
+	{
+		//煤层关联到石门
+		pCS->setRelatedGE(pRG->objectId());
+		//添加煤层到cad图形数据库
+		if(!ArxUtilHelper::PostToModelSpace(pCS))
+		{
+			delete pCS; pCS = 0;
+			//煤层提交失败,则删除已添加的石门
+			ArxEntityHelper::EraseObject(pRG->objectId(), true);
+		}
+		else
+		{
+			//通过DataLink关联数据对象,并写入到图元中
+			rg_link.setDataSource(pRG->objectId());
+			rg_link.updateData(true);
+			cs_link.setDataSource(pCS->objectId());
+			cs_link.updateData(true);
+
+			//向listctrl中插入一行
+			InsertRockGateToListCtrl(m_list, pRG->objectId(), rg_link);
+		}
+	}
+	acDocManager->unlockDocument( curDoc() );
+}

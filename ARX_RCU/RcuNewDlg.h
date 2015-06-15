@@ -2,8 +2,7 @@
 
 #include "acui.h"
 #include "resource.h"
-
-// RcuDlg 对话框
+#include "RcuDataLink.h"
 
 class RcuNewDlg : public CAcUiDialog
 {
@@ -15,6 +14,9 @@ public:
 
 // 对话框数据
 	enum { IDD = IDD_RCU_NEW_DLG };
+
+public:
+	void readData(RockGateLink& rg_link, CoalSurfaceLink& cs_link);
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
@@ -35,7 +37,7 @@ public:
 	double m_angle;
 	double m_dist;
 	double m_radius;
+	CString m_name;
 	afx_msg void OnBnClickedOk();
 	virtual BOOL OnInitDialog();
-	afx_msg void OnBnClickedButton1();
 };

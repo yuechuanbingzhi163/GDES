@@ -641,7 +641,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Pore"
+				Name="Rcu"
 				>
 				<File
 					RelativePath=".\SimpleCoalSurfaceDraw.cpp"
@@ -902,7 +902,7 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Pore"
+				Name="Rcu"
 				>
 				<File
 					RelativePath=".\SimpleCoalSurfaceDraw.h"

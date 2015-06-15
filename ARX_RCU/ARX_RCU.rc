@@ -89,13 +89,13 @@ END
 // Dialog
 //
 
-IDD_RCU_NEW_DLG DIALOGEX 0, 0, 325, 143
+IDD_RCU_NEW_DLG DIALOGEX 0, 0, 326, 142
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "开始设计石门"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "确定",IDOK,187,119,55,17
-    PUSHBUTTON      "取消",IDCANCEL,263,119,55,17
+    DEFPUSHBUTTON   "确定",IDOK,200,118,55,17
+    PUSHBUTTON      "取消",IDCANCEL,264,118,55,17
     LTEXT           "长:",IDC_STATIC,92,27,12,8
     EDITTEXT        IDC_EDIT1,105,24,49,14,ES_AUTOHSCROLL
     LTEXT           "宽:",IDC_STATIC,92,59,9,8
@@ -125,21 +125,23 @@ BEGIN
     GROUPBOX        "迎头底板中心坐标",IDC_STATIC,7,7,76,106
     GROUPBOX        "石门大小",IDC_STATIC,85,7,81,107
     GROUPBOX        "石门保护间距",IDC_STATIC,171,8,145,50
-    GROUPBOX        "煤层参数",IDC_STATIC,170,60,148,54
-    LTEXT           "钻孔抽采半径:",IDC_STATIC,14,123,52,8
-    EDITTEXT        IDC_EDIT17,74,120,63,14,ES_AUTOHSCROLL
+    GROUPBOX        "煤层参数",IDC_STATIC,169,60,148,54
+    LTEXT           "抽采半径:",IDC_STATIC,116,125,36,8
+    EDITTEXT        IDC_EDIT17,154,121,39,14,ES_AUTOHSCROLL
+    LTEXT           "名称:",IDC_STATIC,7,125,20,8
+    EDITTEXT        IDC_EDIT18,28,121,76,14,ES_AUTOHSCROLL
 END
 
-IDD_RCU_DESIGN_DLG DIALOGEX 0, 0, 325, 180
+IDD_RCU_DESIGN_DLG DIALOGEX 0, 0, 325, 181
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     LTEXT           "石门揭煤设计",IDC_STATIC,6,8,49,8
-    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,19,309,126
-    PUSHBUTTON      "新建",IDC_BUTTON1,6,148,62,25
-    PUSHBUTTON      "删除",IDC_BUTTON2,89,148,62,25
-    PUSHBUTTON      "设计",IDC_BUTTON3,172,148,62,25
-    PUSHBUTTON      "输出",IDC_BUTTON4,256,148,62,25
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,21,309,126
+    PUSHBUTTON      "新建",IDC_BUTTON1,6,149,62,25
+    PUSHBUTTON      "删除",IDC_BUTTON2,89,149,62,25
+    PUSHBUTTON      "设计",IDC_BUTTON3,172,149,62,25
+    PUSHBUTTON      "输出",IDC_BUTTON4,256,149,62,25
 END
 
 IDD_RCU_EDIT_DLG DIALOGEX 0, 0, 331, 296
@@ -147,44 +149,46 @@ STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSM
 CAPTION "石门设计"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    LTEXT           "长:",IDC_STATIC,92,33,12,8
-    EDITTEXT        IDC_EDIT1,105,31,49,14,ES_AUTOHSCROLL
-    LTEXT           "宽:",IDC_STATIC,92,51,9,8
-    EDITTEXT        IDC_EDIT2,105,49,49,14,ES_AUTOHSCROLL
-    LTEXT           "高:",IDC_STATIC,92,70,9,8
-    EDITTEXT        IDC_EDIT3,105,69,49,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT5,23,31,52,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT7,23,49,52,14,ES_AUTOHSCROLL
-    EDITTEXT        IDC_EDIT9,23,69,52,14,ES_AUTOHSCROLL
-    LTEXT           "X:",IDC_STATIC,14,33,8,8
-    LTEXT           "Y:",IDC_STATIC,14,51,8,8
-    LTEXT           "Z:",IDC_STATIC,14,70,8,8
-    LTEXT           "左帮:",IDC_STATIC,177,35,20,8
-    EDITTEXT        IDC_EDIT10,201,33,40,14,ES_AUTOHSCROLL
-    LTEXT           "右帮:",IDC_STATIC,246,35,20,8
-    EDITTEXT        IDC_EDIT11,268,32,40,14,ES_AUTOHSCROLL
-    LTEXT           "上帮:",IDC_STATIC,177,55,20,8
-    EDITTEXT        IDC_EDIT12,201,52,40,14,ES_AUTOHSCROLL
-    LTEXT           "下帮:",IDC_STATIC,246,54,20,8
-    EDITTEXT        IDC_EDIT13,268,51,40,14,ES_AUTOHSCROLL
-    LTEXT           "煤厚:",IDC_STATIC,13,113,20,8
-    EDITTEXT        IDC_EDIT14,39,111,40,14,ES_AUTOHSCROLL
-    LTEXT           "倾角:",IDC_STATIC,85,113,20,8
-    EDITTEXT        IDC_EDIT15,109,110,40,14,ES_AUTOHSCROLL
-    LTEXT           "迎头到煤层的最小法距:",IDC_STATIC,166,114,84,8
-    EDITTEXT        IDC_EDIT16,258,112,44,14,ES_AUTOHSCROLL
-    GROUPBOX        "迎头底板中心坐标",IDC_STATIC,7,19,76,67
-    GROUPBOX        "石门大小",IDC_STATIC,85,19,81,68
-    GROUPBOX        "石门保护间距",IDC_STATIC,171,20,140,50
-    LTEXT           "钻孔抽采半径:",IDC_STATIC,177,76,52,8
-    EDITTEXT        IDC_EDIT17,237,74,63,14,ES_AUTOHSCROLL
+    LTEXT           "长:",IDC_STATIC,92,49,12,8
+    EDITTEXT        IDC_EDIT1,105,47,49,14,ES_AUTOHSCROLL
+    LTEXT           "宽:",IDC_STATIC,92,67,9,8
+    EDITTEXT        IDC_EDIT2,105,65,49,14,ES_AUTOHSCROLL
+    LTEXT           "高:",IDC_STATIC,92,86,9,8
+    EDITTEXT        IDC_EDIT3,105,85,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT5,23,47,52,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT7,23,65,52,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT9,23,85,52,14,ES_AUTOHSCROLL
+    LTEXT           "X:",IDC_STATIC,14,37,8,8
+    LTEXT           "Y:",IDC_STATIC,14,69,8,8
+    LTEXT           "Z:",IDC_STATIC,14,88,8,8
+    LTEXT           "左帮:",IDC_STATIC,177,56,20,8
+    EDITTEXT        IDC_EDIT10,201,52,40,14,ES_AUTOHSCROLL
+    LTEXT           "右帮:",IDC_STATIC,246,56,20,8
+    EDITTEXT        IDC_EDIT11,268,52,40,14,ES_AUTOHSCROLL
+    LTEXT           "上帮:",IDC_STATIC,177,84,20,8
+    EDITTEXT        IDC_EDIT12,201,80,40,14,ES_AUTOHSCROLL
+    LTEXT           "下帮:",IDC_STATIC,246,84,20,8
+    EDITTEXT        IDC_EDIT13,268,80,40,14,ES_AUTOHSCROLL
+    LTEXT           "煤厚:",IDC_STATIC,13,125,20,8
+    EDITTEXT        IDC_EDIT14,39,123,40,14,ES_AUTOHSCROLL
+    LTEXT           "倾角:",IDC_STATIC,85,125,20,8
+    EDITTEXT        IDC_EDIT15,109,122,40,14,ES_AUTOHSCROLL
+    LTEXT           "迎头到煤层的最小法距:",IDC_STATIC,166,126,84,8
+    EDITTEXT        IDC_EDIT16,258,124,44,14,ES_AUTOHSCROLL
+    GROUPBOX        "迎头底板中心坐标",IDC_STATIC,7,35,76,67
+    GROUPBOX        "石门大小",IDC_STATIC,85,35,81,68
+    GROUPBOX        "石门保护间距",IDC_STATIC,171,36,143,66
+    LTEXT           "钻孔抽采半径:",IDC_STATIC,120,19,52,8
+    EDITTEXT        IDC_EDIT17,180,17,63,14,ES_AUTOHSCROLL
     LTEXT           "-----------------------------------------------------石门参数-----------------------------------------------------",IDC_STATIC,7,7,317,8
-    LTEXT           "-----------------------------------------------------煤层参数-----------------------------------------------------",IDC_STATIC,7,95,317,8
-    LTEXT           "-----------------------------------------------------钻场参数-----------------------------------------------------",IDC_STATIC,7,133,317,8
-    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,147,317,114
-    PUSHBUTTON      "增加钻场",IDC_BUTTON4,25,266,74,23
-    PUSHBUTTON      "删除钻场",IDC_BUTTON5,129,266,74,23
-    PUSHBUTTON      "修改钻场参数",IDC_BUTTON6,233,265,74,23
+    LTEXT           "-----------------------------------------------------煤层参数-----------------------------------------------------",IDC_STATIC,7,110,317,8
+    LTEXT           "-----------------------------------------------------钻场参数-----------------------------------------------------",IDC_STATIC,7,143,317,8
+    CONTROL         "",IDC_LIST2,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,157,317,104
+    DEFPUSHBUTTON   "确定",IDOK,49,266,74,23
+    PUSHBUTTON      "取消",IDCANCEL,202,266,74,23
+    LTEXT           "名称:",IDC_STATIC,12,19,20,8
+    EDITTEXT        IDC_EDIT18,33,15,76,14,ES_AUTOHSCROLL
+    LTEXT           "X:",IDC_STATIC,14,50,8,8
 END
 
 
@@ -199,9 +203,9 @@ BEGIN
     IDD_RCU_NEW_DLG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 318
+        RIGHTMARGIN, 319
         TOPMARGIN, 7
-        BOTTOMMARGIN, 136
+        BOTTOMMARGIN, 135
     END
 
     IDD_RCU_DESIGN_DLG, DIALOG
@@ -209,7 +213,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 318
         TOPMARGIN, 7
-        BOTTOMMARGIN, 173
+        BOTTOMMARGIN, 174
     END
 
     IDD_RCU_EDIT_DLG, DIALOG
@@ -221,6 +225,34 @@ BEGIN
     END
 END
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_RCU_LIST_MENU MENU 
+BEGIN
+    POPUP "石门列表右键菜单"
+    BEGIN
+        MENUITEM "新掘石门",                        ID_RCU_LIST_ADD
+        MENUITEM "删除石门",                        ID_RCU_LIST_DELETE
+        MENUITEM "设计石门",                        ID_RCU_LIST_MODIFY
+        MENUITEM "高亮图形",                        ID_RCU_LIST_HILIGHT
+    END
+END
+
+IDR_DRILL_SITE_MENU MENU 
+BEGIN
+    POPUP "钻场列表右键菜单"
+    BEGIN
+        MENUITEM "增加钻场",                        IDR_DRILL_SITE_ADD
+        MENUITEM "删除钻场",                        IDR_DRILL_SITE_DELETE
+        MENUITEM "设计钻场",                        IDR_DRILL_SITE_MODIFY
+        MENUITEM "高亮图形",                        IDR_DRILL_SITE_HILIGHT
+    END
+END
 
 
 /////////////////////////////////////////////////////////////////////////////
