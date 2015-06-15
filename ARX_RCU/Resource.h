@@ -12,10 +12,8 @@
 #define IDC_LIST1                       105
 #define IDR_RCU_LIST_MENU               105
 #define IDC_EDIT5                       106
-#define IDC_BUTTON1                     106
 #define IDR_DRILL_SITE_MENU             106
 #define IDR_DRILL_SITE_ADD              106
-#define IDC_BUTTON2                     107
 #define IDC_EDIT7                       108
 #define IDC_BUTTON3                     108
 #define IDC_BUTTON4                     109

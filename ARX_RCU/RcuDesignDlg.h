@@ -21,12 +21,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CListCtrl m_list;
-	//新建按钮消息
-	afx_msg void OnBnClickedNew();
-	//删除按钮消息
-	afx_msg void OnBnClickedDelete();
-	//设计按钮消息
-	afx_msg void OnBnClickedModify();
 	//输出按钮消息
 	afx_msg void OnBnClickedExport();
 	//listctrl双击消息

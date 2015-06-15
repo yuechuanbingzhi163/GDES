@@ -495,19 +495,14 @@ bool RcuEditDlg::writeData()
 void RcuEditDlg::OnAddCommand()
 {
 	MessageBox(_T("OnAddCommand"));
-	//int row = GetCurSelOfList(m_list);
-	//if(row != LB_ERR)
-	//{
-	//	ItemData* pData = ( ItemData* )m_list.GetItemData( row );
 
-	//	//高亮选中石门图元
-	//	acDocManager->lockDocument( curDoc() );
-	//	ArxEntityHelper::SelectEntity(pData->objId);
-	//	acDocManager->unlockDocument( curDoc() );
+	//高亮选中石门图元
+	acDocManager->lockDocument( curDoc() );
+	//ArxEntityHelper::SelectEntity(pData->objId);
+	acDocManager->unlockDocument( curDoc() );
 
-	//	//cad窗口获取焦点
-	//	acedGetAcadFrame()->SetFocus();
-	//}
+	//cad窗口获取焦点
+	acedGetAcadFrame()->SetFocus();
 }
 
 void RcuEditDlg::OnDeleteCommand()

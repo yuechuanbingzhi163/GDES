@@ -254,9 +254,6 @@ void RcuDesignDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
-	ON_BN_CLICKED(IDC_BUTTON1, &RcuDesignDlg::OnBnClickedNew)
-	ON_BN_CLICKED(IDC_BUTTON2, &RcuDesignDlg::OnBnClickedDelete)
-	ON_BN_CLICKED(IDC_BUTTON3, &RcuDesignDlg::OnBnClickedModify)
 	ON_BN_CLICKED(IDC_BUTTON4, &RcuDesignDlg::OnBnClickedExport)
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST1, &RcuDesignDlg::OnNMDblclkList1)
 	ON_NOTIFY(NM_RCLICK, IDC_LIST1, &RcuDesignDlg::OnNMRclickList1)
@@ -300,104 +297,6 @@ void RcuDesignDlg::OnClosing()
 }
 
 // RcuDesignDlg 消息处理程序
-
-void RcuDesignDlg::OnBnClickedNew()
-{
-	acDocManager->lockDocument( curDoc() );
-
-	//切换controlbar的显示
-	ControlBarShowSwitch cb_switch(this);
-
-	AcGePoint3d pt;
-	if(!ArxUtilHelper::PromptPt(_T("\n请选择石门的插入点坐标："), pt)) return;
-	
-	//创建Datalink对象,减少字符串格式化代码
-	RockGateLink rg_link;
-	CoalSurfaceLink cs_link;
-	if(!GetRockGateDataFromDlg(rg_link, cs_link)) return;
-	
-	//新建石门并设置插入点坐标
-	RockGate* pRG = new RockGate();
-	pRG->setInsertPt(pt);
-
-	CoalSurface* pCS = new CoalSurface();
-	pCS->setInsertPt(AcGePoint3d(pt.x, pt.y+500, pt.z));
-
-	//添加石门到cad图形数据库
-	if(!ArxUtilHelper::PostToModelSpace(pRG))
-	{
-		delete pRG; pRG = 0;
-	}
-	else
-	{
-		//煤层关联到石门
-		pCS->setRelatedGE(pRG->objectId());
-		//添加煤层到cad图形数据库
-		if(!ArxUtilHelper::PostToModelSpace(pCS))
-		{
-			delete pCS; pCS = 0;
-			//煤层提交失败,则删除已添加的石门
-			ArxEntityHelper::EraseObject(pRG->objectId(), true);
-		}
-		else
-		{
-			//通过DataLink关联数据对象,并写入到图元中
-			rg_link.setDataSource(pRG->objectId());
-			rg_link.updateData(true);
-			cs_link.setDataSource(pCS->objectId());
-			cs_link.updateData(true);
-
-			//向listctrl中插入一行
-			InsertRockGateToListCtrl(m_list, pRG->objectId(), rg_link);
-		}
-	}
-	acDocManager->unlockDocument( curDoc() );
-}
-
-void RcuDesignDlg::OnBnClickedDelete()
-{
-	int row = GetCurSelOfList(m_list);
-	if(row == LB_ERR)
-	{
-		MessageBox( _T( "请确保当前有一行被选中!" ) );
-	}
-	else
-	{
-		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
-
-		//删除石门图元
-		acDocManager->lockDocument( curDoc() );
-		ArxEntityHelper::EraseObject(pData->objId, true);
-		acDocManager->unlockDocument( curDoc() );
-
-		//删除选择的行
-		ClearListCtrlItem(m_list, row);
-		//cad窗口获取焦点
-		acedGetAcadFrame()->SetFocus();
-	}
-}
-
-void RcuDesignDlg::OnBnClickedModify()
-{
-	int row = GetCurSelOfList(m_list);
-	if(row == LB_ERR)
-	{
-		MessageBox( _T( "请确保当前有一行被选中!" ) );
-	}
-	else
-	{
-		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
-	
-		//切换controlbar的显示
-		ControlBarShowSwitch cb_switch(this);
-
-		acDocManager->lockDocument( curDoc() );
-		ShowRcuEditDlg(pData->objId);
-		acDocManager->unlockDocument( curDoc() );
-		//cad窗口获取焦点
-		acedGetAcadFrame()->SetFocus();
-	}
-}
 
 void RcuDesignDlg::OnBnClickedExport()
 {
