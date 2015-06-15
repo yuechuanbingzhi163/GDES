@@ -385,14 +385,9 @@ void RcuDesignDlg::OnModifyCommand()
 		ControlBarShowSwitch cb_switch(this);
 
 		acDocManager->lockDocument( curDoc() );
-		bool ret = ShowRcuEditDlg(pData->objId);
-		acDocManager->unlockDocument( curDoc() );
-		//cad窗口获取焦点
-		acedGetAcadFrame()->SetFocus();
-
 		//用户点击了"确认"按钮
 		//需要重新更新listctrl中的数据
-		if(ret)
+		if(ShowRcuEditDlg(pData->objId))
 		{
 			//从石门中提取数据
 			RockGateLink rg_link;
@@ -401,6 +396,10 @@ void RcuDesignDlg::OnModifyCommand()
 			//修改当前选中行的数据
 			ModifyRockGateToListCtrl(m_list, row, rg_link);
 		}
+
+		acDocManager->unlockDocument( curDoc() );
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
 	}
 }
 
