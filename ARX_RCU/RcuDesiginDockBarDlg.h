@@ -2,8 +2,8 @@
 
 #include "acui.h"
 #include "RcuDesignDlg.h"
-//#include "DockBarChildDlg.h"
 
+//非模态停靠对话框
 class RcuDesiginDockBarDlg : public CAcUiDockControlBar {
 	DECLARE_DYNAMIC (RcuDesiginDockBarDlg)
 

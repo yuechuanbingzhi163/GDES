@@ -4,6 +4,7 @@
 #include "resource.h"
 #include "DockBarChildDlg.h"
 
+//石门揭煤设计主对话框
 class RcuDesignDlg : public DockBarChildDlg
 {
 	DECLARE_DYNAMIC(RcuDesignDlg)
@@ -21,6 +22,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CListCtrl m_list;
+
 	//输出按钮消息
 	afx_msg void OnBnClickedExport();
 	//listctrl双击消息
@@ -29,13 +31,14 @@ public:
 	//因为cad的主窗口总是试图抢夺非模态对话框的焦点(WM_ACAD_KEEPFOCUS)
 	//在消息映射暂时屏蔽右键消息
 	afx_msg void OnNMRclickList1(NMHDR *pNMHDR, LRESULT *pResult);
-	//目前这些菜单项无妨响应非模态对话框的消息
-	//仍保留作为以后学习用
+
+	//菜单项消息响应
 	afx_msg void OnHilightCommand();
 	afx_msg void OnModifyCommand();
 	afx_msg void OnDeleteCommand();
 	afx_msg void OnAddCommand();
 
+	//虚函数重载
 	virtual BOOL OnInitDialog();
 	virtual void OnClosing();
 };

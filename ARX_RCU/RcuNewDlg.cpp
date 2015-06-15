@@ -76,7 +76,7 @@ BOOL RcuNewDlg::OnInitDialog()
 	// 异常: OCX 属性页应返回 FALSE
 }
 
-void RcuNewDlg::readData(RockGateLink& rg_link, CoalSurfaceLink& cs_link)
+void RcuNewDlg::writeToDataLink(RockGateLink& rg_link, CoalSurfaceLink& cs_link)
 {
 	//提取石门数据
 	rg_link.m_name = m_name;

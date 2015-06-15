@@ -2,6 +2,8 @@
 
 #include "../MineGE/DataLink.h"
 
+//4类石门揭煤图元数据关联,减少不必要的字符串与其他数据类型的转换代码
+
 class RockGateLink : public DataLink
 {
 protected:

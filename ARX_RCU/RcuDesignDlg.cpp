@@ -27,38 +27,22 @@ static bool GetRockGateDataFromDlg(RockGateLink& rg_link, CoalSurfaceLink& cs_li
 	if(IDOK != dlg.DoModal()) return false;
 
 	//从对话框中提取数据
-	dlg.readData(rg_link, cs_link);
+	dlg.writeToDataLink(rg_link, cs_link);
 
 	return true;
 }
 
-static void ShowRcuEditDlg(const AcDbObjectId& rock_gate)
+static bool ShowRcuEditDlg(const AcDbObjectId& rock_gate)
 {
 	CAcModuleResourceOverride resourceOverride;
 	RcuEditDlg dlg;
 	//关联一个石门
-	dlg.rock_gate = rock_gate;
-	/*IDOK == */dlg.DoModal();
+	dlg.m_rock_gate = rock_gate;
+	return (IDOK == dlg.DoModal());
 }
 
-static void InsertRockGateToListCtrl(CListCtrl& m_list, const AcDbObjectId& objId, RockGateLink& rg_link)
-{	
-	int n = m_list.GetItemCount();
-
-	//增加一行数据
-	m_list.InsertItem( n, _T( "xx" ) );
-
-	//设置编号
-	CString num;
-	num.Format( _T( "%d" ), n + 1 );
-	m_list.SetItemText( n, 0, num );
-
-	//给每一行附加数据
-	ItemData* pData = new ItemData();
-	pData->iItem = n;
-	pData->objId = objId;
-	m_list.SetItemData( n, ( LPARAM )pData ); // 设置数据
-
+static void ModifyRockGateToListCtrl(CListCtrl& m_list, int n, RockGateLink& rg_link)
+{
 	{
 		m_list.SetItemText( n, 1, rg_link.m_name );
 	}
@@ -110,6 +94,28 @@ static void InsertRockGateToListCtrl(CListCtrl& m_list, const AcDbObjectId& objI
 		ArxUtilHelper::DoubleToString(rg_link.m_bottom, value);
 		m_list.SetItemText( n, 11, value);
 	}
+}
+
+static void InsertRockGateToListCtrl(CListCtrl& m_list, const AcDbObjectId& objId, RockGateLink& rg_link)
+{
+	int n = m_list.GetItemCount();
+	//增加一行数据
+	m_list.InsertItem( n, _T( "xx" ) );
+
+	//设置编号
+	CString num;
+	num.Format( _T( "%d" ), n + 1 );
+	m_list.SetItemText( n, 0, num );
+
+	//给每一行附加数据
+	ItemData* pData = new ItemData();
+	pData->iItem = n;
+	pData->objId = objId;
+	m_list.SetItemData( n, ( LPARAM )pData ); // 设置数据
+
+	//修改一行数据
+	ModifyRockGateToListCtrl(m_list, n, rg_link);
+
 }
 
 static void ClearListCtrlItem( CListCtrl& m_list, int row )
@@ -379,10 +385,22 @@ void RcuDesignDlg::OnModifyCommand()
 		ControlBarShowSwitch cb_switch(this);
 
 		acDocManager->lockDocument( curDoc() );
-		ShowRcuEditDlg(pData->objId);
+		bool ret = ShowRcuEditDlg(pData->objId);
 		acDocManager->unlockDocument( curDoc() );
 		//cad窗口获取焦点
 		acedGetAcadFrame()->SetFocus();
+
+		//用户点击了"确认"按钮
+		//需要重新更新listctrl中的数据
+		if(ret)
+		{
+			//从石门中提取数据
+			RockGateLink rg_link;
+			rg_link.setDataSource(pData->objId);
+			rg_link.updateData(false);
+			//修改当前选中行的数据
+			ModifyRockGateToListCtrl(m_list, row, rg_link);
+		}
 	}
 }
 

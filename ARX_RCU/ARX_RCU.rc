@@ -233,7 +233,7 @@ IDR_RCU_LIST_MENU MENU
 BEGIN
     POPUP "石门列表右键菜单"
     BEGIN
-        MENUITEM "新掘石门",                        ID_RCU_LIST_ADD
+        MENUITEM "新增石门",                        ID_RCU_LIST_ADD
         MENUITEM "删除石门",                        ID_RCU_LIST_DELETE
         MENUITEM "设计石门",                        ID_RCU_LIST_MODIFY
         MENUITEM "高亮图形",                        ID_RCU_LIST_HILIGHT

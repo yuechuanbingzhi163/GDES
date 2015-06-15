@@ -194,7 +194,7 @@ BOOL RcuEditDlg::OnInitDialog()
 	BuildListCtrlHeadColumns( m_list, fields );
 
 	acDocManager->lockDocument( curDoc() );
-	bool ret = readData();
+	bool ret = readDataFromRockGate(m_rock_gate);
 	acDocManager->unlockDocument( curDoc() );
 
 	if(!ret)
@@ -219,7 +219,7 @@ void RcuEditDlg::OnBnClickedOk()
 	UpdateData( TRUE );
 
 	acDocManager->lockDocument( curDoc() );
-	if(!writeData())
+	if(!writeDataToRockGate(m_rock_gate))
 	{
 		MessageBox(_T("更新石门以及相关数据失败!!!"));
 	}
@@ -274,6 +274,7 @@ void RcuEditDlg::exchangeRockGateData(RockGateLink& rg_link, bool save)
 {
 	if(save)
 	{
+		//从对话框界面提取数据
 		rg_link.m_name = m_name;
 		rg_link.m_radius = m_radius;
 		rg_link.m_length = m_length;
@@ -285,9 +286,14 @@ void RcuEditDlg::exchangeRockGateData(RockGateLink& rg_link, bool save)
 		rg_link.m_bottom = m_bottom;
 		rg_link.m_pt = ArxUtilHelper::Point3dToString(AcGePoint3d(m_x, m_y, m_z));
 		rg_link.m_dist = m_dist;
+		//将数据更新到图元中
+		rg_link.updateData(true);
 	}
 	else
 	{
+		//从图元中提取数据
+		rg_link.updateData(false);
+		//给对话框界面赋值
 		m_name = rg_link.m_name;
 		m_radius = rg_link.m_radius;
 		m_length = rg_link.m_length;
@@ -308,11 +314,17 @@ void RcuEditDlg::exchangeCoalSurfaceData(CoalSurfaceLink& cs_link, bool save)
 {
 	if(save)
 	{
+		//从对话框界面提取数据
 		cs_link.m_thick = m_thick;
 		cs_link.m_angle = m_angle;
+		//将数据更新到图元中
+		cs_link.updateData(true);
 	}
 	else
 	{
+		//从图元中提取数据
+		cs_link.updateData(false);
+		//给对话框界面赋值
 		m_thick = cs_link.m_thick;
 		m_angle = cs_link.m_angle;
 	}
@@ -341,6 +353,7 @@ void RcuEditDlg::exchangeDrillSiteData(DrillSiteLink& ds_link, bool save)
 
 	if(save && row != LB_ERR)
 	{
+		//从listctrl中提取钻场数据
 		{
 			CString value = m_list.GetItemText(row, 1);
 			ds_link.m_name = value;
@@ -370,6 +383,8 @@ void RcuEditDlg::exchangeDrillSiteData(DrillSiteLink& ds_link, bool save)
 			ds_link.m_start = 0;
 			ArxUtilHelper::StringToInt(value, ds_link.m_start);
 		}
+		//将数据更新到图元中
+		ds_link.updateData(true);
 	}
 	else
 	{
@@ -379,6 +394,9 @@ void RcuEditDlg::exchangeDrillSiteData(DrillSiteLink& ds_link, bool save)
 			row = InsertDataToDrillSiteList(m_list, drill_site);
 		}
 
+		//从图元中提取数据
+		ds_link.updateData(false);
+		//更新listctrl中钻场的数据
 		{
 			m_list.SetItemText(row, 1, ds_link.m_name);
 		}
@@ -410,7 +428,7 @@ void RcuEditDlg::exchangeDrillSiteData(DrillSiteLink& ds_link, bool save)
 	}
 }
 
-bool RcuEditDlg::readData()
+bool RcuEditDlg::readDataFromRockGate(const AcDbObjectId& rock_gate)
 {
 	//提取石门关联的所有数据并填充到对话框中
 	RockGateLink rg_link;
@@ -457,7 +475,7 @@ bool RcuEditDlg::readData()
 	return true;
 }
 
-bool RcuEditDlg::writeData()
+bool RcuEditDlg::writeDataToRockGate(const AcDbObjectId& rock_gate)
 {
 	RockGateLink rg_link;
 	rg_link.setDataSource(rock_gate);

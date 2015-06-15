@@ -4,6 +4,7 @@
 #include "resource.h"
 #include "RcuDataLink.h"
 
+//新增石门对话框
 class RcuNewDlg : public CAcUiDialog
 {
 	DECLARE_DYNAMIC(RcuNewDlg)
@@ -16,7 +17,8 @@ public:
 	enum { IDD = IDD_RCU_NEW_DLG };
 
 public:
-	void readData(RockGateLink& rg_link, CoalSurfaceLink& cs_link);
+	//从对话框中读取数据
+	void writeToDataLink(RockGateLink& rg_link, CoalSurfaceLink& cs_link);
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
