@@ -135,3 +135,34 @@ bool RcuHelper::GetPoreData(const AcDbObjectId& pore, PoreLink& po_link)
 	po_link.updateData(false);
 	return true;
 }
+
+void RcuHelper::VectorToAngle(const AcGeVector3d& v, double& ang1, double& ang2)
+{
+	//向量在xoy平面上的投影
+	AcGeVector3d u = v.orthoProject(AcGeVector3d::kZAxis);
+	acutPrintf(_T("\n投影值:x=%.3f, y=%.3f z=%.3f"), u.x, u.y, u.z);
+	ang1 = u.angleTo(AcGeVector3d::kXAxis/*, AcGeVector3d::kZAxis*/);
+	ang2 = u.angleTo(v);
+}
+
+void RcuHelper::VectorToAngle()
+{
+	AcGeVector3d v(1,1,1);
+	double ang1, ang2;
+	RcuHelper::VectorToAngle(v, ang1, ang2);
+	acutPrintf(_T("\n向量:(%.3f, %.3f, %.3f)"), v.x, v.y, v.z);
+	acutPrintf(_T("\n弧度-->方向角1:%f  仰角：%f"), ang1, ang2);
+	acutPrintf(_T("\n角度-->方向角1:%f  仰角：%f"), ang1*57.295, ang2*57.295);
+
+	AcGeVector3d v1(1,0,0);
+	RcuHelper::VectorToAngle(v1, ang1, ang2);
+	acutPrintf(_T("\n向量:(%.3f, %.3f, %.3f)"), v1.x, v1.y, v1.z);
+	acutPrintf(_T("\n弧度-->方向角1:%f  仰角：%f"), ang1, ang2);
+	acutPrintf(_T("\n角度-->方向角1:%f  仰角：%f"), ang1*57.295, ang2*57.295);
+
+	AcGeVector3d v2(-1,-1,1);
+	RcuHelper::VectorToAngle(v2, ang1, ang2);
+	acutPrintf(_T("\n向量:(%.3f, %.3f, %.3f)"), v2.x, v2.y, v2.z);
+	acutPrintf(_T("\n弧度-->方向角1:%f  仰角：%f"), ang1, ang2);
+	acutPrintf(_T("\n角度-->方向角1:%f  仰角：%f"), ang1*57.295, ang2*57.295);
+}

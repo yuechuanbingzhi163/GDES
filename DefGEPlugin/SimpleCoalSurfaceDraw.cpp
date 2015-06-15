@@ -53,8 +53,8 @@ void SimpleCoalSurfaceDraw::writeExtraParam( DrawParamWriter& writer )
 
 void SimpleCoalSurfaceDraw::regPropertyDataNames( AcStringArray& names ) const
 {
-    names.append( _T( "投影宽度" ) );
-    names.append( _T( "投影高度" ) );
+    names.append( _T( "$投影宽度" ) );
+    names.append( _T( "$投影高度" ) );
 	//names.append( _T( "迎头煤层投影点坐标" ) );
 }
 

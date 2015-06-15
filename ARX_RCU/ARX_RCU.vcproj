@@ -407,10 +407,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\RockCoalUncover.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\StdAfx.cpp"
 				>
 				<FileConfiguration
@@ -457,6 +453,10 @@
 			>
 			<File
 				RelativePath=".\DockBarChildDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Rcu.h"
 				>
 			</File>
 			<File

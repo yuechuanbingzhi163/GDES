@@ -1,4 +1,5 @@
-#include "StdAfx.h"
+#pragma once
+
 #include <math.h>
 
 #define PI 3.1415926535897932384626433832795
@@ -11,23 +12,13 @@
 //余切
 #define cot(x) 1.0/tan(x)
 
-//向量在水平面的方向角和仰角
-void vector_to_angle(const AcGeVector3d& v, double& ang1, double& ang2)
-{
-	//向量在xoy平面上的投影
-	AcGeVector3d u = v.orthoProject(AcGeVector3d::kZAxis);
-	acutPrintf(_T("\n投影值:x=%.3f, y=%.3f z=%.3f"), u.x, u.y, u.z);
-	ang1 = u.angleTo(AcGeVector3d::kXAxis/*, AcGeVector3d::kZAxis*/);
-	ang2 = u.angleTo(v);
-}
-
-class RockGate
+//石门揭煤计算类
+class Rcu
 {
 public:
 	//构造函数
-	RockGate() 
-		: origin(AcGePoint3d::kOrigin), beta(PI*0.5),
-	      w1(0), w2(0), h1(0), h2(0),r0(0) {}
+	Rcu() : origin(AcGePoint3d::kOrigin), beta(PI*0.5),
+	        w1(0), w2(0), h1(0), h2(0),r0(0) {}
 
 	//设置基点坐标
 	void setOrigin(const AcGePoint3d& origin)
@@ -109,16 +100,6 @@ public:
 	//////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////
-
-	//向量在水平面的方向角和仰角
-	void twoAngesOfVector(const AcGeVector3d& v, double& ang1, double& ang2)
-	{
-		//向量在xoy平面上的投影
-		AcGeVector3d u = v.orthoProject(AcGeVector3d::kZAxis);
-		acutPrintf(_T("\n投影值:x=%.3f, y=%.3f z=%.3f"), u.x, u.y, u.z);
-		ang1 = u.angleTo(AcGeVector3d::kXAxis, AcGeVector3d::kZAxis);
-		ang2 = u.angleTo(v);
-	}
 
 	//计算见煤平面方程
 	void beginCoalSurface(AcGePlane& plane)

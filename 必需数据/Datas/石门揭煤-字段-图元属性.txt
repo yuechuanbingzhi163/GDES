@@ -1,13 +1,13 @@
 Pore	编号
 Pore	半径
-Pore	坐标
+Pore	$坐标
 DrillSite	名称
 DrillSite	位置
 DrillSite	与迎头的距离
 DrillSite	宽度
 DrillSite	高度
 DrillSite	起始编号
-DrillSite	底帮坐标
+DrillSite	$底帮坐标
 RockGate	名称
 RockGate	长度
 RockGate	宽度
@@ -21,6 +21,6 @@ RockGate	上帮保护
 RockGate	下帮保护
 CoalSurface	厚度
 CoalSurface	倾角
-CoalSurface	迎头投影坐标
-CoalSurface	投影宽度
-CoalSurface	投影高度
+CoalSurface	$迎头投影坐标
+CoalSurface	$投影宽度
+CoalSurface	$投影高度

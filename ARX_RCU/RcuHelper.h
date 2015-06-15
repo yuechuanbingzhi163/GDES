@@ -24,4 +24,7 @@ public:
 	static bool GetDrillSiteData(const AcDbObjectId& drill_site, DrillSiteLink& ds_link);
 	//从钻孔提取数据
 	static bool GetPoreData(const AcDbObjectId& pore, PoreLink& po_link);
+	//向量在水平面的方向角和仰角
+	static void VectorToAngle(const AcGeVector3d& v, double& ang1, double& ang2);
+	static void VectorToAngle();
 };
