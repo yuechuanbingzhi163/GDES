@@ -17,6 +17,8 @@ SimpleCoalSurfaceDraw::~SimpleCoalSurfaceDraw ()
 
 void SimpleCoalSurfaceDraw::setAllExtraParamsToDefault()
 {
+	m_height = 0;
+	m_width = 0;
 }
 
 void SimpleCoalSurfaceDraw::configExtraParams()
@@ -60,8 +62,11 @@ void SimpleCoalSurfaceDraw::regPropertyDataNames( AcStringArray& names ) const
 
 void SimpleCoalSurfaceDraw::readPropertyDataFromGE( const AcStringArray& values )
 {
-    m_width = abs(_tstof(values[0].kACharPtr()));
-	m_height = abs(_tstof(values[1].kACharPtr()));
+   // m_width = abs(_tstof(values[0].kACharPtr()));
+	//m_height = abs(_tstof(values[1].kACharPtr()));
+	m_width =_tstof(values[0].kACharPtr());
+	m_height = _tstof(values[1].kACharPtr());
+
 	//ArxUtilHelper::StringToPoint3d(values[2].kACharPtr(), m_pt);
 }
 
@@ -70,7 +75,10 @@ Adesk::Boolean SimpleCoalSurfaceDraw::subWorldDraw( AcGiWorldDraw* mode )
     assertReadEnabled () ;
 
 	//»æÖÆ¾ØÐÎ
-	DrawRect(mode, m_insertPt, 0, m_width, m_height, false);
+	if(m_width > 0 && m_height > 0) 
+	{
+		DrawRect(mode, m_insertPt, 0, m_width, m_height, false);
+	}
 
     return Adesk::kTrue;
 }
