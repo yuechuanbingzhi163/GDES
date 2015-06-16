@@ -1,6 +1,7 @@
 #pragma once
 #include "RcuAcUiBaseDlg.h"
 #include "RcuDataLink.h"
+#include "afxwin.h"
 
 //新增钻场对话框
 class RcuAddDrillDlg : public RcuAcUiBaseDlg
@@ -24,7 +25,9 @@ private:
 	// 钻场名称
 	CString m_name;
 	// 钻场位置
-	int m_loca;
+	int m_leftOrRight;
+	// 钻场位置下拉框
+	CComboBox m_locaCombBox;
 	// 钻场宽度
 	double m_width;
 	// 钻场高度

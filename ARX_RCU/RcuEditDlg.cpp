@@ -197,6 +197,49 @@ static bool ShowAddDrillDlg(DrillSiteLink& ds_link)
 	return true;
 }
 
+static void GetRGInsertPt( const AcDbObjectId& objId, AcGePoint3d& insertPt )
+{
+	AcTransaction* pTrans = actrTransactionManager->startTransaction();
+	if( pTrans == 0 ) return;
+
+	AcDbObject* pObj;
+	if( Acad::eOk != pTrans->getObject( pObj, objId, AcDb::kForWrite ) )
+	{
+		actrTransactionManager->abortTransaction();
+		return;
+	}
+
+	RockGate* pRG = RockGate::cast( pObj );
+	insertPt = pRG->getInsertPt();
+
+	actrTransactionManager->endTransaction();
+}
+
+static bool CaculDrillSitePt(const DrillSiteLink& ds_link,const RockGateLink& rg_link,const AcGePoint3d& rgInsertPt,AcGePoint3d& insertPt,AcGePoint3d& linkPt)
+{
+	//左帮
+	if(0 == ds_link.m_leftOrRight)
+	{
+		insertPt.x = rgInsertPt.x - rg_link.m_width / 2;
+		linkPt.x = rgInsertPt.x - rg_link.m_width / 2 - 2 * ds_link.m_dist;
+	}
+
+	//右帮
+	else if(1 == ds_link.m_leftOrRight)
+	{
+		insertPt.x = rgInsertPt.x + rg_link.m_width / 2;
+		linkPt.x = rgInsertPt.x + rg_link.m_width / 2 + 2 * ds_link.m_dist;
+	}
+
+	else return false;
+
+	insertPt.y = rgInsertPt.y - ds_link.m_dist;
+	insertPt.z = rgInsertPt.z;
+	linkPt.y = rgInsertPt.y - ds_link.m_dist;
+	linkPt.z = rgInsertPt.z;
+	return true;
+}
+
 IMPLEMENT_DYNAMIC(RcuEditDlg, RcuAcUiBaseDlg)
 
 RcuEditDlg::RcuEditDlg(CWnd* pParent /*=NULL*/)
@@ -440,7 +483,7 @@ void RcuEditDlg::exchangeDrillSiteData(DrillSiteLink& ds_link, bool save)
 		}
 		{
 			CString value = m_list.GetItemText(row, 2);
-			ds_link.m_leftOrRight = 0; // 0代表错误的位置
+			ds_link.m_leftOrRight = 0; // 0代表左帮
 			ArxUtilHelper::StringToInt(value, ds_link.m_leftOrRight);
 		}
 		{
@@ -603,10 +646,25 @@ void RcuEditDlg::OnAddCommand()
 	//acDocManager->lockDocument( curDoc() );
 	////ArxEntityHelper::SelectEntity(pData->objId);
 
+	RockGateLink rg_link;
+	if(!RcuHelper::GetRockGateData(m_rock_gate, rg_link))
+	{
+		MessageBox(_T("提取石门数据发生错误!"));
+		return;
+	}
+
+	//计算钻场插入坐标和连接坐标
+	AcGePoint3d insertPt,linkPt,rgInsertPt;
+	GetRGInsertPt(m_rock_gate,rgInsertPt);
+	if(!CaculDrillSitePt(ds_link,rg_link,rgInsertPt,insertPt,linkPt)) 
+	{
+		MessageBox(_T("钻场位置数据错误!"));
+		return;
+	}
 	//新建钻场并设置插入点坐标
 	DrillSite* pDS = new DrillSite();
-	pDS->setInsertPt(AcGePoint3d(0,0,0));
-	pDS->setLinkPt(AcGePoint3d(0,100,0));
+	pDS->setInsertPt(insertPt);
+	pDS->setLinkPt(linkPt);
 	pDS->setRelatedGE(m_rock_gate);
 
 	//添加钻场到cad图形数据库

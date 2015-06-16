@@ -10,7 +10,6 @@
 #define IDD_RCU_DESIGN_DLG              103
 #define IDC_DRILL_WIDTH_EDIT            103
 #define IDD_RCU_EDIT_DLG                104
-#define IDC_EDIT6                       104
 #define IDC_DRILL_INDEX_EDIT            104
 #define IDC_LIST1                       105
 #define IDR_RCU_LIST_MENU               105
@@ -28,10 +27,11 @@
 #define IDC_EDIT9                       110
 #define IDC_DRIL_NAME_EDIT              110
 #define IDC_EDIT10                      111
-#define IDC_DRILL_LOCA_EDIT             111
 #define IDC_EDIT11                      112
 #define IDC_DRILL_DIS_EDIT              112
 #define IDC_EDIT12                      113
+#define IDC_COMBO1                      113
+#define IDC_LOCA_COMBO                  113
 #define IDC_EDIT13                      114
 #define IDC_EDIT14                      115
 #define IDC_EDIT15                      116
@@ -63,7 +63,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        109
 #define _APS_NEXT_COMMAND_VALUE         32786
-#define _APS_NEXT_CONTROL_VALUE         113
+#define _APS_NEXT_CONTROL_VALUE         114
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif
