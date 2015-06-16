@@ -1,12 +1,11 @@
 #pragma once
 
-#include "acui.h"
-#include "Resource.h"
+#include "AcUiBaseDlg.h"
 
 // 将非模态对话框的3个消息放在了基类DockBarChildDlg
 // 这样派生类就可以只专注对话框本身的消息处理
 // 同时减少重复代码
-class DockBarChildDlg : public CAcUiDialog 
+class DockBarChildDlg : public AcUiBaseDlg 
 {
 	DECLARE_DYNAMIC (DockBarChildDlg)
 
@@ -26,6 +25,7 @@ public:
 	virtual BOOL OnCommand (WPARAM wParam, LPARAM lParam) ;
 	afx_msg void OnSize (UINT nType, int cx, int cy) ;
 	afx_msg LRESULT OnAcadKeepFocus (WPARAM wParam, LPARAM lParam) ;
+	virtual BOOL OnInitDialog();
 } ;
 
 //切换controlbar显示

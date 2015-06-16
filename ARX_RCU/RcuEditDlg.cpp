@@ -2,6 +2,7 @@
 #include "RcuEditDlg.h"
 #include "RcuHelper.h"
 #include "RcuDataLink.h"
+#include "AddDrillDlg.h"
 
 #include "../ArxHelper/HelperClass.h"
 #include "../MineGE/HelperClass.h"
@@ -118,10 +119,22 @@ static int GetCurSelOfList(CListCtrl& m_list)
 	return row;
 }
 
-IMPLEMENT_DYNAMIC(RcuEditDlg, CAcUiDialog)
+static bool GetRockGateDataFromDlg(/*RockGateLink& rg_link, CoalSurfaceLink& cs_link*/)
+{
+	CAcModuleResourceOverride resourceOverride;
+	AddDrillDlg dlg;
+	if(IDOK != dlg.DoModal()) return false;
+
+	////从对话框中提取数据
+	//dlg.writeToDataLink(rg_link, cs_link);
+
+	return true;
+}
+
+IMPLEMENT_DYNAMIC(RcuEditDlg, AcUiBaseDlg)
 
 RcuEditDlg::RcuEditDlg(CWnd* pParent /*=NULL*/)
-	: CAcUiDialog(RcuEditDlg::IDD, pParent)
+	: AcUiBaseDlg(RcuEditDlg::IDD, pParent)
 	, m_x(0)
 	, m_y(0)
 	, m_z(0)
@@ -147,7 +160,7 @@ RcuEditDlg::~RcuEditDlg()
 
 void RcuEditDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CAcUiDialog::DoDataExchange(pDX);
+	AcUiBaseDlg::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT5, m_x);
 	DDX_Text(pDX, IDC_EDIT7, m_y);
 	DDX_Text(pDX, IDC_EDIT9, m_z);
@@ -167,7 +180,7 @@ void RcuEditDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(RcuEditDlg, CAcUiDialog)
+BEGIN_MESSAGE_MAP(RcuEditDlg, AcUiBaseDlg)
 	ON_BN_CLICKED(IDOK, &RcuEditDlg::OnBnClickedOk)
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST2, &RcuEditDlg::OnNMDblclkList2)
 	ON_NOTIFY(NM_RCLICK, IDC_LIST2, &RcuEditDlg::OnNMRclickList2)
@@ -184,7 +197,7 @@ END_MESSAGE_MAP()
 */
 BOOL RcuEditDlg::OnInitDialog()
 {
-	CDialog::OnInitDialog();
+	AcUiBaseDlg::OnInitDialog();
 
 	m_list.SetExtendedStyle( m_list.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES );
 
@@ -512,11 +525,18 @@ bool RcuEditDlg::writeDataToRockGate(const AcDbObjectId& rock_gate)
 
 void RcuEditDlg::OnAddCommand()
 {
-	MessageBox(_T("OnAddCommand"));
-
-	//高亮选中石门图元
 	acDocManager->lockDocument( curDoc() );
-	//ArxEntityHelper::SelectEntity(pData->objId);
+
+	ShowWindow(SW_HIDE);
+	if(!GetRockGateDataFromDlg()) 
+	{
+		ShowWindow(SW_SHOW);
+		return;
+	}
+
+	////高亮选中石门图元
+	//acDocManager->lockDocument( curDoc() );
+	////ArxEntityHelper::SelectEntity(pData->objId);
 	acDocManager->unlockDocument( curDoc() );
 
 	//cad窗口获取焦点

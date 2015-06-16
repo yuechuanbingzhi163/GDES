@@ -1,6 +1,6 @@
 #pragma once
 
-#include "acui.h"
+#include "AcUiBaseDlg.h"
 #include "RcuDesignDlg.h"
 
 //非模态停靠对话框

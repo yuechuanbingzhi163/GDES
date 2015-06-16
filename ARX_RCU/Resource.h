@@ -14,8 +14,11 @@
 #define IDC_EDIT5                       106
 #define IDR_DRILL_SITE_MENU             106
 #define IDR_DRILL_SITE_ADD              106
+#define IDD_DRILL_NEW_DIALOG            107
 #define IDC_EDIT7                       108
 #define IDC_BUTTON3                     108
+#define IDI_ICON1                       108
+#define IDI_GAS_ICON                    108
 #define IDC_BUTTON4                     109
 #define IDC_LIST2                       109
 #define IDC_EDIT9                       110
@@ -51,7 +54,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        107
+#define _APS_NEXT_RESOURCE_VALUE        109
 #define _APS_NEXT_COMMAND_VALUE         32786
 #define _APS_NEXT_CONTROL_VALUE         110
 #define _APS_NEXT_SYMED_VALUE           102

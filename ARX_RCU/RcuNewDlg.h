@@ -1,11 +1,10 @@
 #pragma once
 
-#include "acui.h"
-#include "resource.h"
+#include "AcUiBaseDlg.h"
 #include "RcuDataLink.h"
 
 //新增石门对话框
-class RcuNewDlg : public CAcUiDialog
+class RcuNewDlg : public AcUiBaseDlg
 {
 	DECLARE_DYNAMIC(RcuNewDlg)
 
