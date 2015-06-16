@@ -1,9 +1,9 @@
 #include "StdAfx.h"
 #include "DockBarChildDlg.h"
 
-IMPLEMENT_DYNAMIC ( DockBarChildDlg, AcUiBaseDlg )
+IMPLEMENT_DYNAMIC ( DockBarChildDlg, CAcUiDialog )
 
-BEGIN_MESSAGE_MAP( DockBarChildDlg, AcUiBaseDlg )
+BEGIN_MESSAGE_MAP( DockBarChildDlg, CAcUiDialog )
     //{{AFX_MSG_MAP(DockBarChildDlg)
     ON_MESSAGE( WM_ACAD_KEEPFOCUS, OnAcadKeepFocus )  // Needed for modeless dialog.
     //}}AFX_MSG_MAP
@@ -11,7 +11,7 @@ END_MESSAGE_MAP()
 
 //-----------------------------------------------------------------------------
 DockBarChildDlg::DockBarChildDlg( UINT idd, CWnd* pParent, HINSTANCE hInstance )
-    : AcUiBaseDlg ( idd, pParent, hInstance )
+    : CAcUiDialog ( idd, pParent, hInstance )
 {
     //{{AFX_DATA_INIT(DockBarChildDlg)
     //}}AFX_DATA_INIT
@@ -37,12 +37,12 @@ BOOL DockBarChildDlg::OnCommand ( WPARAM wParam, LPARAM lParam )
     case IDCANCEL:
         return ( FALSE ) ;
     }
-    return ( AcUiBaseDlg::OnCommand ( wParam, lParam ) ) ;
+    return ( CAcUiDialog::OnCommand ( wParam, lParam ) ) ;
 }
 
 void DockBarChildDlg::OnSize ( UINT nType, int cx, int cy )
 {
-    AcUiBaseDlg::OnSize ( nType, cx, cy ) ;
+    CAcUiDialog::OnSize ( nType, cx, cy ) ;
     //- Now update the dialog
     MoveWindow ( 0, 0, cx, cy ) ;
 }
@@ -62,10 +62,4 @@ void DockBarChildDlg::ShowParentControlBar(BOOL bShow) const
 	if(pAcadFrame == 0) return;
 
 	pAcadFrame->ShowControlBar( pBar, bShow, FALSE );
-}
-
-BOOL DockBarChildDlg::OnInitDialog()
-{
-	AcUiBaseDlg::OnInitDialog();
-	return TRUE;
 }
