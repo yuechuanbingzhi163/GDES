@@ -19,7 +19,39 @@ struct ItemData
 	AcDbObjectId objId;   // 数据id
 };
 
-static int InsertDataToDrillSiteList(CListCtrl& m_list, const AcDbObjectId& objId)
+static void ModifyDrillSiteToListCtrl(CListCtrl& m_list, int n, const DrillSiteLink& ds_link)
+{
+	{
+		m_list.SetItemText( n, 1, ds_link.m_name );
+	}
+	{
+		CString value;
+		ArxUtilHelper::IntToString(ds_link.m_leftOrRight, value);
+		m_list.SetItemText( n, 2, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(ds_link.m_dist, value);
+		m_list.SetItemText( n, 3, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(ds_link.m_width, value);
+		m_list.SetItemText( n, 4, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(ds_link.m_height, value);
+		m_list.SetItemText( n, 5, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::IntToString(ds_link.m_start, value);
+		m_list.SetItemText( n, 6, value);
+	}
+}
+
+static int InsertDataToDrillSiteList(CListCtrl& m_list, const AcDbObjectId& objId,const DrillSiteLink& ds_link)
 {
 	int n = m_list.GetItemCount();
 
@@ -36,7 +68,40 @@ static int InsertDataToDrillSiteList(CListCtrl& m_list, const AcDbObjectId& objI
 	pData->iItem = n;
 	pData->objId = objId;
 	m_list.SetItemData( n, ( LPARAM )pData ); // 设置数据
+
+	//修改一行数据
+	ModifyDrillSiteToListCtrl(m_list,n,ds_link);
 	return n;
+}
+
+static void InsertDatasToListCtrl( CListCtrl& m_list, const AcStringArray fields, const AcDbObjectIdArray& objIds )
+{
+	//首先删除所有行
+	m_list.DeleteAllItems();
+
+	int len = objIds.length();
+	for( int i = 0; i < len; i++ )
+	{
+		m_list.InsertItem( i, _T( "xx" ) );
+
+		CString num;
+		num.Format( _T( "%d" ), i + 1 );
+		m_list.SetItemText( i, 0, num );
+
+		ItemData* pData = new ItemData();
+		pData->iItem = i;
+		pData->objId = objIds[i];
+		m_list.SetItemData( i, ( LPARAM )pData ); // 设置数据
+
+		int n = fields.length();
+		for( int j = 0; j < n; j++ )
+		{
+			//m_list.SetItemData(i, i);
+			CString value;
+			DataHelper::GetPropertyData( objIds[i], fields[j].kACharPtr(), value );
+			m_list.SetItemText( i, j + 1, value );
+		}
+	}
 }
 
 static void ClearListCtrlItem( CListCtrl& m_list, int row )
@@ -119,14 +184,15 @@ static int GetCurSelOfList(CListCtrl& m_list)
 	return row;
 }
 
-static bool ShowAddDrillDlg(/*RockGateLink& rg_link, CoalSurfaceLink& cs_link*/)
+static bool ShowAddDrillDlg(DrillSiteLink& ds_link)
 {
 	CAcModuleResourceOverride resourceOverride;
 	RcuAddDrillDlg dlg;
 	if(IDOK != dlg.DoModal()) return false;
 
-	////从对话框中提取数据
-	//dlg.writeToDataLink(rg_link, cs_link);
+	//从对话框中提取数据
+	dlg.writeToDataLink(ds_link);
+	//acutPrintf(_T("\n名称:%s"),ds_link.m_name);
 
 	return true;
 }
@@ -364,6 +430,7 @@ void RcuEditDlg::exchangeDrillSiteData(DrillSiteLink& ds_link, bool save)
 
 	int row = findDrillSiteRow(drill_site);
 
+	//acutPrintf(_T("\n名称:%s"),ds_link.m_name);
 	if(save && row != LB_ERR)
 	{
 		//从listctrl中提取钻场数据
@@ -404,7 +471,7 @@ void RcuEditDlg::exchangeDrillSiteData(DrillSiteLink& ds_link, bool save)
 		//增加数据
 		if(row == LB_ERR)
 		{
-			row = InsertDataToDrillSiteList(m_list, drill_site);
+			row = InsertDataToDrillSiteList(m_list, drill_site,ds_link);
 		}
 
 		//从图元中提取数据
@@ -528,11 +595,30 @@ void RcuEditDlg::OnAddCommand()
 	acDocManager->lockDocument( curDoc() );
 
 	//ShowOrHideWindow show_hide(this);
-	if(!ShowAddDrillDlg()) return;
+
+	DrillSiteLink ds_link;
+	if(!ShowAddDrillDlg(ds_link)) return;
 
 	////高亮选中石门图元
 	//acDocManager->lockDocument( curDoc() );
 	////ArxEntityHelper::SelectEntity(pData->objId);
+
+	//新建钻场并设置插入点坐标
+	DrillSite* pDS = new DrillSite();
+	pDS->setInsertPt(AcGePoint3d(0,0,0));
+	pDS->setLinkPt(AcGePoint3d(0,100,0));
+	pDS->setRelatedGE(m_rock_gate);
+
+	//添加钻场到cad图形数据库
+	if(!ArxUtilHelper::PostToModelSpace(pDS))
+	{
+		delete pDS; pDS = 0;
+	}
+	else
+	{
+		InsertDataToDrillSiteList(m_list,pDS->objectId(),ds_link);
+	}
+
 	acDocManager->unlockDocument( curDoc() );
 
 	//cad窗口获取焦点
