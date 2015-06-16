@@ -64,6 +64,7 @@ void SimpleCoalSurfaceDraw::readPropertyDataFromGE( const AcStringArray& values 
 {
    // m_width = abs(_tstof(values[0].kACharPtr()));
 	//m_height = abs(_tstof(values[1].kACharPtr()));
+	if(values.isEmpty()) return;
 	m_width =_tstof(values[0].kACharPtr());
 	m_height = _tstof(values[1].kACharPtr());
 
