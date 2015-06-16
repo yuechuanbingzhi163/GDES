@@ -1,14 +1,14 @@
 #pragma once
-#include "AcUiBaseDlg.h"
+#include "RcuAcUiBaseDlg.h"
 
 //新增钻场对话框
-class AddDrillDlg : public AcUiBaseDlg
+class RcuAddDrillDlg : public RcuAcUiBaseDlg
 {
-	DECLARE_DYNAMIC(AddDrillDlg)
+	DECLARE_DYNAMIC(RcuAddDrillDlg)
 
 public:
-	AddDrillDlg(CWnd* pParent = NULL);   // 标准构造函数
-	virtual ~AddDrillDlg();
+	RcuAddDrillDlg(CWnd* pParent = NULL);   // 标准构造函数
+	virtual ~RcuAddDrillDlg();
 
 // 对话框数据
 	enum { IDD = IDD_DRILL_NEW_DIALOG };

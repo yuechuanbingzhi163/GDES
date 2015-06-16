@@ -425,6 +425,9 @@ void RcuDesignDlg::OnDeleteCommand()
 
 void RcuDesignDlg::OnAddCommand()
 {
+	//非模态对话框AutoCAD获得焦点
+	acedGetAcadDwgView()->SetFocus();
+
 	acDocManager->lockDocument( curDoc() );
 
 	//切换controlbar的显示

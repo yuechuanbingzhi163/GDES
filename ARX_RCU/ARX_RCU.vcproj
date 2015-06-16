@@ -430,15 +430,15 @@
 				Name="ui"
 				>
 				<File
-					RelativePath=".\AcUiBaseDlg.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\AddDrillDlg.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\DockBarChildDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuAcUiBaseDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuAddDrillDlg.cpp"
 					>
 				</File>
 				<File
@@ -491,15 +491,15 @@
 				Name="ui"
 				>
 				<File
-					RelativePath=".\AcUiBaseDlg.h"
-					>
-				</File>
-				<File
-					RelativePath=".\AddDrillDlg.h"
-					>
-				</File>
-				<File
 					RelativePath=".\DockBarChildDlg.h"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuAcUiBaseDlg.h"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuAddDrillDlg.h"
 					>
 				</File>
 				<File

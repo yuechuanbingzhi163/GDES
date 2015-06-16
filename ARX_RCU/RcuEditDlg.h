@@ -1,11 +1,11 @@
 #pragma once
 
-#include "AcUiBaseDlg.h"
+#include "RcuAcUiBaseDlg.h"
 
 #include "RcuDataLink.h"
 
 //石门揭煤编辑对话框(从"石门设计"右键菜单中调用该对话框)
-class RcuEditDlg : public AcUiBaseDlg
+class RcuEditDlg : public RcuAcUiBaseDlg
 {
 	DECLARE_DYNAMIC(RcuEditDlg)
 

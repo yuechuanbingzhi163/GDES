@@ -2,7 +2,7 @@
 #include "RcuEditDlg.h"
 #include "RcuHelper.h"
 #include "RcuDataLink.h"
-#include "AddDrillDlg.h"
+#include "RcuAddDrillDlg.h"
 
 #include "../ArxHelper/HelperClass.h"
 #include "../MineGE/HelperClass.h"
@@ -119,10 +119,10 @@ static int GetCurSelOfList(CListCtrl& m_list)
 	return row;
 }
 
-static bool GetRockGateDataFromDlg(/*RockGateLink& rg_link, CoalSurfaceLink& cs_link*/)
+static bool ShowAddDrillDlg(/*RockGateLink& rg_link, CoalSurfaceLink& cs_link*/)
 {
 	CAcModuleResourceOverride resourceOverride;
-	AddDrillDlg dlg;
+	RcuAddDrillDlg dlg;
 	if(IDOK != dlg.DoModal()) return false;
 
 	////从对话框中提取数据
@@ -131,10 +131,10 @@ static bool GetRockGateDataFromDlg(/*RockGateLink& rg_link, CoalSurfaceLink& cs_
 	return true;
 }
 
-IMPLEMENT_DYNAMIC(RcuEditDlg, AcUiBaseDlg)
+IMPLEMENT_DYNAMIC(RcuEditDlg, RcuAcUiBaseDlg)
 
 RcuEditDlg::RcuEditDlg(CWnd* pParent /*=NULL*/)
-	: AcUiBaseDlg(RcuEditDlg::IDD, pParent)
+	: RcuAcUiBaseDlg(RcuEditDlg::IDD, pParent)
 	, m_x(0)
 	, m_y(0)
 	, m_z(0)
@@ -160,7 +160,7 @@ RcuEditDlg::~RcuEditDlg()
 
 void RcuEditDlg::DoDataExchange(CDataExchange* pDX)
 {
-	AcUiBaseDlg::DoDataExchange(pDX);
+	RcuAcUiBaseDlg::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT5, m_x);
 	DDX_Text(pDX, IDC_EDIT7, m_y);
 	DDX_Text(pDX, IDC_EDIT9, m_z);
@@ -180,7 +180,7 @@ void RcuEditDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(RcuEditDlg, AcUiBaseDlg)
+BEGIN_MESSAGE_MAP(RcuEditDlg, RcuAcUiBaseDlg)
 	ON_BN_CLICKED(IDOK, &RcuEditDlg::OnBnClickedOk)
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST2, &RcuEditDlg::OnNMDblclkList2)
 	ON_NOTIFY(NM_RCLICK, IDC_LIST2, &RcuEditDlg::OnNMRclickList2)
@@ -197,7 +197,7 @@ END_MESSAGE_MAP()
 */
 BOOL RcuEditDlg::OnInitDialog()
 {
-	AcUiBaseDlg::OnInitDialog();
+	RcuAcUiBaseDlg::OnInitDialog();
 
 	m_list.SetExtendedStyle( m_list.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES );
 
@@ -527,12 +527,8 @@ void RcuEditDlg::OnAddCommand()
 {
 	acDocManager->lockDocument( curDoc() );
 
-	ShowWindow(SW_HIDE);
-	if(!GetRockGateDataFromDlg()) 
-	{
-		ShowWindow(SW_SHOW);
-		return;
-	}
+	//ShowOrHideWindow show_hide(this);
+	if(!ShowAddDrillDlg()) return;
 
 	////高亮选中石门图元
 	//acDocManager->lockDocument( curDoc() );

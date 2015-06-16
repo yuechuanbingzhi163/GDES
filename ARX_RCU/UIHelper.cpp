@@ -24,6 +24,7 @@ void UIHelper::ShowRcuDesignDockBar()
 		pRcuDesiginDockBarDlg->EnableDocking ( CBRS_ALIGN_ANY ) ;
 		pRcuDesiginDockBarDlg->RestoreControlBar () ;
 	}
+
 	pAcadFrame->ShowControlBar( pRcuDesiginDockBarDlg, TRUE, FALSE );
 }
 

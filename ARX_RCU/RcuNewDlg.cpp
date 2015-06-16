@@ -4,10 +4,10 @@
 #include "../ArxHelper/HelperClass.h"
 #include "../MineGE/HelperClass.h"
 
-IMPLEMENT_DYNAMIC(RcuNewDlg, AcUiBaseDlg)
+IMPLEMENT_DYNAMIC(RcuNewDlg, RcuAcUiBaseDlg)
 
 RcuNewDlg::RcuNewDlg(CWnd* pParent /*=NULL*/)
-	: AcUiBaseDlg(RcuNewDlg::IDD, pParent)
+	: RcuAcUiBaseDlg(RcuNewDlg::IDD, pParent)
 	, m_x(0)
 	, m_y(0)
 	, m_z(0)
@@ -32,7 +32,7 @@ RcuNewDlg::~RcuNewDlg()
 
 void RcuNewDlg::DoDataExchange(CDataExchange* pDX)
 {
-	AcUiBaseDlg::DoDataExchange(pDX);
+	RcuAcUiBaseDlg::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT5, m_x);
 	DDX_Text(pDX, IDC_EDIT7, m_y);
 	DDX_Text(pDX, IDC_EDIT9, m_z);
@@ -51,7 +51,7 @@ void RcuNewDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(RcuNewDlg, AcUiBaseDlg)
+BEGIN_MESSAGE_MAP(RcuNewDlg, RcuAcUiBaseDlg)
 	ON_BN_CLICKED(IDOK, &RcuNewDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
@@ -70,7 +70,7 @@ void RcuNewDlg::OnBnClickedOk()
 
 BOOL RcuNewDlg::OnInitDialog()
 {
-	AcUiBaseDlg::OnInitDialog();
+	RcuAcUiBaseDlg::OnInitDialog();
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
