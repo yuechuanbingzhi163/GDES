@@ -13,12 +13,13 @@
 #define cot(x) 1.0/tan(x)
 
 //石门揭煤计算类
+//注:角度默认使用弧度
 class Rcu
 {
 public:
 	//构造函数
 	Rcu() : origin(AcGePoint3d::kOrigin), beta(PI*0.5),
-	        w1(0), w2(0), h1(0), h2(0),r0(0) {}
+	        w1(0), w2(0), h1(0), h2(0),d0(0) {}
 
 	//设置基点坐标
 	void setOrigin(const AcGePoint3d& origin)
@@ -92,9 +93,9 @@ public:
 		this->h2 = h2;
 	}
 	//设置钻孔直径
-	void setDrillDiameter(double r0)
+	void setDrillDiameter(double d0)
 	{
-		this->r0 = r0;
+		this->d0 = d0;
 	}
 
 	//////////////////////////////////////////////////////////////////
@@ -125,8 +126,8 @@ public:
 	//钻孔个数及间距
 	void drillNumber(double Lw, double Lh, int& N1, int& N2, double& e1, double& e2)
 	{
-		N1 = int(Lw/r0)+2;
-		N2 = int(Lh/r0)+2;
+		N1 = int(Lw/d0)+2;
+		N2 = int(Lh/d0)+2;
 		e1 = Lw/(N1-1);
 		e2 = Lh/(N2-1);
 	}
@@ -189,8 +190,8 @@ private:
 		int c1 = (k%2==0)?1:-1;
 		int c2 = ((1-k/3)%2==0)?1:-1;
 		int c3 = ((k/3)%2==0)?1:-1;
-		double x1 = c1*(W2 + (1-c1)*d1 + (1+c1)*d2)*0.5 - c1*r0*cos(beta)*0.5;
-		double y1 = (H + f1 - 0.5*r0*sin(getPhi()))*(1-c2)*0.5-(f2-0.5*r0*sin(getPhi()))*(1-c3);
+		double x1 = c1*(W2 + (1-c1)*d1 + (1+c1)*d2)*0.5 - c1*d0*cos(beta)*0.5;
+		double y1 = (H + f1 - 0.5*d0*sin(getPhi()))*(1-c2)*0.5-(f2-0.5*d0*sin(getPhi()))*(1-c3);
 		double z1 = (x1*sin(beta) - y1*cot(getDelta()) + Lf*sqrt(1+square(cot(getDelta()))) + L*cos(beta) + H*cot(getDelta()) - 0.5*W1*sin(beta)) / cos(beta);
 		return AcGePoint3d(x1,y1,z1);
 	}
@@ -232,5 +233,5 @@ private:
 
 	double w1, w2; // 石门迎头钻孔左右边距
 	double h1, h2; // 钻机的最小最大工作高度
-	double r0;     // 钻孔卸压直径
+	double d0;     // 钻孔卸压直径
 };

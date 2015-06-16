@@ -21,6 +21,5 @@ RockGate	上帮保护
 RockGate	下帮保护
 CoalSurface	厚度
 CoalSurface	倾角
-CoalSurface	$迎头投影坐标
 CoalSurface	$投影宽度
 CoalSurface	$投影高度

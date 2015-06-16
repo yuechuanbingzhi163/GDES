@@ -43,11 +43,16 @@ protected:
 	{
 		linkDoubleData( _T( "厚度" ), &m_thick );
 		linkDoubleData( _T( "倾角" ), &m_angle );
+		//带$号的字段表示该字段仅用于内部计算,不应该也不需要显示在对话框界面上
+		linkDoubleData( _T( "$投影宽度" ), &m_width );
+		linkDoubleData( _T( "$投影高度" ), &m_height );
 	}
 
 public:
 	double m_thick;
 	double m_angle;
+	double m_width;
+	double m_height;
 };
 
 class DrillSiteLink : public DataLink
@@ -61,6 +66,8 @@ protected:
 		linkDoubleData( _T( "宽度" ), &m_width );
 		linkDoubleData( _T( "高度" ), &m_height );
 		linkIntData( _T( "起始编号" ), &m_start );
+		//带$号的字段表示该字段仅用于内部计算,不应该也不需要显示在对话框界面上
+		linkStringData( _T( "$底帮坐标" ), &m_name );
 	}
 
 public:
@@ -70,6 +77,9 @@ public:
 	double m_width;
 	double m_height;
 	int m_start;
+	// 坐标是用字符串表示的,xyz之间通过逗号分隔
+	//可通过ArxUtilHelper::StringToPoint3d静态方法进行转换
+	CString m_pt;
 };
 
 class PoreLink : public DataLink
@@ -79,11 +89,14 @@ protected:
 	{
 		linkIntData( _T( "编号" ), &m_num );
 		linkDoubleData( _T( "半径" ), &m_radius );
-		linkStringData( _T( "坐标" ), &m_pt );
+		//带$号的字段表示该字段仅用于内部计算,不应该也不需要显示在对话框界面上
+		linkStringData( _T( "$坐标" ), &m_pt );
 	}
 
 public:
 	int m_num;
 	double m_radius;
+	// 坐标是用字符串表示的,xyz之间通过逗号分隔
+	//可通过ArxUtilHelper::StringToPoint3d静态方法进行转换
 	CString m_pt;
 };

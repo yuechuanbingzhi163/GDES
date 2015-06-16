@@ -383,27 +383,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DockBarChildDlg.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\RcuDesiginDockBarDlg.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\RcuDesignDlg.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\RcuEditDlg.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\RcuHelper.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\RcuNewDlg.cpp"
 				>
 			</File>
 			<File
@@ -446,15 +426,35 @@
 				RelativePath=".\UIHelper.cpp"
 				>
 			</File>
+			<Filter
+				Name="ui"
+				>
+				<File
+					RelativePath=".\DockBarChildDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuDesiginDockBarDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuDesignDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuEditDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuNewDlg.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Include Files"
 			Filter="h;hh;hxx"
 			>
-			<File
-				RelativePath=".\DockBarChildDlg.h"
-				>
-			</File>
 			<File
 				RelativePath=".\Rcu.h"
 				>
@@ -464,23 +464,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\RcuDesiginDockBarDlg.h"
-				>
-			</File>
-			<File
-				RelativePath=".\RcuDesignDlg.h"
-				>
-			</File>
-			<File
-				RelativePath=".\RcuEditDlg.h"
-				>
-			</File>
-			<File
 				RelativePath=".\RcuHelper.h"
-				>
-			</File>
-			<File
-				RelativePath=".\RcuNewDlg.h"
 				>
 			</File>
 			<File
@@ -495,6 +479,30 @@
 				RelativePath=".\UIHelper.h"
 				>
 			</File>
+			<Filter
+				Name="ui"
+				>
+				<File
+					RelativePath=".\DockBarChildDlg.h"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuDesiginDockBarDlg.h"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuDesignDlg.h"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuEditDlg.h"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuNewDlg.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
