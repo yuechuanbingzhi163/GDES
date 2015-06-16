@@ -257,6 +257,7 @@ public:
 		if( !loadArxModule( _T( "ARX_ReportHelper" ) ) ) return false;
 		if( !loadArxModule( _T( "GESESCmds" ) ) ) return false;
 		if( !loadArxModule( _T( "GDESAddFunc" ) ) ) return false;
+		if( !loadArxModule( _T( "ARX_RCU" ) ) ) return false;
 #endif
 
 #if INCLUDE_GAS_MODULE
@@ -285,11 +286,11 @@ public:
 #endif
 
 #if INCLUDE_GESES_MODULE
+		unloadArxModule( _T( "ARX_RCU" ) );
 		unloadArxModule( _T( "GDESAddFunc" ) );
 		unloadArxModule( _T( "ARX_ReportHelper" ) );
 		unloadArxModule( _T( "GESESCmds" ) ) ;
 		unloadArxModule( _T( "GraphTool" ) ) ;
-		unloadArxModule( _T( "GDESAddFunc" ) );
 #endif
 
 #if INCLUDE_GAS_MODULE
@@ -419,6 +420,14 @@ public:
 
 	//    acutPrintf( _T( "\nxxx\n" ) );
 	//    //acedSSGet(NULL, NULL, NULL, NULL, ssname);
+
+		//AcGeVector3d v(-1, 1, 0);
+		//acutPrintf(_T("\n...........\n"));
+		//acutPrintf(_T("\n投影前:(%.3f, %.3f, %.3f)"), v.x, v.y, v.z);
+
+		//v = v.dotProduct( AcGeVector3d::kXAxis ) * AcGeVector3d::kXAxis;
+		//acutPrintf(_T("\n投影后:(%.3f, %.3f, %.3f)"), v.x, v.y, v.z);
+
 	//}
 
 } ;

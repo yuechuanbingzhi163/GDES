@@ -263,3 +263,62 @@ void ArxUtilHelper::BrowserEntities( const AcDbObjectIdArray& objIds )
         ArxUtilHelper::Pause(); // 暂停
     }
 }
+
+// 获取当前模块的路径
+CString ArxUtilHelper::GetAppPathDir(HINSTANCE hInstance)
+{
+	TCHAR szMoudlePath[_MAX_PATH];
+	GetModuleFileName( hInstance, szMoudlePath, _MAX_PATH );
+
+	TCHAR drive[_MAX_DRIVE];
+	TCHAR dir[_MAX_DIR];
+	_tsplitpath( szMoudlePath, drive, dir, NULL, NULL );
+
+	TCHAR path[_MAX_PATH];
+	_tmakepath( path, drive, dir, NULL, NULL );
+
+	return CString( path );
+}
+
+// 生成路径
+CString ArxUtilHelper::BuildPath( const CString& dir, const CString& fileName )
+{
+	CString path;
+	path.Format( _T( "%s%s" ), dir, fileName );
+	return path;
+}
+
+CString ArxUtilHelper::Point3dToString(const AcGePoint3d& pt)
+{
+	CString value;
+	value.Format(_T("%.3f,%.3f,%.3f"), pt.x*1.0, pt.y*1.0, pt.z*1.0);
+	return value;
+}
+
+//分隔字符串
+void ArxUtilHelper::SplitCString(const CString& str, const CString& tokens, CStringArray& values)
+{
+	int nTokenPos = 0;
+	CString strToken = str.Tokenize(tokens, nTokenPos);
+	while (!strToken.IsEmpty())
+	{
+		values.Add(strToken);
+		strToken = str.Tokenize(tokens, nTokenPos);
+	}
+}
+
+bool ArxUtilHelper::StringToPoint3d(const CString& value, AcGePoint3d& pt)
+{
+	CStringArray values;
+	ArxUtilHelper::SplitCString(value, _T(" \t\n,;_-"), values);
+	if(values.GetCount() < 3) return false;
+
+	double x=0,y=0,z=0;
+	if(!ArxUtilHelper::StringToDouble(values[0], x)) return false;
+	if(!ArxUtilHelper::StringToDouble(values[1], y)) return false;
+	if(!ArxUtilHelper::StringToDouble(values[2], z)) return false;
+
+	pt.set(x,y,z);
+
+	return true;
+}

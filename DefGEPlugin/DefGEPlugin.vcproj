@@ -640,6 +640,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Rcu"
+				>
+				<File
+					RelativePath=".\SimpleCoalSurfaceDraw.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SimpleDrillSiteDraw.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SimplePoreDraw.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\SimpleRockGateDraw.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Include Files"
@@ -878,6 +898,26 @@
 				>
 				<File
 					RelativePath=".\GasSensorGEDraw.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Rcu"
+				>
+				<File
+					RelativePath=".\SimpleCoalSurfaceDraw.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SimpleDrillSiteDraw.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SimplePoreDraw.h"
+					>
+				</File>
+				<File
+					RelativePath=".\SimpleRockGateDraw.h"
 					>
 				</File>
 			</Filter>

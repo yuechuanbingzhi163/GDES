@@ -79,6 +79,15 @@
 //瓦斯传感器
 #include "GasSensorGEDraw.h"
 
+//钻孔
+#include "SimplePoreDraw.h"
+//钻场
+#include "SimpleDrillSiteDraw.h"
+//煤层面
+#include "SimpleCoalSurfaceDraw.h"
+//石门
+#include "SimpleRockGateDraw.h"
+
 // 井筒
 //#include "DoubleShaftDraw.h"
 
@@ -187,6 +196,15 @@ void DefGEPlugin::initialize( MineGEDrawManager* pGEDrawManager )
 	//瓦斯传感器
 	REGISTER_MINEGE_DRAW( GasSensorGE, GasSensorGEDraw );
 
+	//钻孔
+	REGISTER_MINEGE_DRAW( Pore, SimplePoreDraw );
+	//钻场
+	REGISTER_MINEGE_DRAW( DrillSite, SimpleDrillSiteDraw );
+	//煤层面
+	REGISTER_MINEGE_DRAW( CoalSurface, SimpleCoalSurfaceDraw );
+	//石门
+	REGISTER_MINEGE_DRAW( RockGate, SimpleRockGateDraw );
+
     END_REGISTER_MINEGE_DRAW
 }
 
@@ -271,6 +289,15 @@ void DefGEPlugin::unInitialize( MineGEDrawManager* pGEDrawManager )
 	//瓦斯传感器
 	UNREGISTER_MINEGE_DRAW( GasSensorGE, GasSensorGEDraw );
 
+	//钻孔
+	UNREGISTER_MINEGE_DRAW( Pore, SimplePoreDraw );
+	//钻场
+	UNREGISTER_MINEGE_DRAW( DrillSite, SimpleDrillSiteDraw );
+	//煤层面
+	UNREGISTER_MINEGE_DRAW( CoalSurface, SimpleCoalSurfaceDraw );
+	//石门
+	UNREGISTER_MINEGE_DRAW( RockGate, SimpleRockGateDraw );
+	
     END_UNREGISTER_MINEGE_DRAW
 }
 

@@ -139,7 +139,7 @@ static void SetFieldInfo(FieldInfo& info,const CString& fieldType, const CString
 // 图元类型	字段1
 // 图元类型	字段2
 // ...
-void DataInitHelper::InitDataField( const CString& fileName )
+void DataInitHelper::InitDataFieldWithMoreInfo( const CString& fileName )
 {
     acutPrintf( _T( "\n从路径: %s加载字段" ), fileName );
 
@@ -169,6 +169,24 @@ void DataInitHelper::InitDataField( const CString& fileName )
 			FieldInfoHelper::RemoveFieldInfo( getype, field );
 			FieldInfoHelper::AddFieldInfo( getype, field, fieldInfo );
 		}
+	}
+	inFile.close();
+}
+
+void DataInitHelper::InitDataField( const CString& fileName )
+{
+	acutPrintf( _T( "\n从路径: %s加载字段" ), fileName );
+
+	AcIfstream inFile( fileName );
+	if( !inFile ) return;
+
+	while( !inFile.eof() )
+	{
+		ACHAR getype[_MAX_PATH], field[_MAX_PATH];
+		inFile >> getype >> field;
+		if(inFile.fail()) break;
+
+		FieldHelper::AddField( getype, field );
 	}
 	inFile.close();
 }

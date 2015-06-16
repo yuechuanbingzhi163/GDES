@@ -520,6 +520,30 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="RCU"
+				>
+				<File
+					RelativePath=".\CoalSurface.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\DrillSite.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Pore.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuGE.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\RockGate.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Include Files"
@@ -634,6 +658,30 @@
 				</File>
 				<File
 					RelativePath=".\TempeSensorGE.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="RCU"
+				>
+				<File
+					RelativePath=".\CoalSurface.h"
+					>
+				</File>
+				<File
+					RelativePath=".\DrillSite.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Pore.h"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuGE.h"
+					>
+				</File>
+				<File
+					RelativePath=".\RockGate.h"
 					>
 				</File>
 			</Filter>

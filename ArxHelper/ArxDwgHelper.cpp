@@ -73,30 +73,6 @@ static void GetBlcokIds( AcDbDatabase* pDB, const AcStringArray& allBlocks, AcDb
 	pBlkTbl->close();
 }
 
-// 获取当前模块的路径
-CString ArxDwgHelper::GetAppPathDir(HINSTANCE hInstance)
-{
-	TCHAR szMoudlePath[_MAX_PATH];
-	GetModuleFileName( hInstance, szMoudlePath, _MAX_PATH );
-
-	TCHAR drive[_MAX_DRIVE];
-	TCHAR dir[_MAX_DIR];
-	_tsplitpath( szMoudlePath, drive, dir, NULL, NULL );
-
-	TCHAR path[_MAX_PATH];
-	_tmakepath( path, drive, dir, NULL, NULL );
-
-	return CString( path );
-}
-
-// 生成路径
-CString ArxDwgHelper::BuildPath( const CString& dir, const CString& fileName )
-{
-	CString path;
-	path.Format( _T( "%s%s" ), dir, fileName );
-	return path;
-}
-
 bool ArxDwgHelper::InsertDwg(const CString& dwgFilePath)
 {
 	// 读取模板dwg文件到一个空数据库

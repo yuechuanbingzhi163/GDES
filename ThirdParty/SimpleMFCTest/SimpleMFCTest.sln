@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleMFCTest", "SimpleMFCTest\SimpleMFCTest.vcproj", "{01F3CCA4-AD53-4F9A-AFD7-54E59B70A085}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01F3CCA4-AD53-4F9A-AFD7-54E59B70A085}.Debug|Win32.ActiveCfg = Debug|Win32
+		{01F3CCA4-AD53-4F9A-AFD7-54E59B70A085}.Debug|Win32.Build.0 = Debug|Win32
+		{01F3CCA4-AD53-4F9A-AFD7-54E59B70A085}.Release|Win32.ActiveCfg = Release|Win32
+		{01F3CCA4-AD53-4F9A-AFD7-54E59B70A085}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

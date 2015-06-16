@@ -8,7 +8,7 @@
 void UpdateDwgBlock()
 {
     //CString dwgFilePath = _T("C:\\Users\\anheihb03dlj\\Desktop\\瓦斯地质图块定义.dwg");
-	CString dwgFilePath = ArxDwgHelper::BuildPath(ArxDwgHelper::GetAppPathDir(_hdllInstance), _T( "Datas\\瓦斯地质图块定义.dwg" ));
+	CString dwgFilePath = ArxUtilHelper::BuildPath(ArxUtilHelper::GetAppPathDir(_hdllInstance), _T( "Datas\\瓦斯地质图块定义.dwg" ));
 	if( ArxDwgHelper::InsertDwg( dwgFilePath ) )
     {
         acutPrintf( _T( "\n更新块成功!\n" ) );

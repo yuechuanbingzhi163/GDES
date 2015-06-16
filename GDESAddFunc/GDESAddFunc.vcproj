@@ -407,10 +407,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\RockCoalUncover.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\StdAfx.cpp"
 				>
 				<FileConfiguration

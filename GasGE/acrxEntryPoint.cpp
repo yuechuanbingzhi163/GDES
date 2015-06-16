@@ -9,7 +9,6 @@
 
 class CGasGEApp : public AcRxArxApp
 {
-
 public:
     CGasGEApp () : AcRxArxApp () {}
 

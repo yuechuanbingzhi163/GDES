@@ -266,6 +266,26 @@ void DrawHelper::GetModelGEById( const AcDbObjectId& objId, AcDbObjectIdArray& o
     GetModelGEById_Helper( objId, modelObjIds, objIds );
 }
 
+void DrawHelper::GetHosts( const AcDbObjectIdArray& objIds, AcDbObjectIdArray& hosts )
+{
+	AcTransaction* pTrans = actrTransactionManager->startTransaction();
+	if( pTrans == 0 ) return;
+
+	int len = objIds.length();
+	for( int i = 0; i < len; i++ )
+	{
+		AcDbObject* pObj;
+		if( Acad::eOk != pTrans->getObject( pObj, objIds[i], AcDb::kForRead ) ) continue;
+
+		TagGE* pTag = TagGE::cast( pObj );
+		if( pTag == 0 ) continue;
+
+		AcDbObjectId host = pTag->getRelatedGE();
+		/*if( !host.isNull() ) */hosts.append( host );
+	}
+	actrTransactionManager->endTransaction();
+}
+
 bool DrawHelper::IsGETypeHasDrawJig( const CString& geType )
 {
     MineGEDrawSystem* pInstance = MineGEDrawSystem::GetInstance();
