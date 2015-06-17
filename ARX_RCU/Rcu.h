@@ -60,8 +60,9 @@ public:
 		W2 = this->W2;
 	}
 	//设置石门参数
-	void setRockGateParams(double f1, double f2, double d1, double d2)
+	void setRockGateParams(double S1,double f1, double f2, double d1, double d2)
 	{
+		this->S1 = S1;
 		this->f1 = f1;
 		this->f2 = f2;
 		this->d1 = d1;
@@ -122,6 +123,8 @@ public:
 
 		Lw = sqrt(square(p12.x-p22.x) + square(p12.y-p22.y) + square(p12.z-p22.z));
 		Lh = sqrt(square(p12.x-p32.x) + square(p12.y-p32.y) + square(p12.z-p32.z));
+		acutPrintf(_T("\n(%.2lf,%.2lf,%.2lf)\t(%.2lf,%.2lf,%.2lf)\t(%.2lf,%.2lf,%.2lf)\t"),p12.x,p12.y,p12.z,p22.x,p22.y,p22.z,p32.x,p32.y,p32.z);
+		acutPrintf(_T("\nLw:%.2lf\tLh:%.2lf\n"),Lw,Lh);
 	}
 	//钻孔个数及间距
 	void drillNumber(double Lw, double Lh, int& N1, int& N2, double& e1, double& e2)

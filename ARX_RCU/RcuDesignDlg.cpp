@@ -4,6 +4,7 @@
 #include "RcuEditDlg.h"
 #include "RcuHelper.h"
 #include "RcuDataLink.h"
+#include "Rcu.h"
 
 #include "../ArxHelper/HelperClass.h"
 #include "../MineGE/HelperClass.h"
@@ -19,6 +20,25 @@ struct ItemData
 	int iItem;            // 第几行的数据
 	AcDbObjectId objId;   // 数据id
 };
+
+static bool CaculCoalFaceParam(const RockGateLink& rg_link,CoalSurfaceLink& cs_link)
+{
+	AcGePoint3d orign;
+	ArxUtilHelper::StringToPoint3d(rg_link.m_pt,orign);
+	Rcu rcu;
+	rcu.setOrigin(orign);
+	rcu.setRockGateParams(rg_link.m_dist,rg_link.m_top,rg_link.m_bottom,rg_link.m_left,rg_link.m_right);
+	rcu.setTunnelParams(rg_link.m_height,rg_link.m_width,rg_link.m_width);
+	//第二个参数是石门轴线与煤层走向的夹角
+	//但是界面上暂时没有，所以考虑90度的
+	rcu.setCoalParams(cs_link.m_angle,PI*0.5,cs_link.m_thick);
+	double w,h;
+	rcu.drillExtent(w,h);
+	cs_link.m_width = w;
+	cs_link.m_height = h;
+	acutPrintf(_T("\n计算时->宽度:%.4lf\t高度:%.4lf\n"),cs_link.m_width,cs_link.m_height);
+	return true;
+}
 
 static bool GetRockGateDataFromDlg(RockGateLink& rg_link, CoalSurfaceLink& cs_link)
 {
@@ -395,6 +415,14 @@ void RcuDesignDlg::OnModifyCommand()
 			rg_link.updateData(false);
 			//修改当前选中行的数据
 			ModifyRockGateToListCtrl(m_list, row, rg_link);
+
+			CoalSurfaceLink cs_link;
+			cs_link.updateData(false);
+			acutPrintf(_T("\n计算之前->宽度:%.4lf\t高度:%.4lf\n"),cs_link.m_width,cs_link.m_height);
+			CaculCoalFaceParam(rg_link,cs_link);
+			cs_link.updateData(true);
+			acutPrintf(_T("\n计算之后->宽度:%.4lf\t高度:%.4lf\n"),cs_link.m_width,cs_link.m_height);
+
 		}
 
 		acDocManager->unlockDocument( curDoc() );
@@ -455,6 +483,11 @@ void RcuDesignDlg::OnAddCommand()
 	}
 	else
 	{
+		acutPrintf(_T("\n计算之前->宽度:%.4lf\t高度:%.4lf\n"),cs_link.m_width,cs_link.m_height);
+		CaculCoalFaceParam(rg_link,cs_link);
+		cs_link.updateData(true);
+		acutPrintf(_T("\n计算之后->宽度:%.4lf\t高度:%.4lf\n"),cs_link.m_width,cs_link.m_height);
+
 		//煤层关联到石门
 		pCS->setRelatedGE(pRG->objectId());
 		//添加煤层到cad图形数据库
