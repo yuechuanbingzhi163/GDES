@@ -331,6 +331,18 @@ BOOL RcuEditDlg::OnInitDialog()
 		UpdateData(FALSE);
 	}
 
+	SetToolTip(IDC_EDIT1,_T("单位:m"));
+	SetToolTip(IDC_EDIT2,_T("单位:m"));
+	SetToolTip(IDC_EDIT3,_T("单位:m"));
+	SetToolTip(IDC_EDIT10,_T("单位:m"));
+	SetToolTip(IDC_EDIT11,_T("单位:m"));
+	SetToolTip(IDC_EDIT12,_T("单位:m"));
+	SetToolTip(IDC_EDIT13,_T("单位:m"));
+	SetToolTip(IDC_EDIT14,_T("单位:m"));
+	SetToolTip(IDC_EDIT16,_T("单位:m"));
+	SetToolTip(IDC_EDIT15,_T("单位:度"));
+	SetToolTip(IDC_EDIT17,_T("单位:m"));
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
 }
@@ -685,7 +697,21 @@ void RcuEditDlg::OnAddCommand()
 
 void RcuEditDlg::OnDeleteCommand()
 {
-	MessageBox(_T("OnDeleteCommand"));
+	int row = GetCurSelOfList(m_list);
+	if(row != LB_ERR)
+	{
+		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
+
+		//删除钻场图元
+		acDocManager->lockDocument( curDoc() );
+		ArxEntityHelper::EraseObject(pData->objId, true);
+		acDocManager->unlockDocument( curDoc() );
+
+		//删除选择的行
+		ClearListCtrlItem(m_list, row);
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
+	}
 }
 
 void RcuEditDlg::OnModifyCommand()
@@ -695,5 +721,18 @@ void RcuEditDlg::OnModifyCommand()
 
 void RcuEditDlg::OnHilightCommand()
 {
-	MessageBox(_T("OnHilightCommand"));
+	//ShowOrHideWindow show_hide(this);
+	int row = GetCurSelOfList(m_list);
+	if(row != LB_ERR)
+	{
+		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
+
+		//高亮选中钻场图元
+		acDocManager->lockDocument( curDoc() );
+		ArxEntityHelper::SelectEntity(pData->objId);
+		acDocManager->unlockDocument( curDoc() );
+
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
+	}
 }

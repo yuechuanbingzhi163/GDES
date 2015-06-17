@@ -31,7 +31,8 @@ static bool CaculCoalFaceParam(const RockGateLink& rg_link,CoalSurfaceLink& cs_l
 	rcu.setTunnelParams(rg_link.m_height,rg_link.m_width,rg_link.m_width);
 	//第二个参数是石门轴线与煤层走向的夹角
 	//但是界面上暂时没有，所以考虑90度的
-	rcu.setCoalParams(cs_link.m_angle,PI*0.5,cs_link.m_thick);
+	double angle = DegToRad(cs_link.m_angle);
+	rcu.setCoalParams(angle,PI*0.5,cs_link.m_thick);
 	double w,h;
 	rcu.drillExtent(w,h);
 	cs_link.m_width = w;

@@ -14,11 +14,14 @@ public:
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
 	virtual BOOL OnInitDialog();
-
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	void SetToolTip(int itemID,const CString& tooltip);
+	
 	DECLARE_MESSAGE_MAP()
 
 protected:
 	HICON m_hIcon;
+	CToolTipCtrl m_tt;
 };
 
 class ShowOrHideWindow

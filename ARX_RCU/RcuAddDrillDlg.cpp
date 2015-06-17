@@ -68,5 +68,10 @@ BOOL RcuAddDrillDlg::OnInitDialog()
 	m_locaCombBox.AddString(_T("右帮钻场"));
 	m_locaCombBox.SetCurSel(m_leftOrRight);
 	UpdateData(FALSE);
+
+	SetToolTip(IDC_DRILL_WIDTH_EDIT,_T("单位:m"));
+	SetToolTip(IDC_DRILL_HEIGHT_EDIT,_T("单位:m"));
+	SetToolTip(IDC_DRILL_DIS_EDIT,_T("单位:m"));
+
 	return TRUE; 
 }

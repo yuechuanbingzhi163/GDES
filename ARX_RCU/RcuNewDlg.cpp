@@ -71,6 +71,18 @@ void RcuNewDlg::OnBnClickedOk()
 BOOL RcuNewDlg::OnInitDialog()
 {
 	RcuAcUiBaseDlg::OnInitDialog();
+	SetToolTip(IDC_EDIT1,_T("单位:m"));
+	SetToolTip(IDC_EDIT2,_T("单位:m"));
+	SetToolTip(IDC_EDIT3,_T("单位:m"));
+	SetToolTip(IDC_EDIT10,_T("单位:m"));
+	SetToolTip(IDC_EDIT11,_T("单位:m"));
+	SetToolTip(IDC_EDIT12,_T("单位:m"));
+	SetToolTip(IDC_EDIT13,_T("单位:m"));
+	SetToolTip(IDC_EDIT14,_T("单位:m"));
+	SetToolTip(IDC_EDIT16,_T("单位:m"));
+	SetToolTip(IDC_EDIT15,_T("单位:度"));
+	SetToolTip(IDC_EDIT17,_T("单位:m"));
+
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
