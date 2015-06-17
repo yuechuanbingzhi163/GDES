@@ -383,6 +383,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\RcuEditDrillDlg.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RcuHelper.cpp"
 				>
 			</File>
@@ -469,6 +473,10 @@
 			</File>
 			<File
 				RelativePath=".\RcuDataLink.h"
+				>
+			</File>
+			<File
+				RelativePath=".\RcuEditDrillDlg.h"
 				>
 			</File>
 			<File

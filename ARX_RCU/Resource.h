@@ -22,6 +22,8 @@
 #define IDC_BUTTON3                     108
 #define IDI_ICON1                       108
 #define IDI_GAS_ICON                    108
+#define IDD_RCU_DRILL_NEW_DIALOG1       108
+#define IDD_RCU_DRILL_EDIT_DIALOG       108
 #define IDC_BUTTON4                     109
 #define IDC_LIST2                       109
 #define IDC_EDIT9                       110
