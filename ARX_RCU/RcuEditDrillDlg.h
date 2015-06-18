@@ -39,8 +39,12 @@ private:
 public:
 	//从对话框中读取数据
 	void writeToDataLink(DrillSiteLink& ds_link);
+	//读取数据到对话框
+	void readFromDataLink(DrillSiteLink& ds_link);
 
-public:
+	//石门图元id
+	AcDbObjectId m_rock_gate;
+
 	afx_msg void OnBnClickedOk();
 
 };

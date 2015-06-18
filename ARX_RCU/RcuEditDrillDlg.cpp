@@ -69,3 +69,13 @@ void RcuEditDrillDlg::writeToDataLink( DrillSiteLink& ds_link )
 	ds_link.m_height = m_height;
 	ds_link.m_start = m_index;
 }
+
+void RcuEditDrillDlg::readFromDataLink( DrillSiteLink& ds_link )
+{
+	m_name = ds_link.m_name;
+	m_leftOrRight = ds_link.m_leftOrRight;
+	m_dist = ds_link.m_dist;
+	m_width = ds_link.m_width;
+	m_height = ds_link.m_height;
+	m_index = ds_link.m_start;
+}

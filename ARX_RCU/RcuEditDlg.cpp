@@ -3,6 +3,7 @@
 #include "RcuHelper.h"
 #include "RcuDataLink.h"
 #include "RcuAddDrillDlg.h"
+#include "RcuEditDrillDlg.h"
 
 #include "../ArxHelper/HelperClass.h"
 #include "../MineGE/HelperClass.h"
@@ -197,6 +198,18 @@ static bool ShowAddDrillDlg(DrillSiteLink& ds_link)
 	return true;
 }
 
+static bool ShowDrillEditDlg(DrillSiteLink& ds_link)
+{
+	CAcModuleResourceOverride resourceOverride;
+	RcuEditDrillDlg dlg;
+	//ds_link.updateData(true);
+	dlg.readFromDataLink(ds_link);
+	if(IDOK != dlg.DoModal()) return false;
+	//从对话框中提取数据
+	dlg.writeToDataLink(ds_link);
+	return true;
+}
+
 static void GetRGInsertPt( const AcDbObjectId& objId, AcGePoint3d& insertPt )
 {
 	AcTransaction* pTrans = actrTransactionManager->startTransaction();
@@ -238,6 +251,41 @@ static bool CaculDrillSitePt(const DrillSiteLink& ds_link,const RockGateLink& rg
 	linkPt.y = rgInsertPt.y - ds_link.m_dist;
 	linkPt.z = rgInsertPt.z;
 	return true;
+}
+
+static void DrawDrillSite(AcDbObjectId& rock_gate_id,CListCtrl& list,DrillSiteLink& ds_link)
+{
+	RockGateLink rg_link;
+	if(!RcuHelper::GetRockGateData(rock_gate_id, rg_link))
+	{
+		AfxMessageBox(_T("提取石门数据发生错误!"));
+		return;
+	}
+	//计算钻场插入坐标和连接坐标
+	AcGePoint3d insertPt,linkPt,rgInsertPt;
+	GetRGInsertPt(rock_gate_id,rgInsertPt);
+	if(!CaculDrillSitePt(ds_link,rg_link,rgInsertPt,insertPt,linkPt)) 
+	{
+		AfxMessageBox(_T("钻场位置数据错误!"));
+		return;
+	}
+	//新建钻场并设置插入点坐标
+	DrillSite* pDS = new DrillSite();
+	pDS->setInsertPt(insertPt);
+	pDS->setLinkPt(linkPt);
+	pDS->setRelatedGE(rock_gate_id);
+
+	//添加钻场到cad图形数据库
+	if(!ArxUtilHelper::PostToModelSpace(pDS))
+	{
+		delete pDS; pDS = 0;
+	}
+	else
+	{
+		InsertDataToDrillSiteList(list,pDS->objectId(),ds_link);
+	}
+
+
 }
 
 IMPLEMENT_DYNAMIC(RcuEditDlg, RcuAcUiBaseDlg)
@@ -658,36 +706,37 @@ void RcuEditDlg::OnAddCommand()
 	//acDocManager->lockDocument( curDoc() );
 	////ArxEntityHelper::SelectEntity(pData->objId);
 
-	RockGateLink rg_link;
-	if(!RcuHelper::GetRockGateData(m_rock_gate, rg_link))
-	{
-		MessageBox(_T("提取石门数据发生错误!"));
-		return;
-	}
+	DrawDrillSite(m_rock_gate,m_list,ds_link);
+	//RockGateLink rg_link;
+	//if(!RcuHelper::GetRockGateData(m_rock_gate, rg_link))
+	//{
+	//	MessageBox(_T("提取石门数据发生错误!"));
+	//	return;
+	//}
 
-	//计算钻场插入坐标和连接坐标
-	AcGePoint3d insertPt,linkPt,rgInsertPt;
-	GetRGInsertPt(m_rock_gate,rgInsertPt);
-	if(!CaculDrillSitePt(ds_link,rg_link,rgInsertPt,insertPt,linkPt)) 
-	{
-		MessageBox(_T("钻场位置数据错误!"));
-		return;
-	}
-	//新建钻场并设置插入点坐标
-	DrillSite* pDS = new DrillSite();
-	pDS->setInsertPt(insertPt);
-	pDS->setLinkPt(linkPt);
-	pDS->setRelatedGE(m_rock_gate);
+	////计算钻场插入坐标和连接坐标
+	//AcGePoint3d insertPt,linkPt,rgInsertPt;
+	//GetRGInsertPt(m_rock_gate,rgInsertPt);
+	//if(!CaculDrillSitePt(ds_link,rg_link,rgInsertPt,insertPt,linkPt)) 
+	//{
+	//	MessageBox(_T("钻场位置数据错误!"));
+	//	return;
+	//}
+	////新建钻场并设置插入点坐标
+	//DrillSite* pDS = new DrillSite();
+	//pDS->setInsertPt(insertPt);
+	//pDS->setLinkPt(linkPt);
+	//pDS->setRelatedGE(m_rock_gate);
 
-	//添加钻场到cad图形数据库
-	if(!ArxUtilHelper::PostToModelSpace(pDS))
-	{
-		delete pDS; pDS = 0;
-	}
-	else
-	{
-		InsertDataToDrillSiteList(m_list,pDS->objectId(),ds_link);
-	}
+	////添加钻场到cad图形数据库
+	//if(!ArxUtilHelper::PostToModelSpace(pDS))
+	//{
+	//	delete pDS; pDS = 0;
+	//}
+	//else
+	//{
+	//	InsertDataToDrillSiteList(m_list,pDS->objectId(),ds_link);
+	//}
 
 	acDocManager->unlockDocument( curDoc() );
 
@@ -716,7 +765,40 @@ void RcuEditDlg::OnDeleteCommand()
 
 void RcuEditDlg::OnModifyCommand()
 {
-	MessageBox(_T("OnModifyCommand"));
+	int row = GetCurSelOfList(m_list);
+	if(row == LB_ERR)
+	{
+		MessageBox( _T( "请确保当前有一行被选中!" ) );
+	}
+	else
+	{
+		ItemData* pData = ( ItemData* )m_list.GetItemData( row );
+
+		acDocManager->lockDocument( curDoc() );
+		//用户点击了"确认"按钮
+		//需要重新更新listctrl中的数据
+		DrillSiteLink ds_link;
+		ds_link.setDataSource(pData->objId);
+		//从对话框中提取数据给钻场
+		exchangeDrillSiteData(ds_link, true);
+		int oldLoca = ds_link.m_leftOrRight;
+		double oldDis = ds_link.m_dist;
+		if(!ShowDrillEditDlg(ds_link)) return;
+		//修改当前选中行的数据
+		ModifyDrillSiteToListCtrl(m_list, row, ds_link);
+
+		if((oldLoca != ds_link.m_leftOrRight) || oldDis != ds_link.m_dist)
+		{
+			ArxEntityHelper::EraseObject(pData->objId, true);
+			//删除选择的行
+			ClearListCtrlItem(m_list, row);
+			DrawDrillSite(m_rock_gate,m_list,ds_link);
+		}
+
+		acDocManager->unlockDocument( curDoc() );
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
+	}
 }
 
 void RcuEditDlg::OnHilightCommand()
