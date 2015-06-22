@@ -1,6 +1,5 @@
 #pragma once
 
-#include "RcuAcUiBaseDlg.h"
 #include "DockBarChildDlg.h"
 
 //石门揭煤设计主对话框
