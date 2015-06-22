@@ -78,10 +78,9 @@ public:
 	// 用一种颜色显示标签图元所关联的宿主图元HostGE
 	static void ShowHostGE(const AcDbObjectId& objId, unsigned short colorIndex);
 
-	static bool GetHostGE( const AcDbObjectId& objId, AcDbObjectId& host );
+	static bool GetHostGE(const AcDbObjectId& objId, AcDbObjectId& host);
 
 	static AcDbObjectId GetRelatedTW(AcDbObjectId objId);
 
 	static AcDbObjectIdArray GetRelatedTunnel(AcDbObjectId tunnelId);
-
 };

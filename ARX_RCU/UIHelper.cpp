@@ -1,13 +1,9 @@
 #include "StdAfx.h"
 #include "UIHelper.h"
-#include "RcuNewDlg.h"
-#include "RcuDesignDlg.h"
-#include "RcuEditDlg.h"
+#include "RcuDesiginDockBarDlg.h"
 
 #include "../ArxHelper/HelperClass.h"
 #include "../MineGE/HelperClass.h"
-
-#include "RcuDesiginDockBarDlg.h"
 
 RcuDesiginDockBarDlg* pRcuDesiginDockBarDlg = 0;
 

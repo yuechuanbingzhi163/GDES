@@ -24,7 +24,7 @@ public:
 	static double AngleToXAxis(const AcGeVector3d& v);
 
 	// 暂停
-	static void Pause();
+	static void Pause(const CString& msg=_T("\n请按回车或空格键结束..."));
 
 	// 是否指定类型的图元
 	static bool IsEqualType(const CString& type, const AcDbObjectId& objId, bool isDerivedFromParent=true);

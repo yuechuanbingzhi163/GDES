@@ -51,15 +51,3 @@ void DockBarChildDlg::OnClosing()
 {
     // do nothing
 }
-
-void DockBarChildDlg::ShowParentControlBar(BOOL bShow) const
-{
-	CAcModuleResourceOverride myResources;
-	CControlBar* pBar = reinterpret_cast<CControlBar*>(this->GetParent());
-	if(pBar == 0) return;
-
-	CMDIFrameWnd* pAcadFrame = acedGetAcadFrame();
-	if(pAcadFrame == 0) return;
-
-	pAcadFrame->ShowControlBar( pBar, bShow, FALSE );
-}
