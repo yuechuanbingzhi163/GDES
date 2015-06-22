@@ -191,7 +191,6 @@ IMPLEMENT_DYNAMIC(RcuDesignDlg, DockBarChildDlg)
 RcuDesignDlg::RcuDesignDlg(CWnd* pParent /*=NULL*/)
 	: DockBarChildDlg(RcuDesignDlg::IDD, pParent)
 {
-
 }
 
 RcuDesignDlg::~RcuDesignDlg()
@@ -230,14 +229,14 @@ BOOL RcuDesignDlg::OnInitDialog()
 	m_list.SetExtendedStyle( m_list.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES );
 	AcStringArray rock_fields;
 	FieldHelper::GetAllFields(_T("RockGate"), rock_fields);
-	// 构建Column
+	//构建表头列表
 	ListCtrlHelper::BuildListCtrlHeadColumns( m_list, rock_fields );
 	CrackHeadColumnWidth(m_list);
 
 	m_list2.SetExtendedStyle( m_list2.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES );
 	AcStringArray drill_fields;
 	FieldHelper::GetAllFields(_T("DrillSite"), drill_fields);
-	// 构建Column
+	//构建表头列表
 	ListCtrlHelper::BuildListCtrlHeadColumns( m_list2, drill_fields );
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -254,9 +253,35 @@ void RcuDesignDlg::OnClosing()
 
 // RcuDesignDlg 消息处理程序
 
-void RcuDesignDlg::OnBnClickedExport()
+void RcuDesignDlg::updateRockGateListCtrl()
 {
-	// TODO: 在此添加控件通知处理程序代码
+	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
+	//int row2 = ListCtrlHelper::GetCurSelOfList(m_list2);
+
+	//清空钻场列表和石门列表
+	ListCtrlHelper::ClearListCtrl(m_list);
+	ListCtrlHelper::ClearListCtrl(m_list2);
+
+	//文档锁切换
+	DocumentLockSwitch lock_switch;
+
+	AcStringArray fields;
+	FieldHelper::GetAllFields(_T("RockGate"), fields);
+	if(fields.isEmpty()) return;
+
+	AcDbObjectIdArray objIds;
+	RcuHelper::FindAllRockGates(objIds);
+	if(objIds.isEmpty()) return;
+
+	ListCtrlHelper::InsertDatasToListCtrl(m_list, fields, objIds);
+
+	//if(row2 == LB_ERR) row2 = 0;
+	//if(row1 == LB_ERR) row1 = 0;
+
+	//选中第1行,触发LVN_ITEMCHANGED消息
+	//m_list.SetItemState(0, LVIS_SELECTED, LVIS_SELECTED | LVIS_FOCUSED);
+	//m_list.EnsureVisible(0, FALSE);
+	m_list.SetFocus();
 }
 
 /**
@@ -274,6 +299,7 @@ http://blog.csdn.net/oldmtn/article/details/9298577
 void RcuDesignDlg::OnLvnItemchangedList1( NMHDR* pNMHDR, LRESULT* pResult )
 {
 	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>( pNMHDR );
+	*pResult = 0;
 
 	if(LVIF_STATE == pNMLV->uChanged && (pNMLV->uNewState & LVIS_SELECTED))
 	{
@@ -298,16 +324,19 @@ void RcuDesignDlg::OnLvnItemchangedList1( NMHDR* pNMHDR, LRESULT* pResult )
 			ListCtrlHelper::ClearListCtrl(m_list2);
 			//添加到钻场列表
 			ListCtrlHelper::InsertDatasToListCtrl(m_list2, fields, drill_sites);
+
+			//屏蔽父窗口对该消息的处理
+			*pResult = 1;
 		}
 	}
-
-	*pResult = 1;
 }
 
 void RcuDesignDlg::OnNMDblclkList1(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	//第几行
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	*pResult = 0;
+
 	int row1 = pNMItemActivate->iItem;
 	if( row1 != LB_ERR )
 	{
@@ -319,15 +348,17 @@ void RcuDesignDlg::OnNMDblclkList1(NMHDR *pNMHDR, LRESULT *pResult)
 		ArxEntityHelper::SelectEntity(pData1->objId);
 		//定位到图元
 		ArxEntityHelper::ZoomToEntityForModeless(pData1->objId);
+		//设置pResult为1,屏蔽父窗口响应该消息
+		*pResult = 1;
 	}
-	//设置pResult为1,屏蔽父窗口响应该消息
-	*pResult = 1;
 }
 
 void RcuDesignDlg::OnNMRclickList1(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	//第几行
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	*pResult = 0;
+
 	int row = pNMItemActivate->iItem;
 	//防止在空白区点击弹出菜单
 	//if (m_list.GetSelectedCount() > 0)
@@ -385,10 +416,13 @@ void RcuDesignDlg::OnDeleteRockGateCommand()
 		DocumentLockSwitch lock_switch;
 
 		//删除图元
-		ArxEntityHelper::EraseObject(pData1->objId, true);
+		//注:EraseObject2使用open/close删除才有效石门和关联的图元
+		//   而EraseObject函数使用的是事务,不一定能有效删除!!!
+		ArxEntityHelper::EraseObject2(pData1->objId, true);
 
 		//删除选择的行
 		ListCtrlHelper::DeleteListCtrlItem(m_list, row1);
+		ListCtrlHelper::ClearListCtrl(m_list2);
 
 		//cad窗口获取焦点
 		acedGetAcadFrame()->SetFocus();
@@ -452,6 +486,8 @@ void RcuDesignDlg::OnNMDblclkList2(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	//第几行
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	*pResult = 0;
+
 	int row = pNMItemActivate->iItem;
 	if( row != LB_ERR )
 	{
@@ -464,15 +500,18 @@ void RcuDesignDlg::OnNMDblclkList2(NMHDR *pNMHDR, LRESULT *pResult)
 		ArxEntityHelper::SelectEntity(pData->objId);
 		//定位到图元
 		ArxEntityHelper::ZoomToEntityForModeless(pData->objId);
+		
+		//设置pResult为1,屏蔽父窗口响应该消息
+		*pResult = 1;
 	}
-	//设置pResult为1,屏蔽父窗口响应该消息
-	*pResult = 1;
 }
 
 void RcuDesignDlg::OnNMRclickList2(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	//第几行
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	*pResult = 0;
+
 	int row = pNMItemActivate->iItem;
 	//防止在空白区点击弹出菜单
 	//if (m_list2.GetSelectedCount() > 0)
@@ -504,10 +543,7 @@ void RcuDesignDlg::OnAddDrillSiteCommand()
 	//切换controlbar的显示
 	ControlBarShowSwitch cb_switch(this);
 
-	//非模态对话框AutoCAD获得焦点
-	//acedGetAcadDwgView()->SetFocus();
-
-	//切换文档锁
+	//文档锁切换
 	DocumentLockSwitch lock_switch;
 
 	//调用对话框获取钻场数据
@@ -550,14 +586,14 @@ void RcuDesignDlg::OnModifyDrillSiteCommand()
 	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
 	if(row1 == LB_ERR)
 	{
-		MessageBox(_T("请添加石门后再进行钻场设计!"));
+		MessageBox(_T("请指定或添加石门后再进行钻场设计!"));
 		return;
 	}
 
 	int row2 = ListCtrlHelper::GetCurSelOfList(m_list2);
 	if(row2 == LB_ERR)
 	{
-		MessageBox( _T( "请选择一个钻场进行选中!" ) );
+		MessageBox( _T( "请选择一个钻场进行设计!" ) );
 		return;
 	}
 
@@ -607,16 +643,13 @@ void RcuDesignDlg::OnHilightDrillSiteCommand()
 	}
 }
 
-void RcuDesignDlg::initRockGateListCtrl()
+void RcuDesignDlg::OnBnClickedExport()
 {
-	//文档锁切换
-	DocumentLockSwitch lock_switch;
+	// TODO: 在此添加控件通知处理程序代码
+}
 
-	AcStringArray fields;
-	FieldHelper::GetAllFields(_T("RockGate"), fields);
-
-	AcDbObjectIdArray objIds;
-	RcuHelper::FindAllRockGates(objIds);
-
-	ListCtrlHelper::InsertDatasToListCtrl(m_list, fields, objIds);
+void RcuDesignDlg::update()
+{
+	//更新石门列表
+	updateRockGateListCtrl();
 }

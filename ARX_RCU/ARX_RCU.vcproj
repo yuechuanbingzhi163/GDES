@@ -458,6 +458,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="reactor"
+				>
+				<File
+					RelativePath=".\Rcu_DbReactor.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\ReactorHelper.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Include Files"
@@ -520,6 +532,18 @@
 				</File>
 				<File
 					RelativePath=".\RcuEditRockGateDlg.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="reactor"
+				>
+				<File
+					RelativePath=".\Rcu_DbReactor.h"
+					>
+				</File>
+				<File
+					RelativePath=".\ReactorHelper.h"
 					>
 				</File>
 			</Filter>

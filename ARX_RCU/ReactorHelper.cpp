@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "ReactorHelper.h"
-#include "DataObject_DbReactor.h"
+#include "Rcu_DbReactor.h"
 
 /*
  * 用于记录与Document相关的reactor
@@ -15,7 +15,7 @@
 struct DocumentReactor
 {
     DocumentReactor() : pDOReactor( 0 ) {}
-    DataObject_DbReactor* pDOReactor;
+    Rcu_DbReactor* pDOReactor;
 
     // ...
     // 集中在一起便于管理，也解决了多文档的问题
@@ -56,7 +56,7 @@ void ReactorHelper::AddDocumentReactor( AcApDocument* pDoc )
 
     DocumentReactor dr;
     //dr.pTooltipMonitor = new MineGETooltipMonitor(pDoc);
-    dr.pDOReactor = new DataObject_DbReactor( pDoc->database() );
+    dr.pDOReactor = new Rcu_DbReactor( pDoc->database() );
 
     pDocumentReactorMap_RCU->insert( DocumentReactorMap::value_type( id, dr ) );
 }

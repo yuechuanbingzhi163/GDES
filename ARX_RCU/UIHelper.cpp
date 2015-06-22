@@ -20,7 +20,7 @@ void UIHelper::ShowRcuDesignDockBar()
 		pRcuDesiginDockBarDlg->EnableDocking ( CBRS_ALIGN_ANY ) ;
 		pRcuDesiginDockBarDlg->RestoreControlBar () ;
 	}
-
+	pRcuDesiginDockBarDlg->ForceUpdate();
 	pAcadFrame->ShowControlBar( pRcuDesiginDockBarDlg, TRUE, FALSE );
 }
 
@@ -31,5 +31,13 @@ void UIHelper::DestroyRcuDesignDockBar()
 		pRcuDesiginDockBarDlg->DestroyWindow();
 		delete pRcuDesiginDockBarDlg;
 		pRcuDesiginDockBarDlg = 0;
+	}
+}
+
+void UIHelper::ForceUpdateDockBar()
+{
+	if(pRcuDesiginDockBarDlg != 0)
+	{
+		pRcuDesiginDockBarDlg->ForceUpdate();
 	}
 }
