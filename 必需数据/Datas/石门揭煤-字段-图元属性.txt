@@ -23,3 +23,4 @@ CoalSurface	厚度
 CoalSurface	倾角
 CoalSurface	$投影宽度
 CoalSurface	$投影高度
+CoalSurface	$中心点坐标

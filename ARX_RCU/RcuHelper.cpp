@@ -1,5 +1,5 @@
 #include "StdAfx.h"
-#include "Rcu.h"
+#include "Rcu2.h"
 #include "RcuDataLink.h"
 #include "SwitchHelper.h"
 #include "RcuHelper.h"
@@ -194,20 +194,37 @@ void RcuHelper::VectorToAngleTest()
 bool RcuHelper::CaculCoalSurfParam(const RockGateLink& rg_link,CoalSurfaceLink& cs_link)
 {
 	AcGePoint3d orign;
-	ArxUtilHelper::StringToPoint3d(rg_link.m_pt,orign);
-	Rcu rcu;
-	rcu.setOrigin(orign);
-	rcu.setRockGateParams(rg_link.m_dist,rg_link.m_top,rg_link.m_bottom,rg_link.m_left,rg_link.m_right);
-	rcu.setTunnelParams(rg_link.m_height,rg_link.m_width,rg_link.m_width);
-	//第二个参数是石门轴线与煤层走向的夹角
-	//但是界面上暂时没有，所以考虑90度的
-	double angle = DegToRad(cs_link.m_angle);
-	rcu.setCoalParams(angle,PI*0.5,cs_link.m_thick);
-	double w,h;
-	rcu.drillExtent(w,h);
-	cs_link.m_width = w;
-	cs_link.m_height = h;
-	acutPrintf(_T("\n计算时->宽度:%.4lf\t高度:%.4lf\n"),cs_link.m_width,cs_link.m_height);
+	if(!ArxUtilHelper::StringToPoint3d(rg_link.m_pt, orign)) return false;
+
+	//调用rcu类进行计算
+	Rcu2 rcu;
+	//设置基点
+	//rcu.setOrigin(orign);
+	//设置煤层参数(倾角和厚度)
+	rcu.setCoalSurf(DegToRad(cs_link.m_angle), cs_link.m_thick);
+	//设置石门巷道断面参数
+	rcu.setRockGate1(rg_link.m_height, rg_link.m_width);
+	//设置石门的上下左右保护帮距
+	rcu.setRockGate2(rg_link.m_top, rg_link.m_bottom, rg_link.m_left, rg_link.m_right);
+	//设置石门距离煤层的最小法距
+	rcu.setRockGate3(rg_link.m_dist);
+	//设置钻孔直径
+	rcu.setDrillDiameter(rg_link.m_radius);
+
+	//计算煤层面的投影宽度和高度
+	rcu.drillExtent(cs_link.m_width, cs_link.m_height);
+	//计算投影范围中心点坐标
+	AcGePoint3d cnt;
+	if(!rcu.drillExtentCenter(cnt)) return false;
+
+	//变换到真实坐标系下
+	cnt += orign.asVector();
+
+	//坐标转换为字符串
+	cs_link.m_pt = ArxUtilHelper::Point3dToString(cnt);
+
+	//acutPrintf(_T("\n计算时->宽度:%.4lf\t高度:%.4lf\n"),cs_link.m_width,cs_link.m_height);
+
 	return true;
 }
 
@@ -289,6 +306,14 @@ bool RcuHelper::SetDrillSitePt(const AcDbObjectId& drill_site, const AcGePoint3d
 
 bool RcuHelper::CreateRockGate(const AcGePoint3d& pt, RockGateLink& rg_link, CoalSurfaceLink& cs_link)
 {
+	//计算煤层参数
+	if(!RcuHelper::CaculCoalSurfParam(rg_link, cs_link)) return false;
+
+	AcGePoint3d origin, cnt;
+	if(!ArxUtilHelper::StringToPoint3d(rg_link.m_pt, origin)) return false;
+	if(!ArxUtilHelper::StringToPoint3d(cs_link.m_pt, cnt)) return false;
+
+	//文档锁切换
 	DocumentLockSwitch lock_switch;
 
 	//新建石门并设置插入点坐标
@@ -296,7 +321,7 @@ bool RcuHelper::CreateRockGate(const AcGePoint3d& pt, RockGateLink& rg_link, Coa
 	pRG->setInsertPt(pt);
 
 	CoalSurface* pCS = new CoalSurface();
-	pCS->setInsertPt(AcGePoint3d(pt.x, pt.y+500, pt.z));
+	pCS->setInsertPt(pt + (cnt - origin));
 
 	//添加石门到cad图形数据库
 	if(!ArxUtilHelper::PostToModelSpace(pRG))
@@ -305,10 +330,6 @@ bool RcuHelper::CreateRockGate(const AcGePoint3d& pt, RockGateLink& rg_link, Coa
 		return  false;
 	}
 	
-	//计算煤层参数
-	RcuHelper::CaculCoalSurfParam(rg_link,cs_link);
-	//acutPrintf(_T("\n计算之后->宽度:%.4lf\t高度:%.4lf\n"),cs_link.m_width,cs_link.m_height);
-
 	//煤层关联到石门
 	pCS->setRelatedGE(pRG->objectId());
 	//添加煤层到cad图形数据库

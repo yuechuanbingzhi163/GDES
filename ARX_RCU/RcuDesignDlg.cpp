@@ -214,12 +214,11 @@ void RcuDesignDlg::DoDataExchange(CDataExchange* pDX)
 	DockBarChildDlg::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST1, m_list);
 	DDX_Control(pDX, IDC_LIST3, m_list2);
-	DDX_Control(pDX, IDC_BUTTON1, m_updBtn);
 }
 
 BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
-	ON_BN_CLICKED(IDC_BUTTON1, &RcuDesignDlg::OnBnClickedUpdate)
 	ON_BN_CLICKED(IDC_BUTTON4, &RcuDesignDlg::OnBnClickedExport)
+
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST1, &RcuDesignDlg::OnLvnItemchangedList1)
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST1, &RcuDesignDlg::OnNMDblclkList1)
 	ON_NOTIFY(NM_RCLICK, IDC_LIST1, &RcuDesignDlg::OnNMRclickList1)
@@ -227,6 +226,8 @@ BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
 	ON_COMMAND(ID_RCU_LIST_MODIFY, &RcuDesignDlg::OnModifyRockGateCommand)
 	ON_COMMAND(ID_RCU_LIST_DELETE, &RcuDesignDlg::OnDeleteRockGateCommand)
 	ON_COMMAND(ID_RCU_LIST_ADD, &RcuDesignDlg::OnAddRockGateCommand)
+	ON_COMMAND(ID_RCU_LIST_UPDATE, &RcuDesignDlg::OnUpdateRockGateListCommand)
+
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST3, &RcuDesignDlg::OnNMDblclkList2)
 	ON_NOTIFY(NM_RCLICK, IDC_LIST3, &RcuDesignDlg::OnNMRclickList2)
 	ON_COMMAND(IDR_DRILL_SITE_ADD, &RcuDesignDlg::OnAddDrillSiteCommand)
@@ -244,13 +245,6 @@ END_MESSAGE_MAP()
 BOOL RcuDesignDlg::OnInitDialog()
 {
 	DockBarChildDlg::OnInitDialog();
-
-	m_updBtn.SubclassDlgItem(IDC_BUTTON1,this); 
-	m_updBtn.SetIcon(IDI_UPDATE_ICON_16); 
-	m_updBtn.SetFlat(TRUE);
-	//m_updBtn.DrawBorder(FALSE);
-	m_updBtn.SetAlign(CButtonST::ST_ALIGN_VERT); 
-	//m_updBtn.DrawFlatFocus(TRUE);
 
 	m_list.SetExtendedStyle( m_list.GetExtendedStyle() | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES );
 	AcStringArray rock_fields;
@@ -483,6 +477,12 @@ void RcuDesignDlg::OnHilightRockGateCommand()
 	}
 }
 
+void RcuDesignDlg::OnUpdateRockGateListCommand()
+{
+	//更新界面
+	updateUI();
+}
+
 void RcuDesignDlg::OnNMDblclkList2(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	//第几行
@@ -642,12 +642,6 @@ void RcuDesignDlg::OnHilightDrillSiteCommand()
 		//cad窗口获取焦点
 		acedGetAcadFrame()->SetFocus();
 	}
-}
-
-void RcuDesignDlg::OnBnClickedUpdate()
-{
-	//更新界面
-	updateUI();
 }
 
 void RcuDesignDlg::OnBnClickedExport()

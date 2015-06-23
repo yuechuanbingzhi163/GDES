@@ -7,10 +7,10 @@ RcuEditDrillSiteDlg::RcuEditDrillSiteDlg(CWnd* pParent /*=NULL*/)
 	: RcuAcUiBaseDlg(RcuEditDrillSiteDlg::IDD, pParent)
 	, m_name(_T(""))
 	, m_leftOrRight(0)
-	, m_width(0)
-	, m_height(0)
-	, m_dist(0)
-	, m_index(0)
+	, m_width(1)
+	, m_height(1)
+	, m_dist(10)
+	, m_index(1)
 {
 
 }

@@ -434,10 +434,6 @@
 				Name="ui"
 				>
 				<File
-					RelativePath=".\BtnST.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\DockBarChildDlg.cpp"
 					>
 				</File>
@@ -492,6 +488,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Rcu2.h"
+				>
+			</File>
+			<File
 				RelativePath=".\RcuDataLink.h"
 				>
 			</File>
@@ -518,10 +518,6 @@
 			<Filter
 				Name="ui"
 				>
-				<File
-					RelativePath=".\BtnST.h"
-					>
-				</File>
 				<File
 					RelativePath=".\DockBarChildDlg.h"
 					>
@@ -586,10 +582,6 @@
 			Filter="reg;rgs;mak;clw;vsdir;vsz;css;inf;vcproj;csproj"
 			>
 		</Filter>
-		<File
-			RelativePath=".\update.png"
-			>
-		</File>
 	</Files>
 	<Globals>
 		<Global

@@ -38,7 +38,6 @@
 #define IDC_EDIT16                      117
 #define IDI_UPDATE_ICON_24              117
 #define IDC_EDIT17                      118
-#define IDI_ICON2                       118
 #define IDI_UPDATE_ICON_16              118
 #define IDC_EDIT18                      119
 #define ID_RCU_LIST_DELETE              32773
@@ -51,13 +50,16 @@
 #define IDR_DRILL_SITE_HILIGHT          32785
 #define ID_32786                        32786
 #define IDR_DRILL_SITE_LOCATE           32787
+#define ID_32788                        32788
+#define ID_UPDATE_ROCK_GATE_LIST        32789
+#define ID_RCU_LIST_UPDATE              32790
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        119
-#define _APS_NEXT_COMMAND_VALUE         32788
+#define _APS_NEXT_COMMAND_VALUE         32791
 #define _APS_NEXT_CONTROL_VALUE         115
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
