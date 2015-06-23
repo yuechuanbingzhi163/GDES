@@ -17,8 +17,6 @@
 #define IDR_DRILL_SITE_MENU             106
 #define IDR_DRILL_SITE_ADD              106
 #define IDC_EDIT7                       108
-#define IDC_BUTTON3                     108
-#define IDI_ICON1                       108
 #define IDI_GAS_ICON                    108
 #define IDD_RCU_DRILL_NEW_DIALOG1       108
 #define IDD_RCU_DRILL_EDIT_DIALOG       108
@@ -32,13 +30,10 @@
 #define IDC_EDIT12                      113
 #define IDC_LOCA_COMBO                  113
 #define IDC_EDIT13                      114
-#define IDC_BUTTON1                     114
 #define IDC_EDIT14                      115
 #define IDC_EDIT15                      116
 #define IDC_EDIT16                      117
-#define IDI_UPDATE_ICON_24              117
 #define IDC_EDIT17                      118
-#define IDI_UPDATE_ICON_16              118
 #define IDC_EDIT18                      119
 #define ID_RCU_LIST_DELETE              32773
 #define ID_RCU_LIST_LOCATE              32774
@@ -48,9 +43,7 @@
 #define ID_RCU_LIST_MODIFY              32781
 #define ID_RCU_LIST_ADD                 32783
 #define IDR_DRILL_SITE_HILIGHT          32785
-#define ID_32786                        32786
 #define IDR_DRILL_SITE_LOCATE           32787
-#define ID_32788                        32788
 #define ID_UPDATE_ROCK_GATE_LIST        32789
 #define ID_RCU_LIST_UPDATE              32790
 

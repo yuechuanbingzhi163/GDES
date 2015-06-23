@@ -235,8 +235,6 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_GAS_ICON            ICON                    "icon.ico"
-IDI_UPDATE_ICON_24      ICON                    "update-24.ico"
-IDI_UPDATE_ICON_16      ICON                    "update-16.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
