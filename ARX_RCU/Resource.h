@@ -32,10 +32,14 @@
 #define IDC_EDIT12                      113
 #define IDC_LOCA_COMBO                  113
 #define IDC_EDIT13                      114
+#define IDC_BUTTON1                     114
 #define IDC_EDIT14                      115
 #define IDC_EDIT15                      116
 #define IDC_EDIT16                      117
+#define IDI_UPDATE_ICON_24              117
 #define IDC_EDIT17                      118
+#define IDI_ICON2                       118
+#define IDI_UPDATE_ICON_16              118
 #define IDC_EDIT18                      119
 #define ID_RCU_LIST_DELETE              32773
 #define ID_RCU_LIST_LOCATE              32774
@@ -52,9 +56,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        109
+#define _APS_NEXT_RESOURCE_VALUE        119
 #define _APS_NEXT_COMMAND_VALUE         32788
-#define _APS_NEXT_CONTROL_VALUE         114
+#define _APS_NEXT_CONTROL_VALUE         115
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif

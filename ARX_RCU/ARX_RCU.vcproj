@@ -434,6 +434,10 @@
 				Name="ui"
 				>
 				<File
+					RelativePath=".\BtnST.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\DockBarChildDlg.cpp"
 					>
 				</File>
@@ -515,6 +519,10 @@
 				Name="ui"
 				>
 				<File
+					RelativePath=".\BtnST.h"
+					>
+				</File>
+				<File
 					RelativePath=".\DockBarChildDlg.h"
 					>
 				</File>
@@ -564,12 +572,24 @@
 				RelativePath=".\icon.ico"
 				>
 			</File>
+			<File
+				RelativePath=".\update-16.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\update-24.ico"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Miscellaneous Files"
 			Filter="reg;rgs;mak;clw;vsdir;vsz;css;inf;vcproj;csproj"
 			>
 		</Filter>
+		<File
+			RelativePath=".\update.png"
+			>
+		</File>
 	</Files>
 	<Globals>
 		<Global

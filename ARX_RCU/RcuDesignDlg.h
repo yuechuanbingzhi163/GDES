@@ -1,6 +1,11 @@
 #pragma once
 
 #include "DockBarChildDlg.h"
+#include "BtnST.h"
+/**
+	CButtonST使用简介
+	http://www.cnblogs.com/lidabo/archive/2012/12/17/2821122.html
+*/
 
 //石门揭煤设计主对话框
 class RcuDesignDlg : public DockBarChildDlg
@@ -23,7 +28,10 @@ public:
 	CListCtrl m_list;
 	//钻场列表
 	CListCtrl m_list2;
+	CButtonST m_updBtn;
 
+	//刷新按钮单击消息
+	afx_msg void OnBnClickedUpdate();
 	//导出按钮单击消息
 	afx_msg void OnBnClickedExport();
 	//石门列表行切换时触发的消息
@@ -49,15 +57,17 @@ public:
 	afx_msg void OnModifyDrillSiteCommand();
 	afx_msg void OnHilightDrillSiteCommand();
 
-	//响应MyMsg.h中自定义的消息
-	afx_msg LRESULT OnCustomAddGE(WPARAM wParam, LPARAM lParam);
-	afx_msg LRESULT OnCustomDelGE(WPARAM wParam, LPARAM lParam);
-	afx_msg LRESULT OnCustomChangeGE(WPARAM wParam, LPARAM lParam);
+	//响应MyMsg.h中自定义消息
+	afx_msg LRESULT OnRcuAddMessage(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnRcuDelMessage(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnRcuModifyMessage(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnRcuUpdateMessage(WPARAM wParam, LPARAM lParam);
 
 	//对话框虚函数重载
 	virtual BOOL OnInitDialog();
 	virtual void OnClosing();
 
+	//下面的这些函数仅提供给自定义消息映射函数使用
 private:
 	//根据用户指定的操作更新石门列表
 	void updateRockGateListCtrl(unsigned int op, const AcDbObjectId& rock_gate);
@@ -77,4 +87,7 @@ private:
 	void delDrillSite(int row2);
 	//修改钻场
 	void modifyDrillSite(int row2);
+
+	//更新对话框
+	void updateUI();
 };

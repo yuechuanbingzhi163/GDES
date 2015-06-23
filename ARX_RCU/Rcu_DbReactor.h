@@ -14,9 +14,8 @@ public:
 	virtual AcDbDatabase *Subject () const ;
 	virtual bool IsAttached () const ;
 
-	virtual void objectUnAppended(const AcDbDatabase* dwg, const AcDbObject* dbObj);
-	virtual void objectReAppended(const AcDbDatabase* dwg, const AcDbObject* dbObj);
-
+	//virtual void objectUnAppended(const AcDbDatabase* dwg, const AcDbObject* dbObj);
+	//virtual void objectReAppended(const AcDbDatabase* dwg, const AcDbObject* dbObj);
 	virtual void objectAppended(const AcDbDatabase* dwg, const AcDbObject* dbObj);
 	virtual void objectModified(const AcDbDatabase* dwg, const AcDbObject* dbObj);
 	virtual void objectErased(const AcDbDatabase * dwg, const AcDbObject * dbObj, Adesk::Boolean pErased);
