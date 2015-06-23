@@ -7,9 +7,9 @@ RcuEditDrillSiteDlg::RcuEditDrillSiteDlg(CWnd* pParent /*=NULL*/)
 	: RcuAcUiBaseDlg(RcuEditDrillSiteDlg::IDD, pParent)
 	, m_name(_T(""))
 	, m_leftOrRight(0)
-	, m_width(1)
-	, m_height(1)
-	, m_dist(10)
+	, m_width(4)
+	, m_height(4)
+	, m_dist(50)
 	, m_index(1)
 {
 
@@ -39,8 +39,8 @@ BOOL RcuEditDrillSiteDlg::OnInitDialog()
 {
 	RcuAcUiBaseDlg::OnInitDialog();
 
-	m_locaCombBox.AddString(_T("×ó°ï×ê³¡"));
-	m_locaCombBox.AddString(_T("ÓÒ°ï×ê³¡"));
+	m_locaCombBox.AddString(_T("×ó°ï"));
+	m_locaCombBox.AddString(_T("ÓÒ°ï"));
 
 	SetToolTip(IDC_DRILL_WIDTH_EDIT,_T("µ¥Î»:m"));
 	SetToolTip(IDC_DRILL_HEIGHT_EDIT,_T("µ¥Î»:m"));

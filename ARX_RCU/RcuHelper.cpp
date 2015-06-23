@@ -253,20 +253,20 @@ bool RcuHelper::GetRockGateInsertPt( const AcDbObjectId& rock_gate, AcGePoint3d&
 	return true;
 }
 
-bool RcuHelper::CaculDrillSitePt(const DrillSiteLink& ds_link,const RockGateLink& rg_link, const AcGePoint3d& rgInsertPt, AcGePoint3d& insertPt, AcGePoint3d& linkPt)
+bool RcuHelper::CaculDrillSitePt(const DrillSiteLink& ds_link, const RockGateLink& rg_link, const AcGePoint3d& rgInsertPt, AcGePoint3d& insertPt, AcGePoint3d& linkPt)
 {
 	//左帮
 	if(0 == ds_link.m_leftOrRight)
 	{
 		insertPt.x = rgInsertPt.x - rg_link.m_width / 2;
-		linkPt.x = rgInsertPt.x - rg_link.m_width / 2 - 2 * ds_link.m_dist;
+		linkPt.x = rgInsertPt.x - rg_link.m_width / 2 - 10;
 	}
 
 	//右帮
 	else if(1 == ds_link.m_leftOrRight)
 	{
 		insertPt.x = rgInsertPt.x + rg_link.m_width / 2;
-		linkPt.x = rgInsertPt.x + rg_link.m_width / 2 + 2 * ds_link.m_dist;
+		linkPt.x = rgInsertPt.x + rg_link.m_width / 2 + 10;
 	}
 
 	else return false;
@@ -275,6 +275,7 @@ bool RcuHelper::CaculDrillSitePt(const DrillSiteLink& ds_link,const RockGateLink
 	insertPt.z = rgInsertPt.z;
 	linkPt.y = rgInsertPt.y - ds_link.m_dist;
 	linkPt.z = rgInsertPt.z;
+
 	return true;
 }
 
@@ -360,9 +361,9 @@ bool RcuHelper::CreateDrillSite(const AcDbObjectId& rock_gate, DrillSiteLink& ds
 	}
 
 	//计算钻场插入坐标和连接坐标
-	AcGePoint3d insertPt,linkPt,rgInsertPt;
-	RcuHelper::GetRockGateInsertPt(rock_gate,rgInsertPt);
-	if(!RcuHelper::CaculDrillSitePt(ds_link,rg_link,rgInsertPt,insertPt,linkPt)) 
+	AcGePoint3d insertPt, linkPt, rgInsertPt;
+	RcuHelper::GetRockGateInsertPt(rock_gate, rgInsertPt);
+	if(!RcuHelper::CaculDrillSitePt(ds_link, rg_link, rgInsertPt, insertPt, linkPt)) 
 	{
 		AfxMessageBox(_T("钻场位置数据错误!"));
 		return false;
