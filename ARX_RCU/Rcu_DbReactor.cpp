@@ -61,38 +61,50 @@ bool Rcu_DbReactor::IsAttached () const
 void Rcu_DbReactor::objectAppended(const AcDbDatabase* dwg, const AcDbObject* dbObj)
 {
 	//AcDbDatabaseReactor::objectAppended(dwg, dbObj);
-	//updateRcuDesignDlg(dwg, dbObj);
+	if(dbObj->isKindOf(RockGate::desc()) || dbObj->isKindOf(RcuGE::desc()))
+	{
+		ArxMsg msgParam = { dbObj->isA()->name(), dbObj->objectId() };
+		UIHelper::SendMessage(WM_ADD_GE, msgParam);
+	}
 }
 
 void Rcu_DbReactor::objectUnAppended(const AcDbDatabase* dwg, const AcDbObject* dbObj)
 {
 	//AcDbDatabaseReactor::objectAppended(dwg, dbObj);
-	updateRcuDesignDlg(dwg, dbObj);
+	if(dbObj->isKindOf(RockGate::desc()) || dbObj->isKindOf(RcuGE::desc()))
+	{
+		ArxMsg msgParam = { dbObj->isA()->name(), dbObj->objectId() };
+		UIHelper::SendMessage(WM_DEL_GE, msgParam);
+	}
 }
 
 void Rcu_DbReactor::objectReAppended(const AcDbDatabase* dwg, const AcDbObject* dbObj)
 {
 	//AcDbDatabaseReactor::objectAppended(dwg, dbObj);
-	updateRcuDesignDlg(dwg, dbObj);
+	if(dbObj->isKindOf(RockGate::desc()) || dbObj->isKindOf(RcuGE::desc()))
+	{
+		ArxMsg msgParam = { dbObj->isA()->name(), dbObj->objectId() };
+		UIHelper::SendMessage(WM_ADD_GE, msgParam);
+	}
 }
 
 // 在objectModified中无法启动事务
 void Rcu_DbReactor::objectModified( const AcDbDatabase* dwg, const AcDbObject* dbObj )
 {
     //AcDbDatabaseReactor::objectModified ( dwg, dbObj );
-	updateRcuDesignDlg(dwg, dbObj);
+	if(dbObj->isKindOf(RockGate::desc()) || dbObj->isKindOf(RcuGE::desc()))
+	{
+		ArxMsg msgParam = { dbObj->isA()->name(), dbObj->objectId() };
+		UIHelper::SendMessage(WM_CHANGE_GE, msgParam);
+	}
 }
 
 void Rcu_DbReactor::objectErased( const AcDbDatabase* dwg, const AcDbObject* dbObj, Adesk::Boolean pErased )
 {
 	//AcDbDatabaseReactor::objectErased ( dwg, dbObj, pErased );
-	updateRcuDesignDlg(dwg, dbObj);
-}
-
-void Rcu_DbReactor::updateRcuDesignDlg(const AcDbDatabase* dwg, const AcDbObject* dbObj)
-{
 	if(dbObj->isKindOf(RockGate::desc()) || dbObj->isKindOf(RcuGE::desc()))
 	{
-		UIHelper::ForceUpdateDockBar();
+		ArxMsg msgParam = { dbObj->isA()->name(), dbObj->objectId() };
+		UIHelper::SendMessage(WM_DEL_GE, msgParam);
 	}
 }

@@ -6,7 +6,6 @@
 IMPLEMENT_DYNAMIC ( RcuDesiginDockBarDlg, CAcUiDockControlBar )
 
 BEGIN_MESSAGE_MAP( RcuDesiginDockBarDlg, CAcUiDockControlBar )
-	ON_WM_PAINT()
     ON_WM_CREATE()
     ON_WM_SYSCOMMAND()
     ON_WM_SIZE()
@@ -131,26 +130,4 @@ bool RcuDesiginDockBarDlg::OnClosing()
     mChildDlg.OnClosing();
 
     return ret;
-}
-
-//该标志用于控制OnPaint()函数只被调用一次
-static bool Global_GotoPaintFlag = false;
-
-void RcuDesiginDockBarDlg::ForceUpdate()
-{
-	this->SetFocus();
-	//触发WM_PAINT消息(映射到OnPaint()函数)
-	this->Invalidate();
-	Global_GotoPaintFlag = false;
-}
-
-void RcuDesiginDockBarDlg::OnPaint()
-{
-	if(!Global_GotoPaintFlag)
-	{
-		//更新界面
-		mChildDlg.update();
-		Global_GotoPaintFlag = true;
-	}
-	CAcUiDockControlBar::OnPaint();
 }

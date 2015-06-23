@@ -45,13 +45,15 @@
 #define ID_RCU_LIST_MODIFY              32781
 #define ID_RCU_LIST_ADD                 32783
 #define IDR_DRILL_SITE_HILIGHT          32785
+#define ID_32786                        32786
+#define IDR_DRILL_SITE_LOCATE           32787
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        109
-#define _APS_NEXT_COMMAND_VALUE         32786
+#define _APS_NEXT_COMMAND_VALUE         32788
 #define _APS_NEXT_CONTROL_VALUE         114
 #define _APS_NEXT_SYMED_VALUE           102
 #endif

@@ -49,13 +49,32 @@ public:
 	afx_msg void OnModifyDrillSiteCommand();
 	afx_msg void OnHilightDrillSiteCommand();
 
+	//响应MyMsg.h中自定义的消息
+	afx_msg LRESULT OnCustomAddGE(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnCustomDelGE(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnCustomChangeGE(WPARAM wParam, LPARAM lParam);
+
 	//对话框虚函数重载
 	virtual BOOL OnInitDialog();
 	virtual void OnClosing();
-	//刷新界面
-	virtual void update();
 
 private:
-	//更新石门列表
-	void updateRockGateListCtrl();
+	//根据用户指定的操作更新石门列表
+	void updateRockGateListCtrl(unsigned int op, const AcDbObjectId& rock_gate);
+	//根据用户指定的操作更新钻场列表
+	void updateDrillSiteListCtrl(unsigned int op, const AcDbObjectId& drill_site);
+	
+	//增加石门
+	void addRockGate(const AcDbObjectId& rock_gate);
+	//删除石门
+	void delRockGate(int row1);
+	//修改石门
+	void modifyRockGate(int row1);
+
+	//增加钻场
+	void addDrillSite(const AcDbObjectId& drill_site);
+	//删除钻场
+	void delDrillSite(int row2);
+	//修改钻场
+	void modifyDrillSite(int row2);
 };

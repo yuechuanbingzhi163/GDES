@@ -25,8 +25,6 @@ class RcuDesiginDockBarDlg : public CAcUiDockControlBar {
 public:
 	//----- Child dialog which will use the resource id supplied
 	RcuDesignDlg mChildDlg;
-	//强制刷新界面
-	void ForceUpdate();
 
 public:
 	RcuDesiginDockBarDlg ();

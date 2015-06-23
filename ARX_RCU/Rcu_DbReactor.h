@@ -20,8 +20,4 @@ public:
 	virtual void objectAppended(const AcDbDatabase* dwg, const AcDbObject* dbObj);
 	virtual void objectModified(const AcDbDatabase* dwg, const AcDbObject* dbObj);
 	virtual void objectErased(const AcDbDatabase * dwg, const AcDbObject * dbObj, Adesk::Boolean pErased);
-
-private:
-	//刷新石门设计模态对话框
-	void updateRcuDesignDlg(const AcDbDatabase* dwg, const AcDbObject* dbObj);
 } ;

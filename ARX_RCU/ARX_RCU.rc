@@ -209,7 +209,7 @@ BEGIN
         MENUITEM "新增石门",                        ID_RCU_LIST_ADD
         MENUITEM "删除石门",                        ID_RCU_LIST_DELETE
         MENUITEM "设计石门",                        ID_RCU_LIST_MODIFY
-        MENUITEM "高亮图形",                        ID_RCU_LIST_HILIGHT
+        MENUITEM "高亮石门",                        ID_RCU_LIST_HILIGHT
     END
 END
 
@@ -220,7 +220,7 @@ BEGIN
         MENUITEM "增加钻场",                        IDR_DRILL_SITE_ADD
         MENUITEM "删除钻场",                        IDR_DRILL_SITE_DELETE
         MENUITEM "设计钻场",                        IDR_DRILL_SITE_MODIFY
-        MENUITEM "高亮图形",                        IDR_DRILL_SITE_HILIGHT
+        MENUITEM "高亮钻场",                        IDR_DRILL_SITE_HILIGHT
     END
 END
 

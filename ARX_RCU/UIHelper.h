@@ -1,5 +1,7 @@
 #pragma once
 
+#include "MyMsg.h"
+
 class UIHelper
 {
 public:
@@ -7,7 +9,6 @@ public:
 	static void ShowRcuDesignDockBar();
 	//销毁石门设计对话框
 	static void DestroyRcuDesignDockBar();
-	//刷新石门设计对话框
-	//用于反应器强制刷新停靠对话框
-	static void ForceUpdateDockBar();
+	//向石门设计对话框发送消息
+	static void SendMessage(unsigned int msgCode, ArxMsg& msgParam);
 };

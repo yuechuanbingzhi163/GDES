@@ -12,8 +12,6 @@ class DockBarChildDlg : public CAcUiDialog
 
 public:
 	virtual ~DockBarChildDlg();
-	//Ë¢ÐÂ½çÃæ
-	virtual void update() {}
 
 protected:
 	DECLARE_MESSAGE_MAP()

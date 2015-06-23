@@ -476,6 +476,14 @@
 			Filter="h;hh;hxx"
 			>
 			<File
+				RelativePath=".\ListCtrlHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MyMsg.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Rcu.h"
 				>
 			</File>
@@ -508,10 +516,6 @@
 				>
 				<File
 					RelativePath=".\DockBarChildDlg.h"
-					>
-				</File>
-				<File
-					RelativePath=".\ListCtrlHelper.h"
 					>
 				</File>
 				<File
