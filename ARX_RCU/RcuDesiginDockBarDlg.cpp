@@ -94,7 +94,7 @@ void RcuDesiginDockBarDlg::SizeChanged ( CRect* lpRect, BOOL bFloating, int flag
         //----- Always point to our resource to be safe
         CAcModuleResourceOverride resourceOverride ;
         //----- Then update its window size relatively
-        mChildDlg.SetWindowPos ( this, lpRect->left , lpRect->top , lpRect->Width (), lpRect->Height (), SWP_NOZORDER ) ;
+        mChildDlg.SetWindowPos ( this, lpRect->left , lpRect->top , lpRect->Width (), lpRect->Height (), SWP_NOZORDER );
     }
 }
 

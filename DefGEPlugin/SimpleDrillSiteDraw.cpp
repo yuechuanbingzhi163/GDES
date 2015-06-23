@@ -108,6 +108,7 @@ Acad::ErrorStatus SimpleDrillSiteDraw::subMoveGripPointsAt ( const AcDbIntArray&
         if ( idx == 0 )
         {
             m_insertPt += offset;
+			m_linkPt += offset;
         }
 
         if ( idx == 1 )

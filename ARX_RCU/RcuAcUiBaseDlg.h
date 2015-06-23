@@ -23,21 +23,3 @@ protected:
 	HICON m_hIcon;
 	CToolTipCtrl m_tt;
 };
-
-class ShowOrHideWindow
-{
-public:
-	//构造函数隐藏
-	ShowOrHideWindow(RcuAcUiBaseDlg* _dlg) : dlg(_dlg)
-	{
-		dlg->ShowWindow(SW_HIDE);
-		////当隐藏之后整个CAD窗口失去焦点
-		//dlg->SetFocus();
-	}
-	//析构函数显示
-	~ShowOrHideWindow()
-	{
-		dlg->ShowWindow(SW_SHOW);
-	}
-	RcuAcUiBaseDlg* dlg;
-};

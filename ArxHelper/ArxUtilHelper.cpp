@@ -95,11 +95,11 @@ void ArxUtilHelper::GetPickSetEntity( AcDbObjectIdArray& objIds )
     acedSSFree( ss );
 }
 
-void ArxUtilHelper::Pause()
+void ArxUtilHelper::Pause(const CString& msg)
 {
     // 中断
     ACHAR tt[100];
-    acedGetString( 0, _T( "\n请按回车或空格键结束..." ), tt );
+    acedGetString( 0, msg, tt );
 }
 
 bool ArxUtilHelper::IsEqualType( const CString& type, const AcDbObjectId& objId, bool isDerivedFromParent/*=true*/ )

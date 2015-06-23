@@ -1,6 +1,5 @@
 #pragma once
 
-#include "RcuAcUiBaseDlg.h"
 #include "DockBarChildDlg.h"
 
 //石门揭煤设计主对话框
@@ -20,24 +19,62 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+	//石门列表
 	CListCtrl m_list;
+	//钻场列表
+	CListCtrl m_list2;
 
-	//输出按钮消息
+	//导出按钮单击消息
 	afx_msg void OnBnClickedExport();
-	//listctrl双击消息
+	//石门列表行切换时触发的消息
+	afx_msg void OnLvnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult);
+	//石门列表双击消息
 	afx_msg void OnNMDblclkList1(NMHDR *pNMHDR, LRESULT *pResult);
-	//listctrl右键消息(可以弹出菜单，但无法响应菜单消息)
-	//因为cad的主窗口总是试图抢夺非模态对话框的焦点(WM_ACAD_KEEPFOCUS)
-	//在消息映射暂时屏蔽右键消息
+	//石门列表右键消息
 	afx_msg void OnNMRclickList1(NMHDR *pNMHDR, LRESULT *pResult);
+	//钻场列表双击消息
+	afx_msg void OnNMDblclkList2(NMHDR *pNMHDR, LRESULT *pResult);
+	//钻场列表右键消息
+	afx_msg void OnNMRclickList2(NMHDR *pNMHDR, LRESULT *pResult);
 
-	//菜单项消息响应
-	afx_msg void OnHilightCommand();
-	afx_msg void OnModifyCommand();
-	afx_msg void OnDeleteCommand();
-	afx_msg void OnAddCommand();
+	//石门列表右键菜单项消息响应
+	afx_msg void OnHilightRockGateCommand();
+	afx_msg void OnModifyRockGateCommand();
+	afx_msg void OnDeleteRockGateCommand();
+	afx_msg void OnAddRockGateCommand();
 
-	//虚函数重载
+	//钻场列表右键菜单项消息响应
+	afx_msg void OnAddDrillSiteCommand();
+	afx_msg void OnDeleteDrillSiteCommand();
+	afx_msg void OnModifyDrillSiteCommand();
+	afx_msg void OnHilightDrillSiteCommand();
+
+	//响应MyMsg.h中自定义的消息
+	afx_msg LRESULT OnCustomAddGE(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnCustomDelGE(WPARAM wParam, LPARAM lParam);
+	afx_msg LRESULT OnCustomChangeGE(WPARAM wParam, LPARAM lParam);
+
+	//对话框虚函数重载
 	virtual BOOL OnInitDialog();
 	virtual void OnClosing();
+
+private:
+	//根据用户指定的操作更新石门列表
+	void updateRockGateListCtrl(unsigned int op, const AcDbObjectId& rock_gate);
+	//根据用户指定的操作更新钻场列表
+	void updateDrillSiteListCtrl(unsigned int op, const AcDbObjectId& drill_site);
+	
+	//增加石门
+	void addRockGate(const AcDbObjectId& rock_gate);
+	//删除石门
+	void delRockGate(int row1);
+	//修改石门
+	void modifyRockGate(int row1);
+
+	//增加钻场
+	void addDrillSite(const AcDbObjectId& drill_site);
+	//删除钻场
+	void delDrillSite(int row2);
+	//修改钻场
+	void modifyDrillSite(int row2);
 };

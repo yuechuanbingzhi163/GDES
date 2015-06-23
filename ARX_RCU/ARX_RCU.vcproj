@@ -383,6 +383,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\ListCtrlHelper.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RcuHelper.cpp"
 				>
 			</File>
@@ -438,10 +442,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\RcuAddDrillDlg.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\RcuDesiginDockBarDlg.cpp"
 					>
 				</File>
@@ -450,15 +450,23 @@
 					>
 				</File>
 				<File
-					RelativePath=".\RcuEditDlg.cpp"
+					RelativePath=".\RcuEditDrillSiteDlg.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\RcuEditDrillDlg.cpp"
+					RelativePath=".\RcuEditRockGateDlg.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="reactor"
+				>
+				<File
+					RelativePath=".\Rcu_DbReactor.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\RcuNewDlg.cpp"
+					RelativePath=".\ReactorHelper.cpp"
 					>
 				</File>
 			</Filter>
@@ -467,6 +475,14 @@
 			Name="Include Files"
 			Filter="h;hh;hxx"
 			>
+			<File
+				RelativePath=".\ListCtrlHelper.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MyMsg.h"
+				>
+			</File>
 			<File
 				RelativePath=".\Rcu.h"
 				>
@@ -488,6 +504,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SwitchHelper.h"
+				>
+			</File>
+			<File
 				RelativePath=".\UIHelper.h"
 				>
 			</File>
@@ -503,10 +523,6 @@
 					>
 				</File>
 				<File
-					RelativePath=".\RcuAddDrillDlg.h"
-					>
-				</File>
-				<File
 					RelativePath=".\RcuDesiginDockBarDlg.h"
 					>
 				</File>
@@ -515,15 +531,23 @@
 					>
 				</File>
 				<File
-					RelativePath=".\RcuEditDlg.h"
+					RelativePath=".\RcuEditDrillSiteDlg.h"
 					>
 				</File>
 				<File
-					RelativePath=".\RcuEditDrillDlg.h"
+					RelativePath=".\RcuEditRockGateDlg.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="reactor"
+				>
+				<File
+					RelativePath=".\Rcu_DbReactor.h"
 					>
 				</File>
 				<File
-					RelativePath=".\RcuNewDlg.h"
+					RelativePath=".\ReactorHelper.h"
 					>
 				</File>
 			</Filter>

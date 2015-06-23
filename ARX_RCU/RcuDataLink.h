@@ -77,7 +77,7 @@ public:
 	double m_width;
 	double m_height;
 	int m_start;
-	// 坐标是用字符串表示的,xyz之间通过逗号分隔
+	//坐标是用字符串表示的,xyz之间通过逗号分隔
 	//可通过ArxUtilHelper::StringToPoint3d静态方法进行转换
 	CString m_pt;
 };
@@ -96,7 +96,7 @@ protected:
 public:
 	int m_num;
 	double m_radius;
-	// 坐标是用字符串表示的,xyz之间通过逗号分隔
+	//坐标是用字符串表示的,xyz之间通过逗号分隔
 	//可通过ArxUtilHelper::StringToPoint3d静态方法进行转换
 	CString m_pt;
 };

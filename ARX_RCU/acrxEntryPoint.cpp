@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "resource.h"
-//#include "ReactorHelper.h"
+#include "ReactorHelper.h"
 #include "UIHelper.h"
 
 #ifndef ARX_RCU_SERVICE_NAME
@@ -18,8 +18,10 @@ public:
 
 		AcRx::AppRetCode retCode =AcRxArxApp::On_kInitAppMsg (pkt) ;
 
+		//注册服务
 		acrxRegisterService( ARX_RCU_SERVICE_NAME );
-		//ReactorHelper::CreateDocumentReactorMap();
+		//创建反应器
+		ReactorHelper::CreateDocumentReactorMap();
 		acutPrintf( _T( "\nARX_RCU::On_kLoadAppMsg\n" ) );
 
 		return (retCode) ;
@@ -29,11 +31,13 @@ public:
 
 		AcRx::AppRetCode retCode =AcRxArxApp::On_kUnloadAppMsg (pkt) ;
 
-		//ReactorHelper::RemoveDocumentReactorMap();
-		delete acrxServiceDictionary->remove( ARX_RCU_SERVICE_NAME );
-		acutPrintf( _T( "\nARX_RCU::On_kUnloadAppMsg\n" ) );
+		//销毁反应器
+		ReactorHelper::RemoveDocumentReactorMap();
 		//销毁停靠对话框
 		UIHelper::DestroyRcuDesignDockBar();
+		//卸载服务
+		delete acrxServiceDictionary->remove( ARX_RCU_SERVICE_NAME );
+		acutPrintf( _T( "\nARX_RCU::On_kUnloadAppMsg\n" ) );
 
 		return (retCode) ;
 	}
@@ -42,7 +46,8 @@ public:
 	{
 		AcRx::AppRetCode retCode = AcRxArxApp::On_kLoadDwgMsg ( pkt ) ;
 
-		//ReactorHelper::AddDocumentReactor( curDoc() );
+		//注册文档相关的反应器
+		ReactorHelper::AddDocumentReactor( curDoc() );
 		acutPrintf( _T( "\nARX_RCU::On_kLoadDwgMsg\n" ) );
 
 		return retCode;
@@ -52,7 +57,8 @@ public:
 	{
 		AcRx::AppRetCode retCode = AcRxArxApp::On_kUnloadDwgMsg ( pkt ) ;
 
-		//ReactorHelper::RemoveDocumentReactor( curDoc() );
+		//卸载文档反应器
+		ReactorHelper::RemoveDocumentReactor( curDoc() );
 		acutPrintf( _T( "\nARX_RCU::On_kUnloadDwgMsg\n" ) );
 
 		return retCode;

@@ -59,6 +59,9 @@ public:
 	// 缩放到图元实体
 	static void ZoomToEntity(const AcDbObjectId& objId);
 
+	//非模态对话框下缩放图元实体
+	static void ZoomToEntityForModeless(const AcDbObjectId& objId);
+
 	// 缩放多个图元的近似中心
 	static void ZoomToEntities(const AcDbObjectIdArray& objIds);
 

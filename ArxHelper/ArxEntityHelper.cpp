@@ -241,12 +241,18 @@ static bool IsValidExtent( const AcDbExtents& ext )
     return ( v.x >= 0 && v.y >= 0 && v.z >= 0 ); // x,y,z的差值必须>=0
 }
 
-//void ArxEntityHelper::ZoomToEntity(const AcDbObjectId& objId)
-//{
-//	ads_name en;
-//	if(Acad::eOk != acdbGetAdsName(en, objId)) return;
-//	acedCommand(RTSTR, _T("ZOOM"), RTSTR, _T("O"), RTENAME, en, RTSTR, _T(""), 0);
-//}
+void ArxEntityHelper::ZoomToEntityForModeless( const AcDbObjectId& objId )
+{
+	// 在非模态对话框下无法使用
+	//ads_name en;
+	//if(Acad::eOk != acdbGetAdsName(en, objId)) return;
+	//acedCommand(RTSTR, _T("ZOOM"), RTSTR, _T("O"), RTENAME, en, RTSTR, _T(""), 0);
+
+	// 临时使用sendStringToExecute解决缩放定位问题
+	CString cmd;
+	cmd.Format( _T( "ZOOM O \003" ) ); // 按空格结束选择对象，然后esc(防止多余的空格重复执行命令)
+	acDocManager->sendStringToExecute( curDoc(), cmd, true, false, false );
+}
 
 void ArxEntityHelper::ZoomToEntity( const AcDbObjectId& objId )
 {
