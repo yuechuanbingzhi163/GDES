@@ -95,9 +95,10 @@ FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,26,309,102
     CONTROL         "",IDC_LIST3,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,146,311,121
-    PUSHBUTTON      "输出",IDC_BUTTON4,256,7,62,19
-    LTEXT           "石门列表:",IDC_STATIC,6,14,36,8
+    PUSHBUTTON      "输出",IDC_BUTTON4,256,6,62,19
+    LTEXT           "石门列表:",IDC_STATIC,6,12,36,8
     LTEXT           "钻场列表:",IDC_STATIC,7,135,45,8
+    CONTROL         "",IDC_BUTTON1,"Button",BS_OWNERDRAW | WS_TABSTOP,45,8,16,16
 END
 
 IDD_RCU_EDIT_DLG DIALOGEX 0, 0, 322, 144
@@ -177,7 +178,7 @@ BEGIN
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 318
-        TOPMARGIN, 7
+        TOPMARGIN, 6
         BOTTOMMARGIN, 267
     END
 
@@ -233,6 +234,8 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_GAS_ICON            ICON                    "icon.ico"
+IDI_UPDATE_ICON_24      ICON                    "update-24.ico"
+IDI_UPDATE_ICON_16      ICON                    "update-16.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //

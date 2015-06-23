@@ -29,6 +29,7 @@ public:
 public:
 	RcuDesiginDockBarDlg ();
 	virtual ~RcuDesiginDockBarDlg ();
+	virtual bool OnClosing ();
 
 public:
 	virtual BOOL Create (CWnd *pParent, LPCTSTR lpszTitle) ;
@@ -37,8 +38,6 @@ public:
 	afx_msg int OnCreate (LPCREATESTRUCT lpCreateStruct) ;
 	afx_msg void OnSysCommand (UINT nID, LPARAM lParam) ;
 	afx_msg void OnSize (UINT nType, int cx, int cy) ;
-	afx_msg void OnPaint();
-	virtual bool OnClosing ();
-
+	
 	DECLARE_MESSAGE_MAP()
 } ;

@@ -110,8 +110,7 @@ bool RcuHelper::ReadRockGateData(const AcDbObjectId& rock_gate, RockGateLink& rg
 	if(rock_gate.isNull()) return false;
 
 	rg_link.setDataSource(rock_gate);
-	rg_link.updateData(false);
-	return true;
+	return rg_link.updateData(false);
 }
 
 bool RcuHelper::GetRockGateAndCoalSurfDatas(const AcDbObjectId& rock_gate, RockGateLink& rg_link, CoalSurfaceLink& cs_link)
@@ -141,8 +140,7 @@ bool RcuHelper::ReadCoalSurfaceData(const AcDbObjectId& coal_surf, CoalSurfaceLi
 	if(coal_surf.isNull()) return false;
 
 	cs_link.setDataSource(coal_surf);
-	cs_link.updateData(false);
-	return true;
+	return cs_link.updateData(false);
 }
 
 bool RcuHelper::ReadDrillSiteData(const AcDbObjectId& drill_site, DrillSiteLink& ds_link)
@@ -150,8 +148,7 @@ bool RcuHelper::ReadDrillSiteData(const AcDbObjectId& drill_site, DrillSiteLink&
 	if(drill_site.isNull()) return false;
 
 	ds_link.setDataSource(drill_site);
-	ds_link.updateData(false);
-	return true;
+	return ds_link.updateData(false);
 }
 
 bool RcuHelper::ReadPoreData(const AcDbObjectId& pore, PoreLink& po_link)

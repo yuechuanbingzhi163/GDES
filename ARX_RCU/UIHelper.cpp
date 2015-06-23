@@ -21,6 +21,9 @@ void UIHelper::ShowRcuDesignDockBar()
 		pRcuDesiginDockBarDlg->RestoreControlBar () ;
 	}
 	pAcadFrame->ShowControlBar( pRcuDesiginDockBarDlg, TRUE, FALSE );
+
+	//Ë¢ÐÂ½çÃæ
+	UIHelper::SendMessage(WM_RCU_UPDATE, 0);
 }
 
 void UIHelper::DestroyRcuDesignDockBar()
@@ -33,10 +36,10 @@ void UIHelper::DestroyRcuDesignDockBar()
 	}
 }
 
-void UIHelper::SendMessage(unsigned int msgCode, ArxMsg& msgParam)
+void UIHelper::SendMessage(unsigned int msgCode, ArxMsg* msgParam)
 {
 	if(pRcuDesiginDockBarDlg != 0)
 	{
-		pRcuDesiginDockBarDlg->mChildDlg.SendMessage(msgCode, (WPARAM)&msgParam, 0);
+		pRcuDesiginDockBarDlg->mChildDlg.SendMessage(msgCode, (WPARAM)msgParam, 0);
 	}
 }
