@@ -454,6 +454,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\RcuEditOpenPoreDlg.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\RcuEditRockGateDlg.cpp"
 					>
 				</File>
@@ -536,6 +540,10 @@
 				</File>
 				<File
 					RelativePath=".\RcuEditDrillSiteDlg.h"
+					>
+				</File>
+				<File
+					RelativePath=".\RcuEditOpenPoreDlg.h"
 					>
 				</File>
 				<File

@@ -14,7 +14,7 @@ public:
 	virtual ~RcuEditRockGateDlg();
 
 // 对话框数据
-	enum { IDD = IDD_RCU_EDIT_DLG };
+	enum { IDD = IDD_RCU_ROCK_GATE_EDIT_DLG };
 
 public:
 	//石门图元id
