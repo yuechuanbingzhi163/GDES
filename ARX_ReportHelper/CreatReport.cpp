@@ -390,7 +390,7 @@ static BOOL SaveReport(CString savePath)
 	return MyWord->SaveDocumentAs(savePath);
 }
 
-bool wordOprate(CString templPath,CString savePath,CString& mineName)
+static bool wordOprate(CString templPath,CString savePath,CString& mineName)
 {
 	AfxGetMainWnd()->BeginWaitCursor();//设置等待光标
 	if(CheckDocIsUsing(templPath)) return false;
@@ -463,6 +463,10 @@ bool CreatReport(const CString& tplPath,const CString& savePath,CString& mineNam
 	return wordOprate(tplPath,savePath,mineName);
 }
 
+bool CreatReport( const CString& savePath )
+{
+	return true;
+}
 void OpenDoc(const CString& docPath,BOOL isVisiable)
 {
 	MyWord->CreateApp();

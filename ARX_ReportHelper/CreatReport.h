@@ -18,6 +18,7 @@ extern void uninitword();
 //生成报告
 //因为有不同的模版，所以需要模版路径
 extern bool CreatReport(const CString& tplPath,const CString& savePath,CString& mineName);
+extern bool CreatReport(const CString& savePath);
 
 extern void OpenDoc(const CString& docPath,BOOL isVisiable = FALSE);
 

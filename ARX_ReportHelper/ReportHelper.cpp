@@ -101,6 +101,69 @@ static BOOL SaveAndOpenReport(CString tplName,CString outName,CString mineName =
 	}
 	return TRUE;
 }
+
+static BOOL SaveAndOpenReport(CString outName)
+{
+	TCHAR szFileFilter[] = _T("doc文档(*.doc)|*.doc||");
+	TCHAR szFileExt[] = _T("doc");
+
+	CString defaultPath;
+	GetDocPath(defaultPath);
+
+	CFileDialog dlg(FALSE,szFileExt,defaultPath,OFN_READONLY,szFileFilter);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
+
+	TCHAR* pFileBuf = new TCHAR[MAX_PATH * 1024];
+	if (NULL == pFileBuf)
+	{
+		return FALSE;
+	}
+	_tcscpy(pFileBuf,outName);
+
+	dlg.m_ofn.lpstrFile = pFileBuf;
+	//dlg.m_ofn.lpstrFile[0] = NULL;
+	dlg.m_ofn.nMaxFile = MAX_PATH * 1024;
+	//dlg.m_ofn.lpstrInitialDir = (LPWSTR)(LPCTSTR)defaultPath;
+	CString selectedPath;
+	if(IDOK == dlg.DoModal())
+	{
+		selectedPath = dlg.GetPathName();
+	}
+
+	else
+	{
+		return FALSE;
+	}
+
+	delete pFileBuf;
+	pFileBuf = NULL;
+
+	acutPrintf( _T( "\n报告生成中...\n" ) );
+	//初始化com
+	if(initword())
+	{
+		if(!CreatReport(selectedPath)) 
+		{
+			//卸载com
+			uninitword();
+			acutPrintf( _T( "\n报告生成失败!\n" ) );
+			return FALSE;
+		}
+		//卸载com
+		uninitword();
+	}
+	acutPrintf( _T( "\n报告保存到:%s" ),selectedPath);
+	if(IDYES == AfxMessageBox(_T("报告生成成功!是否现在打开?"),MB_YESNO))
+	{
+		if(initword())
+		{
+			OpenWordDocument(selectedPath);
+			//卸载com
+			uninitword();
+		}
+	}
+	return TRUE;
+}
+
 void ReportHelper::CreatReportHelper()
 {
 	CAcModuleResourceOverride myResources;
@@ -233,4 +296,16 @@ void ReportHelper::ShowReleatedInfoDlg()
 	bookMks.append(_T("ReleatInfo_YesOrNo"));
 	dlg.setBookMarks(bookMks);
 	dlg.DoModal();
+}
+
+void ReportHelper::CreatRCUReport()
+{
+	CAcModuleResourceOverride myResources;
+
+	TCHAR szFileFilter[] = _T("doc文档(*.doc)|*.doc||");
+	TCHAR szFileExt[] = _T("doc");
+	CString defaultPath;
+	GetDocPath(defaultPath);
+	CString outName = _T("石门设计报告");
+	SaveAndOpenReport(outName);
 }
