@@ -46,6 +46,7 @@ protected:
 		//带$号的字段表示该字段仅用于内部计算,不应该也不需要显示在对话框界面上
 		linkDoubleData( _T( "$投影宽度" ), &m_width );
 		linkDoubleData( _T( "$投影高度" ), &m_height );
+		linkStringData(_T("$中心点坐标"), &m_pt);
 	}
 
 public:
@@ -53,6 +54,7 @@ public:
 	double m_angle;
 	double m_width;
 	double m_height;
+	CString m_pt;
 };
 
 class DrillSiteLink : public DataLink

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "DockBarChildDlg.h"
-#include "BtnST.h"
 /**
 	CButtonST使用简介
 	http://www.cnblogs.com/lidabo/archive/2012/12/17/2821122.html
@@ -28,10 +27,7 @@ public:
 	CListCtrl m_list;
 	//钻场列表
 	CListCtrl m_list2;
-	CButtonST m_updBtn;
 
-	//刷新按钮单击消息
-	afx_msg void OnBnClickedUpdate();
 	//导出按钮单击消息
 	afx_msg void OnBnClickedExport();
 	//石门列表行切换时触发的消息
@@ -50,6 +46,7 @@ public:
 	afx_msg void OnModifyRockGateCommand();
 	afx_msg void OnDeleteRockGateCommand();
 	afx_msg void OnAddRockGateCommand();
+	afx_msg void OnUpdateRockGateListCommand();
 
 	//钻场列表右键菜单项消息响应
 	afx_msg void OnAddDrillSiteCommand();

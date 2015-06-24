@@ -98,7 +98,6 @@ BEGIN
     PUSHBUTTON      "输出",IDC_BUTTON4,256,6,62,19
     LTEXT           "石门列表:",IDC_STATIC,6,12,36,8
     LTEXT           "钻场列表:",IDC_STATIC,7,135,45,8
-    CONTROL         "",IDC_BUTTON1,"Button",BS_OWNERDRAW | WS_TABSTOP,45,8,16,16
 END
 
 IDD_RCU_EDIT_DLG DIALOGEX 0, 0, 322, 144
@@ -207,6 +206,8 @@ IDR_RCU_LIST_MENU MENU
 BEGIN
     POPUP "石门列表右键菜单"
     BEGIN
+        MENUITEM "刷新石门列表",                      ID_RCU_LIST_UPDATE
+        MENUITEM SEPARATOR
         MENUITEM "新增石门",                        ID_RCU_LIST_ADD
         MENUITEM "删除石门",                        ID_RCU_LIST_DELETE
         MENUITEM "设计石门",                        ID_RCU_LIST_MODIFY

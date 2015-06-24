@@ -75,6 +75,7 @@ Adesk::Boolean SimpleDrillSiteDraw::subWorldDraw( AcGiWorldDraw* mode )
 	v.normalize();
 	//向量v在x轴上的投影
 	v = v.dotProduct( AcGeVector3d::kXAxis ) * AcGeVector3d::kXAxis;
+	v.normalize();
 
 	//求矩形的中心点坐标
 	AcGePoint3d pt = m_linkPt + v*m_width/2;
@@ -107,8 +108,8 @@ Acad::ErrorStatus SimpleDrillSiteDraw::subMoveGripPointsAt ( const AcDbIntArray&
 
         if ( idx == 0 )
         {
-            m_insertPt += offset;
-			m_linkPt += offset;
+   //         m_insertPt += offset;
+			//m_linkPt += offset;
         }
 
         if ( idx == 1 )
