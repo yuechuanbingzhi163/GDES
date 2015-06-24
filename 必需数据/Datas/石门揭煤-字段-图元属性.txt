@@ -8,6 +8,7 @@ DrillSite	宽度
 DrillSite	高度
 DrillSite	起始编号
 DrillSite	$底帮坐标
+DrillSite	$钻孔间距
 RockGate	名称
 RockGate	长度
 RockGate	宽度

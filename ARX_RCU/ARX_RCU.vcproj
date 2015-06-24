@@ -458,6 +458,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\RcuEditOpenPoreDlg.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\RcuEditRockGateDlg.cpp"
 					>
 				</File>
@@ -543,6 +547,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\RcuEditOpenPoreDlg.h"
+					>
+				</File>
+				<File
 					RelativePath=".\RcuEditRockGateDlg.h"
 					>
 				</File>
@@ -572,19 +580,6 @@
 				RelativePath=".\icon.ico"
 				>
 			</File>
-			<File
-				RelativePath=".\update-16.ico"
-				>
-			</File>
-			<File
-				RelativePath=".\update-24.ico"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Miscellaneous Files"
-			Filter="reg;rgs;mak;clw;vsdir;vsz;css;inf;vcproj;csproj"
-			>
 		</Filter>
 		<File
 			RelativePath=".\update.png"
