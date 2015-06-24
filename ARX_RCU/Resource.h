@@ -32,6 +32,8 @@
 #define IDC_EDIT12                      113
 #define IDC_LOCA_COMBO                  113
 #define IDC_EDIT13                      114
+#define IDC_DRILL_DIS_EDIT2             114
+#define IDC_DRILL_RADIUS_EDIT           114
 #define IDC_EDIT14                      115
 #define IDC_BUTTON1                     115
 #define IDC_EDIT15                      116

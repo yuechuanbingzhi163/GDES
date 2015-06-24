@@ -7,10 +7,11 @@ RcuEditDrillSiteDlg::RcuEditDrillSiteDlg(CWnd* pParent /*=NULL*/)
 	: RcuAcUiBaseDlg(RcuEditDrillSiteDlg::IDD, pParent)
 	, m_name(_T(""))
 	, m_leftOrRight(0)
-	, m_width(4)
+	, m_depth(3)
 	, m_height(4)
 	, m_dist(50)
 	, m_index(1)
+	, m_radius(0.09)
 {
 
 }
@@ -23,10 +24,11 @@ void RcuEditDrillSiteDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_DRIL_NAME_EDIT, m_name);
-	DDX_Text(pDX, IDC_DRILL_WIDTH_EDIT, m_width);
+	DDX_Text(pDX, IDC_DRILL_WIDTH_EDIT, m_depth);
 	DDX_Text(pDX, IDC_DRILL_HEIGHT_EDIT, m_height);
 	DDX_Text(pDX, IDC_DRILL_DIS_EDIT, m_dist);
 	DDX_Text(pDX, IDC_DRILL_INDEX_EDIT, m_index);
+	DDX_Text(pDX, IDC_DRILL_RADIUS_EDIT, m_radius);
 	DDX_Control(pDX, IDC_LOCA_COMBO, m_locaCombBox);
 }
 
@@ -77,10 +79,11 @@ void RcuEditDrillSiteDlg::writeToDataLink( DrillSiteLink& ds_link )
 	ds_link.m_name = m_name;
 	ds_link.m_leftOrRight = m_leftOrRight;
 	ds_link.m_dist = m_dist;
-	ds_link.m_width = m_width;
+	ds_link.m_depth = m_depth;
 	ds_link.m_height = m_height;
 	ds_link.m_start = m_index;
 	ds_link.m_leftOrRight = m_leftOrRight;
+	ds_link.m_radius = m_radius;
 }
 
 void RcuEditDrillSiteDlg::readFromDataLink( DrillSiteLink& ds_link )
@@ -90,9 +93,10 @@ void RcuEditDrillSiteDlg::readFromDataLink( DrillSiteLink& ds_link )
 	m_name = ds_link.m_name;
 	m_leftOrRight = ds_link.m_leftOrRight;
 	m_dist = ds_link.m_dist;
-	m_width = ds_link.m_width;
+	m_depth = ds_link.m_depth;
 	m_height = ds_link.m_height;
 	m_index = ds_link.m_start;
+	m_radius = ds_link.m_radius;
 
 	if(m_leftOrRight > 1 || m_leftOrRight < 0)
 	{

@@ -4,6 +4,9 @@
 #include "../ArxHelper/HelperClass.h"
 #include "../MineGE/HelperClass.h"
 
+//如果要过滤$开头的字段,请取消下一行的注释
+//#define FILTER_VARIABLE_FIELD
+
 //获取当前选择的行
 int ListCtrlHelper::GetCurSelOfList(CListCtrl& m_list)
 {
@@ -48,8 +51,8 @@ void ListCtrlHelper::BuildListCtrlHeadColumns( CListCtrl& m_list, const AcString
 	for( int i = 0; i < len; i++ )
 	{
 		//过滤掉$开头的字段
-		CString field = fields[i].kACharPtr();
-		if(field.Left(1) == _T("$")) continue;
+		//CString field = fields[i].kACharPtr();
+		//if(field.Left(1) == _T("$")) continue;
 
 		m_list.InsertColumn( i + 1, fields[i].kACharPtr(), LVCFMT_LEFT, dw );
 	}
@@ -89,8 +92,8 @@ void ListCtrlHelper::InsertDatasToListCtrl( CListCtrl& m_list, const AcStringArr
 		for( int j = 0; j < n; j++ )
 		{
 			//过滤掉$开头的字段
-			CString field = fields[i].kACharPtr();
-			if(field.Left(1) == _T("$")) continue;
+			//CString field = fields[i].kACharPtr();
+			//if(field.Left(1) == _T("$")) continue;
 
 			CString value;
 			DataHelper::GetPropertyData( objIds[i], fields[j].kACharPtr(), value );

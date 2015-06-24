@@ -34,14 +34,16 @@ private:
 	int m_leftOrRight;
 	// 钻场位置下拉框
 	CComboBox m_locaCombBox;
-	// 钻场宽度
-	double m_width;
+	// 钻场深度
+	double m_depth;
 	// 钻场高度
 	double m_height;
 	// 钻场与迎头的距离
 	double m_dist;
 	// 起始编号
 	int m_index;
+	//孔径
+	double m_radius;
 
 public:
 	afx_msg void OnBnClickedOk();

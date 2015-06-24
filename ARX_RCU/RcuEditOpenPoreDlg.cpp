@@ -7,8 +7,8 @@ IMPLEMENT_DYNAMIC(RcuEditOpenPoreDlg, RcuAcUiBaseDlg)
 
 RcuEditOpenPoreDlg::RcuEditOpenPoreDlg(CWnd* pParent /*=NULL*/)
 	: RcuAcUiBaseDlg(RcuEditOpenPoreDlg::IDD, pParent)
-	, m_num(10)
-	, m_gap(0.1)
+	, m_num(0)
+	, m_gap(0)
 	, m_radius(0)
 {
 

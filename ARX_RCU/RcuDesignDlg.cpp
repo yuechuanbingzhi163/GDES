@@ -51,7 +51,7 @@ static void ModifyDrillSiteToListCtrl(CListCtrl& m_list2, int n, const DrillSite
 	}
 	{
 		CString value;
-		ArxUtilHelper::DoubleToString(ds_link.m_width, value);
+		ArxUtilHelper::DoubleToString(ds_link.m_depth, value);
 		m_list2.SetItemText( n, 4, value);
 	}
 	{
@@ -61,8 +61,22 @@ static void ModifyDrillSiteToListCtrl(CListCtrl& m_list2, int n, const DrillSite
 	}
 	{
 		CString value;
-		ArxUtilHelper::IntToString(ds_link.m_start, value);
+		ArxUtilHelper::DoubleToString(ds_link.m_radius, value);
 		m_list2.SetItemText( n, 6, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(ds_link.m_gap, value);
+		m_list2.SetItemText( n, 7, value);
+	}
+	{
+		CString value;
+		ArxUtilHelper::IntToString(ds_link.m_start, value);
+		m_list2.SetItemText( n, 8, value);
+	}
+	
+	{
+		m_list2.SetItemText( n, 9, ArxUtilHelper::Point3dToString(ds_link.m_pt));
 	}
 }
 
@@ -93,32 +107,27 @@ static void ModifyRockGateToListCtrl(CListCtrl& m_list, int n, RockGateLink& rg_
 		m_list.SetItemText( n, 5, value);
 	}
 	{
-		CString value;
-		ArxUtilHelper::DoubleToString(rg_link.m_radius, value);
-		m_list.SetItemText( n, 6, value);
-	}
-	{
-		m_list.SetItemText( n, 7, rg_link.m_pt);
+		m_list.SetItemText( n, 6, ArxUtilHelper::Point3dToString(rg_link.m_pt));
 	}
 	{
 		CString value;
 		ArxUtilHelper::DoubleToString(rg_link.m_left, value);
-		m_list.SetItemText( n, 8, value);
+		m_list.SetItemText( n, 7, value);
 	}
 	{
 		CString value;
 		ArxUtilHelper::DoubleToString(rg_link.m_right, value);
-		m_list.SetItemText( n, 9, value);
+		m_list.SetItemText( n, 8, value);
 	}
 	{
 		CString value;
 		ArxUtilHelper::DoubleToString(rg_link.m_top, value);
-		m_list.SetItemText( n, 10, value);
+		m_list.SetItemText( n, 9, value);
 	}
 	{
 		CString value;
 		ArxUtilHelper::DoubleToString(rg_link.m_bottom, value);
-		m_list.SetItemText( n, 11, value);
+		m_list.SetItemText( n, 10, value);
 	}
 }
 
@@ -235,17 +244,34 @@ static bool UpdateOpenPoresFromDlg(const AcDbObjectId& drill_site, RockGateLink&
 	//格式化钻场的位置信息
 	dlg.m_pos = FormatDrillSitePostion(ds_link.m_dist, ds_link.m_leftOrRight);
 	//设置钻孔半径
-	dlg.m_radius = rg_link.m_radius;
+	dlg.m_radius = ds_link.m_radius;
 	//提取钻孔的个数
 	AcDbObjectIdArray pores;
 	RcuHelper::GetRelatedOpenPores(drill_site, pores);
 	dlg.m_num = pores.length();
 	//提取钻孔的间距
-	dlg.m_gap = ds_link.m_gap;
+	if(!pores.isEmpty())
+	{
+		dlg.m_gap = ds_link.m_gap;
+	}
+	else
+	{
+		dlg.m_gap = 0;
+	}
 
 	if(IDOK != dlg.DoModal()) return false;
 
-	return true;
+	//从对话框中读取数据
+	//钻孔间距
+	ds_link.m_gap = dlg.m_gap;
+	//更新数据到钻孔
+	ds_link.updateData(true);
+
+	//删除关联的所有钻孔
+	RcuHelper::ClearRelatedOpenPores(drill_site);
+
+	//创建新的钻孔图元
+	return RcuHelper::CreateOpenPores(drill_site, ds_link);
 }
 
 // RcuDesignDlg 对话框
@@ -753,10 +779,13 @@ void RcuDesignDlg::OnBnClickedDesignOpenPores()
 	DrillSiteLink ds_link;
 	if(!RcuHelper::ReadDrillSiteData(pData2->objId, ds_link)) return;
 
-	//显示对话框
+	//显示钻孔设计对话框
 	if(UpdateOpenPoresFromDlg(pData2->objId, rg_link, ds_link))
 	{
-
+		//更新钻场列表中的数据
+		ModifyDrillSiteToListCtrl(m_list2, row2, ds_link);
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
 	}
 }
 

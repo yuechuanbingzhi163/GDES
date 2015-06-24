@@ -70,8 +70,8 @@ public:
 		Lh = abs((height + f1 + f2)*cot(alpha));
 	}
 
-	//煤层面的抽采范围中点
-	bool drillExtentCenter(AcGePoint3d& cnt)
+	//煤层面
+	bool drillSurface(AcGePoint3d& cnt, AcGeVector3d& normal)
 	{
 		//计算煤平面方程
 		AcGePlane plane1, plane2;
@@ -93,6 +93,8 @@ public:
 		cnt = p1 + 0.5*(p2-p1);
 		//向水平面投影
 		cnt.z = 0;
+		//平面的法向量
+		normal = plane1.normal();
 		
 		return true;
 	}
