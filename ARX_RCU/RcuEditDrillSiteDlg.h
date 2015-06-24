@@ -12,7 +12,7 @@ public:
 	virtual ~RcuEditDrillSiteDlg();
 
 // 对话框数据
-	enum { IDD = IDD_RCU_DRILL_EDIT_DIALOG };
+	enum { IDD = IDD_RCU_DRILL_SITE_EDIT_DIALOG };
 
 public:
 	//石门图元id

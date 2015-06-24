@@ -47,6 +47,10 @@ void ListCtrlHelper::BuildListCtrlHeadColumns( CListCtrl& m_list, const AcString
 	m_list.InsertColumn( 0, _T( "编号" ), LVCFMT_CENTER, dw );
 	for( int i = 0; i < len; i++ )
 	{
+		//过滤掉$开头的字段
+		CString field = fields[i].kACharPtr();
+		if(field.Left(1) == _T("$")) continue;
+
 		m_list.InsertColumn( i + 1, fields[i].kACharPtr(), LVCFMT_LEFT, dw );
 	}
 }
@@ -84,7 +88,10 @@ void ListCtrlHelper::InsertDatasToListCtrl( CListCtrl& m_list, const AcStringArr
 		int n = fields.length();
 		for( int j = 0; j < n; j++ )
 		{
-			//m_list2.SetItemData(i, i);
+			//过滤掉$开头的字段
+			CString field = fields[i].kACharPtr();
+			if(field.Left(1) == _T("$")) continue;
+
 			CString value;
 			DataHelper::GetPropertyData( objIds[i], fields[j].kACharPtr(), value );
 			m_list.SetItemText( i, j + 1, value );

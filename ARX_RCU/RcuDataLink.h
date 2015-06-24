@@ -70,6 +70,7 @@ protected:
 		linkIntData( _T( "起始编号" ), &m_start );
 		//带$号的字段表示该字段仅用于内部计算,不应该也不需要显示在对话框界面上
 		linkStringData( _T( "$底帮坐标" ), &m_name );
+		linkDoubleData( _T( "$钻孔间距" ), &m_gap );
 	}
 
 public:
@@ -82,6 +83,7 @@ public:
 	//坐标是用字符串表示的,xyz之间通过逗号分隔
 	//可通过ArxUtilHelper::StringToPoint3d静态方法进行转换
 	CString m_pt;
+	double m_gap;
 };
 
 class PoreLink : public DataLink

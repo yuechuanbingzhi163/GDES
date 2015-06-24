@@ -2,6 +2,7 @@
 #include "RcuDesignDlg.h"
 #include "RcuEditRockGateDlg.h"
 #include "RcuEditDrillSiteDlg.h"
+#include "RcuEditOpenPoreDlg.h"
 
 #include "Rcu.h"
 #include "RcuHelper.h"
@@ -195,6 +196,58 @@ static bool UpdateDrillSiteDataFromDlg(const AcDbObjectId& drill_site, DrillSite
 	return true;
 }
 
+//格式化钻场钻孔设计对话框的标题
+static CString FormatPoreDlgTitle(const CString& rg_name, const CString& ds_name)
+{
+	CString name1 = rg_name;
+	CString name2 = ds_name;
+	name1.Trim();
+	name2.Trim();
+	if(name1.IsEmpty())
+	{
+		name1 = _T("***");
+	}
+	if(name2.IsEmpty())
+	{
+		name2 = _T("###");
+	}
+
+	CString title;
+	title.Format(_T("%s石门-%s钻场-钻孔设计"), name1, name2);
+	return title;
+}
+
+//格式化钻场钻孔设计对话框中的位置信息
+static CString FormatDrillSitePostion(double m_dist, int leftOrRight)
+{
+	CString pos;
+	pos.Format(_T("%s，距离迎头%.2f米"), (leftOrRight==0)?_T("左帮"):_T("右帮"), m_dist);
+	return pos;
+}
+
+static bool UpdateOpenPoresFromDlg(const AcDbObjectId& drill_site, RockGateLink& rg_link, DrillSiteLink& ds_link)
+{
+	CAcModuleResourceOverride resourceOverride;
+	
+	RcuEditOpenPoreDlg dlg;
+	//格式化钻孔设计对话框的标题
+	dlg.m_title = FormatPoreDlgTitle(rg_link.m_name, ds_link.m_name);
+	//格式化钻场的位置信息
+	dlg.m_pos = FormatDrillSitePostion(ds_link.m_dist, ds_link.m_leftOrRight);
+	//设置钻孔半径
+	dlg.m_radius = rg_link.m_radius;
+	//提取钻孔的个数
+	AcDbObjectIdArray pores;
+	RcuHelper::GetRelatedOpenPores(drill_site, pores);
+	dlg.m_num = pores.length();
+	//提取钻孔的间距
+	dlg.m_gap = ds_link.m_gap;
+
+	if(IDOK != dlg.DoModal()) return false;
+
+	return true;
+}
+
 // RcuDesignDlg 对话框
 
 IMPLEMENT_DYNAMIC(RcuDesignDlg, DockBarChildDlg)
@@ -218,6 +271,8 @@ void RcuDesignDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
 	ON_BN_CLICKED(IDC_BUTTON4, &RcuDesignDlg::OnBnClickedExport)
+	ON_BN_CLICKED(IDC_BUTTON1, &RcuDesignDlg::OnBnClickedDesignClosePores)
+	ON_BN_CLICKED(IDC_BUTTON2, &RcuDesignDlg::OnBnClickedDesignOpenPores)
 
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST1, &RcuDesignDlg::OnLvnItemchangedList1)
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST1, &RcuDesignDlg::OnNMDblclkList1)
@@ -227,6 +282,7 @@ BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
 	ON_COMMAND(ID_RCU_LIST_DELETE, &RcuDesignDlg::OnDeleteRockGateCommand)
 	ON_COMMAND(ID_RCU_LIST_ADD, &RcuDesignDlg::OnAddRockGateCommand)
 	ON_COMMAND(ID_RCU_LIST_UPDATE, &RcuDesignDlg::OnUpdateRockGateListCommand)
+	ON_COMMAND(ID_RCU_COAL_HILIGHT, &RcuDesignDlg::OnHilightCoalSurfCommand)
 
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST3, &RcuDesignDlg::OnNMDblclkList2)
 	ON_NOTIFY(NM_RCLICK, IDC_LIST3, &RcuDesignDlg::OnNMRclickList2)
@@ -483,6 +539,29 @@ void RcuDesignDlg::OnUpdateRockGateListCommand()
 	updateUI();
 }
 
+void RcuDesignDlg::OnHilightCoalSurfCommand()
+{
+	//MessageBox(_T("RcuDesignDlg::OnHilightCoalSurfCommand"));
+	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
+	if(row1 != LB_ERR)
+	{
+		ItemData* pData1 = ( ItemData* )m_list.GetItemData( row1 );
+
+		//文档锁切换
+		DocumentLockSwitch lock_switch;
+
+		AcDbObjectId coal_surf;
+		RcuHelper::GetRelatedCoalSurface(pData1->objId, coal_surf);
+
+		//高亮并定位煤层图元
+		ArxEntityHelper::SelectEntity(coal_surf);
+		ArxEntityHelper::ZoomToEntityForModeless(coal_surf);
+
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
+	}
+}
+
 void RcuDesignDlg::OnNMDblclkList2(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	//第几行
@@ -641,6 +720,43 @@ void RcuDesignDlg::OnHilightDrillSiteCommand()
 
 		//cad窗口获取焦点
 		acedGetAcadFrame()->SetFocus();
+	}
+}
+
+void RcuDesignDlg::OnBnClickedDesignClosePores()
+{
+	MessageBox(_T("暂不考虑终孔设计!"));
+}
+
+void RcuDesignDlg::OnBnClickedDesignOpenPores()
+{
+	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
+	int row2 = ListCtrlHelper::GetCurSelOfList(m_list2);
+
+	if(row1 == LB_ERR || row2 == LB_ERR)
+	{
+		MessageBox(_T("请指定或添加一个石门、钻场后再进行钻孔设计!"));
+		return;
+	}
+
+	ItemData* pData1 = (ItemData*)m_list.GetItemData(row1);
+	ItemData* pData2 = (ItemData*)m_list2.GetItemData(row2);
+
+	//切换文档锁
+	DocumentLockSwitch lock_switch;
+
+	//提取石门数据
+	RockGateLink rg_link;
+	if(!RcuHelper::ReadRockGateData(pData1->objId, rg_link)) return;
+
+	//提取钻场数据
+	DrillSiteLink ds_link;
+	if(!RcuHelper::ReadDrillSiteData(pData2->objId, ds_link)) return;
+
+	//显示对话框
+	if(UpdateOpenPoresFromDlg(pData2->objId, rg_link, ds_link))
+	{
+
 	}
 }
 

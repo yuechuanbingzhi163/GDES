@@ -89,18 +89,20 @@ END
 // Dialog
 //
 
-IDD_RCU_DESIGN_DLG DIALOGEX 0, 0, 325, 274
+IDD_RCU_DESIGN_DLG DIALOGEX 0, 0, 324, 266
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,26,309,102
-    CONTROL         "",IDC_LIST3,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,146,311,121
-    PUSHBUTTON      "输出",IDC_BUTTON4,256,6,62,19
-    LTEXT           "石门列表:",IDC_STATIC,6,12,36,8
-    LTEXT           "钻场列表:",IDC_STATIC,7,135,45,8
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,18,309,80
+    CONTROL         "",IDC_LIST3,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,122,309,108
+    PUSHBUTTON      "输出钻孔设计",IDC_BUTTON4,219,233,74,26
+    LTEXT           "石门列表:",IDC_STATIC,6,4,36,8
+    LTEXT           "石门关联的钻场:",IDC_STATIC,7,107,65,8
+    PUSHBUTTON      "煤层终孔设计",IDC_BUTTON1,31,233,74,26
+    PUSHBUTTON      "钻场开孔设计",IDC_BUTTON2,125,233,74,26
 END
 
-IDD_RCU_EDIT_DLG DIALOGEX 0, 0, 322, 144
+IDD_RCU_ROCK_GATE_EDIT_DLG DIALOGEX 0, 0, 322, 144
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "石门和煤层参数"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
@@ -144,7 +146,7 @@ BEGIN
     LTEXT           "X:",IDC_STATIC,14,50,8,8
 END
 
-IDD_RCU_DRILL_EDIT_DIALOG DIALOGEX 0, 0, 187, 89
+IDD_RCU_DRILL_SITE_EDIT_DIALOG DIALOGEX 0, 0, 187, 89
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "钻场设计"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
@@ -164,6 +166,22 @@ BEGIN
     LTEXT           "距离：",IDC_STATIC,7,30,25,8
 END
 
+IDD_RCU_OPEN_PORES_DLG DIALOGEX 0, 0, 194, 70
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "钻场开孔设计"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "钻孔个数:",IDC_STATIC,7,29,36,8
+    EDITTEXT        IDC_EDIT1,49,26,40,14,ES_AUTOHSCROLL
+    LTEXT           "钻孔间距:",IDC_STATIC,100,28,36,8
+    EDITTEXT        IDC_EDIT2,142,25,40,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "确定并修改",IDOK,101,43,85,20
+    LTEXT           "钻孔半径:",IDC_STATIC,7,49,36,8
+    EDITTEXT        IDC_EDIT3,49,47,40,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "钻场位置:",IDC_STATIC,7,9,36,8
+    LTEXT           "静态",IDC_DRILL_SITE_TEXT,49,9,138,8
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -176,12 +194,12 @@ BEGIN
     IDD_RCU_DESIGN_DLG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 318
+        RIGHTMARGIN, 317
         TOPMARGIN, 6
-        BOTTOMMARGIN, 267
+        BOTTOMMARGIN, 259
     END
 
-    IDD_RCU_EDIT_DLG, DIALOG
+    IDD_RCU_ROCK_GATE_EDIT_DLG, DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 315
@@ -189,9 +207,17 @@ BEGIN
         BOTTOMMARGIN, 137
     END
 
-    IDD_RCU_DRILL_EDIT_DIALOG, DIALOG
+    IDD_RCU_DRILL_SITE_EDIT_DIALOG, DIALOG
     BEGIN
         TOPMARGIN, 1
+    END
+
+    IDD_RCU_OPEN_PORES_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 187
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 63
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -206,12 +232,13 @@ IDR_RCU_LIST_MENU MENU
 BEGIN
     POPUP "石门列表右键菜单"
     BEGIN
-        MENUITEM "刷新石门列表",                      ID_RCU_LIST_UPDATE
-        MENUITEM SEPARATOR
         MENUITEM "新增石门",                        ID_RCU_LIST_ADD
         MENUITEM "删除石门",                        ID_RCU_LIST_DELETE
         MENUITEM "设计石门",                        ID_RCU_LIST_MODIFY
         MENUITEM "高亮石门",                        ID_RCU_LIST_HILIGHT
+        MENUITEM SEPARATOR
+        MENUITEM "刷新石门列表",                      ID_RCU_LIST_UPDATE
+        MENUITEM "高亮定位煤层",                      ID_RCU_COAL_HILIGHT
     END
 END
 
@@ -235,8 +262,6 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_GAS_ICON            ICON                    "icon.ico"
-IDI_UPDATE_ICON_24      ICON                    "update-24.ico"
-IDI_UPDATE_ICON_16      ICON                    "update-16.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //

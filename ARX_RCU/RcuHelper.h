@@ -37,12 +37,8 @@ public:
 
 	//计算煤层面参数
 	static bool CaculCoalSurfParam(const RockGateLink& rg_link,CoalSurfaceLink& cs_link);
-	//获取石门的几何插入点坐标
-	static bool GetRockGateInsertPt(const AcDbObjectId& rock_gate, AcGePoint3d& insertPt);
 	//计算钻场的2点坐标
 	static bool CaculDrillSitePt(const DrillSiteLink& ds_link,const RockGateLink& rg_link,const AcGePoint3d& rgInsertPt,AcGePoint3d& insertPt,AcGePoint3d& linkPt);
-	//设置钻场图元的2点坐标
-	static bool SetDrillSitePt(const AcDbObjectId& drill_site, const AcGePoint3d& insertPt, const AcGePoint3d& linkPt);
 
 	//创建石门和煤层图元(rg_link和cs_link的数据会与新增的图元关联，并被更新到图元)
 	static bool CreateRockGate(const AcGePoint3d& pt, RockGateLink& rg_link, CoalSurfaceLink& cs_link);
@@ -50,4 +46,8 @@ public:
 	static bool CreateDrillSite(const AcDbObjectId& rock_gate, DrillSiteLink& ds_link);
 	//修改钻场参数
 	static bool ModifyDrillSiteParam(const AcDbObjectId& drill_site, DrillSiteLink& ds_link);
+	//获取石门的几何插入点坐标
+	static bool GetRockGateInsertPt(const AcDbObjectId& rock_gate, AcGePoint3d& insertPt);
+	//设置钻场图元的2点坐标
+	static bool SetDrillSitePt(const AcDbObjectId& drill_site, const AcGePoint3d& insertPt, const AcGePoint3d& linkPt);
 };
