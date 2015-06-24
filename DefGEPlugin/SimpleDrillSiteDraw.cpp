@@ -52,7 +52,7 @@ void SimpleDrillSiteDraw::writeExtraParam( DrawParamWriter& writer )
 void SimpleDrillSiteDraw::regPropertyDataNames( AcStringArray& names ) const
 {
     names.append( _T( "名称" ) );
-    names.append( _T( "宽度" ) );
+    names.append( _T( "深度" ) );
 	names.append( _T( "高度" ) );
 	//names.append( _T( "坐标" ) );
 }
@@ -72,18 +72,26 @@ Adesk::Boolean SimpleDrillSiteDraw::subWorldDraw( AcGiWorldDraw* mode )
 	DrawLine(mode, m_insertPt, m_linkPt);
 
 	AcGeVector3d v = m_linkPt-m_insertPt;
-	v.normalize();
-	//向量v在x轴上的投影
-	v = v.dotProduct( AcGeVector3d::kXAxis ) * AcGeVector3d::kXAxis;
-	v.normalize();
 
+	//向量v在x轴上的投影
+	AcGeVector3d v1 = v.dotProduct( AcGeVector3d::kXAxis ) * AcGeVector3d::kXAxis;
+	v1.normalize();
+
+	//向量v在y轴上的投影
+	AcGeVector3d v2 = v.dotProduct( AcGeVector3d::kYAxis ) * AcGeVector3d::kYAxis;
+	v2.normalize();
+
+	if(v2.isZeroLength())
+	{
+		v2 = AcGeVector3d::kYAxis;
+	}
 	//求矩形的中心点坐标
-	AcGePoint3d pt = m_linkPt + v*m_width/2;
+	AcGePoint3d pt = m_linkPt + v1*m_width/2 + v2*m_height/2;
 
 	//计算角度
-	double angle = v.angleTo(AcGeVector3d::kXAxis, -AcGeVector3d::kZAxis);
+	//double angle = v1.angleTo(AcGeVector3d::kXAxis, -AcGeVector3d::kZAxis);
 	//绘制矩形
-	DrawRect(mode, pt, angle, m_width, m_height, false);
+	DrawRect(mode, pt, 0, m_width, m_height, false);
 
     return Adesk::kTrue;
 }
@@ -138,13 +146,13 @@ Acad::ErrorStatus SimpleDrillSiteDraw::subGetOsnapPoints (
 	AcDbIntArray& geomIds ) const
 {
 	assertReadEnabled () ;
-	//// 只捕捉1种类型的点：端点
-	//if( osnapMode != AcDb::kOsMaskEnd ) return Acad::eOk;
+	// 只捕捉1种类型的点：端点
+	if( osnapMode != AcDb::kOsMaskEnd ) return Acad::eOk;
 
-	//if( osnapMode == AcDb::kOsMaskEnd )
-	//{
-	//	snapPoints.append(m_insertPt);
-	//}
+	if( osnapMode == AcDb::kOsMaskEnd )
+	{
+		snapPoints.append(m_insertPt);
+	}
 
 	return Acad::eOk;
 }

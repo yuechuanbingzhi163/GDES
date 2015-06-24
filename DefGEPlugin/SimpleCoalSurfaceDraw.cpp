@@ -126,13 +126,13 @@ Acad::ErrorStatus SimpleCoalSurfaceDraw::subGetOsnapPoints (
 	AcDbIntArray& geomIds ) const
 {
 	assertReadEnabled () ;
-	//// 只捕捉1种类型的点：端点
-	//if( osnapMode != AcDb::kOsMaskCen ) return Acad::eOk;
+	// 只捕捉1种类型的点：端点
+	if( osnapMode != AcDb::kOsMaskCen ) return Acad::eOk;
 
-	//if( osnapMode == AcDb::kOsMaskCen )
-	//{
-	//	snapPoints.append(m_insertPt);
-	//}
+	if( osnapMode == AcDb::kOsMaskCen )
+	{
+		snapPoints.append(m_insertPt);
+	}
 
 	return Acad::eOk;
 }

@@ -54,7 +54,7 @@ void SimplePoreDraw::regPropertyDataNames( AcStringArray& names ) const
 {
     names.append( _T( "编号" ) );
     names.append( _T( "孔径" ) );
-	//names.append( _T( "坐标" ) );
+	//names.append( _T( "$坐标" ) );
 }
 
 void SimplePoreDraw::readPropertyDataFromGE( const AcStringArray& values )
@@ -84,12 +84,12 @@ Adesk::Boolean SimplePoreDraw::subWorldDraw( AcGiWorldDraw* mode )
     //绘制一个圆
 	DrawCircle(mode, m_insertPt, m_radius, false);
 	//绘制十字
-	DrawCross(mode, m_insertPt, m_radius*0.382);
+	//DrawCross(mode, m_insertPt, m_radius*0.382);
 
     // 绘制编号
     AcGePoint3d pt1, pt2;
 	AcGePoint3d pt = CaclLeftBottomPt(m_insertPt, 0, m_radius, m_radius);
-	DrawMText(mode, pt, 0, m_id, 2*m_radius);
+	//DrawMText(mode, pt, 0, m_id, 2*m_radius);
 
     return Adesk::kTrue;
 }
@@ -97,6 +97,8 @@ Adesk::Boolean SimplePoreDraw::subWorldDraw( AcGiWorldDraw* mode )
 Acad::ErrorStatus SimplePoreDraw::subGetGripPoints( AcGePoint3dArray& gripPoints, AcDbIntArray& osnapModes, AcDbIntArray& geomIds ) const
 {
     assertReadEnabled () ;
+
+	gripPoints.append(m_insertPt);
 
     return Acad::eOk;
 }
@@ -125,9 +127,9 @@ Acad::ErrorStatus SimplePoreDraw::subGetOsnapPoints (
 {
 	assertReadEnabled () ;
 	// 只捕捉1种类型的点：端点
-	if( osnapMode != AcDb::kOsMaskCen ) return Acad::eOk;
+	if( osnapMode != AcDb::kOsMaskEnd ) return Acad::eOk;
 
-	if( osnapMode == AcDb::kOsMaskCen )
+	if( osnapMode == AcDb::kOsMaskEnd )
 	{
 		snapPoints.append(m_insertPt);
 	}
