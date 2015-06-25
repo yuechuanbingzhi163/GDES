@@ -6,12 +6,12 @@ IMPLEMENT_DYNAMIC(RcuEditDrillSiteDlg, RcuAcUiBaseDlg)
 RcuEditDrillSiteDlg::RcuEditDrillSiteDlg(CWnd* pParent /*=NULL*/)
 	: RcuAcUiBaseDlg(RcuEditDrillSiteDlg::IDD, pParent)
 	, m_name(_T(""))
-	, m_leftOrRight(0)
-	, m_depth(3)
+	, m_pos(0)
+	, m_width(3)
 	, m_height(4)
 	, m_dist(50)
 	, m_index(1)
-	, m_radius(0.09)
+	, m_pore_size(0.09)
 {
 
 }
@@ -24,11 +24,11 @@ void RcuEditDrillSiteDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_DRIL_NAME_EDIT, m_name);
-	DDX_Text(pDX, IDC_DRILL_WIDTH_EDIT, m_depth);
+	DDX_Text(pDX, IDC_DRILL_WIDTH_EDIT, m_width);
 	DDX_Text(pDX, IDC_DRILL_HEIGHT_EDIT, m_height);
 	DDX_Text(pDX, IDC_DRILL_DIS_EDIT, m_dist);
 	DDX_Text(pDX, IDC_DRILL_INDEX_EDIT, m_index);
-	DDX_Text(pDX, IDC_DRILL_RADIUS_EDIT, m_radius);
+	DDX_Text(pDX, IDC_DRILL_RADIUS_EDIT, m_pore_size);
 	DDX_Control(pDX, IDC_LOCA_COMBO, m_locaCombBox);
 }
 
@@ -43,6 +43,7 @@ BOOL RcuEditDrillSiteDlg::OnInitDialog()
 
 	m_locaCombBox.AddString(_T("左帮"));
 	m_locaCombBox.AddString(_T("右帮"));
+	m_locaCombBox.AddString(_T("迎头"));
 
 	SetToolTip(IDC_DRILL_WIDTH_EDIT,_T("单位:m"));
 	SetToolTip(IDC_DRILL_HEIGHT_EDIT,_T("单位:m"));
@@ -56,7 +57,7 @@ BOOL RcuEditDrillSiteDlg::OnInitDialog()
 	else
 	{
 		SetDlgItemText(IDOK, _T("更新钻场参数"));
-		m_locaCombBox.SetCurSel(m_leftOrRight);
+		m_locaCombBox.SetCurSel(m_pos);
 	}
 
 	//更新数据到界面
@@ -69,7 +70,7 @@ void RcuEditDrillSiteDlg::OnBnClickedOk()
 {
 	UpdateData( TRUE );
 
-	m_leftOrRight = m_locaCombBox.GetCurSel();
+	m_pos = m_locaCombBox.GetCurSel();
 
 	OnOK();
 }
@@ -77,13 +78,19 @@ void RcuEditDrillSiteDlg::OnBnClickedOk()
 void RcuEditDrillSiteDlg::writeToDataLink( DrillSiteLink& ds_link )
 {
 	ds_link.m_name = m_name;
-	ds_link.m_leftOrRight = m_leftOrRight;
+	ds_link.m_pos = m_pos;
 	ds_link.m_dist = m_dist;
-	ds_link.m_depth = m_depth;
+	ds_link.m_width = m_width;
 	ds_link.m_height = m_height;
 	ds_link.m_start = m_index;
-	ds_link.m_leftOrRight = m_leftOrRight;
-	ds_link.m_radius = m_radius;
+	ds_link.m_pos = m_pos;
+	ds_link.m_pore_size = m_pore_size;
+
+	if(m_pos == 2)
+	{
+		//迎头
+		ds_link.m_dist = 0;
+	}
 }
 
 void RcuEditDrillSiteDlg::readFromDataLink( DrillSiteLink& ds_link )
@@ -91,16 +98,16 @@ void RcuEditDrillSiteDlg::readFromDataLink( DrillSiteLink& ds_link )
 	if(m_drill_site.isNull()) return;
 
 	m_name = ds_link.m_name;
-	m_leftOrRight = ds_link.m_leftOrRight;
+	m_pos = ds_link.m_pos;
 	m_dist = ds_link.m_dist;
-	m_depth = ds_link.m_depth;
+	m_width = ds_link.m_width;
 	m_height = ds_link.m_height;
 	m_index = ds_link.m_start;
-	m_radius = ds_link.m_radius;
+	m_pore_size = ds_link.m_pore_size;
 
-	if(m_leftOrRight > 1 || m_leftOrRight < 0)
+	if(m_pos > 2 || m_pos < 0)
 	{
-		m_leftOrRight = 0;
+		m_pos = 0;
 	}
-	m_locaCombBox.SetCurSel(m_leftOrRight);
+	m_locaCombBox.SetCurSel(m_pos);
 }

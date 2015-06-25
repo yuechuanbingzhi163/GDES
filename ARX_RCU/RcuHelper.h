@@ -44,7 +44,7 @@ public:
 	//计算钻场的钻孔相对坐标(基点是钻场底帮点)
 	static bool CaculRelativeOpenPorePts(DrillSiteLink& ds_link, AcGePoint3dArray& pts);
 	//计算煤层的钻孔相对坐标(基点是煤层面的中心点)
-	static bool CaculRelativeClosePorePts(RockGateLink& rg_link, CoalSurfaceLink& cs_link, AcGePoint3dArray& pts);
+	static bool CaculRelativeClosePorePts(CoalSurfaceLink& cs_link, AcGePoint3dArray& pts);
 
 	//创建石门和煤层图元(rg_link和cs_link的数据会与新增的图元关联，并被更新到图元)
 	static bool CreateRockGate(const AcGePoint3d& pt, RockGateLink& rg_link, CoalSurfaceLink& cs_link);
@@ -55,11 +55,19 @@ public:
 	//创建与煤层关联的钻孔图元(终孔)
 	static bool CreateClosePores(const AcDbObjectId& coal_surf, CoalSurfaceLink& cs_link);
 
+	//根据钻场数据修改关联的图元(开孔)
+	static bool ModifyDrillSiteRelatedGEs(const AcDbObjectId& drill_site, DrillSiteLink& ds_link);
+	//根据石门数据修改关联的图元(煤层、钻场)
+	static bool ModifyRockGateRelatedGEs(const AcDbObjectId& rock_gate, RockGateLink& rg_link, CoalSurfaceLink& cs_link);
+
 	//修改钻场参数
-	static bool ModifyDrillSiteParam(const AcDbObjectId& drill_site, DrillSiteLink& ds_link);
-	//获取石门的几何插入点坐标
+	static bool ModifyDrillSitePt(const AcDbObjectId& drill_site, DrillSiteLink& ds_link);
+	//获取石门的插入点坐标
 	static bool GetRockGateInsertPt(const AcDbObjectId& rock_gate, AcGePoint3d& insertPt);
+	//获取煤层的插入点坐标
+	static bool GetCoalSurfInsertPt(const AcDbObjectId& coal_surf, AcGePoint3d& insertPt);
 	//设置钻场图元的2点坐标
 	static bool SetDrillSitePt(const AcDbObjectId& drill_site, const AcGePoint3d& insertPt, const AcGePoint3d& linkPt);
+	//获取钻场的2点坐标
 	static bool GetDrillSitePt(const AcDbObjectId& drill_site, AcGePoint3d& insertPt, AcGePoint3d& linkPt);
 };

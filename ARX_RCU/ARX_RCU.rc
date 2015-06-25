@@ -178,8 +178,8 @@ BEGIN
     LTEXT           "钻孔间距:",IDC_STATIC,8,50,36,8
     EDITTEXT        IDC_EDIT2,50,47,40,14,ES_AUTOHSCROLL
     DEFPUSHBUTTON   "确定并修改",IDOK,101,43,85,20
-    LTEXT           "钻孔半径:",IDC_STATIC,98,28,36,8
-    EDITTEXT        IDC_EDIT3,140,26,40,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "孔径:",IDC_STATIC,98,28,20,8
+    EDITTEXT        IDC_EDIT3,124,26,49,14,ES_AUTOHSCROLL | ES_READONLY
     LTEXT           "钻场位置:",IDC_STATIC,7,9,36,8
     LTEXT           "静态",IDC_DRILL_SITE_TEXT,49,9,138,8
 END
@@ -241,6 +241,7 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "刷新石门列表",                      ID_RCU_LIST_UPDATE
         MENUITEM "高亮定位煤层",                      ID_RCU_COAL_HILIGHT
+        MENUITEM "查看煤层参数",                      ID_RCU_COAL_SURF
     END
 END
 

@@ -57,27 +57,29 @@ public:
 	//////////////////////////////////////////////////////////////////
 
 	/**
-	 * 计算煤层面的投影宽度和高度也就是抽采范围的水平投影.
+	 * 计算煤层面的抽采范围
 	 * 由于我们假设迎头和煤层的走向是垂直的
-	 * 投影的宽度等于左右保护帮距加上巷道的宽度
-	 * 投影高度则要进行投影计算
+	 * 抽采范围的宽度等于左右保护帮距加上巷道的宽度
+	 * 抽采范围的高度计算则稍微麻烦一些
 	 */
 	void drillExtent(double& Lw, double& Lh)
 	{
-		//投影宽度
+		//抽采范围宽度
 		Lw = width + d1 + d2;
-		//投影高度
-		Lh = abs((height + f1 + f2)*cot(alpha));
+		//抽采范围高度
+		Lh = (height + f1 + f2)/sin(alpha);
 	}
 
-	//煤层面
-	bool drillSurface(AcGePoint3d& cnt, AcGeVector3d& normal)
+	//煤层面(需要4个数据才能确定一个煤层平面)
+	//平面上的一点cnt, 平面法向量normV, 煤层的走向向量headV, 煤层的倾向向量dipV
+	//类似3维坐标系的normV-Z, dipV-Y, headV-X
+	bool drillSurface(AcGePoint3d& cnt, AcGeVector3d& normV, AcGeVector3d& headV, AcGeVector3d& dipV)
 	{
 		//计算煤平面方程
 		AcGePlane plane1, plane2;
 		coalSurface(plane1, plane2);
 
-		//投影范围的中心点坐标
+		//抽采范围的中心点坐标
 		//计算出左上帮和右下帮对角点,这2点的中点即为矩形的中心点
 		AcGePoint3d left_top(-0.5*width-d1, 0, height+f1);
 		AcGePoint3d right_bottom(0.5*width+d2, 0, -1*f2);
@@ -91,11 +93,18 @@ public:
 
 		//2个交点的中点即为中心点
 		cnt = p1 + 0.5*(p2-p1);
-		//向水平面投影
-		cnt.z = 0;
-		//平面的法向量
-		normal = plane1.normal();
+		//平面法向量
+		normV = plane1.normal();
 		
+		//计算煤层的倾向向量
+		AcGeVector3d v(-AcGeVector3d::kYAxis);
+		v.rotateBy(-1*alpha, AcGeVector3d::kXAxis);
+		dipV = v;
+		
+		//计算煤层的走向向量
+		v.rotateBy(-0.5*PI, normV);
+		headV = v;
+
 		return true;
 	}
 

@@ -41,8 +41,10 @@ public:
 	// 删除/反删除多个对象实体(使用常规的Open/Close机制)
 	static void EraseObjects2(const AcDbObjectIdArray& objIds, Adesk::Boolean erasing);
 
-	// 对多个实体进行变换
+	// 对多个实体进行变换(使用事务)
 	static void TransformEntities(const AcDbObjectIdArray& objIds, const AcGeMatrix3d & xform);
+	// 对多个实体进行变换(使用常规的Open/Close机制)
+	static void TransformEntities2(const AcDbObjectIdArray& objIds, const AcGeMatrix3d & xform);
 
 	// 绘制多个图形
 	static void DrawEntities(const AcDbObjectIdArray& objIds, AcGiWorldDraw *mode);

@@ -1,5 +1,5 @@
 Pore	编号
-Pore	半径
+Pore	孔径
 Pore	$坐标
 DrillSite	名称
 DrillSite	位置
@@ -23,7 +23,9 @@ RockGate	下帮保护
 CoalSurface	厚度
 CoalSurface	倾角
 CoalSurface	钻孔抽采半径
-CoalSurface	$投影宽度
-CoalSurface	$投影高度
+CoalSurface	$抽采宽度
+CoalSurface	$抽采高度
 CoalSurface	$中心点坐标
 CoalSurface	$平面法向量
+CoalSurface	$煤层走向向量
+CoalSurface	$煤层倾向向量

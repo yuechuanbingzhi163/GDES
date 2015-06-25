@@ -381,57 +381,63 @@ public:
 		unloadArxModule( _T( "ArxSoUI" ) );
 	}
 
-	//static void VVTest_testVector()
-	//{
-	//    AcGeVector3d v1( 100, 20, 0 );
-	//    AcGeVector3d v2( 10, 50, 1 );
-	//    AcGeVector3d v3 = v1.crossProduct( v2 );
-	//    AcGeVector3d v4 = v2.crossProduct( v1 );
+	static void VVTest_testVector()
+	{
+		const double PI = 3.1415926535897932384626433832795;
+		AcGeVector3d v(AcGeVector3d::kXAxis);
+		v.rotateBy(PI/6, AcGeVector3d::kZAxis);
 
-	//    acutPrintf( _T( "\n叉乘z1=%.3f, z2:%.3f" ), v3.z, v4.z );
+		acutPrintf(_T("\n%.3f, %.3f, %.3f"), v.x, v.y, v.z);
+/*
+	    AcGeVector3d v1( 100, 20, 0 );
+	    AcGeVector3d v2( 10, 50, 1 );
+	    AcGeVector3d v3 = v1.crossProduct( v2 );
+	    AcGeVector3d v4 = v2.crossProduct( v1 );
 
-	//    AcGePoint3d p1, p2( 1, 1, 0 ), p3( 2, 0, 0 ), p4( 1, -1, 0 );
-	//    AcGeCircArc3d arc( p1, p2, p3 );
-	//    AcGeCircArc3d arc2( p3, p2, p1 );
-	//    AcGeCircArc3d arc3( p2, p4, p3 );
-	//    AcGeCircArc3d arc4( p1, p3, p4 );
+	    acutPrintf( _T( "\n叉乘z1=%.3f, z2:%.3f" ), v3.z, v4.z );
 
-	//    acutPrintf( _T( "\n弧线z1=%.3f, z2:%.3f" ), arc.normal().z, arc2.normal().z );
-	//    acutPrintf( _T( "\n[1]start angle:%.3f, end angle:%.3f" ), arc.startAng(), arc.endAng() );
-	//    acutPrintf( _T( "\n[2]start angle:%.3f, end angle:%.3f" ), arc2.startAng(), arc2.endAng() );
-	//    acutPrintf( _T( "\n[3]start angle:%.3f, end angle:%.3f" ), arc3.startAng(), arc3.endAng() );
-	//    acutPrintf( _T( "\n[4]start angle:%.3f, end angle:%.3f" ), arc4.startAng(), arc4.endAng() );
+	    AcGePoint3d p1, p2( 1, 1, 0 ), p3( 2, 0, 0 ), p4( 1, -1, 0 );
+	    AcGeCircArc3d arc( p1, p2, p3 );
+	    AcGeCircArc3d arc2( p3, p2, p1 );
+	    AcGeCircArc3d arc3( p2, p4, p3 );
+	    AcGeCircArc3d arc4( p1, p3, p4 );
 
-	//    AcGeVector3d v5( 0, -1, 0 ), v6( 0, 1, 0 );
-	//    double a1 = v5.angleTo( AcGeVector3d::kXAxis, -AcGeVector3d::kZAxis );
-	//    double a2 = v6.angleTo( AcGeVector3d::kXAxis, -AcGeVector3d::kZAxis );
+	    acutPrintf( _T( "\n弧线z1=%.3f, z2:%.3f" ), arc.normal().z, arc2.normal().z );
+	    acutPrintf( _T( "\n[1]start angle:%.3f, end angle:%.3f" ), arc.startAng(), arc.endAng() );
+	    acutPrintf( _T( "\n[2]start angle:%.3f, end angle:%.3f" ), arc2.startAng(), arc2.endAng() );
+	    acutPrintf( _T( "\n[3]start angle:%.3f, end angle:%.3f" ), arc3.startAng(), arc3.endAng() );
+	    acutPrintf( _T( "\n[4]start angle:%.3f, end angle:%.3f" ), arc4.startAng(), arc4.endAng() );
 
-	//    acutPrintf( _T( "\na1:%.3f, a2:%.3f" ), a1, a2 );
+	    AcGeVector3d v5( 0, -1, 0 ), v6( 0, 1, 0 );
+	    double a1 = v5.angleTo( AcGeVector3d::kXAxis, -AcGeVector3d::kZAxis );
+	    double a2 = v6.angleTo( AcGeVector3d::kXAxis, -AcGeVector3d::kZAxis );
 
-	//    ads_point pt1, pt2, pt3, pt4;
-	//    ads_name ssname;
-	//    pt1[X] = pt1[Y] = pt1[Z] = 0.0;
-	//    pt2[X] = pt2[Y] = 5.0;
-	//    pt2[Z] = 0.0;
+	    acutPrintf( _T( "\na1:%.3f, a2:%.3f" ), a1, a2 );
 
-	//    // Get the current PICKFIRST set, if there is one;
-	//    // otherwise, ask the user for a general entity selection.
-	//    acedSSGet( _T( ":S" ), NULL, NULL, NULL, ssname );
+	    ads_point pt1, pt2, pt3, pt4;
+	    ads_name ssname;
+	    pt1[X] = pt1[Y] = pt1[Z] = 0.0;
+	    pt2[X] = pt2[Y] = 5.0;
+	    pt2[Z] = 0.0;
 
-	//    acutPrintf( _T( "\nxxx\n" ) );
-	//    //acedSSGet(NULL, NULL, NULL, NULL, ssname);
+	    // Get the current PICKFIRST set, if there is one;
+	    // otherwise, ask the user for a general entity selection.
+	    acedSSGet( _T( ":S" ), NULL, NULL, NULL, ssname );
 
-		//AcGeVector3d v(-1, 1, 0);
-		//acutPrintf(_T("\n...........\n"));
-		//acutPrintf(_T("\n投影前:(%.3f, %.3f, %.3f)"), v.x, v.y, v.z);
+	    acutPrintf( _T( "\nxxx\n" ) );
+	    //acedSSGet(NULL, NULL, NULL, NULL, ssname);
 
-		//v = v.dotProduct( AcGeVector3d::kXAxis ) * AcGeVector3d::kXAxis;
-		//acutPrintf(_T("\n投影后:(%.3f, %.3f, %.3f)"), v.x, v.y, v.z);
+		AcGeVector3d v(-1, 1, 0);
+		acutPrintf(_T("\n...........\n"));
+		acutPrintf(_T("\n投影前:(%.3f, %.3f, %.3f)"), v.x, v.y, v.z);
 
-	//}
+		v = v.dotProduct( AcGeVector3d::kXAxis ) * AcGeVector3d::kXAxis;
+		acutPrintf(_T("\n投影后:(%.3f, %.3f, %.3f)"), v.x, v.y, v.z);
+*/
+	}
 
 } ;
 
 IMPLEMENT_ARX_ENTRYPOINT( CVVLoaderApp )
 
-//ACED_ARXCOMMAND_ENTRY_AUTO( CVVLoaderApp, VVTest, _testVector, tvec, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CVVLoaderApp, VVTest, _testVector, tvec, ACRX_CMD_TRANSPARENT, NULL )

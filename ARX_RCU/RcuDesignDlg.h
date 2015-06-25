@@ -53,6 +53,7 @@ public:
 	afx_msg void OnHilightRockGateCommand();
 	afx_msg void OnUpdateRockGateListCommand();
 	afx_msg void OnHilightCoalSurfCommand();
+	afx_msg void OnDisplayCoalSurfCommand();
 
 	//钻场列表右键菜单项消息响应
 	afx_msg void OnAddDrillSiteCommand();

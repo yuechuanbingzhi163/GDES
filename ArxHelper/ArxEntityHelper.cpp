@@ -62,25 +62,41 @@ void ArxEntityHelper::EraseObjects2( const AcDbObjectIdArray& objIds, Adesk::Boo
     }
 }
 
-void ArxEntityHelper::TransformEntities( const AcDbObjectIdArray& objIds, const AcGeMatrix3d& xform )
+void ArxEntityHelper::TransformEntities2( const AcDbObjectIdArray& objIds, const AcGeMatrix3d& xform )
 {
     if( objIds.isEmpty() ) return;
 
-    AcTransaction* pTrans = actrTransactionManager->startTransaction();
-    if( pTrans == 0 ) return;
-
-    int len = objIds.length();
+	int len = objIds.length();
     for( int i = 0; i < len; i++ )
     {
-        AcDbObject* pObj;
-        if( Acad::eOk != pTrans->getObject( pObj, objIds[i], AcDb::kForWrite ) ) continue;
-
-        AcDbEntity* pEnt = AcDbEntity::cast( pObj );
-        if( pEnt == 0 ) continue;
-
-        pEnt->transformBy( xform );
+		AcDbEntity* pEnt;
+		if( Acad::eOk == acdbOpenAcDbEntity( pEnt, objIds[i], AcDb::kForWrite ) )
+		{
+			pEnt->transformBy( xform );
+			pEnt->close();
+		}
     }
-    actrTransactionManager->endTransaction();
+}
+
+void ArxEntityHelper::TransformEntities( const AcDbObjectIdArray& objIds, const AcGeMatrix3d& xform )
+{
+	if( objIds.isEmpty() ) return;
+
+	AcTransaction* pTrans = actrTransactionManager->startTransaction();
+	if( pTrans == 0 ) return;
+
+	int len = objIds.length();
+	for( int i = 0; i < len; i++ )
+	{
+		AcDbObject* pObj;
+		if( Acad::eOk != pTrans->getObject( pObj, objIds[i], AcDb::kForWrite ) ) continue;
+
+		AcDbEntity* pEnt = AcDbEntity::cast( pObj );
+		if( pEnt == 0 ) continue;
+
+		pEnt->transformBy( xform );
+	}
+	actrTransactionManager->endTransaction();
 }
 
 void ArxEntityHelper::DrawEntities( const AcDbObjectIdArray& objIds, AcGiWorldDraw* mode )

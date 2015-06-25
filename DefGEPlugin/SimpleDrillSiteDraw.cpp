@@ -54,39 +54,51 @@ void SimpleDrillSiteDraw::regPropertyDataNames( AcStringArray& names ) const
     names.append( _T( "名称" ) );
     names.append( _T( "深度" ) );
 	names.append( _T( "高度" ) );
-	//names.append( _T( "坐标" ) );
+	names.append( _T( "与迎头的距离" ) );
+	names.append( _T( "位置" ) );
 }
 
 void SimpleDrillSiteDraw::readPropertyDataFromGE( const AcStringArray& values )
 {
-    m_id = values[0].kACharPtr();
+    m_name = values[0].kACharPtr();
 	m_width = abs(_tstof(values[1].kACharPtr()));
 	m_height = abs(_tstof(values[2].kACharPtr()));
-	//ArxUtilHelper::StringToPoint3d(values[3].kACharPtr(), m_insertPt);
+	m_dist = abs(_tstof(values[3].kACharPtr()));
+	m_pos = abs(_tstoi(values[4].kACharPtr()));
 }
 
 Adesk::Boolean SimpleDrillSiteDraw::subWorldDraw( AcGiWorldDraw* mode )
 {
     assertReadEnabled () ;
 
-	DrawLine(mode, m_insertPt, m_linkPt);
+	//如果距离小于1m，则不绘制钻场的引线
+	//if(m_dist > 1.0)
+	//{
+		DrawLine(mode, m_insertPt, m_linkPt);
+	//}
 
-	AcGeVector3d v = m_linkPt-m_insertPt;
+	AcGeVector3d v = m_linkPt - m_insertPt;
 
 	//向量v在x轴上的投影
 	AcGeVector3d v1 = v.dotProduct( AcGeVector3d::kXAxis ) * AcGeVector3d::kXAxis;
 	v1.normalize();
+	if(v1.y < 0) v1.negate();
 
 	//向量v在y轴上的投影
 	AcGeVector3d v2 = v.dotProduct( AcGeVector3d::kYAxis ) * AcGeVector3d::kYAxis;
 	v2.normalize();
+	if(v2.y < 0) v2.negate();
 
-	if(v2.isZeroLength())
-	{
-		v2 = AcGeVector3d::kYAxis;
-	}
 	//求矩形的中心点坐标
-	AcGePoint3d pt = m_linkPt + v1*m_width/2 + v2*m_height/2;
+	AcGePoint3d pt = m_linkPt;
+	if(m_pos == 2)
+	{
+		pt += v2*m_height*0.5;
+	}
+	else
+	{
+		pt += v1*m_width*0.5;
+	}
 
 	//计算角度
 	//double angle = v1.angleTo(AcGeVector3d::kXAxis, -AcGeVector3d::kZAxis);
@@ -110,13 +122,13 @@ Acad::ErrorStatus SimpleDrillSiteDraw::subMoveGripPointsAt ( const AcDbIntArray&
 {
     assertWriteEnabled () ;
 
-	    for( int i = 0; i < indices.length(); i++ )
+	for( int i = 0; i < indices.length(); i++ )
     {
         int idx = indices.at( i );
 
         if ( idx == 0 )
         {
-   //         m_insertPt += offset;
+			//m_insertPt += offset;
 			//m_linkPt += offset;
         }
 

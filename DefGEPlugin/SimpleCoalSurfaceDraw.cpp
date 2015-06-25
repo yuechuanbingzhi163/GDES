@@ -55,9 +55,9 @@ void SimpleCoalSurfaceDraw::writeExtraParam( DrawParamWriter& writer )
 
 void SimpleCoalSurfaceDraw::regPropertyDataNames( AcStringArray& names ) const
 {
-    names.append( _T( "$投影宽度" ) );
-    names.append( _T( "$投影高度" ) );
-	//names.append( _T( "迎头煤层投影点坐标" ) );
+    names.append( _T( "$抽采宽度" ) );
+    names.append( _T( "$抽采高度" ) );
+	//names.append( _T( "中心点坐标" ) );
 }
 
 void SimpleCoalSurfaceDraw::readPropertyDataFromGE( const AcStringArray& values )
@@ -88,8 +88,8 @@ Acad::ErrorStatus SimpleCoalSurfaceDraw::subGetGripPoints( AcGePoint3dArray& gri
 {
     assertReadEnabled () ;
 
-	AcGeVector3d v(m_width*0.5, -m_height*0.5, 0);
-	gripPoints.append(m_insertPt+v);
+	//AcGeVector3d v(m_width*0.5, -m_height*0.5, 0);
+	gripPoints.append(m_insertPt);
 
     return Acad::eOk;
 }
