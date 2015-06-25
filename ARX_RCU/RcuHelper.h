@@ -17,6 +17,8 @@ public:
 	static void GetRelatedOpenPores(const AcDbObjectId& drill_site, AcDbObjectIdArray& pores);
 	//删除与钻场关联的所有钻孔
 	static void ClearRelatedOpenPores(const AcDbObjectId& drill_site);
+	//删除与煤层关联的所有钻孔
+	static void ClearRelatedClosePores(const AcDbObjectId& coal_surf);
 
 	//从石门中提取数据
 	static bool ReadRockGateData(const AcDbObjectId& rock_gate, RockGateLink& rg_link);
@@ -59,6 +61,8 @@ public:
 	static bool ModifyDrillSiteRelatedGEs(const AcDbObjectId& drill_site, DrillSiteLink& ds_link);
 	//根据石门数据修改关联的图元(煤层、钻场)
 	static bool ModifyRockGateRelatedGEs(const AcDbObjectId& rock_gate, RockGateLink& rg_link, CoalSurfaceLink& cs_link);
+	//根据煤层数据修改关联的图元(终孔)
+	static bool ModifyCoalSurfRelatedGEs(const AcDbObjectId& coal_surf, CoalSurfaceLink& cs_link);
 
 	//修改钻场参数
 	static bool ModifyDrillSitePt(const AcDbObjectId& drill_site, DrillSiteLink& ds_link);

@@ -533,6 +533,8 @@ void RcuDesignDlg::OnModifyRockGateCommand()
 	//从对话框中更新数据
 	if(UpdateRockGateDataFromDlg(pData1->objId, rg_link, cs_link))
 	{
+		if(!RcuHelper::ModifyRockGateRelatedGEs(pData1->objId, rg_link, cs_link)) return;
+
 		//修改当前选中石门的数据
 		ModifyRockGateToListCtrl(m_list, row1, rg_link);
 		//acutPrintf(_T("\n计算之前->宽度:%.4lf\t高度:%.4lf\n"),cs_link.m_width,cs_link.m_height);
@@ -752,7 +754,7 @@ void RcuDesignDlg::OnModifyDrillSiteCommand()
 	//调用对话框更新钻场数据
 	if(!UpdateDrillSiteDataFromDlg(pData2->objId, ds_link)) return;
 
-	//修改关联的钻孔
+	//修改钻场关联的图元
 	if(!RcuHelper::ModifyDrillSiteRelatedGEs(pData2->objId, ds_link)) return;
 
 	//向list1中插入一行石门数据

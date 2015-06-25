@@ -117,6 +117,17 @@ void RcuHelper::ClearRelatedOpenPores(const AcDbObjectId& drill_site)
 	ArxEntityHelper::EraseObjects2(pores, Adesk::kTrue);
 }
 
+void RcuHelper::ClearRelatedClosePores(const AcDbObjectId& coal_surf)
+{
+	//查找所有与钻场关联的钻孔
+	AcDbObjectIdArray pores;
+	RcuHelper::GetRelatedOpenPores(coal_surf, pores);
+	if(pores.isEmpty()) return;
+
+	//删除钻孔
+	ArxEntityHelper::EraseObjects2(pores, Adesk::kTrue);
+}
+
 bool RcuHelper::ReadRockGateData(const AcDbObjectId& rock_gate, RockGateLink& rg_link)
 {
 	if(rock_gate.isNull()) return false;
@@ -487,8 +498,6 @@ bool RcuHelper::CreateDrillSite(const AcDbObjectId& rock_gate, DrillSiteLink& ds
 		AfxMessageBox(_T("提取石门数据发生错误!"));
 		return false;
 	}
-	//获取石门迎头的基点真实坐标
-	AcGePoint3d origin = rg_link.m_pt;
 
 	//计算钻场插入坐标和连接坐标
 	AcGePoint3d insertPt, linkPt, rgInsertPt;
@@ -515,7 +524,7 @@ bool RcuHelper::CreateDrillSite(const AcDbObjectId& rock_gate, DrillSiteLink& ds
 
 	//更新钻场的实际底帮坐标
 	AcGePoint3d tmp_pt;
-	RcuHelper::CaculDrillSitePt(ds_link, rg_link, origin, ds_link.m_pt, tmp_pt);
+	RcuHelper::CaculDrillSitePt(ds_link, rg_link, rg_link.m_pt, ds_link.m_pt, tmp_pt);
 
 	//关联图元并更新
 	ds_link.setDataSource(pDS->objectId());
@@ -646,7 +655,47 @@ bool RcuHelper::ModifyDrillSiteRelatedGEs(const AcDbObjectId& drill_site, DrillS
 	return CreateOpenPores(drill_site, ds_link);
 }
 
+bool RcuHelper::ModifyCoalSurfRelatedGEs(const AcDbObjectId& coal_surf, CoalSurfaceLink& cs_link)
+{
+	return CreateClosePores(coal_surf, cs_link);
+}
+
 bool RcuHelper::ModifyRockGateRelatedGEs(const AcDbObjectId& rock_gate, RockGateLink& rg_link, CoalSurfaceLink& cs_link)
 {
-	return false;
+	//查找石门关联的煤层
+	AcDbObjectId coal_surf;
+	RcuHelper::GetRelatedCoalSurface(rock_gate, coal_surf);
+	if(coal_surf.isNull()) return false;
+
+	//重新计算煤层参数
+	if(!RcuHelper::CaculCoalSurfParam(rg_link, cs_link)) return false;
+
+	//更新数据到煤层图元里
+	if(!cs_link.updateData(true)) return false;
+
+	//修改煤层关联的图元
+	if(!ModifyCoalSurfRelatedGEs(coal_surf, cs_link)) return false;
+
+	//查找石门关联的钻场
+	AcDbObjectIdArray drill_sites;
+	RcuHelper::GetRelatedDrillSites(rock_gate, drill_sites);
+	for(int i=0;i<drill_sites.length();i++)
+	{
+		DrillSiteLink ds_link;
+		ds_link.setDataSource(drill_sites[i]);
+		ds_link.updateData(false);
+
+		//更新钻场的实际底帮坐标
+		AcGePoint3d tmp_pt;
+		RcuHelper::CaculDrillSitePt(ds_link, rg_link, rg_link.m_pt, ds_link.m_pt, tmp_pt);
+
+		//更新数据到钻场图元里
+		if(ds_link.updateData(true))
+		{
+			//修改钻场关联的图元
+			ModifyDrillSiteRelatedGEs(drill_sites[i], ds_link);
+		}
+	}
+
+	return true;
 }
