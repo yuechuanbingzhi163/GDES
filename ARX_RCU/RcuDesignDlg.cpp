@@ -297,8 +297,6 @@ void RcuDesignDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
 	ON_BN_CLICKED(IDC_BUTTON4, &RcuDesignDlg::OnBnClickedExport)
-	ON_BN_CLICKED(IDC_BUTTON1, &RcuDesignDlg::OnBnClickedDesignClosePores)
-	ON_BN_CLICKED(IDC_BUTTON2, &RcuDesignDlg::OnBnClickedDesignOpenPores)
 
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST1, &RcuDesignDlg::OnLvnItemchangedList1)
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST1, &RcuDesignDlg::OnNMDblclkList1)
@@ -310,6 +308,7 @@ BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
 	ON_COMMAND(ID_RCU_LIST_UPDATE, &RcuDesignDlg::OnUpdateRockGateListCommand)
 	ON_COMMAND(ID_RCU_COAL_HILIGHT, &RcuDesignDlg::OnHilightCoalSurfCommand)
 	ON_COMMAND(ID_RCU_COAL_SURF, &RcuDesignDlg::OnDisplayCoalSurfCommand)
+	ON_COMMAND(ID_COAL_SURF_PORE_DESIGN, &RcuDesignDlg::OnDesiginClosePoresCommand)
 
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST3, &RcuDesignDlg::OnNMDblclkList2)
 	ON_NOTIFY(NM_RCLICK, IDC_LIST3, &RcuDesignDlg::OnNMRclickList2)
@@ -317,6 +316,8 @@ BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
 	ON_COMMAND(IDR_DRILL_SITE_DELETE, &RcuDesignDlg::OnDeleteDrillSiteCommand)
 	ON_COMMAND(IDR_DRILL_SITE_MODIFY, &RcuDesignDlg::OnModifyDrillSiteCommand)
 	ON_COMMAND(IDR_DRILL_SITE_HILIGHT, &RcuDesignDlg::OnHilightDrillSiteCommand)
+	ON_COMMAND(IDR_DRILL_SITE_PORE_DESIGN, &RcuDesignDlg::OnDesiginOpenPoresCommand)
+	ON_COMMAND(IDR_DRILL_SITE_PORE_CLEAR, &RcuDesignDlg::OnClearOpenPoresCommand)
 
 	ON_MESSAGE(WM_RCU_ADD, &RcuDesignDlg::OnRcuAddMessage)
 	ON_MESSAGE(WM_RCU_DEL, &RcuDesignDlg::OnRcuDelMessage)
@@ -783,12 +784,7 @@ void RcuDesignDlg::OnHilightDrillSiteCommand()
 	}
 }
 
-void RcuDesignDlg::OnBnClickedDesignClosePores()
-{
-	MessageBox(_T("暂不考虑终孔设计!"));
-}
-
-void RcuDesignDlg::OnBnClickedDesignOpenPores()
+void RcuDesignDlg::OnDesiginOpenPoresCommand()
 {
 	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
 	int row2 = ListCtrlHelper::GetCurSelOfList(m_list2);
@@ -818,6 +814,45 @@ void RcuDesignDlg::OnBnClickedDesignOpenPores()
 	{
 		//更新钻场列表中的数据
 		ModifyDrillSiteToListCtrl(m_list2, row2, ds_link);
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
+	}
+}
+
+void RcuDesignDlg::OnClearOpenPoresCommand()
+{
+	int row2 = ListCtrlHelper::GetCurSelOfList(m_list2);
+	if(row2 != LB_ERR)
+	{
+		ItemData* pData2 = (ItemData*)m_list2.GetItemData(row2);
+
+		//文档锁切换
+		DocumentLockSwitch lock_switch;
+
+		//删除这个钻场的所有钻孔
+		RcuHelper::ClearRelatedOpenPores(pData2->objId);
+
+		//cad窗口获取焦点
+		acedGetAcadFrame()->SetFocus();
+	}
+}
+
+void RcuDesignDlg::OnDesiginClosePoresCommand()
+{
+	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
+	if(row1 != LB_ERR)
+	{
+		ItemData* pData1 = ( ItemData* )m_list.GetItemData( row1 );
+
+		//文档锁切换
+		DocumentLockSwitch lock_switch;
+
+		AcDbObjectId coal_surf;
+		RcuHelper::GetRelatedCoalSurface(pData1->objId, coal_surf);
+
+		//删除所有的煤层钻孔
+		RcuHelper::ClearRelatedClosePores(coal_surf);
+		
 		//cad窗口获取焦点
 		acedGetAcadFrame()->SetFocus();
 	}

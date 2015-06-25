@@ -36,7 +36,6 @@
 #define IDC_EDIT14                      115
 #define IDC_BUTTON1                     115
 #define IDC_EDIT15                      116
-#define IDC_BUTTON2                     116
 #define IDC_EDIT16                      117
 #define IDC_DRILL_SITE_TEXT             117
 #define IDC_EDIT17                      118
@@ -62,13 +61,20 @@
 #define ID_32797                        32797
 #define ID_RCU_COAL_SURF                32798
 #define ID_32799                        32799
+#define ID_32800                        32800
+#define IDR_DRILL_SITE_PORE_DESIGN      32801
+#define ID_32802                        32802
+#define ID_32803                        32803
+#define ID_COAL_SURF_PORE_DESIGN        32804
+#define ID_32805                        32805
+#define IDR_DRILL_SITE_PORE_CLEAR       32806
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        121
-#define _APS_NEXT_COMMAND_VALUE         32800
+#define _APS_NEXT_COMMAND_VALUE         32807
 #define _APS_NEXT_CONTROL_VALUE         121
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
