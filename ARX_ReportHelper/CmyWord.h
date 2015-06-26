@@ -63,7 +63,8 @@ public:
     void CloseApp();   
   
     //**********************文本书写操作*****************************************  
-    void WriteText(CString szText);        //当前光标处写文本  
+    void WriteText(CString szText);        //当前光标处写文本 
+	void SetFont(CString fonName,int fontSize);
     void WriteNewLineText(CString szText, int nLineCount = 1); //换N行写字  
     void WriteEndLine(CString szText);    //文档结尾处写文本  
     void WholeStory();                    //全选文档内容  

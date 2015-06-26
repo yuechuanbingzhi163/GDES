@@ -712,4 +712,11 @@ void CmyWord::SetSeekView(const CString& text,long align, long currentView, cons
 	mPane.ReleaseDispatch();
 }
 
+void CmyWord::SetFont( CString fonName,int fontSize )
+{
+	_Font font = m_wdSel.GetFont();
+	font.SetSize(fontSize);
+	font.SetName(fonName);
+	m_wdSel.SetFont(font);
+}
 CmyWord* MyWord = 0;

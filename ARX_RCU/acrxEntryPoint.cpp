@@ -2,6 +2,7 @@
 #include "resource.h"
 #include "ReactorHelper.h"
 #include "UIHelper.h"
+#include "../ARX_ReportHelper/ReportHelper.h"
 
 #ifndef ARX_RCU_SERVICE_NAME
 #define ARX_RCU_SERVICE_NAME _T("ARX_RCU_SERVICE_NAME")
@@ -66,10 +67,14 @@ public:
 
 	virtual void RegisterServerComponents () {
 	}
-
 	static void JL_RCUDlg()
 	{
 		UIHelper::ShowRcuDesignDockBar();
+	}
+
+	static void JL_RCUReport()
+	{
+		ReportHelper::CreatRCUReport();
 	}
 
 } ;
@@ -78,3 +83,4 @@ public:
 IMPLEMENT_ARX_ENTRYPOINT(CARX_RCUApp)
 
 ACED_ARXCOMMAND_ENTRY_AUTO( CARX_RCUApp, JL, _RCUDlg, RCUDlg, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CARX_RCUApp, JL, _RCUReport, RCUReport, ACRX_CMD_TRANSPARENT, NULL )
