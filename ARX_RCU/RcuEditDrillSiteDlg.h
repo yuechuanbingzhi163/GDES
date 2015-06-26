@@ -31,10 +31,10 @@ private:
 	// 钻场名称
 	CString m_name;
 	// 钻场位置
-	int m_leftOrRight;
+	int m_pos;
 	// 钻场位置下拉框
 	CComboBox m_locaCombBox;
-	// 钻场宽度
+	// 钻场深度
 	double m_width;
 	// 钻场高度
 	double m_height;
@@ -42,6 +42,8 @@ private:
 	double m_dist;
 	// 起始编号
 	int m_index;
+	//孔径
+	double m_pore_size;
 
 public:
 	afx_msg void OnBnClickedOk();

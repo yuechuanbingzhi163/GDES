@@ -4,10 +4,12 @@
 #include "config.h"
 #include "DataHelperImpl.h"
 #include "CurDrawTool.h"
+#include "HelperClass.h"
 
 #include "../MineGEDraw/MineGEDraw_Jig.h"
 #include "../MineGEDraw/MineGEDrawSystem.h"
 #include "../ArxDbgXdata/ArxDbgXdata.h"
+#include "../ArxHelper/HelperClass.h"
 
 static bool HasDataObject( const AcDbObjectId& dictId )
 {
@@ -67,19 +69,19 @@ static AcDbObjectId GetDataObject( const AcDbObjectId& dictId )
 }
 
 // 对图元关联的所有标签图元进行变换(可见图元，不包括已删除掉的图元)
-//static void TransformAllTagGE( const AcDbObjectId& objId, const AcGeMatrix3d & xform )
-//{
-//	AcDbObjectIdArray objIds;
-//	DrawHelper::GetAllTagGEById(objId, objIds);
-//	ArxEntityHelper::TransformEntities(objIds, xform);
-//}
+static void TransformAllTagGE( const AcDbObjectId& objId, const AcGeMatrix3d & xform )
+{
+	AcDbObjectIdArray objIds;
+	DrawHelper::GetAllTagGEById(objId, objIds);
+	ArxEntityHelper::TransformEntities2(objIds, xform);
+}
 
 Adesk::UInt32 MineGE::kCurrentVersionNumber = 1 ;
 
 // 有修改，使得MineGE成为抽象类
 ACRX_NO_CONS_DEFINE_MEMBERS ( MineGE, AcDbEntity )
 
-MineGE::MineGE() : m_pCurrentGEDraw( 0 )
+MineGE::MineGE() : m_pCurrentGEDraw( 0 ), m_bFollow(false)
 {
     //acutPrintf(_T("\nMineGE::MineGE()..."));
 }
@@ -471,6 +473,7 @@ Acad::ErrorStatus MineGE::dwgOutFields( AcDbDwgFiler* pFiler ) const
         return ( es ) ;
 
     pFiler->writeSoftPointerId( m_dataObjectId );
+	pFiler->writeBool(m_bFollow);
 
     return ( pFiler->filerStatus () ) ;
 }
@@ -499,6 +502,8 @@ Acad::ErrorStatus MineGE::dwgInFields( AcDbDwgFiler* pFiler )
     AcDbSoftPointerId id;
     pFiler->readSoftPointerId( &id );
     m_dataObjectId = id;
+
+	pFiler->readBool(&m_bFollow);
 
     initDraw();
 
@@ -630,7 +635,7 @@ Acad::ErrorStatus MineGE::subTransformBy( const AcGeMatrix3d& xform )
     updateDrawParam( true );
 
     // 4、将附带所有的TagGE
-    //TransformAllTagGE(objectId(), xform);
+	transformAllTagGE(xform);
 
     return Acad::eOk;
 }
@@ -694,7 +699,7 @@ Acad::ErrorStatus MineGE::subMoveGripPointsAt ( const AcDbIntArray& indices, con
 
     // 所有的标签图元也进行变换
     // 变换结果偏差较大，不建议在程序中使用
-    //TransformAllTagGE(objectId(), AcGeMatrix3d::translation(offset));
+	transformAllTagGE(AcGeMatrix3d::translation(offset));
 
     return Acad::eOk;
 }
@@ -750,4 +755,18 @@ Acad::ErrorStatus MineGE::subClose( void )
         initPropertyData();
     }
     return es;
+}
+
+void MineGE::transformAllTagGE(const AcGeMatrix3d& xform)
+{
+	if(m_bFollow)
+	{
+		TransformAllTagGE(this->objectId(), xform);
+	}
+}
+
+void MineGE::enableFollow(bool bFollow)
+{
+	assertWriteEnabled () ;
+	m_bFollow = bFollow;
 }

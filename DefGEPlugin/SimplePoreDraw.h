@@ -43,7 +43,7 @@ public:
 	//key param
 	AcGePoint3d m_insertPt;   // ²åÈëµã×ø±ê
 	//data
-	double m_radius;          // ¿×¾¶
+	double m_pore_size;          // ¿×¾¶
 	CString m_id;             // ±àºÅ
 } ;
 

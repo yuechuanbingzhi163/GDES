@@ -41,6 +41,8 @@ protected:
 	void linkDoubleData(const CString& field, double* pValue);
 	void linkBoolData(const CString& field, bool* pValue);
 	void linkDateTimeData(const CString& field, COleDateTime* pValue);
+	void linkPointData(const CString& field, AcGePoint3d* pValue);
+	void linkVectorData(const CString& field, AcGeVector3d* pValue);
 
 private:
 	void initDatas();

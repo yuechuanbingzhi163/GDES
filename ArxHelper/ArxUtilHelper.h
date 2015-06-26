@@ -75,6 +75,9 @@ public:
 	static CString Point3dToString(const AcGePoint3d& pt);
 	static bool StringToPoint3d(const CString& value, AcGePoint3d& pt);
 
+	static CString Vector3dToString(const AcGeVector3d& v);
+	static bool StringToVector3d(const CString& value, AcGeVector3d& v);
+
 	//分隔字符串
 	// tokens表示分隔符(可以有多个分隔符)
 	static void SplitCString(const CString& str, const CString& tokens, CStringArray& values);

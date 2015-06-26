@@ -17,13 +17,13 @@ RcuEditRockGateDlg::RcuEditRockGateDlg(CWnd* pParent /*=NULL*/)
 	, m_length(500)
 	, m_width(4)
 	, m_height(5)
-	, m_left(8)
-	, m_right(8)
-	, m_top(8)
-	, m_bottom(8)
-	, m_radius(0.08)
+	, m_left(15)
+	, m_right(15)
+	, m_top(10)
+	, m_bottom(10)
+	, m_gas_radius(3)
 	, m_thick(3)
-	, m_angle(3)
+	, m_angle(8)
 	, m_dist(50)
 {
 
@@ -46,7 +46,7 @@ void RcuEditRockGateDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT11, m_right);
 	DDX_Text(pDX, IDC_EDIT12, m_top);
 	DDX_Text(pDX, IDC_EDIT13, m_bottom);
-	DDX_Text(pDX, IDC_EDIT17, m_radius);
+	DDX_Text(pDX, IDC_EDIT17, m_gas_radius);
 	DDX_Text(pDX, IDC_EDIT14, m_thick);
 	DDX_Text(pDX, IDC_EDIT15, m_angle);
 	DDX_Text(pDX, IDC_EDIT16, m_dist);
@@ -109,7 +109,6 @@ void RcuEditRockGateDlg::exchangeRockGateData(RockGateLink& rg_link, bool save)
 	{
 		//从对话框界面提取数据
 		rg_link.m_name = m_name;
-		rg_link.m_radius = m_radius;
 		rg_link.m_length = m_length;
 		rg_link.m_width = m_width;
 		rg_link.m_height = m_height;
@@ -117,14 +116,13 @@ void RcuEditRockGateDlg::exchangeRockGateData(RockGateLink& rg_link, bool save)
 		rg_link.m_right = m_right;
 		rg_link.m_top = m_top;
 		rg_link.m_bottom = m_bottom;
-		rg_link.m_pt = ArxUtilHelper::Point3dToString(AcGePoint3d(m_x, m_y, m_z));
+		rg_link.m_pt = AcGePoint3d(m_x, m_y, m_z);
 		rg_link.m_dist = m_dist;
 	}
 	else
 	{
 		//给对话框界面赋值
 		m_name = rg_link.m_name;
-		m_radius = rg_link.m_radius;
 		m_length = rg_link.m_length;
 		m_width = rg_link.m_width;
 		m_height = rg_link.m_height;
@@ -132,8 +130,7 @@ void RcuEditRockGateDlg::exchangeRockGateData(RockGateLink& rg_link, bool save)
 		m_right = rg_link.m_right;
 		m_top = rg_link.m_top;
 		m_bottom = rg_link.m_bottom;
-		AcGePoint3d pt;
-		ArxUtilHelper::StringToPoint3d(rg_link.m_pt, pt);
+		AcGePoint3d pt = rg_link.m_pt;
 		m_x = pt.x; m_y = pt.y; m_z = pt.z;
 		m_dist = rg_link.m_dist;
 	}
@@ -146,12 +143,14 @@ void RcuEditRockGateDlg::exchangeCoalSurfaceData(CoalSurfaceLink& cs_link, bool 
 		//从对话框界面提取数据
 		cs_link.m_thick = m_thick;
 		cs_link.m_angle = m_angle;
+		cs_link.m_gas_radius = m_gas_radius;
 	}
 	else
 	{
 		//给对话框界面赋值
 		m_thick = cs_link.m_thick;
 		m_angle = cs_link.m_angle;
+		m_gas_radius = cs_link.m_gas_radius;
 	}
 }
 

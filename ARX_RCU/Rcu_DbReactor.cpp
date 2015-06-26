@@ -63,7 +63,7 @@ void Rcu_DbReactor::objectAppended(const AcDbDatabase* dwg, const AcDbObject* db
 	AcDbDatabaseReactor::objectAppended(dwg, dbObj);
 	if(dbObj->isKindOf(RockGate::desc()) || dbObj->isKindOf(RcuGE::desc()))
 	{
-		acutPrintf(_T("\nRcu_DbReactor::objectAppended..."));
+		//acutPrintf(_T("\nRcu_DbReactor::objectAppended..."));
 		ArxMsg msgParam = { dbObj->isA()->name(), dbObj->objectId() };
 		UIHelper::SendMessage(WM_RCU_ADD, &msgParam);
 	}
@@ -108,7 +108,7 @@ void Rcu_DbReactor::objectErased( const AcDbDatabase* dwg, const AcDbObject* dbO
 	AcDbDatabaseReactor::objectErased ( dwg, dbObj, pErased );
 	if(dbObj->isKindOf(RockGate::desc()) || dbObj->isKindOf(RcuGE::desc()))
 	{
-		acutPrintf(_T("\nRcu_DbReactor::objectErased..."));
+		//acutPrintf(_T("\nRcu_DbReactor::objectErased..."));
 		ArxMsg msgParam = { dbObj->isA()->name(), dbObj->objectId() };
 		if(pErased == Adesk::kTrue)
 		{

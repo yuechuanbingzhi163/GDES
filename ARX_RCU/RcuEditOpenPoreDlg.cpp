@@ -7,9 +7,9 @@ IMPLEMENT_DYNAMIC(RcuEditOpenPoreDlg, RcuAcUiBaseDlg)
 
 RcuEditOpenPoreDlg::RcuEditOpenPoreDlg(CWnd* pParent /*=NULL*/)
 	: RcuAcUiBaseDlg(RcuEditOpenPoreDlg::IDD, pParent)
-	, m_num(10)
-	, m_gap(0.1)
-	, m_radius(0)
+	, m_pore_num(0)
+	, m_pore_gap(0)
+	, m_pore_size(0)
 {
 
 }
@@ -21,9 +21,9 @@ RcuEditOpenPoreDlg::~RcuEditOpenPoreDlg()
 void RcuEditOpenPoreDlg::DoDataExchange(CDataExchange* pDX)
 {
 	RcuAcUiBaseDlg::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_EDIT1, m_num);
-	DDX_Text(pDX, IDC_EDIT2, m_gap);
-	DDX_Text(pDX, IDC_EDIT3, m_radius);
+	DDX_Text(pDX, IDC_EDIT1, m_pore_num);
+	DDX_Text(pDX, IDC_EDIT2, m_pore_gap);
+	DDX_Text(pDX, IDC_EDIT3, m_pore_size);
 }
 
 
