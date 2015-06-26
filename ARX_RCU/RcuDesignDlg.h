@@ -53,9 +53,9 @@ public:
 	afx_msg void OnDesiginClosePoresCommand();
 
 	//钻场列表右键菜单项消息响应
-	afx_msg void OnAddDrillSiteCommand();
+	//afx_msg void OnAddDrillSiteCommand();
 	afx_msg void OnDeleteDrillSiteCommand();
-	afx_msg void OnModifyDrillSiteCommand();
+	//afx_msg void OnModifyDrillSiteCommand();
 	afx_msg void OnHilightDrillSiteCommand();
 	afx_msg void OnDesiginOpenPoresCommand();
 	afx_msg void OnClearOpenPoresCommand();
@@ -73,12 +73,12 @@ public:
 	//下面的这些函数仅提供给自定义消息映射函数使用
 private:
 	//根据用户指定的操作更新石门列表
-	void updateRockGateListCtrl(unsigned int op, const AcDbObjectId& rock_gate);
+	void updateRockGateListCtrl(unsigned int op, const AcDbObjectId& drill_site);
 	//根据用户指定的操作更新钻场列表
 	void updateDrillSiteListCtrl(unsigned int op, const AcDbObjectId& drill_site);
 	
 	//增加石门
-	void addRockGate(const AcDbObjectId& rock_gate);
+	void addRockGate(const AcDbObjectId& drill_site);
 	//删除石门
 	void delRockGate(int row1);
 	//修改石门

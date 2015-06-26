@@ -30,10 +30,6 @@ protected:
 private:
 	// 钻场名称
 	CString m_name;
-	// 钻场位置
-	int m_pos;
-	// 钻场位置下拉框
-	CComboBox m_locaCombBox;
 	// 钻场深度
 	double m_width;
 	// 钻场高度

@@ -14,7 +14,6 @@ RcuEditRockGateDlg::RcuEditRockGateDlg(CWnd* pParent /*=NULL*/)
 	, m_x(0)
 	, m_y(0)
 	, m_z(0)
-	, m_length(500)
 	, m_width(4)
 	, m_height(5)
 	, m_left(15)
@@ -39,7 +38,6 @@ void RcuEditRockGateDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT5, m_x);
 	DDX_Text(pDX, IDC_EDIT7, m_y);
 	DDX_Text(pDX, IDC_EDIT9, m_z);
-	DDX_Text(pDX, IDC_EDIT1, m_length);
 	DDX_Text(pDX, IDC_EDIT2, m_width);
 	DDX_Text(pDX, IDC_EDIT3, m_height);
 	DDX_Text(pDX, IDC_EDIT10, m_left);
@@ -103,36 +101,34 @@ void RcuEditRockGateDlg::OnBnClickedOk()
 	OnOK();
 }
 
-void RcuEditRockGateDlg::exchangeRockGateData(RockGateLink& rg_link, bool save)
+void RcuEditRockGateDlg::exchangeRockGateData( DrillSiteLink& ds_link, bool save)
 {
 	if(save)
 	{
 		//从对话框界面提取数据
-		rg_link.m_name = m_name;
-		rg_link.m_length = m_length;
-		rg_link.m_width = m_width;
-		rg_link.m_height = m_height;
-		rg_link.m_left = m_left;
-		rg_link.m_right = m_right;
-		rg_link.m_top = m_top;
-		rg_link.m_bottom = m_bottom;
-		rg_link.m_pt = AcGePoint3d(m_x, m_y, m_z);
-		rg_link.m_dist = m_dist;
+		ds_link.m_name = m_name;
+		ds_link.m_width = m_width;
+		ds_link.m_height = m_height;
+		ds_link.m_left = m_left;
+		ds_link.m_right = m_right;
+		ds_link.m_top = m_top;
+		ds_link.m_bottom = m_bottom;
+		ds_link.m_pt = AcGePoint3d(m_x, m_y, m_z);
+		ds_link.m_dist = m_dist;
 	}
 	else
 	{
 		//给对话框界面赋值
-		m_name = rg_link.m_name;
-		m_length = rg_link.m_length;
-		m_width = rg_link.m_width;
-		m_height = rg_link.m_height;
-		m_left = rg_link.m_left;
-		m_right = rg_link.m_right;
-		m_top = rg_link.m_top;
-		m_bottom = rg_link.m_bottom;
-		AcGePoint3d pt = rg_link.m_pt;
+		m_name = ds_link.m_name;
+		m_width = ds_link.m_width;
+		m_height = ds_link.m_height;
+		m_left = ds_link.m_left;
+		m_right = ds_link.m_right;
+		m_top = ds_link.m_top;
+		m_bottom = ds_link.m_bottom;
+		AcGePoint3d pt = ds_link.m_pt;
 		m_x = pt.x; m_y = pt.y; m_z = pt.z;
-		m_dist = rg_link.m_dist;
+		m_dist = ds_link.m_dist;
 	}
 }
 
@@ -154,21 +150,21 @@ void RcuEditRockGateDlg::exchangeCoalSurfaceData(CoalSurfaceLink& cs_link, bool 
 	}
 }
 
-void RcuEditRockGateDlg::readFromDataLink(RockGateLink& rg_link, CoalSurfaceLink& cs_link)
+void RcuEditRockGateDlg::readFromDataLink( DrillSiteLink& ds_link,CoalSurfaceLink& cs_link)
 {
 	//如果是新建石门,则不读入数据
 	if(m_rock_gate.isNull()) return;
 
 	//交换石门数据到对话框中
-	exchangeRockGateData(rg_link, false);
+	exchangeRockGateData(ds_link, false);
 	//交换煤层数据到对话框中
 	exchangeCoalSurfaceData(cs_link, false);
 }
 
-void RcuEditRockGateDlg::writeToDataLink(RockGateLink& rg_link, CoalSurfaceLink& cs_link)
+void RcuEditRockGateDlg::writeToDataLink( DrillSiteLink& ds_link, CoalSurfaceLink& cs_link)
 {
 	//从对话框中提取数据给石门
-	exchangeRockGateData(rg_link, true);
+	exchangeRockGateData(ds_link, true);
 	//从对话框中提取数据给煤层
 	exchangeCoalSurfaceData(cs_link, true);
 }

@@ -20,12 +20,12 @@ public:
 	//石门图元id
 	AcDbObjectId m_rock_gate;
 	//读/写数据
-	void readFromDataLink(RockGateLink& rg_link, CoalSurfaceLink& cs_link);
-	void writeToDataLink(RockGateLink& rg_link, CoalSurfaceLink& cs_link);
+	void readFromDataLink( DrillSiteLink& ds_link, CoalSurfaceLink& cs_link);
+	void writeToDataLink( DrillSiteLink& ds_link, CoalSurfaceLink& cs_link);
 
 private:
 	//对话框与石门图元之间交换数据
-	void exchangeRockGateData(RockGateLink& rg_link, bool save);
+	void exchangeRockGateData( DrillSiteLink& ds_link, bool save);
 	//对话框与煤层图元之间交换数据
 	void exchangeCoalSurfaceData(CoalSurfaceLink& cs_link, bool save);
 
@@ -38,7 +38,6 @@ public:
 	double m_x;
 	double m_y;
 	double m_z;
-	double m_length;
 	double m_width;
 	double m_height;
 	double m_left;

@@ -64,7 +64,6 @@ void SimpleDrillSiteDraw::readPropertyDataFromGE( const AcStringArray& values )
 	m_width = abs(_tstof(values[1].kACharPtr()));
 	m_height = abs(_tstof(values[2].kACharPtr()));
 	m_dist = abs(_tstof(values[3].kACharPtr()));
-	m_pos = abs(_tstoi(values[4].kACharPtr()));
 }
 
 Adesk::Boolean SimpleDrillSiteDraw::subWorldDraw( AcGiWorldDraw* mode )
@@ -91,14 +90,7 @@ Adesk::Boolean SimpleDrillSiteDraw::subWorldDraw( AcGiWorldDraw* mode )
 
 	//求矩形的中心点坐标
 	AcGePoint3d pt = m_linkPt;
-	if(m_pos == 2)
-	{
-		pt += v2*m_height*0.5;
-	}
-	else
-	{
-		pt += v1*m_width*0.5;
-	}
+	pt += v2*m_height*0.5;
 
 	//计算角度
 	//double angle = v1.angleTo(AcGeVector3d::kXAxis, -AcGeVector3d::kZAxis);
