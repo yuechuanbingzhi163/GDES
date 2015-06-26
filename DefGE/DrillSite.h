@@ -3,7 +3,7 @@
 #include "RcuGE.h"
 
 //钻场
-class DEFGE_EXPORT_API DrillSite : public RcuGE
+class DEFGE_EXPORT_API DrillSite : public MineGE
 {
 public:
 	ACRX_DECLARE_MEMBERS(DrillSite) ;
@@ -21,11 +21,11 @@ public:
 	// 设置插入点坐标
 	void setInsertPt(const AcGePoint3d& pt);
 
-	// 获取连接点坐标
-	AcGePoint3d getLinkPt() const;
+	//// 获取连接点坐标
+	//AcGePoint3d getLinkPt() const;
 
-	// 设置连接点坐标
-	void setLinkPt(const AcGePoint3d& pt);
+	//// 设置连接点坐标
+	//void setLinkPt(const AcGePoint3d& pt);
 
 public:
 	virtual Acad::ErrorStatus dwgOutFields (AcDbDwgFiler *pFiler) const;
@@ -38,7 +38,7 @@ protected:
 private:
 	// key param
 	AcGePoint3d m_insertPt;  // 插入点坐标
-	AcGePoint3d m_linkPt;    // 连接点坐标
+	//AcGePoint3d m_linkPt;    // 连接点坐标
 };
 
 #ifdef DEFGE_MODULE

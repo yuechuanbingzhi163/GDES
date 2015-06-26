@@ -27,35 +27,35 @@ void DrillSite::setInsertPt( const AcGePoint3d& pt )
     m_insertPt = pt;
 }
 
-AcGePoint3d DrillSite::getLinkPt() const
-{
-	assertReadEnabled();
-	return m_linkPt;
-}
-
-void DrillSite::setLinkPt( const AcGePoint3d& pt )
-{
-	assertWriteEnabled();
-	m_linkPt = pt;
-}
+//AcGePoint3d DrillSite::getLinkPt() const
+//{
+//	assertReadEnabled();
+//	return m_linkPt;
+//}
+//
+//void DrillSite::setLinkPt( const AcGePoint3d& pt )
+//{
+//	assertWriteEnabled();
+//	m_linkPt = pt;
+//}
 
 void DrillSite::readKeyParam( DrawParamReader& reader )
 {
     reader.readPoint(m_insertPt);
-	reader.readPoint(m_linkPt);
+	//reader.readPoint(m_linkPt);
 }
 
 void DrillSite::writeKeyParam( DrawParamWriter& writer ) const
 {
     writer.writePoint(m_insertPt);
-	writer.writePoint(m_linkPt);
+	//writer.writePoint(m_linkPt);
 }
 
 Acad::ErrorStatus DrillSite::dwgOutFields ( AcDbDwgFiler* pFiler ) const
 {
     assertReadEnabled () ;
     //----- Save parent class information first.
-    Acad::ErrorStatus es = RcuGE::dwgOutFields ( pFiler ) ;
+    Acad::ErrorStatus es = MineGE::dwgOutFields ( pFiler ) ;
     if ( es != Acad::eOk )
         return ( es ) ;
     //----- Object version number needs to be saved first
@@ -63,7 +63,7 @@ Acad::ErrorStatus DrillSite::dwgOutFields ( AcDbDwgFiler* pFiler ) const
         return ( es ) ;
 
     pFiler->writeItem(m_insertPt);
-	pFiler->writeItem(m_linkPt);
+	//pFiler->writeItem(m_linkPt);
 
     return ( pFiler->filerStatus () ) ;
 }
@@ -72,7 +72,7 @@ Acad::ErrorStatus DrillSite::dwgInFields ( AcDbDwgFiler* pFiler )
 {
     assertWriteEnabled () ;
     //----- Read parent class information first.
-    Acad::ErrorStatus es = RcuGE::dwgInFields ( pFiler ) ;
+    Acad::ErrorStatus es = MineGE::dwgInFields ( pFiler ) ;
     if ( es != Acad::eOk )
         return ( es ) ;
     //----- Object version number needs to be read first
@@ -83,7 +83,7 @@ Acad::ErrorStatus DrillSite::dwgInFields ( AcDbDwgFiler* pFiler )
         return ( Acad::eMakeMeProxy ) ;
 
     pFiler->readItem(&m_insertPt);
-	pFiler->readItem(&m_linkPt);
+	//pFiler->readItem(&m_linkPt);
 
     return ( pFiler->filerStatus () ) ;
 }

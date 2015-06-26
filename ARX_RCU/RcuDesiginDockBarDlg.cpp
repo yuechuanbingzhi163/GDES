@@ -50,7 +50,7 @@ BOOL RcuDesiginDockBarDlg::Create ( CWnd* pParent, LPCTSTR lpszTitle )
 {
     CString strWndClass ;
     strWndClass = AfxRegisterWndClass ( CS_DBLCLKS, LoadCursor ( NULL, IDC_ARROW ) ) ;
-    CRect rect ( 0, 0, 350, 285 ) ;
+    CRect rect ( 0, 0, 350, 135 ) ;
     if ( !CAcUiDockControlBar::Create (
                 strWndClass, lpszTitle, WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN,
                 rect, pParent, 0

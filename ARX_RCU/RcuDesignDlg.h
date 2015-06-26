@@ -23,26 +23,18 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	//石门列表
-	CListCtrl m_list;
 	//钻场列表
-	CListCtrl m_list2;
+	CListCtrl m_list;
 
 	//导出按钮单击消息
 	afx_msg void OnBnClickedExport();
 
-	//石门列表行切换时触发的消息
-	afx_msg void OnLvnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult);
-	//石门列表双击消息
-	afx_msg void OnNMDblclkList1(NMHDR *pNMHDR, LRESULT *pResult);
-	//石门列表右键消息
-	afx_msg void OnNMRclickList1(NMHDR *pNMHDR, LRESULT *pResult);
 	//钻场列表双击消息
-	afx_msg void OnNMDblclkList2(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnNMDblclkList1(NMHDR *pNMHDR, LRESULT *pResult);
 	//钻场列表右键消息
-	afx_msg void OnNMRclickList2(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnNMRclickList1(NMHDR *pNMHDR, LRESULT *pResult);
 
-	//石门列表右键菜单项消息响应
+	//钻场列表右键菜单项消息响应
 	afx_msg void OnAddRockGateCommand();
 	afx_msg void OnDeleteRockGateCommand();
 	afx_msg void OnModifyRockGateCommand();
@@ -54,7 +46,7 @@ public:
 
 	//钻场列表右键菜单项消息响应
 	//afx_msg void OnAddDrillSiteCommand();
-	afx_msg void OnDeleteDrillSiteCommand();
+	//afx_msg void OnDeleteDrillSiteCommand();
 	//afx_msg void OnModifyDrillSiteCommand();
 	afx_msg void OnHilightDrillSiteCommand();
 	afx_msg void OnDesiginOpenPoresCommand();
@@ -72,16 +64,16 @@ public:
 
 	//下面的这些函数仅提供给自定义消息映射函数使用
 private:
-	//根据用户指定的操作更新石门列表
+	//根据用户指定的操作更新钻场列表
 	void updateRockGateListCtrl(unsigned int op, const AcDbObjectId& drill_site);
 	//根据用户指定的操作更新钻场列表
-	void updateDrillSiteListCtrl(unsigned int op, const AcDbObjectId& drill_site);
+	//void updateDrillSiteListCtrl(unsigned int op, const AcDbObjectId& drill_site);
 	
-	//增加石门
+	//增加钻场
 	void addRockGate(const AcDbObjectId& drill_site);
-	//删除石门
+	//删除钻场
 	void delRockGate(int row1);
-	//修改石门
+	//修改钻场
 	void modifyRockGate(int row1);
 
 	//增加钻场

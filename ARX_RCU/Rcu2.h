@@ -27,13 +27,13 @@ public:
 		//this->beta = beta;
 		this->thick = thick;
 	}
-	//设置石门巷道断面参数
+	//设置钻场巷道断面参数
 	void setRockGate1(double height, double width)
 	{
 		this->height = height;
 		this->width = width;
 	}
-	//设置石门的上下左右帮保护间距
+	//设置钻场的上下左右帮保护间距
 	void setRockGate2(double f1, double f2, double d1, double d2)
 	{
 		this->f1 = f1;
@@ -41,7 +41,7 @@ public:
 		this->d1 = d1;
 		this->d2 = d2;
 	}
-	//设置石门距煤层面的最小法距
+	//设置钻场距煤层面的最小法距
 	void setRockGate3(double minDist)
 	{
 		this->minDist = minDist;
@@ -81,11 +81,10 @@ public:
 
 		//抽采范围的中心点坐标
 		//计算出左上帮和右下帮对角点,这2点的中点即为矩形的中心点
-		AcGePoint3d left_top(-0.5*width-d1, 0, height+f1);
-		AcGePoint3d right_bottom(0.5*width+d2, 0, -1*f2);
-		AcGeRay3d lt_ray(left_top, AcGeVector3d::kYAxis);
-		AcGeRay3d rb_ray(right_bottom, AcGeVector3d::kYAxis);
-
+		AcGePoint3d left_top(0, 0, height+f1);
+		AcGePoint3d right_bottom(0, 0, -1*f2);
+		AcGeLine3d lt_ray(left_top, AcGeVector3d::kYAxis);
+		AcGeLine3d rb_ray(right_bottom, AcGeVector3d::kYAxis);
 		//两条射线与平面的交点
 		AcGePoint3d p1, p2;
 		if(Adesk::kTrue != plane1.intersectWith(lt_ray, p1)) return false;
@@ -123,6 +122,7 @@ private:
 	{
 		//迎头煤层的轴线距离
 		double L = minDist/sin(alpha);
+		//acutPrintf(_T("\n迎头煤层的轴线距离L=%.2f"),L);
 		//迎头轴线与煤层的交点
 		AcGePoint3d pt(0, L, 0);
 
@@ -132,18 +132,24 @@ private:
 
 		//由平面上的点和法向量确定一个平面
 		plane1.set(pt, v);
+		//acutPrintf(_T("\n见煤面点(%.2f,%.2f,%.2f),向量(%.2f,%.2f,%.2f)"),
+		//	pt.x,pt.y,pt.z,v.x,v.y,v.z);
 		plane2.set(pt - v*thick, v);
+		//pt = pt - v*thick;
+		//acutPrintf(_T("\n止煤面点(%.2f,%.2f,%.2f),向量(%.2f,%.2f,%.2f)"),
+		//	pt.x,pt.y,pt.z,v.x,v.y,v.z);
+
 	}
 
 private:
 	double alpha;    // 煤层倾角
-	double beta;     // 石门轴线与煤层走向的夹角(始终是90°)
+	double beta;     // 钻场轴线与煤层走向的夹角(始终是90°)
 	double thick;    // 煤层厚度
 
-	double height;    // 石门巷道高度
-	double width;     // 石门巷道宽度(假设石门为矩形巷道)
+	double height;    // 钻场巷道高度
+	double width;     // 钻场巷道宽度(假设钻场为矩形巷道)
 	
-	double minDist;     // 石门距离煤层的最小法距
+	double minDist;     // 钻场距离煤层的最小法距
 	double f1; // 石门揭煤轮廓外上控距离
 	double f2; // 石门揭煤轮廓外下控距离
 	double d1; // 石门揭煤轮廓外左控距离

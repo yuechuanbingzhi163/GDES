@@ -24,6 +24,9 @@ RcuEditRockGateDlg::RcuEditRockGateDlg(CWnd* pParent /*=NULL*/)
 	, m_thick(3)
 	, m_angle(8)
 	, m_dist(50)
+	, m_pore_size(0.09)
+	, m_pore_gap(0.2)
+	, m_index(1)
 {
 
 }
@@ -49,6 +52,9 @@ void RcuEditRockGateDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT15, m_angle);
 	DDX_Text(pDX, IDC_EDIT16, m_dist);
 	DDX_Text(pDX, IDC_EDIT18, m_name);
+	DDX_Text(pDX, IDC_PORE_SIZE_EDIT, m_pore_size);
+	DDX_Text(pDX, IDC_PORE_GAP_EDIT, m_pore_gap);
+	DDX_Text(pDX, IDC_INDEX_EDIT, m_index);
 }
 
 
@@ -66,7 +72,7 @@ BOOL RcuEditRockGateDlg::OnInitDialog()
 	RcuAcUiBaseDlg::OnInitDialog();
 
 	SetToolTip(IDC_EDIT1,_T("单位:m"));
-	SetToolTip(IDC_EDIT2,_T("单位:m"));
+	SetToolTip(IDC_EDIT2,_T("迎头和钻场（耳洞）总宽度:m"));
 	SetToolTip(IDC_EDIT3,_T("单位:m"));
 	SetToolTip(IDC_EDIT10,_T("单位:m"));
 	SetToolTip(IDC_EDIT11,_T("单位:m"));
@@ -76,14 +82,17 @@ BOOL RcuEditRockGateDlg::OnInitDialog()
 	SetToolTip(IDC_EDIT16,_T("单位:m"));
 	SetToolTip(IDC_EDIT15,_T("单位:度"));
 	SetToolTip(IDC_EDIT17,_T("单位:m"));
+	SetToolTip(IDC_PORE_SIZE_EDIT, _T("钻孔孔径:m"));
+	SetToolTip(IDC_PORE_GAP_EDIT,  _T("钻孔之间间距:m"));
+	SetToolTip(IDC_INDEX_EDIT,  _T("钻孔指定起始编号"));
 
-	if(m_rock_gate.isNull())
+	if(m_drill_site.isNull())
 	{
-		SetDlgItemText(IDOK, _T("新设计石门"));
+		SetDlgItemText(IDOK, _T("新设计钻场"));
 	}
 	else
 	{
-		SetDlgItemText(IDOK, _T("更新石门参数"));
+		SetDlgItemText(IDOK, _T("更新钻场参数"));
 	}
 
 	//更新数据到界面
@@ -115,6 +124,9 @@ void RcuEditRockGateDlg::exchangeRockGateData( DrillSiteLink& ds_link, bool save
 		ds_link.m_bottom = m_bottom;
 		ds_link.m_pt = AcGePoint3d(m_x, m_y, m_z);
 		ds_link.m_dist = m_dist;
+		ds_link.m_pore_size = m_pore_size;
+		ds_link.m_pore_gap = m_pore_gap;
+		ds_link.m_start = m_index;
 	}
 	else
 	{
@@ -129,6 +141,9 @@ void RcuEditRockGateDlg::exchangeRockGateData( DrillSiteLink& ds_link, bool save
 		AcGePoint3d pt = ds_link.m_pt;
 		m_x = pt.x; m_y = pt.y; m_z = pt.z;
 		m_dist = ds_link.m_dist;
+		m_pore_size = ds_link.m_pore_size;
+		m_pore_gap = ds_link.m_pore_gap;
+		m_index = ds_link.m_start;
 	}
 }
 
@@ -152,10 +167,10 @@ void RcuEditRockGateDlg::exchangeCoalSurfaceData(CoalSurfaceLink& cs_link, bool 
 
 void RcuEditRockGateDlg::readFromDataLink( DrillSiteLink& ds_link,CoalSurfaceLink& cs_link)
 {
-	//如果是新建石门,则不读入数据
-	if(m_rock_gate.isNull()) return;
+	//如果是新建钻场,则不读入数据
+	if(m_drill_site.isNull()) return;
 
-	//交换石门数据到对话框中
+	//交换钻场数据到对话框中
 	exchangeRockGateData(ds_link, false);
 	//交换煤层数据到对话框中
 	exchangeCoalSurfaceData(cs_link, false);
@@ -163,7 +178,7 @@ void RcuEditRockGateDlg::readFromDataLink( DrillSiteLink& ds_link,CoalSurfaceLin
 
 void RcuEditRockGateDlg::writeToDataLink( DrillSiteLink& ds_link, CoalSurfaceLink& cs_link)
 {
-	//从对话框中提取数据给石门
+	//从对话框中提取数据给钻场
 	exchangeRockGateData(ds_link, true);
 	//从对话框中提取数据给煤层
 	exchangeCoalSurfaceData(cs_link, true);

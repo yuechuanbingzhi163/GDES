@@ -30,13 +30,13 @@ void SimpleDrillSiteDraw::updateExtraParams()
 void SimpleDrillSiteDraw::readKeyParam(DrawParamReader& reader)
 {
 	reader.readPoint(m_insertPt);
-	reader.readPoint(m_linkPt);
+	//reader.readPoint(m_linkPt);
 }
 
 void SimpleDrillSiteDraw::writeKeyParam(DrawParamWriter& writer)
 {
 	writer.writePoint(m_insertPt);
-	writer.writePoint(m_linkPt);
+	//writer.writePoint(m_linkPt);
 }
 
 void SimpleDrillSiteDraw::readExtraParam( DrawParamReader& reader )
@@ -52,10 +52,8 @@ void SimpleDrillSiteDraw::writeExtraParam( DrawParamWriter& writer )
 void SimpleDrillSiteDraw::regPropertyDataNames( AcStringArray& names ) const
 {
     names.append( _T( "名称" ) );
-    names.append( _T( "深度" ) );
+    names.append( _T( "宽度" ) );
 	names.append( _T( "高度" ) );
-	names.append( _T( "与迎头的距离" ) );
-	names.append( _T( "位置" ) );
 }
 
 void SimpleDrillSiteDraw::readPropertyDataFromGE( const AcStringArray& values )
@@ -63,7 +61,6 @@ void SimpleDrillSiteDraw::readPropertyDataFromGE( const AcStringArray& values )
     m_name = values[0].kACharPtr();
 	m_width = abs(_tstof(values[1].kACharPtr()));
 	m_height = abs(_tstof(values[2].kACharPtr()));
-	m_dist = abs(_tstof(values[3].kACharPtr()));
 }
 
 Adesk::Boolean SimpleDrillSiteDraw::subWorldDraw( AcGiWorldDraw* mode )
@@ -73,27 +70,31 @@ Adesk::Boolean SimpleDrillSiteDraw::subWorldDraw( AcGiWorldDraw* mode )
 	//如果距离小于1m，则不绘制钻场的引线
 	//if(m_dist > 1.0)
 	//{
-		DrawLine(mode, m_insertPt, m_linkPt);
+		//DrawLine(mode, m_insertPt, m_linkPt);
 	//}
 
-	AcGeVector3d v = m_linkPt - m_insertPt;
+	//AcGeVector3d v = m_linkPt - m_insertPt;
 
-	//向量v在x轴上的投影
-	AcGeVector3d v1 = v.dotProduct( AcGeVector3d::kXAxis ) * AcGeVector3d::kXAxis;
-	v1.normalize();
-	if(v1.y < 0) v1.negate();
+	////向量v在x轴上的投影
+	//AcGeVector3d v1 = v.dotProduct( AcGeVector3d::kXAxis ) * AcGeVector3d::kXAxis;
+	//v1.normalize();
+	//if(v1.y < 0) v1.negate();
 
-	//向量v在y轴上的投影
-	AcGeVector3d v2 = v.dotProduct( AcGeVector3d::kYAxis ) * AcGeVector3d::kYAxis;
-	v2.normalize();
-	if(v2.y < 0) v2.negate();
+	////向量v在y轴上的投影
+	//AcGeVector3d v2 = v.dotProduct( AcGeVector3d::kYAxis ) * AcGeVector3d::kYAxis;
+	//v2.normalize();
+	//if(v2.y < 0) v2.negate();
 
-	//求矩形的中心点坐标
-	AcGePoint3d pt = m_linkPt;
-	pt += v2*m_height*0.5;
+	////求矩形的中心点坐标
+	//AcGePoint3d pt = m_linkPt;
+	//pt += v2*m_height*0.5;
 
 	//计算角度
 	//double angle = v1.angleTo(AcGeVector3d::kXAxis, -AcGeVector3d::kZAxis);
+	AcGeVector3d v( AcGeVector3d::kXAxis );
+	v.rotateBy( PI * 0.5, AcGeVector3d::kZAxis );
+	v.normalize();
+	AcGePoint3d pt = m_insertPt + 0.5*m_height * v;
 	//绘制矩形
 	DrawRect(mode, pt, 0, m_width, m_height, false);
 
@@ -105,7 +106,7 @@ Acad::ErrorStatus SimpleDrillSiteDraw::subGetGripPoints( AcGePoint3dArray& gripP
     assertReadEnabled () ;
 
 	gripPoints.append(m_insertPt);
-	gripPoints.append(m_linkPt);
+	//gripPoints.append(m_linkPt);
 
     return Acad::eOk;
 }
@@ -120,13 +121,13 @@ Acad::ErrorStatus SimpleDrillSiteDraw::subMoveGripPointsAt ( const AcDbIntArray&
 
         if ( idx == 0 )
         {
-			//m_insertPt += offset;
+			m_insertPt += offset;
 			//m_linkPt += offset;
         }
 
         if ( idx == 1 )
         {
-           m_linkPt += offset;
+          // m_insertPt += offset;
         }
     }
 
@@ -136,7 +137,7 @@ Acad::ErrorStatus SimpleDrillSiteDraw::subMoveGripPointsAt ( const AcDbIntArray&
 Acad::ErrorStatus SimpleDrillSiteDraw::subTransformBy( const AcGeMatrix3d& xform )
 {
 	m_insertPt.transformBy(xform);
-	m_linkPt.transformBy(xform);
+	//m_linkPt.transformBy(xform);
 	return Acad::eOk;
 }
 

@@ -25,7 +25,6 @@
 #define IDC_BUTTON4                     109
 #define IDC_EDIT9                       110
 #define IDC_DRIL_NAME_EDIT              110
-#define IDC_LIST3                       110
 #define IDC_EDIT10                      111
 #define IDC_EDIT11                      112
 #define IDC_DRILL_DIS_EDIT              112
@@ -41,6 +40,10 @@
 #define IDC_EDIT17                      118
 #define IDC_EDIT18                      119
 #define IDD_RCU_OPEN_PORES_DLG          119
+#define IDC_PORE_SIZE_EDIT              121
+#define IDC_PORE_GAP_EDIT               122
+#define IDC_EDIT6                       123
+#define IDC_INDEX_EDIT                  123
 #define ID_RCU_LIST_DELETE              32773
 #define ID_RCU_LIST_LOCATE              32774
 #define ID_RCU_LIST_HILIGHT             32775
@@ -75,7 +78,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        121
 #define _APS_NEXT_COMMAND_VALUE         32807
-#define _APS_NEXT_CONTROL_VALUE         121
+#define _APS_NEXT_CONTROL_VALUE         124
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif

@@ -15,7 +15,7 @@ public:
 	enum { IDD = IDD_RCU_DRILL_SITE_EDIT_DIALOG };
 
 public:
-	//石门图元id
+	//钻场图元id
 	AcDbObjectId m_drill_site;
 	//读取数据到对话框
 	void readFromDataLink(DrillSiteLink& ds_link);

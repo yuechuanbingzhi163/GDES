@@ -42,11 +42,10 @@ protected:
 public:
 	//key param
 	AcGePoint3d m_insertPt;     // 插入点坐标
-	AcGePoint3d m_linkPt;       // 连接点坐标
+	//AcGePoint3d m_linkPt;       // 连接点坐标
 	//data
 	double m_width, m_height;   // 钻场宽度和高度
 	CString m_name;				// 钻场编号
-	double m_dist;              // 与迎头的距离
 } ;
 
 #ifdef DEFGEPLUGIN_MODULE

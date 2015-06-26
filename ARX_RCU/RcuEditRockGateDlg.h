@@ -4,7 +4,7 @@
 
 #include "RcuDataLink.h"
 
-//石门揭煤编辑对话框(从"石门设计"右键菜单中调用该对话框)
+//石门揭煤编辑对话框(从"钻场设计"右键菜单中调用该对话框)
 class RcuEditRockGateDlg : public RcuAcUiBaseDlg
 {
 	DECLARE_DYNAMIC(RcuEditRockGateDlg)
@@ -17,14 +17,14 @@ public:
 	enum { IDD = IDD_RCU_ROCK_GATE_EDIT_DLG };
 
 public:
-	//石门图元id
-	AcDbObjectId m_rock_gate;
+	//钻场图元id
+	AcDbObjectId m_drill_site;
 	//读/写数据
 	void readFromDataLink( DrillSiteLink& ds_link, CoalSurfaceLink& cs_link);
 	void writeToDataLink( DrillSiteLink& ds_link, CoalSurfaceLink& cs_link);
 
 private:
-	//对话框与石门图元之间交换数据
+	//对话框与钻场图元之间交换数据
 	void exchangeRockGateData( DrillSiteLink& ds_link, bool save);
 	//对话框与煤层图元之间交换数据
 	void exchangeCoalSurfaceData(CoalSurfaceLink& cs_link, bool save);
@@ -48,6 +48,9 @@ public:
 	double m_thick;
 	double m_angle;
 	double m_dist;
+	double m_pore_size;
+	double m_pore_gap;
+	int m_index;
 
 	//"确定"按钮消息
 	afx_msg void OnBnClickedOk();

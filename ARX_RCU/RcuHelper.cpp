@@ -130,10 +130,10 @@ void RcuHelper::ClearRelatedClosePores(const AcDbObjectId& coal_surf)
 
 bool RcuHelper::GetRockGateAndCoalSurfDatas(const AcDbObjectId& rock_gate, DrillSiteLink& ds_link, CoalSurfaceLink& cs_link)
 {
-	//提取石门关联的所有数据并填充到对话框中
+	//提取钻场关联的所有数据并填充到对话框中
 	if(!RcuHelper::ReadDrillSiteData(rock_gate, ds_link)) return false;
 
-	//查找石门关联的煤层
+	//查找钻场关联的煤层
 	AcDbObjectId coal_surf;
 	RcuHelper::GetRelatedCoalSurface(rock_gate, coal_surf);
 	if(coal_surf.isNull()) return false;
@@ -216,11 +216,11 @@ bool RcuHelper::CaculCoalSurfParam( DrillSiteLink& ds_link, CoalSurfaceLink& cs_
 	//rcu.setOrigin(orign);
 	//设置煤层参数(倾角和厚度)
 	rcu.setCoalSurf(DegToRad(cs_link.m_angle), cs_link.m_thick);
-	//设置石门巷道断面参数
+	//设置钻场巷道断面参数
 	rcu.setRockGate1(ds_link.m_height, ds_link.m_width);
-	//设置石门的上下左右保护帮距
+	//设置钻场的上下左右保护帮距
 	rcu.setRockGate2(ds_link.m_top, ds_link.m_bottom, ds_link.m_left, ds_link.m_right);
-	//设置石门距离煤层的最小法距
+	//设置钻场距离煤层的最小法距
 	rcu.setRockGate3(ds_link.m_dist);
 	////设置钻孔直径
 	//rcu.setDrillDiameter(ds_link.m_pore_size);
@@ -434,34 +434,34 @@ bool RcuHelper::CreateDrillSite(const AcGePoint3d& pt, DrillSiteLink& ds_link, C
 	//文档锁切换
 	DocumentLockSwitch lock_switch;
 
-	//新建石门并设置插入点坐标
+	//新建钻场并设置插入点坐标
 	DrillSite* pDS = new DrillSite();
 	pDS->setInsertPt(pt);
-	pDS->enableFollow(true); // 开启跟随效果
+	//pDS->enableFollow(true); // 开启跟随效果
 
 	CoalSurface* pCS = new CoalSurface();
 	pCS->setInsertPt(pt + (cnt - origin));
-	pCS->enableFollow(true); // 开启跟随效果
+	//pCS->enableFollow(true); // 开启跟随效果
 
-	//添加石门到cad图形数据库
+	//添加钻场到cad图形数据库
 	if(!ArxUtilHelper::PostToModelSpace(pDS))
 	{
 		delete pDS; pDS = 0;
 		return  false;
 	}
 	
-	//煤层关联到石门
+	//煤层关联到钻场
 	pCS->setRelatedGE(pDS->objectId());
 	//添加煤层到cad图形数据库
 	if(!ArxUtilHelper::PostToModelSpace(pCS))
 	{
 		delete pCS; pCS = 0;
-		//煤层提交失败,则删除已添加的石门
+		//煤层提交失败,则删除已添加的钻场
 		ArxEntityHelper::EraseObject(pDS->objectId(), true);
 		return false;
 	}
 
-	//通过DataLink修改石门和煤层的数据
+	//通过DataLink修改钻场和煤层的数据
 	ds_link.setDataSource(pDS->objectId());
 	ds_link.updateData(true);
 	cs_link.setDataSource(pCS->objectId());
@@ -484,7 +484,7 @@ bool RcuHelper::ModifyDrillSitePt(const AcDbObjectId& drill_site, DrillSiteLink&
 
 	if(!RcuHelper::ReadDrillSiteData(rock_gate, ds_link)) return false;
 
-	//获取石门的插入点坐标
+	//获取钻场的插入点坐标
 	AcGePoint3d pt;
 	if(!RcuHelper::GetRockGateInsertPt(rock_gate, pt)) return false;
 
@@ -597,7 +597,7 @@ bool RcuHelper::ModifyCoalSurfRelatedGEs(const AcDbObjectId& coal_surf, CoalSurf
 
 bool RcuHelper::ModifyRockGateRelatedGEs(const AcDbObjectId& rock_gate, DrillSiteLink& ds_link, CoalSurfaceLink& cs_link)
 {
-	//查找石门关联的煤层
+	//查找钻场关联的煤层
 	AcDbObjectId coal_surf;
 	RcuHelper::GetRelatedCoalSurface(rock_gate, coal_surf);
 	if(coal_surf.isNull()) return false;
@@ -611,7 +611,7 @@ bool RcuHelper::ModifyRockGateRelatedGEs(const AcDbObjectId& rock_gate, DrillSit
 	//修改煤层关联的图元
 	if(!ModifyCoalSurfRelatedGEs(coal_surf, cs_link)) return false;
 
-	//查找石门关联的钻场
+	//查找钻场关联的钻场
 	AcDbObjectIdArray drill_sites;
 	RcuHelper::GetRelatedDrillSites(rock_gate, drill_sites);
 	for(int i=0;i<drill_sites.length();i++)
