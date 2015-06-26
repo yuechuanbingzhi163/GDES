@@ -30,10 +30,6 @@ public:
 
 	//导出按钮单击消息
 	afx_msg void OnBnClickedExport();
-	//终孔设计按钮单击消息
-	afx_msg void OnBnClickedDesignClosePores();
-	//开孔设计按钮单击消息
-	afx_msg void OnBnClickedDesignOpenPores();
 
 	//石门列表行切换时触发的消息
 	afx_msg void OnLvnItemchangedList1(NMHDR *pNMHDR, LRESULT *pResult);
@@ -53,12 +49,16 @@ public:
 	afx_msg void OnHilightRockGateCommand();
 	afx_msg void OnUpdateRockGateListCommand();
 	afx_msg void OnHilightCoalSurfCommand();
+	afx_msg void OnDisplayCoalSurfCommand();
+	afx_msg void OnDesiginClosePoresCommand();
 
 	//钻场列表右键菜单项消息响应
 	afx_msg void OnAddDrillSiteCommand();
 	afx_msg void OnDeleteDrillSiteCommand();
 	afx_msg void OnModifyDrillSiteCommand();
 	afx_msg void OnHilightDrillSiteCommand();
+	afx_msg void OnDesiginOpenPoresCommand();
+	afx_msg void OnClearOpenPoresCommand();
 
 	//响应MyMsg.h中自定义消息
 	afx_msg LRESULT OnRcuAddMessage(WPARAM wParam, LPARAM lParam);

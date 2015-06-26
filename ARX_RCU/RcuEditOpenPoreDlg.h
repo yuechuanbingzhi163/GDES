@@ -26,9 +26,9 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	int m_num;
-	double m_gap;
-	double m_radius;
+	int m_pore_num;
+	double m_pore_gap;
+	double m_pore_size;
 
 	afx_msg void OnBnClickedOk();
 	virtual BOOL OnInitDialog();

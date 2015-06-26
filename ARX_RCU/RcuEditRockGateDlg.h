@@ -45,7 +45,7 @@ public:
 	double m_right;
 	double m_top;
 	double m_bottom;
-	double m_radius;
+	double m_gas_radius;
 	double m_thick;
 	double m_angle;
 	double m_dist;

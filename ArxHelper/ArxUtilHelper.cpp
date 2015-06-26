@@ -322,3 +322,25 @@ bool ArxUtilHelper::StringToPoint3d(const CString& value, AcGePoint3d& pt)
 
 	return true;
 }
+
+CString ArxUtilHelper::Vector3dToString(const AcGeVector3d& v)
+{
+	AcGePoint3d pt;
+	pt += v;
+	return ArxUtilHelper::Point3dToString(pt);
+}
+
+bool ArxUtilHelper::StringToVector3d(const CString& value, AcGeVector3d& v)
+{
+	AcGePoint3d pt;
+	pt += v;
+	if(StringToPoint3d(value, pt))
+	{
+		v = pt.asVector();
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

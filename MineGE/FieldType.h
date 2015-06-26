@@ -8,7 +8,9 @@ enum DATA_TYPE
 	DT_NUMERIC  = 2, // 浮点数
 	DT_BOOL     = 3, // 布尔类型
 	DT_DATE     = 4, // 日期类型
-	DT_LIST     = 5  // 列表类型(特殊的离散类型)
+	DT_LIST     = 5, // 列表类型(特殊的离散类型)
+	DT_POINT    = 6, // 坐标点
+	DT_VECTOR   = 7  //向量
 };
 
 // 列表数据类型

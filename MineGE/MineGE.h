@@ -30,6 +30,9 @@ public:
 	// 获取数据对象id
 	AcDbObjectId getDataObject() const;
 
+	//启用/关闭跟随效果
+	void enableFollow(bool bFollow);
+
 	// 必须要重载实现的虚函数
 protected:
 	// 将关键参数写入到writer中
@@ -89,6 +92,9 @@ protected:
 	// 获取当前draw对象(方便子类使用，避免直接操纵私有数据)
 	MineGEDraw* getCurrentDraw() const;
 
+	//变换所有的关联图元
+	void transformAllTagGE(const AcGeMatrix3d& xform);
+
 private:
 	// 绘制背景消隐
 	void drawBackground(MineGEDraw* pGEDraw, AcGiWorldDraw *mode);
@@ -131,6 +137,8 @@ private:
 	MineGEDraw* m_pCurrentGEDraw;
 	// 图元关联的数据对象
 	AcDbObjectId m_dataObjectId;
+	//是否实现跟随效果(关联图元TagGE跟随移动,默认是禁用的!)
+	bool m_bFollow;
 };
 
 #ifdef MINEGE_MODULE
