@@ -35,10 +35,10 @@ public:
 	afx_msg void OnNMRclickList1(NMHDR *pNMHDR, LRESULT *pResult);
 
 	//钻场列表右键菜单项消息响应
-	afx_msg void OnAddRockGateCommand();
-	afx_msg void OnDeleteRockGateCommand();
-	afx_msg void OnModifyRockGateCommand();
-	afx_msg void OnHilightRockGateCommand();
+	afx_msg void OnAddDrillSiteCommand();
+	afx_msg void OnDeleteDrillSiteCommand();
+	afx_msg void OnModifyDrillSiteCommand();
+	afx_msg void OnHilightDrillSiteCommand();
 	afx_msg void OnUpdateRockGateListCommand();
 	afx_msg void OnHilightCoalSurfCommand();
 	afx_msg void OnDisplayCoalSurfCommand();
@@ -48,9 +48,9 @@ public:
 	//afx_msg void OnAddDrillSiteCommand();
 	//afx_msg void OnDeleteDrillSiteCommand();
 	//afx_msg void OnModifyDrillSiteCommand();
-	afx_msg void OnHilightDrillSiteCommand();
-	afx_msg void OnDesiginOpenPoresCommand();
-	afx_msg void OnClearOpenPoresCommand();
+	//afx_msg void OnHilightDrillSiteCommand();
+	//afx_msg void OnDesiginOpenPoresCommand();
+	//afx_msg void OnClearOpenPoresCommand();
 
 	//响应MyMsg.h中自定义消息
 	afx_msg LRESULT OnRcuAddMessage(WPARAM wParam, LPARAM lParam);
