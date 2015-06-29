@@ -28,13 +28,13 @@ public:
 		this->thick = thick;
 	}
 	//设置钻场巷道断面参数
-	void setRockGate1(double height, double width)
+	void setDrillSite1(double height, double width)
 	{
 		this->height = height;
 		this->width = width;
 	}
 	//设置钻场的上下左右帮保护间距
-	void setRockGate2(double f1, double f2, double d1, double d2)
+	void setDrillSite2(double f1, double f2, double d1, double d2)
 	{
 		this->f1 = f1;
 		this->f2 = f2;
@@ -42,7 +42,7 @@ public:
 		this->d2 = d2;
 	}
 	//设置钻场距煤层面的最小法距
-	void setRockGate3(double minDist)
+	void setDrillSite3(double minDist)
 	{
 		this->minDist = minDist;
 	}

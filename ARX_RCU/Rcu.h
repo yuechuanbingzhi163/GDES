@@ -60,7 +60,7 @@ public:
 		W2 = this->W2;
 	}
 	//设置钻场参数
-	void setRockGateParams(double S1,double f1, double f2, double d1, double d2)
+	void setDrillSiteParams(double S1,double f1, double f2, double d1, double d2)
 	{
 		this->S1 = S1;
 		this->f1 = f1;
@@ -69,7 +69,7 @@ public:
 		this->d2 = d2;
 	}
 	//获取钻场参数
-	void getRockGateParams(double& f1, double& f2, double& d1, double& d2) const
+	void getDrillSiteParams(double& f1, double& f2, double& d1, double& d2) const
 	{
 		f1 = this->f1;
 		f2 = this->f2;

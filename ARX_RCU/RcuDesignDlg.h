@@ -39,18 +39,10 @@ public:
 	afx_msg void OnDeleteDrillSiteCommand();
 	afx_msg void OnModifyDrillSiteCommand();
 	afx_msg void OnHilightDrillSiteCommand();
-	afx_msg void OnUpdateRockGateListCommand();
+	afx_msg void OnUpdateDrillSiteListCommand();
 	afx_msg void OnHilightCoalSurfCommand();
 	afx_msg void OnDisplayCoalSurfCommand();
 	afx_msg void OnDesiginClosePoresCommand();
-
-	//钻场列表右键菜单项消息响应
-	//afx_msg void OnAddDrillSiteCommand();
-	//afx_msg void OnDeleteDrillSiteCommand();
-	//afx_msg void OnModifyDrillSiteCommand();
-	//afx_msg void OnHilightDrillSiteCommand();
-	//afx_msg void OnDesiginOpenPoresCommand();
-	//afx_msg void OnClearOpenPoresCommand();
 
 	//响应MyMsg.h中自定义消息
 	afx_msg LRESULT OnRcuAddMessage(WPARAM wParam, LPARAM lParam);
@@ -65,23 +57,14 @@ public:
 	//下面的这些函数仅提供给自定义消息映射函数使用
 private:
 	//根据用户指定的操作更新钻场列表
-	void updateRockGateListCtrl(unsigned int op, const AcDbObjectId& drill_site);
-	//根据用户指定的操作更新钻场列表
-	//void updateDrillSiteListCtrl(unsigned int op, const AcDbObjectId& drill_site);
+	void updateDrillSiteListCtrl(unsigned int op, const AcDbObjectId& drill_site);
 	
-	//增加钻场
-	void addRockGate(const AcDbObjectId& drill_site);
-	//删除钻场
-	void delRockGate(int row1);
-	//修改钻场
-	void modifyRockGate(int row1);
-
 	//增加钻场
 	void addDrillSite(const AcDbObjectId& drill_site);
 	//删除钻场
-	void delDrillSite(int row2);
+	void delDrillSite(int row1);
 	//修改钻场
-	void modifyDrillSite(int row2);
+	void modifyDrillSite(int row1);
 
 	//更新对话框
 	void updateUI();

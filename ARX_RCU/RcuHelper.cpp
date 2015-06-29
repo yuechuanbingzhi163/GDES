@@ -14,9 +14,9 @@
 #include "../DefGE/RockGate.h"
 #include "../DefGE/CoalSurface.h"
 
-void RcuHelper::FindAllRockGates(AcDbObjectIdArray& rock_gates)
+void RcuHelper::FindAllDrillSite(AcDbObjectIdArray& rock_gates)
 {
-	ArxDataTool::GetEntsByType(_T("RockGate"), rock_gates, true);
+	ArxDataTool::GetEntsByType(_T("DrillSite"), rock_gates, true);
 }
 
 void RcuHelper::GetRelatedCoalSurface(const AcDbObjectId& drill_site, AcDbObjectId& coal_surf)
@@ -40,29 +40,6 @@ void RcuHelper::GetRelatedCoalSurface(const AcDbObjectId& drill_site, AcDbObject
 		}
 	}
 }
-
-//void RcuHelper::GetRelatedDrillSites(const AcDbObjectId& drill_site, AcDbObjectIdArray& drill_sites)
-//{
-//	//查找所有的钻场图元
-//	AcDbObjectIdArray tags;
-//	ArxDataTool::GetEntsByType(_T("DrillSite"), tags, true);
-//	if(tags.isEmpty()) return;
-//
-//	//查找钻场图元关联的宿主
-//	AcDbObjectIdArray hosts;
-//	DrawHelper::GetHosts(tags, hosts);
-//	if(hosts.length() != tags.length()) return;
-//
-//	//匹配
-//	int n = hosts.length();
-//	for(int i=0;i<n;i++)
-//	{
-//		if(hosts[i] == drill_site)
-//		{
-//			drill_sites.append(tags[i]);
-//		}
-//	}
-//}
 
 void RcuHelper::GetRelatedClosePores(const AcDbObjectId& coal_surf, AcDbObjectIdArray& pores)
 {
@@ -128,7 +105,7 @@ void RcuHelper::ClearRelatedClosePores(const AcDbObjectId& coal_surf)
 	ArxEntityHelper::EraseObjects(pores, Adesk::kTrue);
 }
 
-bool RcuHelper::GetRockGateAndCoalSurfDatas(const AcDbObjectId& drill_site, DrillSiteLink& ds_link, CoalSurfaceLink& cs_link)
+bool RcuHelper::GetDrillSiteAndCoalSurfDatas(const AcDbObjectId& drill_site, DrillSiteLink& ds_link, CoalSurfaceLink& cs_link)
 {
 	//提取钻场关联的所有数据并填充到对话框中
 	if(!RcuHelper::ReadDrillSiteData(drill_site, ds_link)) return false;
@@ -212,18 +189,14 @@ bool RcuHelper::CaculCoalSurfParam( DrillSiteLink& ds_link, CoalSurfaceLink& cs_
 
 	//调用rcu类进行计算
 	Rcu2 rcu;
-	//设置基点
-	//rcu.setOrigin(orign);
 	//设置煤层参数(倾角和厚度)
 	rcu.setCoalSurf(DegToRad(cs_link.m_angle), cs_link.m_thick);
 	//设置钻场巷道断面参数
-	rcu.setRockGate1(ds_link.m_height, ds_link.m_width);
+	rcu.setDrillSite1(ds_link.m_height, ds_link.m_width);
 	//设置钻场的上下左右保护帮距
-	rcu.setRockGate2(ds_link.m_top, ds_link.m_bottom, ds_link.m_left, ds_link.m_right);
+	rcu.setDrillSite2(ds_link.m_top, ds_link.m_bottom, ds_link.m_left, ds_link.m_right);
 	//设置钻场距离煤层的最小法距
-	rcu.setRockGate3(ds_link.m_dist);
-	////设置钻孔直径
-	//rcu.setDrillDiameter(ds_link.m_pore_size);
+	rcu.setDrillSite3(ds_link.m_dist);
 
 	//计算煤层面的抽采范围宽度和高度
 	rcu.drillExtent(cs_link.m_width, cs_link.m_height);
@@ -286,7 +259,7 @@ bool RcuHelper::CaculRelativeClosePorePts(CoalSurfaceLink& cs_link, AcGePoint3dA
 	return true;
 }
 
-bool RcuHelper::GetRockGateInsertPt( const AcDbObjectId& drill_site, AcGePoint3d& insertPt )
+bool RcuHelper::GetDrillSiteInsertPt( const AcDbObjectId& drill_site, AcGePoint3d& insertPt )
 {
 	AcTransaction* pTrans = actrTransactionManager->startTransaction();
 	if( pTrans == 0 ) return false;
@@ -298,7 +271,7 @@ bool RcuHelper::GetRockGateInsertPt( const AcDbObjectId& drill_site, AcGePoint3d
 		return false;
 	}
 
-	RockGate* pDS = RockGate::cast( pObj );
+	DrillSite* pDS = DrillSite::cast( pObj );
 	if(pDS == 0)
 	{
 		actrTransactionManager->abortTransaction();
@@ -449,7 +422,7 @@ bool RcuHelper::ModifyDrillSitePt(const AcDbObjectId& drill_site, DrillSiteLink&
 
 	//获取钻场的插入点坐标
 	AcGePoint3d pt;
-	if(!RcuHelper::GetRockGateInsertPt(drill_site, pt)) return false;
+	if(!RcuHelper::GetDrillSiteInsertPt(drill_site, pt)) return false;
 
 	AcGePoint3d insertPt;
 	// 	if(!RcuHelper::CaculDrillSitePt(ds_link, ds_link, pt, insertPt, linkPt)) return false;
@@ -558,7 +531,7 @@ bool RcuHelper::ModifyCoalSurfRelatedGEs(const AcDbObjectId& coal_surf, CoalSurf
 	return CreateClosePores(coal_surf, cs_link);
 }
 
-bool RcuHelper::ModifyRockGateRelatedGEs(const AcDbObjectId& drill_site, DrillSiteLink& ds_link, CoalSurfaceLink& cs_link)
+bool RcuHelper::ModifyDrillSiteRelatedGEs(const AcDbObjectId& drill_site, DrillSiteLink& ds_link, CoalSurfaceLink& cs_link)
 {
 	//查找钻场关联的煤层
 	AcDbObjectId coal_surf;
