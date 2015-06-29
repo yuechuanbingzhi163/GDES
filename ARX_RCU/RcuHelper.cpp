@@ -218,24 +218,20 @@ bool RcuHelper::CaculRelativeOpenPorePts(CoalSurfaceLink& cs_link, DrillSiteLink
 	CaculPoreNums(n1,n2,cs_link.m_width,cs_link.m_height,cs_link.m_gas_radius);
 
 	//计算钻孔的坐标
-	double gap1 = ds_link.m_width/n1 - ds_link.m_pore_size;
-	double gap2 = ds_link.m_height/n2 - ds_link.m_pore_size;
-	////钻场的宽度上布置多少个钻孔
-	//int n1 = int(ds_link.m_width/gap1);
-	////钻场的高度上布置多少个钻孔
-	//int n2 = int(ds_link.m_height/gap2);
+	double gap1 = ds_link.m_width/n1;
+	double gap2 = ds_link.m_height/n2;
 
-	AcGePoint3d pt = AcGePoint3d::kOrigin;
-	//迎头,将基点处理到左下角
-	pt += AcGeVector3d(-0.5*ds_link.m_width, 0, 0);
+	AcGeVector3d xVector(AcGeVector3d::kXAxis);
+	AcGeVector3d yVector(AcGeVector3d::kYAxis);
+
+	//以左下角为基点
+	AcGePoint3d origin = AcGePoint3d::kOrigin +xVector*(-0.5)*ds_link.m_width + yVector*0;
 	for(int i=0;i<n1;i++)
 	{
-		pt.x += gap1;
-		pt.y = 0;
+		AcGePoint3d pt = origin + xVector*gap1*(i+1);
 		for(int j=0;j<n2;j++)
 		{
-			double gap = gap2 + ds_link.m_pore_size;
-			pt.y += gap;
+			pt += yVector * gap2;
 			pts.append(pt);
 		}
 	}
