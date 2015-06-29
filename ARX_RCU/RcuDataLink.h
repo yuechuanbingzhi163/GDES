@@ -44,7 +44,7 @@ class DrillSiteLink : public DataLink
 public:
 	DrillSiteLink() : m_dist(0), m_width(0), m_height(0), 
 					  m_left(0), m_right(0), m_top(0), m_bottom(0),
-		              m_start(1), m_pore_gap(0), m_pore_size(0)
+		              m_start(1), m_pore_size(0)
 	{
 
 	}
@@ -62,7 +62,6 @@ protected:
 		linkDoubleData( _T( "下帮保护" ), &m_bottom );
 		linkIntData( _T( "起始编号" ), &m_start );
 		linkDoubleData( _T( "孔径" ), &m_pore_size );
-		linkDoubleData( _T( "孔距" ), &m_pore_gap );
 		//带$号的字段表示该字段仅用于内部计算,不应该也不需要显示在对话框界面上
 		linkPointData( _T( "$底帮坐标" ), &m_pt );
 	}
@@ -75,7 +74,6 @@ public:
 	int m_start;
 	//坐标内部存储是用字符串表示的,xyz之间通过逗号分隔
 	AcGePoint3d m_pt;
-	double m_pore_gap;
 	double m_pore_size;
 	double m_left;
 	double m_right;

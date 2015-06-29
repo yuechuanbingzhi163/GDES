@@ -94,15 +94,16 @@ public:
 		cnt = p1 + 0.5*(p2-p1);
 		//平面法向量
 		normV = plane1.normal();
-		
+		//acutPrintf(_T("\n法向量(%.2f,%.2f,%.2f)"),normV.x,normV.y,normV.z);
 		//计算煤层的倾向向量
 		AcGeVector3d v(-AcGeVector3d::kYAxis);
 		v.rotateBy(-1*alpha, AcGeVector3d::kXAxis);
 		dipV = v;
-		
+		//acutPrintf(_T("\n倾向向量(%.2f,%.2f,%.2f)"),dipV.x,dipV.y,dipV.z);
 		//计算煤层的走向向量
 		v.rotateBy(-0.5*PI, normV);
 		headV = v;
+		//acutPrintf(_T("\n走向向量(%.2f,%.2f,%.2f)"),headV.x,headV.y,headV.z);
 
 		return true;
 	}

@@ -14,7 +14,7 @@ public:
 	virtual ~RcuEditDrillSiteDlg();
 
 // 对话框数据
-	enum { IDD = IDD_RCU_ROCK_GATE_EDIT_DLG };
+	enum { IDD = IDD_RCU_DRILL_SITE_EDIT_DLG };
 
 public:
 	//钻场图元id
@@ -49,7 +49,6 @@ public:
 	double m_angle;
 	double m_dist;
 	double m_pore_size;
-	double m_pore_gap;
 	int m_index;
 
 	//"确定"按钮消息

@@ -453,10 +453,6 @@
 					RelativePath=".\RcuEditDrillSiteDlg.cpp"
 					>
 				</File>
-				<File
-					RelativePath=".\RcuEditOpenPoreDlg.cpp"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="reactor"
@@ -536,10 +532,6 @@
 				</File>
 				<File
 					RelativePath=".\RcuEditDrillSiteDlg.h"
-					>
-				</File>
-				<File
-					RelativePath=".\RcuEditOpenPoreDlg.h"
 					>
 				</File>
 			</Filter>

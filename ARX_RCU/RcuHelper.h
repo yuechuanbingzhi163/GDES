@@ -40,23 +40,23 @@ public:
 	//计算煤层面参数
 	static bool CaculCoalSurfParam(DrillSiteLink& ds_link, CoalSurfaceLink& cs_link);
 	//计算钻场的钻孔相对坐标(基点是钻场底帮点)
-	static bool CaculRelativeOpenPorePts(DrillSiteLink& ds_link, AcGePoint3dArray& pts);
+	static bool CaculRelativeOpenPorePts(CoalSurfaceLink& cs_link, DrillSiteLink& ds_link, AcGePoint3dArray& pts);
 	//计算煤层的钻孔相对坐标(基点是煤层面的中心点)
 	static bool CaculRelativeClosePorePts(CoalSurfaceLink& cs_link, AcGePoint3dArray& pts);
 
 	//创建钻场和煤层图元(rg_link和cs_link的数据会与新增的图元关联，并被更新到图元)
 	static bool CreateDrillSite(const AcGePoint3d& pt, DrillSiteLink& ds_link, CoalSurfaceLink& cs_link);
 	//创建与钻场关联的钻孔图元(开孔)
-	static bool CreateOpenPores(const AcDbObjectId& drill_site, DrillSiteLink& ds_link);
+	static bool CreateOpenPores(const AcDbObjectId& drill_site, CoalSurfaceLink& cs_link, DrillSiteLink& ds_link);
 	//创建与煤层关联的钻孔图元(终孔)
-	static bool CreateClosePores(const AcDbObjectId& coal_surf, CoalSurfaceLink& cs_link);
+	static bool CreateClosePores(const AcDbObjectId& coal_surf, CoalSurfaceLink& cs_link, DrillSiteLink& ds_link);
 
 	//根据钻场数据修改关联的图元(开孔)
-	static bool ModifyDrillSiteRelatedGEs(const AcDbObjectId& drill_site, DrillSiteLink& ds_link);
-	//根据钻场数据修改关联的图元(煤层、钻场)
-	static bool ModifyDrillSiteRelatedGEs(const AcDbObjectId& drill_site, DrillSiteLink& ds_link, CoalSurfaceLink& cs_link);
+	static bool ModifyDrillSitePoreGEs(const AcDbObjectId& drill_site, CoalSurfaceLink& cs_link, DrillSiteLink& ds_link);
+	//根据钻场数据修改关联的图元(煤层、钻孔)
+	static bool ModifyDrillSiteRelatedGEs(const AcDbObjectId& drill_site,CoalSurfaceLink& cs_link, DrillSiteLink& ds_link);
 	//根据煤层数据修改关联的图元(终孔)
-	static bool ModifyCoalSurfRelatedGEs(const AcDbObjectId& coal_surf, CoalSurfaceLink& cs_link);
+	static bool ModifyCoalSurfRelatedGEs(const AcDbObjectId& coal_surf, CoalSurfaceLink& cs_link, DrillSiteLink& ds_link);
 
 	//修改钻场参数
 	static bool ModifyCoalSurfPt(const AcDbObjectId& drill_site);
@@ -70,4 +70,7 @@ public:
 	static bool SetDrillSitePt(const AcDbObjectId& drill_site, const AcGePoint3d& insertPt);
 	//获取钻场的2点坐标
 	static bool GetDrillSitePt(const AcDbObjectId& drill_site, AcGePoint3d& insertPt);
+
+	//计算钻孔个数
+	static void CaculPoreNums(int& row_num, int& col_num, double width, double height,double radius);
 };

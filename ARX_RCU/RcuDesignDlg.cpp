@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "RcuDesignDlg.h"
 #include "RcuEditDrillSiteDlg.h"
-#include "RcuEditOpenPoreDlg.h"
 
 #include "Rcu.h"
 #include "RcuHelper.h"
@@ -83,13 +82,8 @@ static void ModifyDrillSiteToListCtrl(CListCtrl& m_list, int n, DrillSiteLink& d
 	}
 	{
 		CString value;
-		ArxUtilHelper::DoubleToString(ds_link.m_pore_gap, value);
-		m_list.SetItemText( n, 11, value);
-	}
-	{
-		CString value;
 		ArxUtilHelper::DoubleToString(ds_link.m_start, value);
-		m_list.SetItemText( n, 12, value);
+		m_list.SetItemText( n, 11, value);
 	}
 }
 
@@ -147,43 +141,43 @@ static CString FormatPoreDlgTitle(const CString& ds_name)
 }
 
 
-static bool UpdateOpenPoresFromDlg(const AcDbObjectId& drill_site,  DrillSiteLink& ds_link)
-{
-	CAcModuleResourceOverride resourceOverride;
-	
-	RcuEditOpenPoreDlg dlg;
-	//格式化钻孔设计对话框的标题
-	dlg.m_title = FormatPoreDlgTitle(ds_link.m_name);
-	//设置钻孔半径
-	dlg.m_pore_size = ds_link.m_pore_size;
-	//提取钻孔的个数
-	AcDbObjectIdArray pores;
-	RcuHelper::GetRelatedOpenPores(drill_site, pores);
-	dlg.m_pore_num = pores.length();
-	//提取钻孔的间距
-	if(!pores.isEmpty())
-	{
-		dlg.m_pore_gap = ds_link.m_pore_gap;
-	}
-	else
-	{
-		dlg.m_pore_gap = 0;
-	}
-
-	if(IDOK != dlg.DoModal()) return false;
-
-	//从对话框中读取数据
-	//钻孔间距
-	ds_link.m_pore_gap = dlg.m_pore_gap;
-	//更新数据到钻孔
-	ds_link.updateData(true);
-
-	//删除关联的所有钻孔
-	RcuHelper::ClearRelatedOpenPores(drill_site);
-
-	//创建新的钻孔图元
-	return RcuHelper::CreateOpenPores(drill_site, ds_link);
-}
+//static bool UpdateOpenPoresFromDlg(const AcDbObjectId& drill_site,  DrillSiteLink& ds_link)
+//{
+//	CAcModuleResourceOverride resourceOverride;
+//	
+//	//RcuEditOpenPoreDlg dlg;
+//	////格式化钻孔设计对话框的标题
+//	//dlg.m_title = FormatPoreDlgTitle(ds_link.m_name);
+//	////设置钻孔半径
+//	//dlg.m_pore_size = ds_link.m_pore_size;
+//	////提取钻孔的个数
+//	//AcDbObjectIdArray pores;
+//	//RcuHelper::GetRelatedOpenPores(drill_site, pores);
+//	//dlg.m_pore_num = pores.length();
+//	////提取钻孔的间距
+//	////if(!pores.isEmpty())
+//	////{
+//	////	dlg.m_pore_gap = ds_link.m_pore_gap;
+//	////}
+//	////else
+//	////{
+//	////	dlg.m_pore_gap = 0;
+//	////}
+//
+//	//if(IDOK != dlg.DoModal()) return false;
+//
+//	////从对话框中读取数据
+//	////钻孔间距
+//	////ds_link.m_pore_gap = dlg.m_pore_gap;
+//	////更新数据到钻孔
+//	//ds_link.updateData(true);
+//
+//	////删除关联的所有钻孔
+//	//RcuHelper::ClearRelatedOpenPores(drill_site);
+//
+//	//创建新的钻孔图元
+//	return RcuHelper::CreateOpenPores(drill_site, ds_link);
+//}
 
 // RcuDesignDlg 对话框
 
@@ -333,7 +327,7 @@ void RcuDesignDlg::OnAddDrillSiteCommand()
 	//创建钻场和煤层图元
 	if(RcuHelper::CreateDrillSite(pt, ds_link, cs_link))
 	{
-		if(!RcuHelper::ModifyDrillSiteRelatedGEs(ds_link.getDataSource(), ds_link, cs_link)) return;
+		if(!RcuHelper::ModifyDrillSiteRelatedGEs(ds_link.getDataSource(), cs_link, ds_link)) return;
 
 		//向list1中插入一行钻场数据
 		InsertDrillSiteToListCtrl(m_list, ds_link.getDataSource(), ds_link);
@@ -396,7 +390,7 @@ void RcuDesignDlg::OnModifyDrillSiteCommand()
 	if(UpdateDrillSiteDataFromDlg(pData1->objId, ds_link, cs_link))
 	{
 		if (!RcuHelper::ModifyCoalSurfPt(pData1->objId)) return;
-		if(!RcuHelper::ModifyDrillSiteRelatedGEs(pData1->objId, ds_link, cs_link)) return;
+		if(!RcuHelper::ModifyDrillSiteRelatedGEs(pData1->objId, cs_link, ds_link)) return;
 
 		//修改当前选中钻场的数据
 		ModifyDrillSiteToListCtrl(m_list, row1, ds_link);
