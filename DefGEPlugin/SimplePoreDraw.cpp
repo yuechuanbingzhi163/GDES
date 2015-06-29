@@ -88,8 +88,8 @@ Adesk::Boolean SimplePoreDraw::subWorldDraw( AcGiWorldDraw* mode )
 
     // ªÊ÷∆±‡∫≈
     AcGePoint3d pt1, pt2;
-	AcGePoint3d pt = CaclLeftBottomPt(m_insertPt, 0, m_pore_size*0.5, m_pore_size*0.5);
-	//DrawMText(mode, pt, 0, m_id, 2*m_pore_size);
+	//AcGePoint3d pt = CaclLeftBottomPt(m_insertPt, 0, m_pore_size*0.5, m_pore_size*0.5);
+	DrawMText(mode, m_insertPt, 0, m_id, 0.25*m_pore_size);
 
     return Adesk::kTrue;
 }

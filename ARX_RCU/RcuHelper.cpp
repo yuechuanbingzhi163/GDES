@@ -11,7 +11,7 @@
 #include "../DefGE/RcuGE.h"
 #include "../DefGE/Pore.h"
 #include "../DefGE/DrillSite.h"
-#include "../DefGE/RockGate.h"
+//#include "../DefGE/RockGate.h"
 #include "../DefGE/CoalSurface.h"
 
 void RcuHelper::FindAllDrillSite(AcDbObjectIdArray& rock_gates)
@@ -284,6 +284,32 @@ bool RcuHelper::GetDrillSiteInsertPt( const AcDbObjectId& drill_site, AcGePoint3
 	return true;
 }
 
+
+bool RcuHelper::SetCoalSurfInsertPt( const AcDbObjectId& coal_surf, AcGePoint3d& insertPt )
+{
+	AcTransaction* pTrans = actrTransactionManager->startTransaction();
+	if( pTrans == 0 ) return false;
+
+	AcDbObject* pObj;
+	if( Acad::eOk != pTrans->getObject( pObj, coal_surf, AcDb::kForWrite ) )
+	{
+		actrTransactionManager->abortTransaction();
+		return false;
+	}
+
+	CoalSurface* pCS = CoalSurface::cast( pObj );
+	if(pCS == 0)
+	{
+		actrTransactionManager->abortTransaction();
+		return false;
+	}
+
+	pCS->setInsertPt(insertPt);
+
+	actrTransactionManager->endTransaction();
+	return true;
+}
+
 bool RcuHelper::GetCoalSurfInsertPt( const AcDbObjectId& coal_surf, AcGePoint3d& insertPt )
 {
 	AcTransaction* pTrans = actrTransactionManager->startTransaction();
@@ -376,7 +402,8 @@ bool RcuHelper::CreateDrillSite(const AcGePoint3d& pt, DrillSiteLink& ds_link, C
 	//pDS->enableFollow(true); // 开启跟随效果
 
 	CoalSurface* pCS = new CoalSurface();
-	pCS->setInsertPt(pt + (cnt - origin));
+	//pCS->setInsertPt(pt + (cnt - origin));
+	pCS->setInsertPt(pt + AcGeVector3d(0,1,0)*(cs_link.m_height*0.5+ds_link.m_height*1.618));
 	//pCS->enableFollow(true); // 开启跟随效果
 
 	//添加钻场到cad图形数据库
@@ -411,24 +438,37 @@ bool RcuHelper::CreateDrillSite(const AcGePoint3d& pt, DrillSiteLink& ds_link, C
 }
 
 
-bool RcuHelper::ModifyDrillSitePt(const AcDbObjectId& drill_site, DrillSiteLink& ds_link)
+bool RcuHelper::ModifyCoalSurfPt(const AcDbObjectId& drill_site)
 {
 	if(drill_site.isNull()) return false;
 
-	//AcDbObjectId drill_site;
-	//if(!DrawHelper::GetHostGE(drill_site, drill_site)) return false;
+	AcDbObjectIdArray coal_surfs;
+	DrawHelper::GetTagGEById2(drill_site, _T("CoalSurface"),coal_surfs);
+	if(coal_surfs.isEmpty()) return false;
+	AcDbObjectId coal_surf = coal_surfs[0];
 
+	//获取钻场数据
+	DrillSiteLink ds_link;
 	if(!RcuHelper::ReadDrillSiteData(drill_site, ds_link)) return false;
+
+	//获取煤层数据
+	CoalSurfaceLink cs_link;
+	if(!RcuHelper::ReadCoalSurfaceData(coal_surf,cs_link));
+
+	//重新计算煤层参数
+	if(!RcuHelper::CaculCoalSurfParam(ds_link, cs_link)) return false;
 
 	//获取钻场的插入点坐标
 	AcGePoint3d pt;
 	if(!RcuHelper::GetDrillSiteInsertPt(drill_site, pt)) return false;
+	
+	AcGePoint3d insertPt = pt + AcGeVector3d(0,1,0)*(cs_link.m_height*0.5+ds_link.m_height*1.618);
 
-	AcGePoint3d insertPt;
+	if(!RcuHelper::SetCoalSurfInsertPt(coal_surf,insertPt)) return false;
 	// 	if(!RcuHelper::CaculDrillSitePt(ds_link, ds_link, pt, insertPt, linkPt)) return false;
-
+	return true;
 	//修改钻场图元的几何点坐标
-	return RcuHelper::SetDrillSitePt(drill_site, insertPt);
+	//return RcuHelper::SetDrillSitePt(drill_site, insertPt);
 }
 
 bool RcuHelper::CreateOpenPores(const AcDbObjectId& drill_site, DrillSiteLink& ds_link)
@@ -523,12 +563,14 @@ bool RcuHelper::CreateClosePores(const AcDbObjectId& coal_surf, CoalSurfaceLink&
 
 bool RcuHelper::ModifyDrillSiteRelatedGEs(const AcDbObjectId& drill_site, DrillSiteLink& ds_link)
 {
-	return CreateOpenPores(drill_site, ds_link);
+	//return CreateOpenPores(drill_site, ds_link);
+	return true;
 }
 
 bool RcuHelper::ModifyCoalSurfRelatedGEs(const AcDbObjectId& coal_surf, CoalSurfaceLink& cs_link)
 {
-	return CreateClosePores(coal_surf, cs_link);
+	//return CreateClosePores(coal_surf, cs_link);
+	return true;
 }
 
 bool RcuHelper::ModifyDrillSiteRelatedGEs(const AcDbObjectId& drill_site, DrillSiteLink& ds_link, CoalSurfaceLink& cs_link)

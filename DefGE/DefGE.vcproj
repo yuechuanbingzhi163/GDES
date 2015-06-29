@@ -539,10 +539,6 @@
 					RelativePath=".\RcuGE.cpp"
 					>
 				</File>
-				<File
-					RelativePath=".\RockGate.cpp"
-					>
-				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -678,10 +674,6 @@
 				</File>
 				<File
 					RelativePath=".\RcuGE.h"
-					>
-				</File>
-				<File
-					RelativePath=".\RockGate.h"
 					>
 				</File>
 			</Filter>

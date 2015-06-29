@@ -15,7 +15,7 @@
 #include "../DefGE/RcuGE.h"
 #include "../DefGE/Pore.h"
 #include "../DefGE/DrillSite.h"
-#include "../DefGE/RockGate.h"
+//#include "../DefGE/RockGate.h"
 #include "../DefGE/CoalSurface.h"
 
 //自定义消息
@@ -121,6 +121,7 @@ static bool UpdateDrillSiteDataFromDlg(const AcDbObjectId& drill_site, DrillSite
 
 	//从对话框中提取数据
 	dlg.writeToDataLink(ds_link, cs_link);
+	
 
 	//将数据更新到图元中
 	ds_link.updateData(true);
@@ -394,6 +395,7 @@ void RcuDesignDlg::OnModifyDrillSiteCommand()
 	//从对话框中更新数据
 	if(UpdateDrillSiteDataFromDlg(pData1->objId, ds_link, cs_link))
 	{
+		if (!RcuHelper::ModifyCoalSurfPt(pData1->objId)) return;
 		if(!RcuHelper::ModifyDrillSiteRelatedGEs(pData1->objId, ds_link, cs_link)) return;
 
 		//修改当前选中钻场的数据
@@ -469,12 +471,12 @@ void RcuDesignDlg::OnDisplayCoalSurfCommand()
 		{
 			CString msg;
 			msg.Format(_T("厚度:%.3f\t倾角:%.3f\n"), cs_link.m_thick, cs_link.m_angle);
-			msg.Format(_T("钻孔抽采半径:%.3f\n"), cs_link.m_gas_radius);
-			msg.Format(_T("抽采范围宽度:%.3f\t高度:%.3f\n"), cs_link.m_width, cs_link.m_height);
-			msg.Format(_T("抽采范围中心点坐标:(%.3f, %.3f, %.3f)\n"), cs_link.m_pt.x, cs_link.m_pt.y, cs_link.m_pt.z);
-			msg.Format(_T("平面法向量:(%.3f, %.3f, %.3f)\n"), cs_link.m_normV.x, cs_link.m_normV.y, cs_link.m_normV.z);
-			msg.Format(_T("煤层走向向量:(%.3f, %.3f, %.3f)\n"), cs_link.m_headV.x, cs_link.m_headV.y, cs_link.m_headV.z);
-			msg.Format(_T("煤层倾向向量:(%.3f, %.3f, %.3f)"), cs_link.m_dipV.x, cs_link.m_dipV.y, cs_link.m_dipV.z);
+			msg.AppendFormat(_T("钻孔抽采半径:%.3f\n"), cs_link.m_gas_radius);
+			msg.AppendFormat(_T("抽采范围宽度:%.3f\t高度:%.3f\n"), cs_link.m_width, cs_link.m_height);
+			msg.AppendFormat(_T("抽采范围中心点坐标:(%.3f, %.3f, %.3f)\n"), cs_link.m_pt.x, cs_link.m_pt.y, cs_link.m_pt.z);
+			msg.AppendFormat(_T("平面法向量:(%.3f, %.3f, %.3f)\n"), cs_link.m_normV.x, cs_link.m_normV.y, cs_link.m_normV.z);
+			msg.AppendFormat(_T("煤层走向向量:(%.3f, %.3f, %.3f)\n"), cs_link.m_headV.x, cs_link.m_headV.y, cs_link.m_headV.z);
+			msg.AppendFormat(_T("煤层倾向向量:(%.3f, %.3f, %.3f)"), cs_link.m_dipV.x, cs_link.m_dipV.y, cs_link.m_dipV.z);
 			MessageBox(msg);
 		}
 	}
