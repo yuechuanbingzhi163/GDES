@@ -49,7 +49,6 @@ public:
 	double m_angle;
 	double m_dist;
 	double m_pore_size;
-	int m_index;
 
 	//"确定"按钮消息
 	afx_msg void OnBnClickedOk();

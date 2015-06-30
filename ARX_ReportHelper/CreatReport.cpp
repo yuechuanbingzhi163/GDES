@@ -384,39 +384,6 @@ static void SetFieldsValue()
 	//MyWord->SetSeekView(mineName,wdAlignParagraphJustify,wdSeekCurrentPageHeader,_T("{{MineName_Header}}"));
 }
 
-static void WriteRCUDataToReport()
-{
-	MyWord->SetFont(_T("宋体"),22);
-	MyWord->WriteText(_T("**石门设计"));
-	MyWord->WriteText(_T("石门参数"));
-	//加1表示表头
-	int rows = 3;
-	if(rows <= 0) return;
-
-	//写表头
-	MyWord->CreateTable(rows,11);
-	MyWord->SetTableText(1,1,_T("名称"));
-	MyWord->SetTableText(1,2,_T("长度"));
-	MyWord->SetTableText(1,3,_T("宽度"));
-	MyWord->SetTableText(1,4,_T("高度"));
-	MyWord->SetTableText(1,5,_T("最小法距"));
-	MyWord->SetTableText(1,6,_T("钻孔半径"));
-	MyWord->SetTableText(1,7,_T("迎头底板中心点坐标"));
-	MyWord->SetTableText(1,8,_T("左帮保护"));
-	MyWord->SetTableText(1,9,_T("右帮保护"));
-	MyWord->SetTableText(1,10,_T("上帮保护"));
-	MyWord->SetTableText(1,11,_T("下帮保护"));
-
-	////填充抽采系统数据
-	//for(int i = 2; i <= rows; i += 2)
-	//{
-	//	int inx = i -2;
-	//	CString strName = datas[0][inx].kACharPtr();
-	//	MyWord->SetTableText(i,1,strName);
-	//}
-
-}
-
 static BOOL SaveReport(CString savePath)
 {
 	if(CheckDocIsUsing(savePath)) return FALSE;
@@ -476,7 +443,7 @@ static bool wordOprate(CString savePath)
 		return false;
 	}
 
-	WriteRCUDataToReport();
+	//WriteRCUDataToReport();
 	bool ret;
 	if(!SaveReport(savePath)) ret = false;
 	else ret = true;

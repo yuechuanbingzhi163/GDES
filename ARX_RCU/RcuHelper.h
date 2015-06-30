@@ -6,7 +6,7 @@ class RcuHelper
 {
 public:
 	//查找所有的钻场
-	static void FindAllDrillSite(AcDbObjectIdArray& rock_gates);
+	static void FindAllDrillSite(AcDbObjectIdArray& drill_sites);
 	//查找与钻场关联的煤层
 	static void GetRelatedCoalSurface(const AcDbObjectId& drill_site, AcDbObjectId& coal_surf);
 	////查找与钻场关联的钻场
@@ -73,4 +73,7 @@ public:
 
 	//计算钻孔个数
 	static void CaculPoreNums(int& row_num, int& col_num, double width, double height,double radius);
+
+	//生成报告
+	static void CreatReportHelper();
 };

@@ -3,6 +3,7 @@
 #include "RcuDataLink.h"
 #include "SwitchHelper.h"
 #include "RcuHelper.h"
+#include "CreatReport.h"
 #include <algorithm>
 
 #include "../ArxHelper/HelperClass.h"
@@ -11,12 +12,11 @@
 #include "../DefGE/RcuGE.h"
 #include "../DefGE/Pore.h"
 #include "../DefGE/DrillSite.h"
-//#include "../DefGE/RockGate.h"
 #include "../DefGE/CoalSurface.h"
 
-void RcuHelper::FindAllDrillSite(AcDbObjectIdArray& rock_gates)
+void RcuHelper::FindAllDrillSite(AcDbObjectIdArray& drill_sites)
 {
-	ArxDataTool::GetEntsByType(_T("DrillSite"), rock_gates, true);
+	ArxDataTool::GetEntsByType(_T("DrillSite"), drill_sites, true);
 }
 
 void RcuHelper::GetRelatedCoalSurface(const AcDbObjectId& drill_site, AcDbObjectId& coal_surf)
@@ -218,8 +218,8 @@ bool RcuHelper::CaculRelativeOpenPorePts(CoalSurfaceLink& cs_link, DrillSiteLink
 	CaculPoreNums(n1,n2,cs_link.m_width,cs_link.m_height,cs_link.m_gas_radius);
 
 	//计算钻孔的坐标
-	double gap1 = ds_link.m_width/n1;
-	double gap2 = ds_link.m_height/n2;
+	double gap1 = ds_link.m_width/(n1+1);
+	double gap2 = ds_link.m_height/(n2+1);
 
 	AcGeVector3d xVector(AcGeVector3d::kXAxis);
 	AcGeVector3d yVector(AcGeVector3d::kYAxis);
@@ -228,7 +228,7 @@ bool RcuHelper::CaculRelativeOpenPorePts(CoalSurfaceLink& cs_link, DrillSiteLink
 	AcGePoint3d origin = AcGePoint3d::kOrigin +xVector*(-0.5)*ds_link.m_width + yVector*0;
 	for(int i=0;i<n1;i++)
 	{
-		AcGePoint3d pt = origin + xVector*gap1*(i+1);
+		AcGePoint3d pt = origin + xVector*gap1*(i + 1);
 		for(int j=0;j<n2;j++)
 		{
 			pt += yVector * gap2;
@@ -452,7 +452,7 @@ bool RcuHelper::ModifyCoalSurfPt(const AcDbObjectId& drill_site)
 
 	//获取煤层数据
 	CoalSurfaceLink cs_link;
-	if(!RcuHelper::ReadCoalSurfaceData(coal_surf,cs_link));
+	if(!RcuHelper::ReadCoalSurfaceData(coal_surf,cs_link)) return false;
 
 	//重新计算煤层参数
 	if(!RcuHelper::CaculCoalSurfParam(ds_link, cs_link)) return false;
@@ -619,4 +619,84 @@ void RcuHelper::CaculPoreNums( int& row_num, int& col_num, double width, double 
 	//抽采范围的高度上布置钻孔个数
 	col_num = int(height/2/radius);
 
+}
+
+static void GetDocPath( CString& defaultPath )
+{
+	TCHAR pPath[MAX_PATH]={0};
+	SHGetSpecialFolderPath(NULL,pPath,CSIDL_PERSONAL,0);
+
+	defaultPath.Format(_T("%s"),pPath);
+}
+
+static BOOL SaveAndOpenReport(CString outName)
+{
+	TCHAR szFileFilter[] = _T("doc文档(*.doc)|*.doc||");
+	TCHAR szFileExt[] = _T("doc");
+
+	CString defaultPath;
+	GetDocPath(defaultPath);
+
+	CFileDialog dlg(FALSE,szFileExt,defaultPath,OFN_READONLY,szFileFilter);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
+
+	TCHAR* pFileBuf = new TCHAR[MAX_PATH * 1024];
+	if (NULL == pFileBuf)
+	{
+		return FALSE;
+	}
+	_tcscpy(pFileBuf,outName);
+
+	dlg.m_ofn.lpstrFile = pFileBuf;
+	dlg.m_ofn.nMaxFile = MAX_PATH * 1024;
+	CString selectedPath;
+	if(IDOK == dlg.DoModal())
+	{
+		selectedPath = dlg.GetPathName();
+	}
+
+	else
+	{
+		return FALSE;
+	}
+
+	delete pFileBuf;
+	pFileBuf = NULL;
+
+	acutPrintf( _T( "\n报告生成中...\n" ) );
+	//初始化com
+	if(initword())
+	{
+		if(!CreatReport(selectedPath)) 
+		{
+			//卸载com
+			uninitword();
+			acutPrintf( _T( "\n报告生成失败!\n" ) );
+			return FALSE;
+		}
+		//卸载com
+		uninitword();
+	}
+	acutPrintf( _T( "\n报告保存到:%s" ),selectedPath);
+	if(IDYES == AfxMessageBox(_T("报告生成成功!是否现在打开?"),MB_YESNO))
+	{
+		if(initword())
+		{
+			OpenWordDocument(selectedPath);
+			//卸载com
+			uninitword();
+		}
+	}
+	return TRUE;
+}
+
+void RcuHelper::CreatReportHelper()
+{
+	CAcModuleResourceOverride myResources;
+
+	TCHAR szFileFilter[] = _T("doc文档(*.doc)|*.doc||");
+	TCHAR szFileExt[] = _T("doc");
+	CString defaultPath;
+	GetDocPath(defaultPath);
+	CString outName = _T("石门设计报告");
+	SaveAndOpenReport(outName);
 }

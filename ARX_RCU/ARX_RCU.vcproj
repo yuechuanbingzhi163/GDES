@@ -466,6 +466,22 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="report"
+				>
+				<File
+					RelativePath=".\CmyWord.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\CreatReport.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\msword.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Include Files"
@@ -544,6 +560,22 @@
 				</File>
 				<File
 					RelativePath=".\ReactorHelper.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="report"
+				>
+				<File
+					RelativePath=".\CmyWord.h"
+					>
+				</File>
+				<File
+					RelativePath=".\CreatReport.h"
+					>
+				</File>
+				<File
+					RelativePath=".\msword.h"
 					>
 				</File>
 			</Filter>

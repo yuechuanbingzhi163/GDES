@@ -80,11 +80,6 @@ static void ModifyDrillSiteToListCtrl(CListCtrl& m_list, int n, DrillSiteLink& d
 		ArxUtilHelper::DoubleToString(ds_link.m_pore_size, value);
 		m_list.SetItemText( n, 10, value);
 	}
-	{
-		CString value;
-		ArxUtilHelper::DoubleToString(ds_link.m_start, value);
-		m_list.SetItemText( n, 11, value);
-	}
 }
 
 //向钻场列表中新增一行

@@ -24,7 +24,6 @@ RcuEditDrillSiteDlg::RcuEditDrillSiteDlg(CWnd* pParent /*=NULL*/)
 	, m_angle(8)
 	, m_dist(50)
 	, m_pore_size(0.09)
-	, m_index(1)
 {
 
 }
@@ -51,7 +50,6 @@ void RcuEditDrillSiteDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT16, m_dist);
 	DDX_Text(pDX, IDC_EDIT18, m_name);
 	DDX_Text(pDX, IDC_PORE_SIZE_EDIT, m_pore_size);
-	DDX_Text(pDX, IDC_INDEX_EDIT, m_index);
 }
 
 
@@ -80,7 +78,6 @@ BOOL RcuEditDrillSiteDlg::OnInitDialog()
 	SetToolTip(IDC_EDIT17,_T("单位:m"));
 	SetToolTip(IDC_PORE_SIZE_EDIT, _T("钻孔孔径:m"));
 	SetToolTip(IDC_PORE_GAP_EDIT,  _T("钻孔之间间距:m"));
-	SetToolTip(IDC_INDEX_EDIT,  _T("钻孔指定起始编号"));
 
 	if(m_drill_site.isNull())
 	{
@@ -121,7 +118,6 @@ void RcuEditDrillSiteDlg::exchangeDrillSiteData( DrillSiteLink& ds_link, bool sa
 		ds_link.m_pt = AcGePoint3d(m_x, m_y, m_z);
 		ds_link.m_dist = m_dist;
 		ds_link.m_pore_size = m_pore_size;
-		ds_link.m_start = m_index;
 	}
 	else
 	{
@@ -137,7 +133,6 @@ void RcuEditDrillSiteDlg::exchangeDrillSiteData( DrillSiteLink& ds_link, bool sa
 		m_x = pt.x; m_y = pt.y; m_z = pt.z;
 		m_dist = ds_link.m_dist;
 		m_pore_size = ds_link.m_pore_size;
-		m_index = ds_link.m_start;
 	}
 }
 

@@ -2,7 +2,7 @@
 #include "resource.h"
 #include "ReactorHelper.h"
 #include "UIHelper.h"
-#include "../ARX_ReportHelper/ReportHelper.h"
+#include "RcuHelper.h"
 
 #ifndef ARX_RCU_SERVICE_NAME
 #define ARX_RCU_SERVICE_NAME _T("ARX_RCU_SERVICE_NAME")
@@ -75,7 +75,8 @@ public:
 
 	static void JL_RCUReport()
 	{
-		ReportHelper::CreatRCUReport();
+		RcuHelper::CreatReportHelper();
+		//ReportHelper::CreatRCUReport();
 	}
 
 } ;
