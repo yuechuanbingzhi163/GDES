@@ -80,12 +80,12 @@ static void CreatDrillTable(const DrillSiteLink& ds_link)
 	value.Format(_T("%.2f"),ds_link.m_pore_size);
 	MyWord->SetTableText(2,10,value);
 	MyWord->NoneSelectMoveDown(rows,5);
-	MyWord->InsetBookMark(_T("DRILL_SITE_TABLE"));
+	//MyWord->InsetBookMark(_T("DRILL_SITE_TABLE"));
 }
 
 static void CreatCoalTable(const CoalSurfaceLink& cs_link)
 {
-	MyWord->Goto(_T("DRILL_SITE_TABLE"));
+	//MyWord->Goto(_T("DRILL_SITE_TABLE"));
 	MyWord->WriteText(_T("煤层参数"));
 	//加1表示表头
 	int rows = 2;
@@ -111,7 +111,49 @@ static void CreatCoalTable(const CoalSurfaceLink& cs_link)
 	value.Format(_T("%.2f"),cs_link.m_width);
 	MyWord->SetTableText(2,5,value);
 	MyWord->NoneSelectMoveDown(rows,5);
-	MyWord->InsetBookMark(_T("COAL_SURFACE_TABLE"));
+	//MyWord->InsetBookMark(_T("COAL_SURFACE_TABLE"));
+}
+
+static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& coal_surf)
+{
+	MyWord->WriteText(_T("钻孔参数"));
+
+	AcDbObjectIdArray openPores,closePores;
+	RcuHelper::GetRelatedOpenPores(drill_site,openPores);
+	RcuHelper::GetRelatedClosePores(coal_surf,closePores);
+	if(openPores.length() != closePores.length()) return;
+	int rows = openPores.length() + 1;
+	if(rows <= 0) return;
+
+	//写表头
+	MyWord->CreateTable(rows,7);
+	MyWord->SetTableText(1,1,_T("开孔编号"));
+	MyWord->SetTableText(1,2,_T("开孔坐标"));
+	MyWord->SetTableText(1,3,_T("终孔编号"));
+	MyWord->SetTableText(1,4,_T("终孔坐标"));
+	MyWord->SetTableText(1,5,_T("仰角"));
+	MyWord->SetTableText(1,6,_T("偏角"));
+	MyWord->SetTableText(1,7,_T("长度"));
+	
+	//数据填充，从表格中的第三行开始些数据
+	//列数据分别为:开孔编号、开孔坐标、终孔编号、终孔坐标、仰角、偏角、长度
+	for(int i = 0; i < openPores.length(); i++)
+	{
+		PoreLink op_link,cp_link;
+		RcuHelper::ReadPoreData(openPores[i],op_link);
+		RcuHelper::ReadPoreData(closePores[i],cp_link);
+		CString value;
+		value.Format(_T("%d"),op_link.m_pore_num);
+		MyWord->SetTableText(2+i,1,value);
+		value = ArxUtilHelper::Point3dToString(op_link.m_pt);
+		MyWord->SetTableText(2+i,2,value);
+		value.Format(_T("%d"),cp_link.m_pore_num);
+		MyWord->SetTableText(2+i,3,value);
+		value = ArxUtilHelper::Point3dToString(cp_link.m_pt);
+		MyWord->SetTableText(2+i,4,value);
+
+	}
+	//MyWord->NoneSelectMoveDown(rows,5);
 }
 
 static bool WriteRCUDataToReport()
@@ -139,6 +181,7 @@ static bool WriteRCUDataToReport()
 		CoalSurfaceLink cs_link;
 		if(!RcuHelper::ReadCoalSurfaceData(coal_surf,cs_link)) return false;
 		CreatCoalTable(cs_link);
+		CreatPoreTable(drill_site,coal_surf);
 	}
 	return true;
 }

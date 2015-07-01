@@ -642,6 +642,11 @@ void CmyWord::MergeTable( int mergeFromRow, int mergeFromCol, int mergeToRow, in
 	Cell cellTo = m_table.Cell(mergeToRow,mergeToCol);
 	Cell cell = m_table.Cell(mergeFromRow,mergeFromCol);
 	cell.Merge(cellTo);
+
+	Range r = cellTo.GetRange();
+	_ParagraphFormat parafm = r.GetParagraphFormat();
+	parafm.SetAlignment(1); //默认为1，也就是居中
+	r.SetParagraphFormat(parafm);
 }
 
 void CmyWord::Delete(int nCount)
