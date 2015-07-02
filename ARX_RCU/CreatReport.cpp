@@ -125,7 +125,8 @@ static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& c
 	RcuHelper::GetRelatedOpenPores(drill_site,openPores);
 	RcuHelper::GetRelatedClosePores(coal_surf,closePores);
 	if(openPores.length() != closePores.length()) return;
-	int rows = openPores.length() + 1;
+	//行数比钻孔数多2的原因是表头一行，最后一行总长度
+	int rows = openPores.length() + 2;
 	if(rows <= 0) return;
 
 	//写表头
@@ -140,12 +141,13 @@ static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& c
 	
 	//数据填充，从表格中的第三行开始些数据
 	//列数据分别为:开孔编号、开孔坐标、终孔编号、终孔坐标、仰角、偏角、长度
+	double drillLenth = 0;
+	CString value;
 	for(int i = 0; i < openPores.length(); i++)
 	{
 		PoreLink op_link,cp_link;
 		RcuHelper::ReadPoreData(openPores[i],op_link);
 		RcuHelper::ReadPoreData(closePores[i],cp_link);
-		CString value;
 		value.Format(_T("%d"),op_link.m_pore_num);
 		MyWord->SetTableText(2+i,1,value);
 		value = ArxUtilHelper::Point3dToString(op_link.m_pt);
@@ -162,6 +164,7 @@ static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& c
 		double reg1 = RadToDeg(angle1);
 		double reg2 = RadToDeg(angle2);
 		double len = v.length();
+		drillLenth += len;
 
 		value.Format(_T("%.2f"),reg1);
 		MyWord->SetTableText(2+i,5,value);
@@ -170,6 +173,11 @@ static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& c
 		value.Format(_T("%.2f"),len);
 		MyWord->SetTableText(2+i,7,value);
 	}
+	value.Format(_T("%.2f"),drillLenth);
+	MyWord->SetTableText(rows,7,value);
+	MyWord->SetTableText(rows,1,_T("所有钻孔总长度(m)"));
+	MyWord->MergeTable(rows,6,rows,1);
+
 	MyWord->MoveToEnd();
 	MyWord->TypeParagraph();
 }
