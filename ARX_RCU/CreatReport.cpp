@@ -2,6 +2,7 @@
 #include "CmyWord.h"
 #include "CreatReport.h"
 #include "RcuHelper.h"
+#include "Rcu2.h"
 #include "../ArxHelper/ArxUtilHelper.h"
 
 static CString GetAppPathDir()
@@ -52,15 +53,15 @@ static void CreatDrillTable(const DrillSiteLink& ds_link)
 	//写表头
 	MyWord->CreateTable(rows,10);
 	MyWord->SetTableText(1,1,_T("名称"));
-	MyWord->SetTableText(1,2,_T("宽度"));
-	MyWord->SetTableText(1,3,_T("高度"));
-	MyWord->SetTableText(1,4,_T("最小法距"));
+	MyWord->SetTableText(1,2,_T("宽度(m)"));
+	MyWord->SetTableText(1,3,_T("高度(m)"));
+	MyWord->SetTableText(1,4,_T("最小法距(m)"));
 	MyWord->SetTableText(1,5,_T("迎头底板中心点坐标"));
-	MyWord->SetTableText(1,6,_T("左帮保护"));
-	MyWord->SetTableText(1,7,_T("右帮保护"));
-	MyWord->SetTableText(1,8,_T("上帮保护"));
-	MyWord->SetTableText(1,9,_T("下帮保护"));
-	MyWord->SetTableText(1,10,_T("孔径"));
+	MyWord->SetTableText(1,6,_T("左帮保护(m)"));
+	MyWord->SetTableText(1,7,_T("右帮保护(m)"));
+	MyWord->SetTableText(1,8,_T("上帮保护(m)"));
+	MyWord->SetTableText(1,9,_T("下帮保护(m)"));
+	MyWord->SetTableText(1,10,_T("孔径(m)"));
 
 	MyWord->SetTableText(2,1,ds_link.m_name);
 	CString value;
@@ -95,11 +96,11 @@ static void CreatCoalTable(const CoalSurfaceLink& cs_link)
 
 	//写表头
 	MyWord->CreateTable(rows,5);
-	MyWord->SetTableText(1,1,_T("煤厚"));
-	MyWord->SetTableText(1,2,_T("倾角"));
-	MyWord->SetTableText(1,3,_T("钻孔抽采半径"));
-	MyWord->SetTableText(1,4,_T("抽采高度"));
-	MyWord->SetTableText(1,5,_T("抽采宽度"));
+	MyWord->SetTableText(1,1,_T("煤厚(m)"));
+	MyWord->SetTableText(1,2,_T("倾角(度)"));
+	MyWord->SetTableText(1,3,_T("钻孔抽采半径(m)"));
+	MyWord->SetTableText(1,4,_T("抽采高度(m)"));
+	MyWord->SetTableText(1,5,_T("抽采宽度(m)"));
 
 	CString value;
 	value.Format(_T("%.2f"),cs_link.m_thick);
@@ -133,9 +134,9 @@ static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& c
 	MyWord->SetTableText(1,2,_T("开孔坐标"));
 	MyWord->SetTableText(1,3,_T("终孔编号"));
 	MyWord->SetTableText(1,4,_T("终孔坐标"));
-	MyWord->SetTableText(1,5,_T("仰角"));
-	MyWord->SetTableText(1,6,_T("偏角"));
-	MyWord->SetTableText(1,7,_T("长度"));
+	MyWord->SetTableText(1,5,_T("仰角(度)"));
+	MyWord->SetTableText(1,6,_T("偏角(度)"));
+	MyWord->SetTableText(1,7,_T("长度(m)"));
 	
 	//数据填充，从表格中的第三行开始些数据
 	//列数据分别为:开孔编号、开孔坐标、终孔编号、终孔坐标、仰角、偏角、长度
@@ -154,6 +155,20 @@ static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& c
 		value = ArxUtilHelper::Point3dToString(cp_link.m_pt);
 		MyWord->SetTableText(2+i,4,value);
 
+		//角度和长度计算
+		AcGeVector3d v = cp_link.m_pt - op_link.m_pt;
+		double angle1,angle2;
+		RcuHelper::VectorToAngle(v,angle1,angle2);
+		double reg1 = RadToDeg(angle1);
+		double reg2 = RadToDeg(angle2);
+		double len = v.length();
+
+		value.Format(_T("%.2f"),reg1);
+		MyWord->SetTableText(2+i,5,value);
+		value.Format(_T("%.2f"),reg2);
+		MyWord->SetTableText(2+i,6,value);
+		value.Format(_T("%.2f"),len);
+		MyWord->SetTableText(2+i,7,value);
 	}
 	MyWord->MoveToEnd();
 	MyWord->TypeParagraph();
