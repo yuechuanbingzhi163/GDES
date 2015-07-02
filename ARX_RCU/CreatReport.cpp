@@ -41,6 +41,9 @@ static BOOL CheckDocIsUsing(const CString& fileName)
 static void CreatDrillTable(const DrillSiteLink& ds_link)
 {
 	//MyWord->SetFont(_T("宋体"),22);
+	MyWord->WriteText(ds_link.m_name);
+	MyWord->WriteText(_T("钻场--石门设计相关参数"));
+
 	MyWord->WriteText(_T("钻场参数"));
 	//加1表示表头
 	int rows = 2;
@@ -85,7 +88,6 @@ static void CreatDrillTable(const DrillSiteLink& ds_link)
 
 static void CreatCoalTable(const CoalSurfaceLink& cs_link)
 {
-	//MyWord->Goto(_T("DRILL_SITE_TABLE"));
 	MyWord->WriteText(_T("煤层参数"));
 	//加1表示表头
 	int rows = 2;
@@ -153,7 +155,8 @@ static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& c
 		MyWord->SetTableText(2+i,4,value);
 
 	}
-	//MyWord->NoneSelectMoveDown(rows,5);
+	MyWord->MoveToEnd();
+	MyWord->TypeParagraph();
 }
 
 static bool WriteRCUDataToReport()

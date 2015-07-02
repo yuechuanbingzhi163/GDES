@@ -730,4 +730,9 @@ void CmyWord::SetFont( CString fonName,float fontSize )
 	m_wdSel.SetFont(font);
 
 }
+
+void CmyWord::MoveToEnd()
+{
+	m_wdSel.EndKey(COleVariant((short)wdStory),COleVariant((short)0));
+}
 CmyWord* MyWord = 0;

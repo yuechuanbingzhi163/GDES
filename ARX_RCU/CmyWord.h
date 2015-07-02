@@ -5,6 +5,7 @@
   
 #define wdCharacter 1  
 #define wdLine 5  
+#define wdStory 6
 #define wdCell 12  
 #define wdExtend 1  
 #define wdMove 0  
@@ -90,6 +91,7 @@ public:
 	BOOL Goto(const CString& strBMark);
 
     void MoveToFirst();  
+	void MoveToEnd();
     void MoveToNextPage();  
     void TypeParagraph();  
     void PasteAndFormat();  
