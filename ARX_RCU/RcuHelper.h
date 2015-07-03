@@ -59,13 +59,13 @@ public:
 	static bool ModifyCoalSurfRelatedGEs(const AcDbObjectId& coal_surf, CoalSurfaceLink& cs_link, DrillSiteLink& ds_link);
 
 	//修改钻场参数
-	static bool ModifyCoalSurfPt(const AcDbObjectId& drill_site);
+	static bool ModifyCoalSurfParams(const AcDbObjectId& drill_site);
 	//获取钻场的插入点坐标
 	static bool GetDrillSiteInsertPt(const AcDbObjectId& drill_site, AcGePoint3d& insertPt);
 	//获取煤层的插入点坐标
 	static bool GetCoalSurfInsertPt(const AcDbObjectId& coal_surf, AcGePoint3d& insertPt);
 	//获取煤层的插入点坐标
-	static bool SetCoalSurfInsertPt(const AcDbObjectId& coal_surf, AcGePoint3d& insertPt);
+	static bool SetCoalSurfParams(const AcDbObjectId& coal_surf, AcGePoint3d& insertPt, double w, double h);
 	//设置钻场图元的2点坐标
 	static bool SetDrillSitePt(const AcDbObjectId& drill_site, const AcGePoint3d& insertPt);
 	//获取钻场的2点坐标

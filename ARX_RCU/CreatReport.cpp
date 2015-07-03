@@ -44,6 +44,7 @@ static void CreatDrillTable(const DrillSiteLink& ds_link)
 	//MyWord->SetFont(_T("宋体"),22);
 	MyWord->WriteText(ds_link.m_name);
 	MyWord->WriteText(_T("钻场--石门设计相关参数"));
+	MyWord->TypeParagraph();
 
 	MyWord->WriteText(_T("钻场参数"));
 	//加1表示表头
@@ -55,7 +56,7 @@ static void CreatDrillTable(const DrillSiteLink& ds_link)
 	MyWord->SetTableText(1,1,_T("名称"));
 	MyWord->SetTableText(1,2,_T("宽度(m)"));
 	MyWord->SetTableText(1,3,_T("高度(m)"));
-	MyWord->SetTableText(1,4,_T("最小法距(m)"));
+	MyWord->SetTableText(1,4,_T("垂距(m)"));
 	MyWord->SetTableText(1,5,_T("迎头底板中心点坐标"));
 	MyWord->SetTableText(1,6,_T("左帮保护(m)"));
 	MyWord->SetTableText(1,7,_T("右帮保护(m)"));
@@ -166,9 +167,9 @@ static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& c
 		double len = v.length();
 		drillLenth += len;
 
-		value.Format(_T("%.2f"),reg1);
-		MyWord->SetTableText(2+i,5,value);
 		value.Format(_T("%.2f"),reg2);
+		MyWord->SetTableText(2+i,5,value);
+		value.Format(_T("%.2f"),reg1);
 		MyWord->SetTableText(2+i,6,value);
 		value.Format(_T("%.2f"),len);
 		MyWord->SetTableText(2+i,7,value);

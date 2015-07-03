@@ -195,7 +195,7 @@ bool RcuHelper::CaculCoalSurfParam( DrillSiteLink& ds_link, CoalSurfaceLink& cs_
 	rcu.setDrillSite1(ds_link.m_height, ds_link.m_width);
 	//设置钻场的上下左右保护帮距
 	rcu.setDrillSite2(ds_link.m_top, ds_link.m_bottom, ds_link.m_left, ds_link.m_right);
-	//设置钻场距离煤层的最小法距
+	//设置钻场距离煤层的垂距
 	rcu.setDrillSite3(ds_link.m_dist);
 
 	//计算煤层面的抽采范围宽度和高度
@@ -221,17 +221,17 @@ bool RcuHelper::CaculRelativeOpenPorePts(CoalSurfaceLink& cs_link, DrillSiteLink
 	double gap1 = ds_link.m_width/(n1+1);
 	double gap2 = ds_link.m_height/(n2+1);
 
-	AcGeVector3d xVector(AcGeVector3d::kXAxis);
-	AcGeVector3d yVector(AcGeVector3d::kYAxis);
+	AcGeVector3d headV(AcGeVector3d::kXAxis);
+	AcGeVector3d dipV(AcGeVector3d::kZAxis);
 
 	//以左下角为基点
-	AcGePoint3d origin = AcGePoint3d::kOrigin +xVector*(-0.5)*ds_link.m_width + yVector*0;
+	AcGePoint3d origin = AcGePoint3d::kOrigin +headV*(-0.5)*ds_link.m_width + dipV*0;
 	for(int i=0;i<n1;i++)
 	{
-		AcGePoint3d pt = origin + xVector*gap1*(i + 1);
+		AcGePoint3d pt = origin + headV*gap1*(i + 1);
 		for(int j=0;j<n2;j++)
 		{
-			pt += yVector * gap2;
+			pt += dipV * gap2;
 			pts.append(pt);
 		}
 	}
@@ -284,7 +284,7 @@ bool RcuHelper::GetDrillSiteInsertPt( const AcDbObjectId& drill_site, AcGePoint3
 }
 
 
-bool RcuHelper::SetCoalSurfInsertPt( const AcDbObjectId& coal_surf, AcGePoint3d& insertPt )
+bool RcuHelper::SetCoalSurfParams( const AcDbObjectId& coal_surf, AcGePoint3d& insertPt, double w, double h )
 {
 	AcTransaction* pTrans = actrTransactionManager->startTransaction();
 	if( pTrans == 0 ) return false;
@@ -304,7 +304,8 @@ bool RcuHelper::SetCoalSurfInsertPt( const AcDbObjectId& coal_surf, AcGePoint3d&
 	}
 
 	pCS->setInsertPt(insertPt);
-
+	pCS->setHeight(h);
+	pCS->setWidth(w);
 	actrTransactionManager->endTransaction();
 	return true;
 }
@@ -402,7 +403,11 @@ bool RcuHelper::CreateDrillSite(const AcGePoint3d& pt, DrillSiteLink& ds_link, C
 
 	CoalSurface* pCS = new CoalSurface();
 	//pCS->setInsertPt(pt + (cnt - origin));
-	pCS->setInsertPt(pt + AcGeVector3d(0,1,0)*(cs_link.m_height*0.5+ds_link.m_height*1.618));
+	double w = ds_link.m_width + ds_link.m_left + ds_link.m_right;
+	double h = ds_link.m_height + ds_link.m_top + ds_link.m_bottom;
+	pCS->setInsertPt(pt + AcGeVector3d(0,1,0)*(h*0.5+ds_link.m_height*1.618));
+	pCS->setWidth(w);
+	pCS->setHeight(h);
 	//pCS->enableFollow(true); // 开启跟随效果
 
 	//添加钻场到cad图形数据库
@@ -437,7 +442,7 @@ bool RcuHelper::CreateDrillSite(const AcGePoint3d& pt, DrillSiteLink& ds_link, C
 }
 
 
-bool RcuHelper::ModifyCoalSurfPt(const AcDbObjectId& drill_site)
+bool RcuHelper::ModifyCoalSurfParams(const AcDbObjectId& drill_site)
 {
 	if(drill_site.isNull()) return false;
 
@@ -461,9 +466,11 @@ bool RcuHelper::ModifyCoalSurfPt(const AcDbObjectId& drill_site)
 	AcGePoint3d pt;
 	if(!RcuHelper::GetDrillSiteInsertPt(drill_site, pt)) return false;
 	
-	AcGePoint3d insertPt = pt + AcGeVector3d(0,1,0)*(cs_link.m_height*0.5+ds_link.m_height*1.618);
+	double w = ds_link.m_width + ds_link.m_left + ds_link.m_right;
+	double h = ds_link.m_height + ds_link.m_top + ds_link.m_bottom;
+	AcGePoint3d insertPt = pt + AcGeVector3d(0,1,0)*(h*0.5+ds_link.m_height*1.618);
 
-	if(!RcuHelper::SetCoalSurfInsertPt(coal_surf,insertPt)) return false;
+	if(!RcuHelper::SetCoalSurfParams(coal_surf,insertPt,w,h)) return false;
 	// 	if(!RcuHelper::CaculDrillSitePt(ds_link, ds_link, pt, insertPt, linkPt)) return false;
 	return true;
 	//修改钻场图元的几何点坐标
@@ -490,7 +497,10 @@ bool RcuHelper::CreateOpenPores(const AcDbObjectId& drill_site, CoalSurfaceLink&
 
 		Pore* pPore = new Pore();
 		//基于xoy平面
-		pPore->setInsertPt(xoy_origin + pt.asVector());
+		//基于xoz平面,所以要把点pt的y和z互换
+		AcGePoint3d pt2 = pt;
+		std::swap(pt2.y, pt2.z);
+		pPore->setInsertPt(xoy_origin + pt2.asVector());
 		pPore->setRelatedGE(drill_site);
 
 		//添加钻场到cad图形数据库
@@ -509,8 +519,6 @@ bool RcuHelper::CreateOpenPores(const AcDbObjectId& drill_site, CoalSurfaceLink&
 			pore_link.setDataSource(pPore->objectId());
 			pore_link.m_pore_num = i + 1;
 			pore_link.m_pore_size = ds_link.m_pore_size;
-			//基于xoz平面,所以要把点pt的y和z互换
-			std::swap(pt.y, pt.z);
 			pore_link.m_pt = xoz_origin + pt.asVector();
 			pore_link.updateData(true);
 		}
@@ -537,7 +545,11 @@ bool RcuHelper::CreateClosePores(const AcDbObjectId& coal_surf, CoalSurfaceLink&
 
 		Pore* pPore = new Pore();
 		//基于xoy平面
-		pPore->setInsertPt(insertPt + pt.asVector());
+		AcGeVector3d v = pt.asVector();
+		AcGeVector3d normalYV(AcGeVector3d::kYAxis);
+		v = v.orthoProject(normalYV);
+		std::swap(v.y, v.z);
+		pPore->setInsertPt(insertPt + v);
 		pPore->setRelatedGE(coal_surf);
 
 		//添加钻场到cad图形数据库

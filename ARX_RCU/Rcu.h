@@ -76,7 +76,7 @@ public:
 		d1 = this->d1;
 		d2 = this->d2;
 	}
-	//最小法距点坐标
+	//垂距点坐标
 	AcGePoint3d minNormalDistPoint() const
 	{
 		return origin + AcGeVector3d(W1*0.5, H, 0);
@@ -136,11 +136,11 @@ public:
 	}
 
 private:
-	//最小法距
+	//垂距
 	double minNormalDist() const
 	{
 		using namespace std;
-		//沿着F点(最小法距点向煤层做垂线)
+		//沿着F点(垂距点向煤层做垂线)
 		return S1*sin(beta);
 	}
 	//如果只考虑钻场水平，则delta等于alpha(煤层倾角)

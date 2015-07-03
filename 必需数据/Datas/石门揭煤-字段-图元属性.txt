@@ -4,7 +4,7 @@ Pore	$坐标
 DrillSite	名称
 DrillSite	宽度
 DrillSite	高度
-DrillSite	最小法距
+DrillSite	垂距
 DrillSite	迎头底板中心点坐标
 DrillSite	左帮保护
 DrillSite	右帮保护

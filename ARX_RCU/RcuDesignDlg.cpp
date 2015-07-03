@@ -384,7 +384,7 @@ void RcuDesignDlg::OnModifyDrillSiteCommand()
 	//从对话框中更新数据
 	if(UpdateDrillSiteDataFromDlg(pData1->objId, ds_link, cs_link))
 	{
-		if (!RcuHelper::ModifyCoalSurfPt(pData1->objId)) return;
+		if (!RcuHelper::ModifyCoalSurfParams(pData1->objId)) return;
 		if(!RcuHelper::ModifyDrillSiteRelatedGEs(pData1->objId, cs_link, ds_link)) return;
 
 		//修改当前选中钻场的数据

@@ -54,7 +54,7 @@ protected:
 		linkStringData( _T( "名称" ), &m_name );
 		linkDoubleData( _T( "宽度" ), &m_width );
 		linkDoubleData( _T( "高度" ), &m_height );
-		linkDoubleData( _T( "最小法距" ), &m_dist );
+		linkDoubleData( _T( "垂距" ), &m_dist );
 		linkPointData( _T( "迎头底板中心点坐标" ), &m_pt );
 		linkDoubleData( _T( "左帮保护" ), &m_left );
 		linkDoubleData( _T( "右帮保护" ), &m_right );

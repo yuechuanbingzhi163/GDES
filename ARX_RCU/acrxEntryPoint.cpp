@@ -79,6 +79,15 @@ public:
 		//ReportHelper::CreatRCUReport();
 	}
 
+	static void JL_TestV()
+	{
+		AcGeVector3d v(1,1,1);
+		AcGeVector3d normalV(AcGeVector3d::kYAxis);
+		AcGeVector3d v2 = v.orthoProject(normalV);
+		acutPrintf(_T("\n投影之后的坐标:(%.2f,%.2f,%.2f)"),v2.x,v2.y,v2.z);
+		//RcuHelper::VectorToAngleTest();
+	}
+
 } ;
 
 //-----------------------------------------------------------------------------
@@ -86,3 +95,4 @@ IMPLEMENT_ARX_ENTRYPOINT(CARX_RCUApp)
 
 ACED_ARXCOMMAND_ENTRY_AUTO( CARX_RCUApp, JL, _RCUDlg, RCUDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CARX_RCUApp, JL, _RCUReport, RCUReport, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CARX_RCUApp, JL, _TestV, TestV, ACRX_CMD_TRANSPARENT, NULL )

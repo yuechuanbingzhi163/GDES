@@ -41,7 +41,7 @@ public:
 		this->d1 = d1;
 		this->d2 = d2;
 	}
-	//设置钻场距煤层面的最小法距
+	//设置钻场距煤层面的垂距
 	void setDrillSite3(double minDist)
 	{
 		this->minDist = minDist;
@@ -150,7 +150,7 @@ private:
 	double height;    // 钻场巷道高度
 	double width;     // 钻场巷道宽度(假设钻场为矩形巷道)
 	
-	double minDist;     // 钻场距离煤层的最小法距
+	double minDist;     // 钻场距离煤层的垂距
 	double f1; // 石门揭煤轮廓外上控距离
 	double f2; // 石门揭煤轮廓外下控距离
 	double d1; // 石门揭煤轮廓外左控距离
