@@ -25,7 +25,7 @@ protected:
 public:
 	//钻场列表
 	CListCtrl m_list;
-
+	BOOL m_allPut;
 	//导出按钮单击消息
 	afx_msg void OnBnClickedExport();
 

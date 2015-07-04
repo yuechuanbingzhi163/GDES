@@ -194,12 +194,21 @@ static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& c
 	MyWord->TypeParagraph();
 }
 
-static bool WriteRCUDataToReport()
+static bool WriteRCUDataToReport(const AcDbObjectId& drill_site)
 {
 	MyWord->WriteText(_T("石门设计报告"),wdAlignParagraphCenter);
 	MyWord->TypeParagraph();
 	AcDbObjectIdArray drill_sites;
-	RcuHelper::FindAllDrillSite(drill_sites);
+	if(drill_site.isNull())
+	{
+		RcuHelper::FindAllDrillSite(drill_sites);
+	}
+
+	else
+	{
+		drill_sites.append(drill_site);
+	}
+
 	if(drill_sites.isEmpty())
 	{
 		AfxMessageBox(_T("未找到相关钻场信息!"),MB_OK | MB_ICONSTOP);
@@ -231,7 +240,7 @@ static BOOL SaveReport(CString savePath)
 }
 
 
-static bool wordOprate(CString savePath)
+static bool wordOprate(CString savePath,const AcDbObjectId& drill_site)
 {
 	AfxGetMainWnd()->BeginWaitCursor();//设置等待光标
 	if(!MyWord->CreateDocuments())
@@ -243,7 +252,7 @@ static bool wordOprate(CString savePath)
 		return false;
 	}
 
-	if(!WriteRCUDataToReport()) 
+	if(!WriteRCUDataToReport(drill_site)) 
 	{
 		MyWord->CloseDocument();
 		MyWord->CloseApp();
@@ -288,9 +297,9 @@ void uninitword()
 	CoUninitialize();
 }
 
-bool CreatReport( const CString& savePath )
+bool CreatReport( const CString& savePath,const AcDbObjectId& drill_site )
 {
-	return wordOprate(savePath);
+	return wordOprate(savePath,drill_site);
 }
 
 void OpenWordDocument( const CString& filePath )

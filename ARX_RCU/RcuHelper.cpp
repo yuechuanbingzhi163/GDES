@@ -640,7 +640,7 @@ static void GetDocPath( CString& defaultPath )
 	defaultPath.Format(_T("%s"),pPath);
 }
 
-static BOOL SaveAndOpenReport(CString outName)
+static BOOL SaveAndOpenReport(CString outName,const AcDbObjectId& drill_site)
 {
 	TCHAR szFileFilter[] = _T("doc文档(*.doc)|*.doc||");
 	TCHAR szFileExt[] = _T("doc");
@@ -677,7 +677,7 @@ static BOOL SaveAndOpenReport(CString outName)
 	//初始化com
 	if(initword())
 	{
-		if(!CreatReport(selectedPath)) 
+		if(!CreatReport(selectedPath,drill_site)) 
 		{
 			//卸载com
 			uninitword();
@@ -700,7 +700,7 @@ static BOOL SaveAndOpenReport(CString outName)
 	return TRUE;
 }
 
-void RcuHelper::CreatReportHelper()
+void RcuHelper::CreatReportHelper(const AcDbObjectId& drill_site)
 {
 	CAcModuleResourceOverride myResources;
 
@@ -708,6 +708,15 @@ void RcuHelper::CreatReportHelper()
 	TCHAR szFileExt[] = _T("doc");
 	CString defaultPath;
 	GetDocPath(defaultPath);
-	CString outName = _T("石门设计报告");
-	SaveAndOpenReport(outName);
+	CString outName;
+	if(drill_site.isNull())
+		outName = _T("石门设计报告");
+	else
+	{
+		//获取钻场数据
+		DrillSiteLink ds_link;
+		if(!RcuHelper::ReadDrillSiteData(drill_site, ds_link)) return;
+		outName.Format(_T("%s钻场--石门设计报告"),ds_link.m_name);
+	}
+	SaveAndOpenReport(outName,drill_site);
 }

@@ -75,5 +75,5 @@ public:
 	static void CaculPoreNums(int& row_num, int& col_num, double width, double height,double gap);
 
 	//生成报告
-	static void CreatReportHelper();
+	static void CreatReportHelper(const AcDbObjectId& drill_site);
 };

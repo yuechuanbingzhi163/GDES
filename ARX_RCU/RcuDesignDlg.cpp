@@ -180,6 +180,7 @@ IMPLEMENT_DYNAMIC(RcuDesignDlg, DockBarChildDlg)
 
 RcuDesignDlg::RcuDesignDlg(CWnd* pParent /*=NULL*/)
 	: DockBarChildDlg(RcuDesignDlg::IDD, pParent)
+	, m_allPut(FALSE)
 {
 }
 
@@ -192,6 +193,7 @@ void RcuDesignDlg::DoDataExchange(CDataExchange* pDX)
 {
 	DockBarChildDlg::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST1, m_list);
+	DDX_Check(pDX, IDC_ALL_PUTOUT_CHECK, m_allPut);
 }
 
 BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
@@ -494,7 +496,23 @@ void RcuDesignDlg::OnDesiginClosePoresCommand()
 
 void RcuDesignDlg::OnBnClickedExport()
 {
-	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	//文档锁切换
+	DocumentLockSwitch lock_switch;
+	if(m_allPut)
+	{
+		RcuHelper::CreatReportHelper(NULL);
+		return;
+	}
+	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
+	if(row1 == LB_ERR)
+	{
+		MessageBox( _T( "请确保当前有一行被选中!" ) );
+		return;
+	}
+	ItemData* pData1 = ( ItemData* )m_list.GetItemData( row1 );
+	
+	RcuHelper::CreatReportHelper(pData1->objId);
 }
 
 void RcuDesignDlg::updateDrillSiteListCtrl(unsigned int op, const AcDbObjectId& drill_site)

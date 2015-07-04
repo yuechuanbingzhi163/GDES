@@ -75,7 +75,7 @@ public:
 
 	static void JL_RCUReport()
 	{
-		RcuHelper::CreatReportHelper();
+		//RcuHelper::CreatReportHelper();
 		//ReportHelper::CreatRCUReport();
 	}
 

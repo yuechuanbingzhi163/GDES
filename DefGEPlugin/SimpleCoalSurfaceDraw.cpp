@@ -55,8 +55,8 @@ void SimpleCoalSurfaceDraw::writeExtraParam( DrawParamWriter& writer )
 
 void SimpleCoalSurfaceDraw::regPropertyDataNames( AcStringArray& names ) const
 {
-    names.append( _T( "几何宽度" ) );
-    names.append( _T( "几何高度" ) );
+    names.append( _T( "$几何宽度" ) );
+    names.append( _T( "$几何高度" ) );
 	//names.append( _T( "中心点坐标" ) );
 }
 

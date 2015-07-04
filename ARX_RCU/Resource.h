@@ -34,6 +34,8 @@
 #define IDC_PORE_GAP_EDIT               122
 #define IDC_EDIT6                       123
 #define IDC_INDEX_EDIT                  123
+#define IDC_CHECK1                      124
+#define IDC_ALL_PUTOUT_CHECK            124
 #define ID_RCU_LIST_DELETE              32773
 #define ID_RCU_LIST_LOCATE              32774
 #define ID_RCU_LIST_HILIGHT             32775
@@ -68,7 +70,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        121
 #define _APS_NEXT_COMMAND_VALUE         32807
-#define _APS_NEXT_CONTROL_VALUE         124
+#define _APS_NEXT_CONTROL_VALUE         125
 #define _APS_NEXT_SYMED_VALUE           102
 #endif
 #endif
