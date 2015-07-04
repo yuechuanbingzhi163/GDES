@@ -121,13 +121,16 @@ static void CreatCoalTable(const CoalSurfaceLink& cs_link)
 static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& coal_surf)
 {
 	MyWord->WriteText(_T("钻孔参数"));
+	CString bookMks;
+	bookMks.Format(_T("RCU_PORE_PARAM%d"),drill_site.asOldId()/1000);
+	MyWord->InsetBookMark(bookMks);
 
 	AcDbObjectIdArray openPores,closePores;
 	RcuHelper::GetRelatedOpenPores(drill_site,openPores);
 	RcuHelper::GetRelatedClosePores(coal_surf,closePores);
 	if(openPores.length() != closePores.length()) return;
 	//行数比钻孔数多2的原因是表头一行，最后一行总长度
-	int rows = openPores.length() + 2;
+	int rows = openPores.length() + 1;
 	if(rows <= 0) return;
 
 	//写表头
@@ -174,10 +177,15 @@ static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& c
 		value.Format(_T("%.2f"),len);
 		MyWord->SetTableText(2+i,7,value);
 	}
-	value.Format(_T("%.2f"),drillLenth);
-	MyWord->SetTableText(rows,7,value);
-	MyWord->SetTableText(rows,1,_T("所有钻孔总长度(m)"));
-	MyWord->MergeTable(rows,6,rows,1);
+	//value.Format(_T("%.2f"),drillLenth);
+	//MyWord->SetTableText(rows,7,value);
+	//MyWord->SetTableText(rows,1,_T("所有钻孔总长度(m)"));
+	//MyWord->MergeTable(rows,6,rows,1);
+
+	MyWord->Goto(bookMks);
+	CString msg;
+	msg.Format(_T("（钻孔数:%d，所有钻孔长度:%.2lfm）"),openPores.length(),drillLenth);
+	MyWord->WriteText(msg);
 
 	MyWord->MoveToEnd();
 	MyWord->TypeParagraph();

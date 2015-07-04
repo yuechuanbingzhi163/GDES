@@ -168,7 +168,7 @@ void CSimpleMFCTestDlg::OnBnClickedButton1()
 	CStringArray values;
 
 	CString value;
-	value.Format(_T("%.6f %.6f %.6f"), 45.7, 89.3, 44*1.0);
+	value.Format(_T("%.6f %.6f %.6f"), -45.5, 89.3, -44*1.0);
 	MessageBox(value);
 
 	CString xx = _T("45.7  89.3		32.4   ");

@@ -310,7 +310,7 @@ void ArxUtilHelper::SplitCString(const CString& str, const CString& tokens, CStr
 bool ArxUtilHelper::StringToPoint3d(const CString& value, AcGePoint3d& pt)
 {
 	CStringArray values;
-	ArxUtilHelper::SplitCString(value, _T(" (\t\n,;_-)"), values);
+	ArxUtilHelper::SplitCString(value, _T(" (\t\n,;_)"), values);
 	if(values.GetCount() < 3) return false;
 
 	double x=0,y=0,z=0;
