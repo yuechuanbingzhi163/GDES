@@ -154,11 +154,18 @@ bool RcuHelper::ReadPoreData(const AcDbObjectId& pore, PoreLink& po_link)
 
 void RcuHelper::VectorToAngle(const AcGeVector3d& v, double& ang1, double& ang2)
 {
-	//向量在xoy平面上的投影
+	//向量在xoy平面上的正交投影
 	AcGeVector3d u = v.orthoProject(AcGeVector3d::kZAxis);
 	//acutPrintf(_T("\n投影值:x=%.3f, y=%.3f z=%.3f"), u.x, u.y, u.z);
-	ang1 = u.angleTo(AcGeVector3d::kXAxis/*, AcGeVector3d::kZAxis*/);
+
+	//angleTo求的是夹角，范围在[0,90]
+	//计算向量u与Y轴的夹角(偏角)
+	ang1 = u.angleTo(AcGeVector3d::kYAxis);
+	if(u.x < 0) ang1 *= -1;
+
+	//计算向量u与v的夹角(仰角)，范围在[0,90]
 	ang2 = u.angleTo(v);
+	if(v.z < 0) ang2 *= -1;
 }
 
 void RcuHelper::VectorToAngleTest()
@@ -214,18 +221,20 @@ bool RcuHelper::CaculCoalSurfParam( DrillSiteLink& ds_link, CoalSurfaceLink& cs_
 
 bool RcuHelper::CaculRelativeOpenPorePts(CoalSurfaceLink& cs_link, DrillSiteLink& ds_link, AcGePoint3dArray& pts)
 {
+	//计算钻孔的行和列上的分布个数
 	int n1,n2;
-	CaculPoreNums(n1,n2,cs_link.m_width,cs_link.m_height,cs_link.m_gas_radius);
+	CaculPoreNums(n1,n2,cs_link.m_width,cs_link.m_height,2*cs_link.m_gas_radius);
 
 	//计算钻孔的坐标
 	double gap1 = ds_link.m_width/(n1+1);
 	double gap2 = ds_link.m_height/(n2+1);
+	acutPrintf(_T("\ngap1:%.3f, gap2:%.3f"), gap1, gap2);
 
 	AcGeVector3d headV(AcGeVector3d::kXAxis);
 	AcGeVector3d dipV(AcGeVector3d::kZAxis);
 
-	//以左下角为基点
-	AcGePoint3d origin = AcGePoint3d::kOrigin +headV*(-0.5)*ds_link.m_width + dipV*0;
+	//以矩形左下角为基点(便于计算)
+	AcGePoint3d origin = AcGePoint3d::kOrigin + headV*(-0.5)*ds_link.m_width + dipV*0;
 	for(int i=0;i<n1;i++)
 	{
 		AcGePoint3d pt = origin + headV*gap1*(i + 1);
@@ -240,8 +249,10 @@ bool RcuHelper::CaculRelativeOpenPorePts(CoalSurfaceLink& cs_link, DrillSiteLink
 
 bool RcuHelper::CaculRelativeClosePorePts(CoalSurfaceLink& cs_link, AcGePoint3dArray& pts)
 {
+	//计算行和列上钻孔的个数
 	int n1,n2;
-	CaculPoreNums(n1,n2,cs_link.m_width,cs_link.m_height,cs_link.m_gas_radius);
+	CaculPoreNums(n1,n2,cs_link.m_width,cs_link.m_height,2*cs_link.m_gas_radius);
+
 	//矩形左下角的点坐标,从这个点开始计算
 	AcGePoint3d origin = AcGePoint3d::kOrigin + cs_link.m_headV*cs_link.m_width*-0.5 + cs_link.m_dipV*cs_link.m_height*-0.5;
 	for(int i=0;i<n1;i++)
@@ -390,9 +401,6 @@ bool RcuHelper::CreateDrillSite(const AcGePoint3d& pt, DrillSiteLink& ds_link, C
 	//计算煤层参数
 	if(!RcuHelper::CaculCoalSurfParam(ds_link, cs_link)) return false;
 
-	AcGePoint3d origin = ds_link.m_pt;
-	AcGePoint3d cnt = cs_link.m_pt;
-
 	//文档锁切换
 	DocumentLockSwitch lock_switch;
 
@@ -487,8 +495,7 @@ bool RcuHelper::CreateOpenPores(const AcDbObjectId& drill_site, CoalSurfaceLink&
 	AcGePoint3dArray pts;
 	if(!RcuHelper::CaculRelativeOpenPorePts(cs_link, ds_link, pts)) return false;
 
-	//计算底帮的基点(连接点向下偏移一半的高度距离)
-	AcGePoint3d xoy_origin = insertPt;
+	//acutPrintf(ArxUtilHelper::Point3dToString(ds_link.m_pt)+_T("\n"));
 	//新建钻场并设置插入点坐标
 	for(int i = 0;i < pts.length(); i++)
 	{
@@ -496,11 +503,10 @@ bool RcuHelper::CreateOpenPores(const AcDbObjectId& drill_site, CoalSurfaceLink&
 		AcGePoint3d pt = pts[i];
 
 		Pore* pPore = new Pore();
-		//基于xoy平面
 		//基于xoz平面,所以要把点pt的y和z互换
 		AcGePoint3d pt2 = pt;
 		std::swap(pt2.y, pt2.z);
-		pPore->setInsertPt(xoy_origin + pt2.asVector());
+		pPore->setInsertPt(insertPt + pt2.asVector());
 		pPore->setRelatedGE(drill_site);
 
 		//添加钻场到cad图形数据库
@@ -511,15 +517,13 @@ bool RcuHelper::CreateOpenPores(const AcDbObjectId& drill_site, CoalSurfaceLink&
 		}
 		else
 		{
-			//这里涉及到2个坐标:
-			//平面投影坐标基于xoy平面，而钻场打钻的那面墙基于xoz平面
-			AcGePoint3d xoz_origin = ds_link.m_pt;
-
 			PoreLink pore_link;
 			pore_link.setDataSource(pPore->objectId());
 			pore_link.m_pore_num = i + 1;
 			pore_link.m_pore_size = ds_link.m_pore_size;
-			pore_link.m_pt = xoz_origin + pt.asVector();
+			//这里要用钻场的底板中心点真实坐标计算钻孔的真实坐标
+			pore_link.m_pt = ds_link.m_pt + pt.asVector();
+			//acutPrintf(ArxUtilHelper::Point3dToString(pore_link.m_pt)+_T(" "));
 			pore_link.updateData(true);
 		}
 	}
@@ -577,12 +581,6 @@ bool RcuHelper::ModifyDrillSitePoreGEs( const AcDbObjectId& drill_site, CoalSurf
 	return CreateOpenPores(drill_site, cs_link, ds_link);
 }
 
-//bool RcuHelper::ModifyDrillSiteRelatedGEs(const AcDbObjectId& drill_site, DrillSiteLink& ds_link)
-//{
-//	return CreateOpenPores(drill_site, ds_link);
-//	//return true;
-//}
-
 bool RcuHelper::ModifyCoalSurfRelatedGEs(const AcDbObjectId& coal_surf, CoalSurfaceLink& cs_link, DrillSiteLink& ds_link)
 {
 	return CreateClosePores(coal_surf, cs_link,ds_link);
@@ -624,13 +622,12 @@ bool RcuHelper::ModifyDrillSiteRelatedGEs(const AcDbObjectId& drill_site, CoalSu
 	return true;
 }
 
-void RcuHelper::CaculPoreNums( int& row_num, int& col_num, double width, double height, double radius )
+void RcuHelper::CaculPoreNums( int& row_num, int& col_num, double width, double height, double gap )
 {
 	//抽采范围的宽度上布置钻孔个数
-	row_num = int(width/2/radius);
+	row_num = int(width/gap);
 	//抽采范围的高度上布置钻孔个数
-	col_num = int(height/2/radius);
-
+	col_num = int(height/gap);
 }
 
 static void GetDocPath( CString& defaultPath )
