@@ -21,3 +21,5 @@ CoalSurface	$中心点坐标
 CoalSurface	$平面法向量
 CoalSurface	$煤层走向向量
 CoalSurface	$煤层倾向向量
+CoalSurface	$几何宽度
+CoalSurface	$几何高度

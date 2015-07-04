@@ -19,8 +19,8 @@ public:
 	virtual void readKeyParam(DrawParamReader& reader);
 	virtual void writeKeyParam(DrawParamWriter& writer);
 
-	//virtual void regPropertyDataNames(AcStringArray& names) const;
-	//virtual void readPropertyDataFromGE(const AcStringArray& values);
+	virtual void regPropertyDataNames(AcStringArray& names) const;
+	virtual void readPropertyDataFromGE(const AcStringArray& values);
 
 	virtual void readExtraParam(DrawParamReader& reader);
 	virtual void writeExtraParam(DrawParamWriter& writer);

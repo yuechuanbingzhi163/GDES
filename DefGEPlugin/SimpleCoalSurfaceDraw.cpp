@@ -17,8 +17,8 @@ SimpleCoalSurfaceDraw::~SimpleCoalSurfaceDraw ()
 
 void SimpleCoalSurfaceDraw::setAllExtraParamsToDefault()
 {
-	m_height = 0;
-	m_width = 0;
+	//m_height = 0;
+	//m_width = 0;
 }
 
 void SimpleCoalSurfaceDraw::configExtraParams()
@@ -32,15 +32,15 @@ void SimpleCoalSurfaceDraw::updateExtraParams()
 void SimpleCoalSurfaceDraw::readKeyParam(DrawParamReader& reader)
 {
 	reader.readPoint(m_insertPt);
-	reader.readDouble(m_width);
-	reader.readDouble(m_height);
+	//reader.readDouble(m_width);
+	//reader.readDouble(m_height);
 }
 
 void SimpleCoalSurfaceDraw::writeKeyParam(DrawParamWriter& writer)
 {
 	writer.writePoint(m_insertPt);
-	writer.writeDouble(m_width);
-	writer.writeDouble(m_height);
+	//writer.writeDouble(m_width);
+	//writer.writeDouble(m_height);
 }
 
 void SimpleCoalSurfaceDraw::readExtraParam( DrawParamReader& reader )
@@ -53,23 +53,23 @@ void SimpleCoalSurfaceDraw::writeExtraParam( DrawParamWriter& writer )
     //MineGEDraw::writeExtraParam( writer );
 }
 
-//void SimpleCoalSurfaceDraw::regPropertyDataNames( AcStringArray& names ) const
-//{
-//    names.append( _T( "$抽采宽度" ) );
-//    names.append( _T( "$抽采高度" ) );
-//	//names.append( _T( "中心点坐标" ) );
-//}
-//
-//void SimpleCoalSurfaceDraw::readPropertyDataFromGE( const AcStringArray& values )
-//{
-//   // m_width = abs(_tstof(values[0].kACharPtr()));
-//	//m_height = abs(_tstof(values[1].kACharPtr()));
-//	if(values.isEmpty()) return;
-//	m_width =_tstof(values[0].kACharPtr());
-//	m_height = _tstof(values[1].kACharPtr());
-//
-//	//ArxUtilHelper::StringToPoint3d(values[2].kACharPtr(), m_pt);
-//}
+void SimpleCoalSurfaceDraw::regPropertyDataNames( AcStringArray& names ) const
+{
+    names.append( _T( "几何宽度" ) );
+    names.append( _T( "几何高度" ) );
+	//names.append( _T( "中心点坐标" ) );
+}
+
+void SimpleCoalSurfaceDraw::readPropertyDataFromGE( const AcStringArray& values )
+{
+   // m_width = abs(_tstof(values[0].kACharPtr()));
+	//m_height = abs(_tstof(values[1].kACharPtr()));
+	if(values.isEmpty()) return;
+	m_width =_tstof(values[0].kACharPtr());
+	m_height = _tstof(values[1].kACharPtr());
+
+	//ArxUtilHelper::StringToPoint3d(values[2].kACharPtr(), m_pt);
+}
 
 Adesk::Boolean SimpleCoalSurfaceDraw::subWorldDraw( AcGiWorldDraw* mode )
 {

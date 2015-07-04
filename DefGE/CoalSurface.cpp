@@ -27,42 +27,42 @@ void CoalSurface::setInsertPt( const AcGePoint3d& pt )
     m_insertPt = pt;
 }
 
-double CoalSurface::getWidth() const
-{
-	assertReadEnabled();
-	return m_width;
-}
-
-void CoalSurface::setWidth(double w)
-{
-	assertWriteEnabled();
-	m_width = w;
-}
-
-double CoalSurface::getHeight() const
-{
-	assertReadEnabled();
-	return m_height;
-}
-
-void CoalSurface::setHeight(double h)
-{
-	assertWriteEnabled();
-	m_height = h;
-}
+//double CoalSurface::getWidth() const
+//{
+//	assertReadEnabled();
+//	return m_width;
+//}
+//
+//void CoalSurface::setWidth(double w)
+//{
+//	assertWriteEnabled();
+//	m_width = w;
+//}
+//
+//double CoalSurface::getHeight() const
+//{
+//	assertReadEnabled();
+//	return m_height;
+//}
+//
+//void CoalSurface::setHeight(double h)
+//{
+//	assertWriteEnabled();
+//	m_height = h;
+//}
 
 void CoalSurface::readKeyParam( DrawParamReader& reader )
 {
     reader.readPoint(m_insertPt);
-	reader.readDouble(m_width);
-	reader.readDouble(m_height);
+	//reader.readDouble(m_width);
+	//reader.readDouble(m_height);
 }
 
 void CoalSurface::writeKeyParam( DrawParamWriter& writer ) const
 {
     writer.writePoint(m_insertPt);
-	writer.writeDouble(m_width);
-	writer.writeDouble(m_height);
+	//writer.writeDouble(m_width);
+	//writer.writeDouble(m_height);
 }
 
 Acad::ErrorStatus CoalSurface::dwgOutFields ( AcDbDwgFiler* pFiler ) const

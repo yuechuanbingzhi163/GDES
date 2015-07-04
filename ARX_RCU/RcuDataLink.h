@@ -6,7 +6,7 @@
 class CoalSurfaceLink : public DataLink
 {
 public:
-	CoalSurfaceLink() : m_thick(0), m_angle(0), m_width(0), m_height(0), 
+	CoalSurfaceLink() : m_thick(0), m_angle(0), m_width(0), m_height(0), m_GEwidth(0),m_GEheight(0),
 		                m_gas_radius(3)
 	{
 
@@ -24,6 +24,8 @@ protected:
 		linkVectorData(_T("$平面法向量"), &m_normV);
 		linkVectorData(_T("$煤层走向向量"), &m_headV);
 		linkVectorData(_T("$煤层倾向向量"), &m_dipV);
+		linkDoubleData( _T( "$几何宽度" ), &m_GEwidth );
+		linkDoubleData( _T( "$几何高度" ), &m_GEheight );
 	}
 
 public:
@@ -37,6 +39,9 @@ public:
 	AcGeVector3d m_headV;
 	AcGeVector3d m_dipV;
 	double m_gas_radius;
+	double m_GEwidth;
+	double m_GEheight;
+
 };
 
 class DrillSiteLink : public DataLink

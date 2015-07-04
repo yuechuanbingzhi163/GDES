@@ -21,11 +21,11 @@ public:
 	// 设置插入点坐标
 	void setInsertPt(const AcGePoint3d& pt);
 
-	double getWidth() const;
-	void setWidth(double w);
+	//double getWidth() const;
+	//void setWidth(double w);
 
-	double getHeight() const;
-	void setHeight(double h);
+	//double getHeight() const;
+	//void setHeight(double h);
 
 public:
 	virtual Acad::ErrorStatus dwgOutFields (AcDbDwgFiler *pFiler) const;
@@ -38,7 +38,7 @@ protected:
 private:
 	// key param
 	AcGePoint3d m_insertPt;  // 插入点坐标
-	double m_width, m_height; // 宽度和高度
+	//double m_width, m_height; // 宽度和高度
 };
 
 #ifdef DEFGE_MODULE

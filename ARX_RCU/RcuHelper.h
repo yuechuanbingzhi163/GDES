@@ -65,7 +65,7 @@ public:
 	//获取煤层的插入点坐标
 	static bool GetCoalSurfInsertPt(const AcDbObjectId& coal_surf, AcGePoint3d& insertPt);
 	//获取煤层的插入点坐标
-	static bool SetCoalSurfParams(const AcDbObjectId& coal_surf, AcGePoint3d& insertPt, double w, double h);
+	static bool SetCoalSurfParams(const AcDbObjectId& coal_surf, AcGePoint3d& insertPt);
 	//设置钻场图元的2点坐标
 	static bool SetDrillSitePt(const AcDbObjectId& drill_site, const AcGePoint3d& insertPt);
 	//获取钻场的2点坐标

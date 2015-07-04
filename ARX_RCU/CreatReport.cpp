@@ -84,7 +84,8 @@ static void CreatDrillTable(const DrillSiteLink& ds_link)
 	MyWord->SetTableText(2,9,value);
 	value.Format(_T("%.2f"),ds_link.m_pore_size);
 	MyWord->SetTableText(2,10,value);
-	MyWord->NoneSelectMoveDown(rows,5);
+	//MyWord->NoneSelectMoveDown(rows,5);
+	MyWord->MoveToEnd();
 	//MyWord->InsetBookMark(_T("DRILL_SITE_TABLE"));
 }
 
@@ -114,15 +115,17 @@ static void CreatCoalTable(const CoalSurfaceLink& cs_link)
 	MyWord->SetTableText(2,4,value);
 	value.Format(_T("%.2f"),cs_link.m_width);
 	MyWord->SetTableText(2,5,value);
-	MyWord->NoneSelectMoveDown(rows,5);
+	//MyWord->NoneSelectMoveDown(rows,5);
+	MyWord->MoveToEnd();
+
 	//MyWord->InsetBookMark(_T("COAL_SURFACE_TABLE"));
 }
 
-static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& coal_surf)
+static void CreatPoreTable(const AcDbObjectId& drill_site, const AcDbObjectId& coal_surf,int index)
 {
 	MyWord->WriteText(_T("×ê¿×²ÎÊý"));
 	CString bookMks;
-	bookMks.Format(_T("RCU_PORE_PARAM%d"),drill_site.asOldId()/1000);
+	bookMks.Format(_T("RCU_PORE_PARAM_%d"),index);
 	MyWord->InsetBookMark(bookMks);
 
 	AcDbObjectIdArray openPores,closePores;
@@ -216,7 +219,7 @@ static bool WriteRCUDataToReport()
 		CoalSurfaceLink cs_link;
 		if(!RcuHelper::ReadCoalSurfaceData(coal_surf,cs_link)) return false;
 		CreatCoalTable(cs_link);
-		CreatPoreTable(drill_site,coal_surf);
+		CreatPoreTable(drill_site,coal_surf,i+1);
 	}
 	return true;
 }

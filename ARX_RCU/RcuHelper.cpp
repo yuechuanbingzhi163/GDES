@@ -284,7 +284,7 @@ bool RcuHelper::GetDrillSiteInsertPt( const AcDbObjectId& drill_site, AcGePoint3
 }
 
 
-bool RcuHelper::SetCoalSurfParams( const AcDbObjectId& coal_surf, AcGePoint3d& insertPt, double w, double h )
+bool RcuHelper::SetCoalSurfParams( const AcDbObjectId& coal_surf, AcGePoint3d& insertPt )
 {
 	AcTransaction* pTrans = actrTransactionManager->startTransaction();
 	if( pTrans == 0 ) return false;
@@ -304,8 +304,8 @@ bool RcuHelper::SetCoalSurfParams( const AcDbObjectId& coal_surf, AcGePoint3d& i
 	}
 
 	pCS->setInsertPt(insertPt);
-	pCS->setHeight(h);
-	pCS->setWidth(w);
+	//pCS->setHeight(h);
+	//pCS->setWidth(w);
 	actrTransactionManager->endTransaction();
 	return true;
 }
@@ -403,11 +403,12 @@ bool RcuHelper::CreateDrillSite(const AcGePoint3d& pt, DrillSiteLink& ds_link, C
 
 	CoalSurface* pCS = new CoalSurface();
 	//pCS->setInsertPt(pt + (cnt - origin));
-	double w = ds_link.m_width + ds_link.m_left + ds_link.m_right;
-	double h = ds_link.m_height + ds_link.m_top + ds_link.m_bottom;
-	pCS->setInsertPt(pt + AcGeVector3d(0,1,0)*(h*0.5+ds_link.m_height*1.618));
-	pCS->setWidth(w);
-	pCS->setHeight(h);
+	cs_link.m_GEwidth = ds_link.m_width + ds_link.m_left + ds_link.m_right;
+	cs_link.m_GEheight = ds_link.m_height + ds_link.m_top + ds_link.m_bottom;
+	cs_link.updateData(true);
+	pCS->setInsertPt(pt + AcGeVector3d(0,1,0)*(cs_link.m_GEheight*0.5+ds_link.m_height*1.618));
+	//pCS->setWidth(w);
+	//pCS->setHeight(h);
 	//pCS->enableFollow(true); // 开启跟随效果
 
 	//添加钻场到cad图形数据库
@@ -466,11 +467,12 @@ bool RcuHelper::ModifyCoalSurfParams(const AcDbObjectId& drill_site)
 	AcGePoint3d pt;
 	if(!RcuHelper::GetDrillSiteInsertPt(drill_site, pt)) return false;
 	
-	double w = ds_link.m_width + ds_link.m_left + ds_link.m_right;
-	double h = ds_link.m_height + ds_link.m_top + ds_link.m_bottom;
-	AcGePoint3d insertPt = pt + AcGeVector3d(0,1,0)*(h*0.5+ds_link.m_height*1.618);
+	cs_link.m_GEwidth = ds_link.m_width + ds_link.m_left + ds_link.m_right;
+	cs_link.m_GEheight = ds_link.m_height + ds_link.m_top + ds_link.m_bottom;
+	cs_link.updateData(true);
+	AcGePoint3d insertPt = pt + AcGeVector3d(0,1,0)*(cs_link.m_GEheight*0.5+ds_link.m_height*1.618);
 
-	if(!RcuHelper::SetCoalSurfParams(coal_surf,insertPt,w,h)) return false;
+	if(!RcuHelper::SetCoalSurfParams(coal_surf,insertPt)) return false;
 	// 	if(!RcuHelper::CaculDrillSitePt(ds_link, ds_link, pt, insertPt, linkPt)) return false;
 	return true;
 	//修改钻场图元的几何点坐标
