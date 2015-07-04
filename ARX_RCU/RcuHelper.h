@@ -32,7 +32,7 @@ public:
 	//得到钻场的数据
 	static bool GetDrillSiteData(const AcDbObjectId& drill_site, DrillSiteLink& ds_link);
 
-	//向量在水平面的方向角和仰角
+	//向量的偏角(与Y轴的夹角，有正负)和仰角(与水平面的夹角，有正负)
 	static void VectorToAngle(const AcGeVector3d& v, double& ang1, double& ang2);
 	//测试VectorToAngle函数
 	static void VectorToAngleTest();
@@ -72,7 +72,7 @@ public:
 	static bool GetDrillSitePt(const AcDbObjectId& drill_site, AcGePoint3d& insertPt);
 
 	//计算钻孔个数
-	static void CaculPoreNums(int& row_num, int& col_num, double width, double height,double radius);
+	static void CaculPoreNums(int& row_num, int& col_num, double width, double height,double gap);
 
 	//生成报告
 	static void CreatReportHelper();

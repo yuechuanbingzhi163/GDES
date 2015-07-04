@@ -134,11 +134,26 @@ Acad::ErrorStatus SimpleCoalSurfaceDraw::subGetOsnapPoints (
 {
 	assertReadEnabled () ;
 	// 只捕捉1种类型的点：端点
-	if( osnapMode != AcDb::kOsMaskCen ) return Acad::eOk;
+	if( osnapMode != AcDb::kOsMaskCen && osnapMode != AcDb::kOsMaskEnd) return Acad::eOk;
 
 	if( osnapMode == AcDb::kOsMaskCen )
 	{
 		snapPoints.append(m_insertPt);
+	}
+	else if(osnapMode == AcDb::kOsMaskEnd)
+	{
+		AcGeVector3d u(AcGeVector3d::kXAxis);
+		AcGeVector3d v(AcGeVector3d::kYAxis);
+		snapPoints.append(m_insertPt+u*m_width+v*m_height);
+
+		u.rotateBy(PI, AcGeVector3d::kZAxis);
+		snapPoints.append(m_insertPt+u*m_width+v*m_height);
+
+		v.rotateBy(PI, AcGeVector3d::kZAxis);
+		snapPoints.append(m_insertPt+u*m_width+v*m_height);
+
+		u.rotateBy(PI, AcGeVector3d::kZAxis);
+		snapPoints.append(m_insertPt+u*m_width+v*m_height);
 	}
 
 	return Acad::eOk;
