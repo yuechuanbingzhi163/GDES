@@ -158,12 +158,12 @@ void RcuHelper::VectorToAngle(const AcGeVector3d& v, double& ang1, double& ang2)
 	AcGeVector3d u = v.orthoProject(AcGeVector3d::kZAxis);
 	//acutPrintf(_T("\n投影值:x=%.3f, y=%.3f z=%.3f"), u.x, u.y, u.z);
 
-	//angleTo求的是夹角，范围在[0,90]
+	//angleTo求的是夹角，范围在[0,180]
 	//计算向量u与Y轴的夹角(偏角)
 	ang1 = u.angleTo(AcGeVector3d::kYAxis);
 	if(u.x < 0) ang1 *= -1;
 
-	//计算向量u与v的夹角(仰角)，范围在[0,90]
+	//计算向量u与v的夹角(仰角)，范围在[0,180]
 	ang2 = u.angleTo(v);
 	if(v.z < 0) ang2 *= -1;
 }

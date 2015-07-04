@@ -22,7 +22,7 @@ RcuEditDrillSiteDlg::RcuEditDrillSiteDlg(CWnd* pParent /*=NULL*/)
 	, m_gas_radius(3)
 	, m_thick(3)
 	, m_angle(8)
-	, m_dist(50)
+	, m_dist(10)
 	, m_pore_size(0.09)
 {
 
