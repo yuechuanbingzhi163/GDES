@@ -388,6 +388,10 @@ public:
 		v.rotateBy(PI/6, AcGeVector3d::kZAxis);
 
 		acutPrintf(_T("\n%.3f, %.3f, %.3f"), v.x, v.y, v.z);
+
+		AcGeVector3d vv(-1,1,0);
+		double ang = vv.angleTo(AcGeVector3d::kYAxis, AcGeVector3d::kZAxis);
+		acutPrintf(_T("\n½Ç¶È:%.3f"), ang);
 /*
 	    AcGeVector3d v1( 100, 20, 0 );
 	    AcGeVector3d v2( 10, 50, 1 );
