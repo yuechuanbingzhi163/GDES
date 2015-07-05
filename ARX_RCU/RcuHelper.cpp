@@ -228,7 +228,7 @@ bool RcuHelper::CaculRelativeOpenPorePts(CoalSurfaceLink& cs_link, DrillSiteLink
 	//¼ÆËã×ê¿×µÄ×ø±ê
 	double gap1 = ds_link.m_width/(n1+1);
 	double gap2 = ds_link.m_height/(n2+1);
-	acutPrintf(_T("\ngap1:%.3f, gap2:%.3f"), gap1, gap2);
+	//acutPrintf(_T("\ngap1:%.3f, gap2:%.3f"), gap1, gap2);
 
 	AcGeVector3d headV(AcGeVector3d::kXAxis);
 	AcGeVector3d dipV(AcGeVector3d::kZAxis);
