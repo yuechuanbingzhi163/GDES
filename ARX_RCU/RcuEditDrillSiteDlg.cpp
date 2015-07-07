@@ -81,11 +81,11 @@ BOOL RcuEditDrillSiteDlg::OnInitDialog()
 
 	if(m_drill_site.isNull())
 	{
-		SetDlgItemText(IDOK, _T("新设计钻场"));
+		SetDlgItemText(IDOK, _T("新设计石门"));
 	}
 	else
 	{
-		SetDlgItemText(IDOK, _T("更新钻场参数"));
+		SetDlgItemText(IDOK, _T("更新石门参数"));
 	}
 
 	//更新数据到界面

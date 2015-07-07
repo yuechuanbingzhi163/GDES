@@ -9,7 +9,7 @@
 #include "../MineGE/DrawHelper.h"
 #include "../ArxHelper/ArxUtilHelper.h"
 #include "../ARX_ReportHelper/ReportHelper.h"
-
+#include "../MineGECmds/PropertyDataDlgHelper.h"
 
 #include "DataList_DockBar.h"
 #include "EditPumpDBDlg.h"
@@ -638,10 +638,11 @@ void UIHelper::SelectPump()
 	AcDbObjectId objId = ArxUtilHelper::SelectObject(_T("选择需要选型的瓦斯泵"));
 	if (!ArxUtilHelper::IsEqualType( _T( "GasPumpGE" ), objId)) return;
 	if(!PumpSelecting(objId)) return;
-	AfxMessageBox(_T("瓦斯泵选型成功!"));
 
 	//用黄色表示高亮
 	DrawHelper::HighLightShowGE(objId,2);
+
+	PropertyDataDlgHelper::DisplayPropertyByFunName( objId,_T("瓦斯泵选型参考") );
 }
 
 void UIHelper::SelectPumps()
@@ -652,8 +653,13 @@ void UIHelper::SelectPumps()
 	for (int i = 0; i < objIds.length(); i++)
 	{
 		if(!PumpSelecting(objIds[i])) return;
+		//用黄色表示高亮
+		DrawHelper::HighLightShowGE(objIds[i],2);
+
+		PropertyDataDlgHelper::DisplayPropertyByFunName( objIds[i],_T("瓦斯泵选型参考") );
+
 	}
-	AfxMessageBox(_T("所有瓦斯泵选型成功!"));
+	//AfxMessageBox(_T("所有瓦斯泵选型成功!"));
 }
 
 void UIHelper::DatabaseManagerDlg()
