@@ -740,7 +740,7 @@ bool EditPumpDBDlg::FindPumpsByCondition( DBDatasVector& datasV )
 	switch(indx)
 	{
 	case 0:
-		msg = _T("一个都没有选中!");
+		msg = _T("未给定查询条件!");
 		break;
 	case 1:
 		OnlyTypesql(ttsql,msg);

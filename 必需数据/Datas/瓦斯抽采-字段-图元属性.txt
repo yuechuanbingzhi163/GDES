@@ -129,9 +129,10 @@
 							
 瓦斯泵的流量计算	GasPumpGE	瓦斯抽采总量（纯量）	DT_NUMERIC	0-9999999999	2	1	单位：m3/min
 瓦斯泵的流量计算	GasPumpGE	瓦斯抽采浓度	DT_NUMERIC	0-99	2	1	单位：%
-瓦斯泵的流量计算	GasPumpGE	瓦斯泵流量备用系数	DT_NUMERIC	0-9999999999	2	1	瓦斯泵流量备用系数
+瓦斯泵的流量计算	GasPumpGE	瓦斯泵流量备用系数	DT_NUMERIC	0-9999999999	2	1	建议取2.0
 瓦斯泵的流量计算	GasPumpGE	瓦斯泵的机械效率	DT_NUMERIC	0-9999999999	2	1	一般取0.8
 瓦斯泵的流量计算	GasPumpGE	瓦斯泵的额定流量	DT_NUMERIC	0-9999999999	2	0	单位：m3/min
+瓦斯泵的流量计算	GasPumpGE	当地大气压	DT_NUMERIC	0-9999999999	2	1	标准大气压为101325Pa
 							
 瓦斯泵的压力计算	GasPumpGE	正压管路的摩擦阻力损失	DT_NUMERIC	0-9999999999	2	1	单位：Pa
 瓦斯泵的压力计算	GasPumpGE	正压管路的局部阻力损失	DT_NUMERIC	0-9999999999	2	1	单位：Pa
@@ -147,12 +148,13 @@
 							
 瓦斯泵计算	GasPumpGE	瓦斯抽采总量（纯量）	DT_NUMERIC	0-9999999999	2	1	单位：m3/min
 瓦斯泵计算	GasPumpGE	瓦斯抽采浓度	DT_NUMERIC	0-99	2	1	单位：%
-瓦斯泵计算	GasPumpGE	瓦斯泵流量备用系数	DT_NUMERIC	0-9999999999	2	1	瓦斯泵流量备用系数
+瓦斯泵计算	GasPumpGE	瓦斯泵流量备用系数	DT_NUMERIC	0-9999999999	2	1	建议取2.0
 瓦斯泵计算	GasPumpGE	瓦斯泵的机械效率	DT_NUMERIC	0-9999999999	2	1	一般取0.8
 瓦斯泵计算	GasPumpGE	正压管路的摩擦阻力损失	DT_NUMERIC	0-9999999999	2	1	单位：Pa
 瓦斯泵计算	GasPumpGE	正压管路的局部阻力损失	DT_NUMERIC	0-9999999999	2	1	单位：Pa
 瓦斯泵计算	GasPumpGE	用户所需正压	DT_NUMERIC	0-9999999999	2	1	单位：Pa
 瓦斯泵计算	GasPumpGE	抽采钻孔负压	DT_NUMERIC	0-9999999999	2	1	单位：Pa
+瓦斯泵计算	GasPumpGE	当地大气压	DT_NUMERIC	0-9999999999	2	1	标准大气压为101325Pa
 瓦斯泵计算	GasPumpGE	负压管路的摩擦阻力损失	DT_NUMERIC	0-9999999999	2	1	单位：Pa
 瓦斯泵计算	GasPumpGE	负压的局部阻力损失	DT_NUMERIC	0-9999999999	2	1	单位：Pa
 瓦斯泵计算	GasPumpGE	备用系数	DT_NUMERIC	0-9999999999	2	1	一般取1.2

@@ -150,6 +150,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ARX_RCU", "ARX_RCU\ARX_RCU.
 		{E73D4DDF-2EB8-499B-9468-C8A7770734D7} = {E73D4DDF-2EB8-499B-9468-C8A7770734D7}
 	EndProjectSection
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "瓦斯抽采达标评价系统", "瓦斯抽采达标评价系统\瓦斯抽采达标评价系统.vdproj", "{A937C84C-4B51-46B4-BC04-C72B9E0C9F6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -354,6 +356,10 @@ Global
 		{DCF9260D-BEF6-4BAC-9C1D-BFF1AED9D26F}.Release|Win32.Build.0 = Release|Win32
 		{DCF9260D-BEF6-4BAC-9C1D-BFF1AED9D26F}.Release|x64.ActiveCfg = Release|x64
 		{DCF9260D-BEF6-4BAC-9C1D-BFF1AED9D26F}.Release|x64.Build.0 = Release|x64
+		{A937C84C-4B51-46B4-BC04-C72B9E0C9F6F}.Debug|Win32.ActiveCfg = Debug
+		{A937C84C-4B51-46B4-BC04-C72B9E0C9F6F}.Debug|x64.ActiveCfg = Debug
+		{A937C84C-4B51-46B4-BC04-C72B9E0C9F6F}.Release|Win32.ActiveCfg = Release
+		{A937C84C-4B51-46B4-BC04-C72B9E0C9F6F}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
