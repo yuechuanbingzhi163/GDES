@@ -4,15 +4,13 @@ Pore	$坐标
 DrillSite	名称
 DrillSite	宽度
 DrillSite	高度
-DrillSite	最小法距
+DrillSite	垂距
 DrillSite	迎头底板中心点坐标
 DrillSite	左帮保护
 DrillSite	右帮保护
 DrillSite	上帮保护
 DrillSite	下帮保护
 DrillSite	孔径
-DrillSite	孔距
-DrillSite	起始编号
 DrillSite	$底帮坐标
 CoalSurface	厚度
 CoalSurface	倾角
@@ -23,3 +21,5 @@ CoalSurface	$中心点坐标
 CoalSurface	$平面法向量
 CoalSurface	$煤层走向向量
 CoalSurface	$煤层倾向向量
+CoalSurface	$几何宽度
+CoalSurface	$几何高度

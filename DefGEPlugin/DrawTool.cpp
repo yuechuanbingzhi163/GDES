@@ -243,7 +243,7 @@ void DrawMText( AcGiWorldDraw* mode, const AcGePoint3d& pt, double angle, const 
 	AcDbObjectId fontId = GetTextStyle(style);
 	if(!fontId.isNull())
 	{
-		acutPrintf(_T("\n设置样式为罗马字体"));
+		//acutPrintf(_T("\n设置样式为罗马字体"));
 		mt.setTextStyle(fontId);
 	}
     mt.setLocation( pt );

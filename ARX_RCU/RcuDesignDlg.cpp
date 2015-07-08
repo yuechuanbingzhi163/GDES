@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "RcuDesignDlg.h"
-#include "RcuEditRockGateDlg.h"
 #include "RcuEditDrillSiteDlg.h"
-#include "RcuEditOpenPoreDlg.h"
 
 #include "Rcu.h"
 #include "RcuHelper.h"
@@ -16,7 +14,7 @@
 #include "../DefGE/RcuGE.h"
 #include "../DefGE/Pore.h"
 #include "../DefGE/DrillSite.h"
-#include "../DefGE/RockGate.h"
+//#include "../DefGE/RockGate.h"
 #include "../DefGE/CoalSurface.h"
 
 //自定义消息
@@ -34,54 +32,7 @@ static void CrackHeadColumnWidth(CListCtrl& m_list)
 }
 
 //修改钻场列表第n行的数据
-//static void ModifyDrillSiteToListCtrl(CListCtrl& m_list2, int n, const DrillSiteLink& ds_link)
-//{
-//	{
-//		m_list2.SetItemText( n, 1, ds_link.m_name );
-//	}
-//	{
-//		CString value;
-//		ArxUtilHelper::IntToString(ds_link.m_pos, value);
-//		m_list2.SetItemText( n, 2, value);
-//	}
-//	{
-//		CString value;
-//		ArxUtilHelper::DoubleToString(ds_link.m_dist, value);
-//		m_list2.SetItemText( n, 3, value);
-//	}
-//	{
-//		CString value;
-//		ArxUtilHelper::DoubleToString(ds_link.m_width, value);
-//		m_list2.SetItemText( n, 4, value);
-//	}
-//	{
-//		CString value;
-//		ArxUtilHelper::DoubleToString(ds_link.m_height, value);
-//		m_list2.SetItemText( n, 5, value);
-//	}
-//	{
-//		CString value;
-//		ArxUtilHelper::DoubleToString(ds_link.m_pore_size, value);
-//		m_list2.SetItemText( n, 6, value);
-//	}
-//	{
-//		CString value;
-//		ArxUtilHelper::DoubleToString(ds_link.m_pore_gap, value);
-//		m_list2.SetItemText( n, 7, value);
-//	}
-//	{
-//		CString value;
-//		ArxUtilHelper::IntToString(ds_link.m_start, value);
-//		m_list2.SetItemText( n, 8, value);
-//	}
-//	
-//	{
-//		m_list2.SetItemText( n, 9, ArxUtilHelper::Point3dToString(ds_link.m_pt));
-//	}
-//}
-//
-//修改钻场列表第n行的数据
-static void ModifyRockGateToListCtrl(CListCtrl& m_list, int n, DrillSiteLink& ds_link)
+static void ModifyDrillSiteToListCtrl(CListCtrl& m_list, int n, DrillSiteLink& ds_link)
 {
 	{
 		m_list.SetItemText( n, 1, ds_link.m_name );
@@ -124,10 +75,15 @@ static void ModifyRockGateToListCtrl(CListCtrl& m_list, int n, DrillSiteLink& ds
 		ArxUtilHelper::DoubleToString(ds_link.m_bottom, value);
 		m_list.SetItemText( n, 9, value);
 	}
+	{
+		CString value;
+		ArxUtilHelper::DoubleToString(ds_link.m_pore_size, value);
+		m_list.SetItemText( n, 10, value);
+	}
 }
 
 //向钻场列表中新增一行
-static void InsertRockGateToListCtrl(CListCtrl& m_list, const AcDbObjectId& objId, DrillSiteLink& ds_link)
+static void InsertDrillSiteToListCtrl(CListCtrl& m_list, const AcDbObjectId& objId, DrillSiteLink& ds_link)
 {
 	int row = ListCtrlHelper::SearchRowOfList(m_list, objId);
 	if(row == -1)
@@ -136,28 +92,16 @@ static void InsertRockGateToListCtrl(CListCtrl& m_list, const AcDbObjectId& objI
 		row = ListCtrlHelper::InsertRowToListCtrl(m_list, objId);
 	}
 	//设置钻场列表的各列数据
-	ModifyRockGateToListCtrl(m_list, row, ds_link);
+	ModifyDrillSiteToListCtrl(m_list, row, ds_link);
 }
 
-//向钻场列表中新增一行
-//static void InsertDrillSiteToListCtrl(CListCtrl& m_list, const AcDbObjectId& objId, const DrillSiteLink& ds_link)
-//{
-//	int row = ListCtrlHelper::SearchRowOfList(m_list, objId);
-//	if(row == -1)
-//	{
-//		//增加一行
-//		row = ListCtrlHelper::InsertRowToListCtrl(m_list, objId);
-//	}
-//	//设置钻场列表的各列数据
-//	ModifyDrillSiteToListCtrl(m_list, row, ds_link);
-//}
 
-static bool UpdateRockGateDataFromDlg(const AcDbObjectId& drill_site, DrillSiteLink& ds_link, CoalSurfaceLink& cs_link)
+static bool UpdateDrillSiteDataFromDlg(const AcDbObjectId& drill_site, DrillSiteLink& ds_link, CoalSurfaceLink& cs_link)
 {
 	CAcModuleResourceOverride resourceOverride;
 
 	//初始化钻场对话框
-	RcuEditRockGateDlg dlg;
+	RcuEditDrillSiteDlg dlg;
 	dlg.m_drill_site = drill_site;
 	//如果钻场id不为空,则读取数据并更新到对话框
 	dlg.readFromDataLink(ds_link, cs_link);
@@ -166,6 +110,7 @@ static bool UpdateRockGateDataFromDlg(const AcDbObjectId& drill_site, DrillSiteL
 
 	//从对话框中提取数据
 	dlg.writeToDataLink(ds_link, cs_link);
+	
 
 	//将数据更新到图元中
 	ds_link.updateData(true);
@@ -174,100 +119,60 @@ static bool UpdateRockGateDataFromDlg(const AcDbObjectId& drill_site, DrillSiteL
 	return true;
 }
 
-static bool UpdateDrillSiteDataFromDlg(const AcDbObjectId& drill_site, DrillSiteLink& ds_link)
-{
-	CAcModuleResourceOverride resourceOverride;
-
-	//初始化钻场对话框
-	RcuEditDrillSiteDlg dlg;
-	dlg.m_drill_site = drill_site;
-	dlg.readFromDataLink(ds_link);
-
-	if(IDOK != dlg.DoModal()) return false;
-
-	//从对话框中提取数据
-	dlg.writeToDataLink(ds_link);
-
-	if(!drill_site.isNull())
-	{
-		//修改钻场的2点坐标
-		RcuHelper::ModifyDrillSitePt(drill_site, ds_link);
-	}
-
-	//将数据更新到图元中
-	ds_link.updateData(true);
-	
-	return true;
-}
 
 //格式化钻场钻孔设计对话框的标题
-static CString FormatPoreDlgTitle(const CString& rg_name, const CString& ds_name)
+static CString FormatPoreDlgTitle(const CString& ds_name)
 {
-	CString name1 = rg_name;
-	CString name2 = ds_name;
-	name1.Trim();
-	name2.Trim();
-	if(name1.IsEmpty())
+	CString name = ds_name;
+	name.Trim();
+	if(name.IsEmpty())
 	{
-		name1 = _T("***");
-	}
-	if(name2.IsEmpty())
-	{
-		name2 = _T("###");
+		name = _T("***");
 	}
 
 	CString title;
-	title.Format(_T("%s钻场-%s钻场-钻孔设计"), name1, name2);
+	title.Format(_T("%s钻场-钻孔设计"), name);
 	return title;
 }
 
-//格式化钻场钻孔设计对话框中的位置信息
-static CString FormatDrillSitePostion(double m_dist, int leftOrRight)
-{
-	CString pos;
-	pos.Format(_T("%s，距离迎头%.2f米"), (leftOrRight==0)?_T("左帮"):_T("右帮"), m_dist);
-	return pos;
-}
 
-static bool UpdateOpenPoresFromDlg(const AcDbObjectId& drill_site,  DrillSiteLink& ds_link)
-{
-	CAcModuleResourceOverride resourceOverride;
-	
-	RcuEditOpenPoreDlg dlg;
-	//格式化钻孔设计对话框的标题
-	dlg.m_title = FormatPoreDlgTitle(ds_link.m_name, ds_link.m_name);
-	//格式化钻场的位置信息
-	//dlg.m_pos = FormatDrillSitePostion(ds_link.m_dist, ds_link.m_pos);
-	//设置钻孔半径
-	dlg.m_pore_size = ds_link.m_pore_size;
-	//提取钻孔的个数
-	AcDbObjectIdArray pores;
-	RcuHelper::GetRelatedOpenPores(drill_site, pores);
-	dlg.m_pore_num = pores.length();
-	//提取钻孔的间距
-	if(!pores.isEmpty())
-	{
-		dlg.m_pore_gap = ds_link.m_pore_gap;
-	}
-	else
-	{
-		dlg.m_pore_gap = 0;
-	}
-
-	if(IDOK != dlg.DoModal()) return false;
-
-	//从对话框中读取数据
-	//钻孔间距
-	ds_link.m_pore_gap = dlg.m_pore_gap;
-	//更新数据到钻孔
-	ds_link.updateData(true);
-
-	//删除关联的所有钻孔
-	RcuHelper::ClearRelatedOpenPores(drill_site);
-
-	//创建新的钻孔图元
-	return RcuHelper::CreateOpenPores(drill_site, ds_link);
-}
+//static bool UpdateOpenPoresFromDlg(const AcDbObjectId& drill_site,  DrillSiteLink& ds_link)
+//{
+//	CAcModuleResourceOverride resourceOverride;
+//	
+//	//RcuEditOpenPoreDlg dlg;
+//	////格式化钻孔设计对话框的标题
+//	//dlg.m_title = FormatPoreDlgTitle(ds_link.m_name);
+//	////设置钻孔半径
+//	//dlg.m_pore_size = ds_link.m_pore_size;
+//	////提取钻孔的个数
+//	//AcDbObjectIdArray pores;
+//	//RcuHelper::GetRelatedOpenPores(drill_site, pores);
+//	//dlg.m_pore_num = pores.length();
+//	////提取钻孔的间距
+//	////if(!pores.isEmpty())
+//	////{
+//	////	dlg.m_pore_gap = ds_link.m_pore_gap;
+//	////}
+//	////else
+//	////{
+//	////	dlg.m_pore_gap = 0;
+//	////}
+//
+//	//if(IDOK != dlg.DoModal()) return false;
+//
+//	////从对话框中读取数据
+//	////钻孔间距
+//	////ds_link.m_pore_gap = dlg.m_pore_gap;
+//	////更新数据到钻孔
+//	//ds_link.updateData(true);
+//
+//	////删除关联的所有钻孔
+//	//RcuHelper::ClearRelatedOpenPores(drill_site);
+//
+//	//创建新的钻孔图元
+//	return RcuHelper::CreateOpenPores(drill_site, ds_link);
+//}
 
 // RcuDesignDlg 对话框
 
@@ -275,6 +180,7 @@ IMPLEMENT_DYNAMIC(RcuDesignDlg, DockBarChildDlg)
 
 RcuDesignDlg::RcuDesignDlg(CWnd* pParent /*=NULL*/)
 	: DockBarChildDlg(RcuDesignDlg::IDD, pParent)
+	, m_allPut(FALSE)
 {
 }
 
@@ -287,6 +193,7 @@ void RcuDesignDlg::DoDataExchange(CDataExchange* pDX)
 {
 	DockBarChildDlg::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LIST1, m_list);
+	DDX_Check(pDX, IDC_ALL_PUTOUT_CHECK, m_allPut);
 }
 
 BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
@@ -294,18 +201,18 @@ BEGIN_MESSAGE_MAP(RcuDesignDlg, DockBarChildDlg)
 
 	ON_NOTIFY(NM_DBLCLK, IDC_LIST1, &RcuDesignDlg::OnNMDblclkList1)
 	ON_NOTIFY(NM_RCLICK, IDC_LIST1, &RcuDesignDlg::OnNMRclickList1)
-	ON_COMMAND(ID_RCU_LIST_HILIGHT, &RcuDesignDlg::OnHilightRockGateCommand)
-	ON_COMMAND(ID_RCU_LIST_MODIFY, &RcuDesignDlg::OnModifyRockGateCommand)
-	ON_COMMAND(ID_RCU_LIST_DELETE, &RcuDesignDlg::OnDeleteRockGateCommand)
-	ON_COMMAND(ID_RCU_LIST_ADD, &RcuDesignDlg::OnAddRockGateCommand)
-	ON_COMMAND(ID_RCU_LIST_UPDATE, &RcuDesignDlg::OnUpdateRockGateListCommand)
+	ON_COMMAND(ID_RCU_LIST_HILIGHT, &RcuDesignDlg::OnHilightDrillSiteCommand)
+	ON_COMMAND(ID_RCU_LIST_MODIFY, &RcuDesignDlg::OnModifyDrillSiteCommand)
+	ON_COMMAND(ID_RCU_LIST_DELETE, &RcuDesignDlg::OnDeleteDrillSiteCommand)
+	ON_COMMAND(ID_RCU_LIST_ADD, &RcuDesignDlg::OnAddDrillSiteCommand)
+	ON_COMMAND(ID_RCU_LIST_UPDATE, &RcuDesignDlg::OnUpdateDrillSiteListCommand)
 	ON_COMMAND(ID_RCU_COAL_HILIGHT, &RcuDesignDlg::OnHilightCoalSurfCommand)
 	ON_COMMAND(ID_RCU_COAL_SURF, &RcuDesignDlg::OnDisplayCoalSurfCommand)
 	ON_COMMAND(ID_COAL_SURF_PORE_DESIGN, &RcuDesignDlg::OnDesiginClosePoresCommand)
 
 	ON_COMMAND(IDR_DRILL_SITE_HILIGHT, &RcuDesignDlg::OnHilightDrillSiteCommand)
-	ON_COMMAND(IDR_DRILL_SITE_PORE_DESIGN, &RcuDesignDlg::OnDesiginOpenPoresCommand)
-	ON_COMMAND(IDR_DRILL_SITE_PORE_CLEAR, &RcuDesignDlg::OnClearOpenPoresCommand)
+	//ON_COMMAND(IDR_DRILL_SITE_PORE_DESIGN, &RcuDesignDlg::OnDesiginOpenPoresCommand)
+	//ON_COMMAND(IDR_DRILL_SITE_PORE_CLEAR, &RcuDesignDlg::OnClearOpenPoresCommand)
 
 	ON_MESSAGE(WM_RCU_ADD, &RcuDesignDlg::OnRcuAddMessage)
 	ON_MESSAGE(WM_RCU_DEL, &RcuDesignDlg::OnRcuDelMessage)
@@ -397,7 +304,7 @@ void RcuDesignDlg::OnNMRclickList1(NMHDR *pNMHDR, LRESULT *pResult)
 	*pResult = 1;
 }
 
-void RcuDesignDlg::OnAddRockGateCommand()
+void RcuDesignDlg::OnAddDrillSiteCommand()
 {
 	//切换controlbar的显示
 	ControlBarShowSwitch cb_switch(this);
@@ -412,22 +319,23 @@ void RcuDesignDlg::OnAddRockGateCommand()
 	//调用对话框获取钻场和煤层数据
 	DrillSiteLink ds_link;
 	CoalSurfaceLink cs_link;
-	if(!UpdateRockGateDataFromDlg(AcDbObjectId::kNull, ds_link, cs_link)) return;
+	if(!UpdateDrillSiteDataFromDlg(AcDbObjectId::kNull, ds_link, cs_link)) return;
 
 	//创建钻场和煤层图元
 	if(RcuHelper::CreateDrillSite(pt, ds_link, cs_link))
 	{
+		if(!RcuHelper::ModifyDrillSiteRelatedGEs(ds_link.getDataSource(), cs_link, ds_link)) return;
+
 		//向list1中插入一行钻场数据
-		InsertRockGateToListCtrl(m_list, ds_link.getDataSource(), ds_link);
+		InsertDrillSiteToListCtrl(m_list, ds_link.getDataSource(), ds_link);
 
 		//cad窗口获取焦点
 		acedGetAcadFrame()->SetFocus();
 	}
 }
 
-void RcuDesignDlg::OnDeleteRockGateCommand()
+void RcuDesignDlg::OnDeleteDrillSiteCommand()
 {
-	//MessageBox(_T("RcuDesignDlg::OnDeleteRockGateCommand"));
 	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
 	if(row1 != LB_ERR)
 	{
@@ -449,7 +357,7 @@ void RcuDesignDlg::OnDeleteRockGateCommand()
 	}
 }
 
-void RcuDesignDlg::OnModifyRockGateCommand()
+void RcuDesignDlg::OnModifyDrillSiteCommand()
 {
 	//MessageBox(_T("RcuDesignDlg::OnLocateCommand"));
 	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
@@ -466,7 +374,7 @@ void RcuDesignDlg::OnModifyRockGateCommand()
 	//提取钻场和煤层数据
 	DrillSiteLink ds_link;
 	CoalSurfaceLink cs_link;
-	if(!RcuHelper::GetRockGateAndCoalSurfDatas(pData1->objId, ds_link, cs_link))
+	if(!RcuHelper::GetDrillSiteAndCoalSurfDatas(pData1->objId, ds_link, cs_link))
 	{
 		MessageBox(_T("提取钻场或煤层失败!!!"));
 		return;
@@ -476,12 +384,13 @@ void RcuDesignDlg::OnModifyRockGateCommand()
 	ControlBarShowSwitch cb_switch(this);
 
 	//从对话框中更新数据
-	if(UpdateRockGateDataFromDlg(pData1->objId, ds_link, cs_link))
+	if(UpdateDrillSiteDataFromDlg(pData1->objId, ds_link, cs_link))
 	{
-		if(!RcuHelper::ModifyRockGateRelatedGEs(pData1->objId, ds_link, cs_link)) return;
+		if (!RcuHelper::ModifyCoalSurfParams(pData1->objId)) return;
+		if(!RcuHelper::ModifyDrillSiteRelatedGEs(pData1->objId, cs_link, ds_link)) return;
 
 		//修改当前选中钻场的数据
-		ModifyRockGateToListCtrl(m_list, row1, ds_link);
+		ModifyDrillSiteToListCtrl(m_list, row1, ds_link);
 		//acutPrintf(_T("\n计算之前->宽度:%.4lf\t高度:%.4lf\n"),cs_link.m_width,cs_link.m_height);
 		
 		//cad窗口获取焦点
@@ -489,9 +398,8 @@ void RcuDesignDlg::OnModifyRockGateCommand()
 	}
 }
 
-void RcuDesignDlg::OnHilightRockGateCommand()
+void RcuDesignDlg::OnHilightDrillSiteCommand()
 {
-	//MessageBox(_T("RcuDesignDlg::OnHilightRockGateCommand"));
 	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
 	if(row1 != LB_ERR)
 	{
@@ -507,7 +415,7 @@ void RcuDesignDlg::OnHilightRockGateCommand()
 	}
 }
 
-void RcuDesignDlg::OnUpdateRockGateListCommand()
+void RcuDesignDlg::OnUpdateDrillSiteListCommand()
 {
 	//更新界面
 	updateUI();
@@ -554,127 +462,15 @@ void RcuDesignDlg::OnDisplayCoalSurfCommand()
 		{
 			CString msg;
 			msg.Format(_T("厚度:%.3f\t倾角:%.3f\n"), cs_link.m_thick, cs_link.m_angle);
-			msg.Format(_T("钻孔抽采半径:%.3f\n"), cs_link.m_gas_radius);
-			msg.Format(_T("抽采范围宽度:%.3f\t高度:%.3f\n"), cs_link.m_width, cs_link.m_height);
-			msg.Format(_T("抽采范围中心点坐标:(%.3f, %.3f, %.3f)\n"), cs_link.m_pt.x, cs_link.m_pt.y, cs_link.m_pt.z);
-			msg.Format(_T("平面法向量:(%.3f, %.3f, %.3f)\n"), cs_link.m_normV.x, cs_link.m_normV.y, cs_link.m_normV.z);
-			msg.Format(_T("煤层走向向量:(%.3f, %.3f, %.3f)\n"), cs_link.m_headV.x, cs_link.m_headV.y, cs_link.m_headV.z);
-			msg.Format(_T("煤层倾向向量:(%.3f, %.3f, %.3f)"), cs_link.m_dipV.x, cs_link.m_dipV.y, cs_link.m_dipV.z);
+			msg.AppendFormat(_T("钻孔抽采半径:%.3f\n"), cs_link.m_gas_radius);
+			msg.AppendFormat(_T("抽采范围宽度:%.3f\t高度:%.3f\n"), cs_link.m_width, cs_link.m_height);
+			msg.AppendFormat(_T("抽采范围中心点坐标:(%.3f, %.3f, %.3f)\n"), cs_link.m_pt.x, cs_link.m_pt.y, cs_link.m_pt.z);
+			msg.AppendFormat(_T("平面法向量:(%.3f, %.3f, %.3f)\n"), cs_link.m_normV.x, cs_link.m_normV.y, cs_link.m_normV.z);
+			msg.AppendFormat(_T("煤层走向向量:(%.3f, %.3f, %.3f)\n"), cs_link.m_headV.x, cs_link.m_headV.y, cs_link.m_headV.z);
+			msg.AppendFormat(_T("煤层倾向向量:(%.3f, %.3f, %.3f)"), cs_link.m_dipV.x, cs_link.m_dipV.y, cs_link.m_dipV.z);
 			MessageBox(msg);
 		}
 	}
-}
-
-//void RcuDesignDlg::OnModifyDrillSiteCommand()
-//{
-//	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
-//	if(row1 == LB_ERR)
-//	{
-//		MessageBox(_T("请指定或添加钻场后再进行钻场设计!"));
-//		return;
-//	}
-//
-//	int row2 = ListCtrlHelper::GetCurSelOfList(m_list2);
-//	if(row2 == LB_ERR)
-//	{
-//		MessageBox( _T( "请选择一个钻场进行设计!" ) );
-//		return;
-//	}
-//
-//	ItemData* pData1 = (ItemData*)m_list.GetItemData(row1);
-//	ItemData* pData2 = (ItemData*)m_list2.GetItemData(row2);
-//
-//	//切换文档锁
-//	DocumentLockSwitch lock_switch;
-//
-//	//从图元中提取钻场数据
-//	DrillSiteLink ds_link;
-//	if(!RcuHelper::GetDrillSiteData(pData2->objId, ds_link))
-//	{
-//		MessageBox(_T("提取钻场数据失败!!!"));
-//		return;
-//	}
-//
-//	//切换controlbar的显示
-//	//ControlBarShowSwitch cb_switch(this);
-//
-//	//调用对话框更新钻场数据
-//	if(!UpdateDrillSiteDataFromDlg(pData2->objId, ds_link)) return;
-//
-//	//修改钻场关联的图元
-//	if(!RcuHelper::ModifyDrillSiteRelatedGEs(pData2->objId, ds_link)) return;
-//
-//	//向list1中插入一行钻场数据
-//	ModifyDrillSiteToListCtrl(m_list2, row2, ds_link);
-//
-//	//cad窗口获取焦点
-//	acedGetAcadFrame()->SetFocus();
-//}
-
-void RcuDesignDlg::OnHilightDrillSiteCommand()
-{
-	//ShowOrHideWindow show_hide(this);
-	//int row2 = ListCtrlHelper::GetCurSelOfList(m_list2);
-	//if(row2 != LB_ERR)
-	//{
-	//	ItemData* pData2 = (ItemData*)m_list2.GetItemData(row2);
-
-	//	//文档锁切换
-	//	DocumentLockSwitch lock_switch;
-
-	//	//高亮选中钻场图元
-	//	ArxEntityHelper::SelectEntity(pData2->objId);
-
-	//	//cad窗口获取焦点
-	//	acedGetAcadFrame()->SetFocus();
-	//}
-}
-
-void RcuDesignDlg::OnDesiginOpenPoresCommand()
-{
-	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
-
-	if(row1 == LB_ERR)
-	{
-		MessageBox(_T("请指定或添加一个钻场、钻场后再进行钻孔设计!"));
-		return;
-	}
-
-	ItemData* pData1 = (ItemData*)m_list.GetItemData(row1);
-
-	//切换文档锁
-	DocumentLockSwitch lock_switch;
-
-	//提取钻场数据
-	DrillSiteLink ds_link;
-	if(!RcuHelper::ReadDrillSiteData(pData1->objId, ds_link)) return;
-
-	//显示钻孔设计对话框
-// 	if(UpdateOpenPoresFromDlg(pData2->objId, ds_link))
-	{
-		//更新钻场列表中的数据
-		//ModifyDrillSiteToListCtrl(m_list2, row2, ds_link);
-		//cad窗口获取焦点
-		acedGetAcadFrame()->SetFocus();
-	}
-}
-
-void RcuDesignDlg::OnClearOpenPoresCommand()
-{
-	//int row2 = ListCtrlHelper::GetCurSelOfList(m_list2);
-	//if(row2 != LB_ERR)
-	//{
-	//	ItemData* pData2 = (ItemData*)m_list2.GetItemData(row2);
-
-	//	//文档锁切换
-	//	DocumentLockSwitch lock_switch;
-
-	//	//删除这个钻场的所有钻孔
-	//	RcuHelper::ClearRelatedOpenPores(pData2->objId);
-
-	//	//cad窗口获取焦点
-	//	acedGetAcadFrame()->SetFocus();
-	//}
 }
 
 void RcuDesignDlg::OnDesiginClosePoresCommand()
@@ -700,10 +496,26 @@ void RcuDesignDlg::OnDesiginClosePoresCommand()
 
 void RcuDesignDlg::OnBnClickedExport()
 {
-	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	//文档锁切换
+	DocumentLockSwitch lock_switch;
+	if(m_allPut)
+	{
+		RcuHelper::CreatReportHelper(NULL);
+		return;
+	}
+	int row1 = ListCtrlHelper::GetCurSelOfList(m_list);
+	if(row1 == LB_ERR)
+	{
+		MessageBox( _T( "请确保当前有一行被选中!" ) );
+		return;
+	}
+	ItemData* pData1 = ( ItemData* )m_list.GetItemData( row1 );
+	
+	RcuHelper::CreatReportHelper(pData1->objId);
 }
 
-void RcuDesignDlg::updateRockGateListCtrl(unsigned int op, const AcDbObjectId& drill_site)
+void RcuDesignDlg::updateDrillSiteListCtrl(unsigned int op, const AcDbObjectId& drill_site)
 {
 	if(drill_site.isNull()) return;
 
@@ -713,62 +525,32 @@ void RcuDesignDlg::updateRockGateListCtrl(unsigned int op, const AcDbObjectId& d
 		if(row1 == LB_ERR)
 		{
 			//增加钻场
-			addRockGate(drill_site);
+			addDrillSite(drill_site);
 		}
 		else
 		{
 			//修改钻场
-			modifyRockGate(row1);
+			modifyDrillSite(row1);
 		}
 	}
 	else if(op == 1 && row1 != LB_ERR)
 	{
 		//删除钻场
-		delRockGate(row1);
+		delDrillSite(row1);
 	}
 	else if(op == 2 && row1 != LB_ERR)
 	{
 		//修改钻场
-		modifyRockGate(row1);
+		modifyDrillSite(row1);
 	}
 }
-
-// void RcuDesignDlg::updateDrillSiteListCtrl(unsigned int op, const AcDbObjectId& drill_site)
-// {
-// 	if(drill_site.isNull()) return;
-// 
-// 	int row2 = ListCtrlHelper::SearchRowOfList(m_list2, drill_site);
-// 	if(op == 0)
-// 	{
-// 		if(row2 == LB_ERR)
-// 		{
-// 			//增加钻场
-// 			addDrillSite(drill_site);
-// 		}
-// 		else
-// 		{
-// 			//修改钻场
-// 			modifyDrillSite(row2);
-// 		}
-// 	}
-// 	else if(op == 1 && row2 != LB_ERR)
-// 	{
-// 		//删除钻场
-// 		delDrillSite(row2);
-// 	}
-// 	else if(op == 2 && row2 != LB_ERR)
-// 	{
-// 		//修改钻场
-// 		modifyDrillSite(row2);
-// 	}
-// }
 
 LRESULT RcuDesignDlg::OnRcuAddMessage(WPARAM wParam, LPARAM lParam)
 {
 	ArxMsg* pMsg = (ArxMsg*)wParam;
 	if(pMsg->clsName.CompareNoCase(_T("DrillSite")) == 0)
 	{
-		updateRockGateListCtrl(0, pMsg->objId);
+		updateDrillSiteListCtrl(0, pMsg->objId);
 	}
 	return 0;
 } 
@@ -778,12 +560,8 @@ LRESULT RcuDesignDlg::OnRcuDelMessage(WPARAM wParam, LPARAM lParam)
 	ArxMsg* pMsg = (ArxMsg*)wParam;
 	if(pMsg->clsName.CompareNoCase(_T("DrillSite")) == 0)
 	{
-		updateRockGateListCtrl(1, pMsg->objId);
+		updateDrillSiteListCtrl(1, pMsg->objId);
 	}
-	//else if(pMsg->clsName.CompareNoCase(_T("")) == 0)
-	//{
-	//	updateDrillSiteListCtrl(1, pMsg->objId);
-	//}
 	return 0;
 }
 
@@ -792,12 +570,8 @@ LRESULT RcuDesignDlg::OnRcuModifyMessage(WPARAM wParam, LPARAM lParam)
 	ArxMsg* pMsg = (ArxMsg*)wParam;
 	if(pMsg->clsName.CompareNoCase(_T("DrillSite")) == 0)
 	{
-		updateRockGateListCtrl(2, pMsg->objId);
+		updateDrillSiteListCtrl(2, pMsg->objId);
 	}
-// 	else if(pMsg->clsName.CompareNoCase(_T("DrillSite")) == 0)
-// 	{
-// 		updateDrillSiteListCtrl(2, pMsg->objId);
-// 	}
 	return 0;
 }
 
@@ -808,7 +582,7 @@ LRESULT RcuDesignDlg::OnRcuUpdateMessage(WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-void RcuDesignDlg::addRockGate(const AcDbObjectId& drill_site)
+void RcuDesignDlg::addDrillSite(const AcDbObjectId& drill_site)
 {
 	//切换文档锁
 	DocumentLockSwitch lock_switch;
@@ -818,10 +592,10 @@ void RcuDesignDlg::addRockGate(const AcDbObjectId& drill_site)
 	if(!RcuHelper::ReadDrillSiteData(drill_site, ds_link)) return;
 
 	//向list1中插入一行钻场数据
-	InsertRockGateToListCtrl(m_list, drill_site, ds_link);
+	InsertDrillSiteToListCtrl(m_list, drill_site, ds_link);
 }
 
-void RcuDesignDlg::delRockGate(int row1)
+void RcuDesignDlg::delDrillSite(int row1)
 {
 	if(row1 != LB_ERR)
 	{
@@ -840,7 +614,7 @@ void RcuDesignDlg::delRockGate(int row1)
 	}
 }
 
-void RcuDesignDlg::modifyRockGate(int row1)
+void RcuDesignDlg::modifyDrillSite(int row1)
 {
 	if(row1 != LB_ERR)
 	{
@@ -854,57 +628,8 @@ void RcuDesignDlg::modifyRockGate(int row1)
 		if(!RcuHelper::ReadDrillSiteData(pData1->objId, ds_link)) return;
 
 		//修改当前选中钻场的数据
-		ModifyRockGateToListCtrl(m_list, row1, ds_link);
+		ModifyDrillSiteToListCtrl(m_list, row1, ds_link);
 	}
-}
-
-void RcuDesignDlg::addDrillSite(const AcDbObjectId& drill_site)
-{
-	//文档锁切换
-	DocumentLockSwitch lock_switch;
-
-	//调用对话框获取钻场数据
-	DrillSiteLink ds_link;
-	if(!RcuHelper::ReadDrillSiteData(drill_site, ds_link)) return;
-
-	//向list2中插入一行钻场数据
-	//InsertDrillSiteToListCtrl(m_list2, drill_site, ds_link);
-}
-
-void RcuDesignDlg::delDrillSite(int row2)
-{
-	//if(row2 != LB_ERR)
-	//{
-	//	ItemData* pData2 = ( ItemData* )m_list2.GetItemData(row2);
-
-	//	//文档锁切换
-	//	DocumentLockSwitch lock_switch;
-	//	//删除钻场图元
-	//	ArxEntityHelper::EraseObject2(pData2->objId, true);
-	//	//删除选择的行
-	//	ListCtrlHelper::DeleteListCtrlItem(m_list2, row2);
-	//}
-}
-
-void RcuDesignDlg::modifyDrillSite(int row2)
-{
-	//if(row2 != LB_ERR)
-	//{
-	//	ItemData* pData2 = ( ItemData* )m_list2.GetItemData(row2);
-
-	//	//文档锁切换
-	//	DocumentLockSwitch lock_switch;
-
-	//	//提取钻场数据
-	//	DrillSiteLink ds_link;
-	//	if(!RcuHelper::ReadDrillSiteData(pData2->objId, ds_link)) return;
-
-	//	//修改关联的钻孔
-	//	if(!RcuHelper::ModifyDrillSiteRelatedGEs(pData2->objId, ds_link)) return;
-
-	//	//修改当前选中钻场的数据
-	//	//ModifyDrillSiteToListCtrl(m_list, row2, ds_link);
-	//}
 }
 
 void RcuDesignDlg::updateUI()
@@ -920,7 +645,7 @@ void RcuDesignDlg::updateUI()
 	if(fields.isEmpty()) return;
 
 	AcDbObjectIdArray objIds;
-	RcuHelper::FindAllRockGates(objIds);
+	RcuHelper::FindAllDrillSite(objIds);
 	if(objIds.isEmpty()) return;
 
 	ListCtrlHelper::InsertDatasToListCtrl(m_list, fields, objIds);

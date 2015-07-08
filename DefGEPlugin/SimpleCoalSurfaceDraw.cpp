@@ -17,8 +17,8 @@ SimpleCoalSurfaceDraw::~SimpleCoalSurfaceDraw ()
 
 void SimpleCoalSurfaceDraw::setAllExtraParamsToDefault()
 {
-	m_height = 0;
-	m_width = 0;
+	//m_height = 0;
+	//m_width = 0;
 }
 
 void SimpleCoalSurfaceDraw::configExtraParams()
@@ -55,8 +55,8 @@ void SimpleCoalSurfaceDraw::writeExtraParam( DrawParamWriter& writer )
 
 void SimpleCoalSurfaceDraw::regPropertyDataNames( AcStringArray& names ) const
 {
-    names.append( _T( "$抽采宽度" ) );
-    names.append( _T( "$抽采高度" ) );
+    names.append( _T( "$几何宽度" ) );
+    names.append( _T( "$几何高度" ) );
 	//names.append( _T( "中心点坐标" ) );
 }
 
@@ -80,6 +80,13 @@ Adesk::Boolean SimpleCoalSurfaceDraw::subWorldDraw( AcGiWorldDraw* mode )
 	{
 		DrawRect(mode, m_insertPt, 0, m_width, m_height, false);
 	}
+
+	//绘制宽和高标注
+	CString value;
+	value.Format(_T("%.2f(m)"),m_width);
+	AcGeVector3d v(AcGeVector3d::kYAxis);
+	AcGePoint3d insertPt = m_insertPt + v*m_height*0.5;
+	//DrawMText(mode,insertPt,PI*0.5,value,)
 
     return Adesk::kTrue;
 }
@@ -127,11 +134,26 @@ Acad::ErrorStatus SimpleCoalSurfaceDraw::subGetOsnapPoints (
 {
 	assertReadEnabled () ;
 	// 只捕捉1种类型的点：端点
-	if( osnapMode != AcDb::kOsMaskCen ) return Acad::eOk;
+	if( osnapMode != AcDb::kOsMaskCen && osnapMode != AcDb::kOsMaskEnd) return Acad::eOk;
 
 	if( osnapMode == AcDb::kOsMaskCen )
 	{
 		snapPoints.append(m_insertPt);
+	}
+	else if(osnapMode == AcDb::kOsMaskEnd)
+	{
+		AcGeVector3d u(AcGeVector3d::kXAxis);
+		AcGeVector3d v(AcGeVector3d::kYAxis);
+		snapPoints.append(m_insertPt+u*m_width+v*m_height);
+
+		u.rotateBy(PI, AcGeVector3d::kZAxis);
+		snapPoints.append(m_insertPt+u*m_width+v*m_height);
+
+		v.rotateBy(PI, AcGeVector3d::kZAxis);
+		snapPoints.append(m_insertPt+u*m_width+v*m_height);
+
+		u.rotateBy(PI, AcGeVector3d::kZAxis);
+		snapPoints.append(m_insertPt+u*m_width+v*m_height);
 	}
 
 	return Acad::eOk;

@@ -2,7 +2,7 @@
 #include "resource.h"
 #include "ReactorHelper.h"
 #include "UIHelper.h"
-#include "../ARX_ReportHelper/ReportHelper.h"
+#include "RcuHelper.h"
 
 #ifndef ARX_RCU_SERVICE_NAME
 #define ARX_RCU_SERVICE_NAME _T("ARX_RCU_SERVICE_NAME")
@@ -22,7 +22,7 @@ public:
 		//注册服务
 		acrxRegisterService( ARX_RCU_SERVICE_NAME );
 		//创建反应器
-		ReactorHelper::CreateDocumentReactorMap();
+		//ReactorHelper::CreateDocumentReactorMap();
 		acutPrintf( _T( "\nARX_RCU::On_kLoadAppMsg\n" ) );
 
 		return (retCode) ;
@@ -33,7 +33,7 @@ public:
 		AcRx::AppRetCode retCode =AcRxArxApp::On_kUnloadAppMsg (pkt) ;
 
 		//销毁反应器
-		ReactorHelper::RemoveDocumentReactorMap();
+		//ReactorHelper::RemoveDocumentReactorMap();
 		//销毁停靠对话框
 		UIHelper::DestroyRcuDesignDockBar();
 		//卸载服务
@@ -48,7 +48,7 @@ public:
 		AcRx::AppRetCode retCode = AcRxArxApp::On_kLoadDwgMsg ( pkt ) ;
 
 		//注册文档相关的反应器
-		ReactorHelper::AddDocumentReactor( curDoc() );
+		//ReactorHelper::AddDocumentReactor( curDoc() );
 		acutPrintf( _T( "\nARX_RCU::On_kLoadDwgMsg\n" ) );
 
 		return retCode;
@@ -59,7 +59,7 @@ public:
 		AcRx::AppRetCode retCode = AcRxArxApp::On_kUnloadDwgMsg ( pkt ) ;
 
 		//卸载文档反应器
-		ReactorHelper::RemoveDocumentReactor( curDoc() );
+		//ReactorHelper::RemoveDocumentReactor( curDoc() );
 		acutPrintf( _T( "\nARX_RCU::On_kUnloadDwgMsg\n" ) );
 
 		return retCode;
@@ -75,7 +75,17 @@ public:
 
 	static void JL_RCUReport()
 	{
-		ReportHelper::CreatRCUReport();
+		//RcuHelper::CreatReportHelper();
+		//ReportHelper::CreatRCUReport();
+	}
+
+	static void JL_TestV()
+	{
+		AcGeVector3d v(1,1,1);
+		AcGeVector3d normalV(AcGeVector3d::kYAxis);
+		AcGeVector3d v2 = v.orthoProject(normalV);
+		acutPrintf(_T("\n投影之后的坐标:(%.2f,%.2f,%.2f)"),v2.x,v2.y,v2.z);
+		//RcuHelper::VectorToAngleTest();
 	}
 
 } ;
@@ -85,3 +95,4 @@ IMPLEMENT_ARX_ENTRYPOINT(CARX_RCUApp)
 
 ACED_ARXCOMMAND_ENTRY_AUTO( CARX_RCUApp, JL, _RCUDlg, RCUDlg, ACRX_CMD_TRANSPARENT, NULL )
 ACED_ARXCOMMAND_ENTRY_AUTO( CARX_RCUApp, JL, _RCUReport, RCUReport, ACRX_CMD_TRANSPARENT, NULL )
+ACED_ARXCOMMAND_ENTRY_AUTO( CARX_RCUApp, JL, _TestV, TestV, ACRX_CMD_TRANSPARENT, NULL )

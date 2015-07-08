@@ -4,7 +4,7 @@
 Adesk::UInt32 DrillSite::kCurrentVersionNumber = 1 ;
 
 ACRX_DXF_DEFINE_MEMBERS (
-	DrillSite, RcuGE,
+	DrillSite, MineGE,
 	AcDb::kDHL_CURRENT, AcDb::kMReleaseCurrent,
 	AcDbProxyEntity::kNoOperation,
 	×ê³¡, DEFGEAPP

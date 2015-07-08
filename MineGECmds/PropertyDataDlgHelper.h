@@ -1,6 +1,7 @@
 #pragma once
+#include "dlimexp.h"
 
-class PropertyDataDlgHelper
+class MINEGECMDS_DLLIMPEXP PropertyDataDlgHelper
 {
 public:
 	// 显示"属性对话框"(显示全部数据)

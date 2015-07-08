@@ -297,15 +297,3 @@ void ReportHelper::ShowReleatedInfoDlg()
 	dlg.setBookMarks(bookMks);
 	dlg.DoModal();
 }
-
-void ReportHelper::CreatRCUReport()
-{
-	CAcModuleResourceOverride myResources;
-
-	TCHAR szFileFilter[] = _T("doc文档(*.doc)|*.doc||");
-	TCHAR szFileExt[] = _T("doc");
-	CString defaultPath;
-	GetDocPath(defaultPath);
-	CString outName = _T("石门设计报告");
-	SaveAndOpenReport(outName);
-}

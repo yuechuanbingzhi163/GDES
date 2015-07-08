@@ -88,8 +88,8 @@ Adesk::Boolean SimplePoreDraw::subWorldDraw( AcGiWorldDraw* mode )
 
     // 绘制编号
     AcGePoint3d pt1, pt2;
-	AcGePoint3d pt = CaclLeftBottomPt(m_insertPt, 0, m_pore_size*0.5, m_pore_size*0.5);
-	//DrawMText(mode, pt, 0, m_id, 2*m_pore_size);
+	//AcGePoint3d pt = CaclLeftBottomPt(m_insertPt, 0, m_pore_size*0.5, m_pore_size*0.5);
+	DrawMText(mode, m_insertPt, 0, m_id, 0.25*m_pore_size);
 
     return Adesk::kTrue;
 }
@@ -135,12 +135,26 @@ Acad::ErrorStatus SimplePoreDraw::subGetOsnapPoints (
 	AcDbIntArray& geomIds ) const
 {
 	assertReadEnabled () ;
-	// 只捕捉1种类型的点：端点
-	if( osnapMode != AcDb::kOsMaskEnd ) return Acad::eOk;
+	// 只捕捉2种类型的点：端点或圆心
+	if( osnapMode != AcDb::kOsMaskCen &&  osnapMode != AcDb::kOsMaskEnd) return Acad::eOk;
 
-	if( osnapMode == AcDb::kOsMaskEnd )
+	if( osnapMode == AcDb::kOsMaskCen )
 	{
 		snapPoints.append(m_insertPt);
+	}
+	else if(osnapMode == AcDb::kOsMaskEnd)
+	{
+		AcGeVector3d v(AcGeVector3d::kXAxis);
+		snapPoints.append(m_insertPt + v*m_pore_size*0.5);
+		
+		v.rotateBy(PI*0.5, AcGeVector3d::kZAxis);
+		snapPoints.append(m_insertPt + v*m_pore_size*0.5);
+
+		v.rotateBy(PI*0.5, AcGeVector3d::kZAxis);
+		snapPoints.append(m_insertPt + v*m_pore_size*0.5);
+
+		v.rotateBy(PI*0.5, AcGeVector3d::kZAxis);
+		snapPoints.append(m_insertPt + v*m_pore_size*0.5);
 	}
 
 	return Acad::eOk;

@@ -28,21 +28,21 @@ public:
 		this->thick = thick;
 	}
 	//设置钻场巷道断面参数
-	void setRockGate1(double height, double width)
+	void setDrillSite1(double height, double width)
 	{
 		this->height = height;
 		this->width = width;
 	}
 	//设置钻场的上下左右帮保护间距
-	void setRockGate2(double f1, double f2, double d1, double d2)
+	void setDrillSite2(double f1, double f2, double d1, double d2)
 	{
 		this->f1 = f1;
 		this->f2 = f2;
 		this->d1 = d1;
 		this->d2 = d2;
 	}
-	//设置钻场距煤层面的最小法距
-	void setRockGate3(double minDist)
+	//设置钻场距煤层面的垂距
+	void setDrillSite3(double minDist)
 	{
 		this->minDist = minDist;
 	}
@@ -94,15 +94,16 @@ public:
 		cnt = p1 + 0.5*(p2-p1);
 		//平面法向量
 		normV = plane1.normal();
-		
+		//acutPrintf(_T("\n法向量(%.2f,%.2f,%.2f)"),normV.x,normV.y,normV.z);
 		//计算煤层的倾向向量
 		AcGeVector3d v(-AcGeVector3d::kYAxis);
 		v.rotateBy(-1*alpha, AcGeVector3d::kXAxis);
 		dipV = v;
-		
+		//acutPrintf(_T("\n倾向向量(%.2f,%.2f,%.2f)"),dipV.x,dipV.y,dipV.z);
 		//计算煤层的走向向量
 		v.rotateBy(-0.5*PI, normV);
 		headV = v;
+		//acutPrintf(_T("\n走向向量(%.2f,%.2f,%.2f)"),headV.x,headV.y,headV.z);
 
 		return true;
 	}
@@ -149,7 +150,7 @@ private:
 	double height;    // 钻场巷道高度
 	double width;     // 钻场巷道宽度(假设钻场为矩形巷道)
 	
-	double minDist;     // 钻场距离煤层的最小法距
+	double minDist;     // 钻场距离煤层的垂距
 	double f1; // 石门揭煤轮廓外上控距离
 	double f2; // 石门揭煤轮廓外下控距离
 	double d1; // 石门揭煤轮廓外左控距离

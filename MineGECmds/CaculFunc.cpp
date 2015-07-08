@@ -10,7 +10,7 @@
 #include "../MineGE/config.h"
 
 #define LESSTHANZERO(x) x <= TOLERANCE
-#define NOTZERO(x) abs(x) <= TOLERANCE 
+#define NOTZERO(x) abs(x) > TOLERANCE 
 
 bool CaculFunc::coalResrevesCacul()
 {
@@ -534,9 +534,10 @@ bool CaculFunc::tubeFrictionResisCacul()
 
 bool CaculFunc::pumbFlowCacul()
 {
-	CString strQz,strx,strP,strH;
+	CString strQz,strx,strP,strH,strK;
 	DataHelper::GetPropertyData(m_objId,_T("瓦斯抽采总量（纯量）"),strQz);
 	DataHelper::GetPropertyData(m_objId,_T("瓦斯抽采浓度"),strx);
+	DataHelper::GetPropertyData(m_objId,_T("瓦斯泵流量备用系数"),strK);
 	DataHelper::GetPropertyData(m_objId,_T("当地大气压"),strP);
 	DataHelper::GetPropertyData(m_objId,_T("瓦斯泵的压力"),strH);
 
@@ -544,6 +545,7 @@ bool CaculFunc::pumbFlowCacul()
 	double p = _tstof(strP);
 	mineDrainGasDencity = _tstof(strx);
 	double h = _tstof(strH);
+	double k = _tstof(strK);
 
 	//double part1 = 100 * pureMineDrainGas * llReserveFactor;
 	//double part2 = mineDrainGasDencity * pumbEfficiency;
@@ -555,15 +557,15 @@ bool CaculFunc::pumbFlowCacul()
 		return false;
 	}
 
-	if(NOTZERO(p - h) && NOTZERO(mineDrainGasDencity))
+	if(NOTZERO((p - h)) && NOTZERO(mineDrainGasDencity))
 	{
-		pumbFlow = (2 * 100 * pureMineDrainGas * 101325) / (mineDrainGasDencity * (p - h));
+		pumbFlow = (k * 100 * pureMineDrainGas * p) / (mineDrainGasDencity * (p - h));
 	}
 	else
 	{
 		pumbFlow = 0;
 	}
-
+	
 	if (LESSTHANZERO(pumbFlow))
 	{
 		AfxMessageBox(_T("计算失败"));
