@@ -36,14 +36,14 @@ private :
 	void paintEvent(QPaintEvent *e);
 	void getTime();
 	void initDialog();
-	void setTitle();
+	void setHelpBtnStyle();
 	void cheakRegCode();
 
 	QString lastPath;
 	QTimer *myTimer;
 	QString sTime; //当前时间
 	QLabel *timeLabel;
-	QString windTitle;
+	//QString windTitle;
 
 	QPushButton *startNullBtn;
 	QPushButton *startFileBtn;

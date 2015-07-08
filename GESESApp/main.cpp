@@ -58,7 +58,7 @@ static int initRunCAD()
 	}
 	cadPath = QDir::currentPath();
 	writeReg(cadPath);
-	return 0;
+	return 1;
 }
 /***************************************************************
 问题以解决：不用拷贝，因为启动之后操作会在启动文件所在的
@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
 		msg.exec();
 		return 0;
 	}
-	initRunCAD();
+	if(0 == initRunCAD()) return 0;
 	RunGui *mainWin = new RunGui;
 	//QString cadPath;
 	//QStringList argument;
