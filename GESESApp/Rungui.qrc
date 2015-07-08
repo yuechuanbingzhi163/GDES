@@ -10,5 +10,7 @@
         <file>images/open.png</file>
         <file>images/openHover.png</file>
         <file>images/startHover.png</file>
+        <file>images/ok.png</file>
+        <file>images/unlocked.png</file>
     </qresource>
 </RCC>

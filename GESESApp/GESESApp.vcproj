@@ -411,6 +411,26 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\images\ok.png"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\images\open.png"
 				>
 				<FileConfiguration
@@ -480,7 +500,7 @@
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputFileName)..."
 						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o .\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputPath);.\rungui_zh.qm;.\qt_zh_CN.qm;.\icon.ico;.\images\background.png;.\images\help.png;.\images\helpHover.png;.\images\autoCAD.png;.\images\open.png;.\images\openHover.png;.\images\startHover.png"
+						AdditionalDependencies="$(InputPath);.\rungui_zh.qm;.\qt_zh_CN.qm;.\icon.ico;.\images\background.png;.\images\help.png;.\images\helpHover.png;.\images\autoCAD.png;.\images\open.png;.\images\openHover.png;.\images\startHover.png;.\images\ok.png;.\images\unlocked.png"
 						Outputs=".\GeneratedFiles\qrc_$(InputName).cpp"
 					/>
 				</FileConfiguration>
@@ -491,7 +511,7 @@
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputFileName)..."
 						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o .\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputPath);.\rungui_zh.qm;.\qt_zh_CN.qm;.\icon.ico;.\images\background.png;.\images\help.png;.\images\helpHover.png;.\images\autoCAD.png;.\images\open.png;.\images\openHover.png;.\images\startHover.png"
+						AdditionalDependencies="$(InputPath);.\rungui_zh.qm;.\qt_zh_CN.qm;.\icon.ico;.\images\background.png;.\images\help.png;.\images\helpHover.png;.\images\autoCAD.png;.\images\open.png;.\images\openHover.png;.\images\startHover.png;.\images\ok.png;.\images\unlocked.png"
 						Outputs=".\GeneratedFiles\qrc_$(InputName).cpp"
 					/>
 				</FileConfiguration>
@@ -518,6 +538,26 @@
 			</File>
 			<File
 				RelativePath=".\images\startHover.png"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\images\unlocked.png"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
