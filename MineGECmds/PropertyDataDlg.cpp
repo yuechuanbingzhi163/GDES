@@ -304,7 +304,7 @@ BOOL PropertyDataDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	//	ModifyStyle(0, WS_SIZEBOX);
-	if(!m_func.IsEmpty() && _T("基本信息") != m_func)
+	if(!m_func.IsEmpty() && _T("基本信息") != m_func && _T("瓦斯泵选型参考") != m_func)
 	{
 		GetDlgItem(IDOK)->SetWindowText(_T("计算"));
 		GetDlgItem(IDCANCEL)->SetWindowText(_T("退出"));
