@@ -331,6 +331,26 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\images\autoCAD1.png"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\images\background.png"
 				>
 				<FileConfiguration
@@ -451,7 +471,47 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\images\open1.png"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\images\openHover.png"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\images\openHover1.png"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -500,7 +560,7 @@
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputFileName)..."
 						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o .\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputPath);.\rungui_zh.qm;.\qt_zh_CN.qm;.\icon.ico;.\images\background.png;.\images\help.png;.\images\helpHover.png;.\images\autoCAD.png;.\images\open.png;.\images\openHover.png;.\images\startHover.png;.\images\ok.png;.\images\unlocked.png"
+						AdditionalDependencies="$(InputPath);.\rungui_zh.qm;.\qt_zh_CN.qm;.\icon.ico;.\images\background.png;.\images\help.png;.\images\helpHover.png;.\images\autoCAD.png;.\images\open.png;.\images\openHover.png;.\images\startHover.png;.\images\ok.png;.\images\unlocked.png;.\images\autoCAD1.png;.\images\open1.png;.\images\openHover1.png;.\images\startHover1.png"
 						Outputs=".\GeneratedFiles\qrc_$(InputName).cpp"
 					/>
 				</FileConfiguration>
@@ -511,7 +571,7 @@
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputFileName)..."
 						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o .\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputPath);.\rungui_zh.qm;.\qt_zh_CN.qm;.\icon.ico;.\images\background.png;.\images\help.png;.\images\helpHover.png;.\images\autoCAD.png;.\images\open.png;.\images\openHover.png;.\images\startHover.png;.\images\ok.png;.\images\unlocked.png"
+						AdditionalDependencies="$(InputPath);.\rungui_zh.qm;.\qt_zh_CN.qm;.\icon.ico;.\images\background.png;.\images\help.png;.\images\helpHover.png;.\images\autoCAD.png;.\images\open.png;.\images\openHover.png;.\images\startHover.png;.\images\ok.png;.\images\unlocked.png;.\images\autoCAD1.png;.\images\open1.png;.\images\openHover1.png;.\images\startHover1.png"
 						Outputs=".\GeneratedFiles\qrc_$(InputName).cpp"
 					/>
 				</FileConfiguration>
@@ -538,6 +598,26 @@
 			</File>
 			<File
 				RelativePath=".\images\startHover.png"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\images\startHover1.png"
 				>
 				<FileConfiguration
 					Name="Release|Win32"

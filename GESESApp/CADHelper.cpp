@@ -9,6 +9,52 @@
 
 #include "eoLogger.h"
 
+
+//#include <psapi.h >
+//#pragma comment(lib,"psapi.lib")
+
+//检查进程是否存在
+#include <tlhelp32.h> 
+//返回 -1 没有找到
+//返回  0 找到自身
+//返回  1 找到除自身外的另一个
+
+int FindProcess(LPCTSTR appName)  
+{  
+	int i=0;  
+	PROCESSENTRY32 pe32;  
+	pe32.dwSize = sizeof(pe32);   
+	HANDLE hProcessSnap = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);  
+	if(hProcessSnap == INVALID_HANDLE_VALUE)  
+	{  
+		i+=0;  
+	}  
+	BOOL bMore = ::Process32First(hProcessSnap, &pe32);  
+	while(bMore)  
+	{  
+		//printf(" 进程名称：%s \n", pe32.szExeFile);  
+		if(stricmp(appName,pe32.szExeFile)==0)  
+		{  
+			//printf("进程运行中");  
+			i+=1;  
+		}  
+		bMore = ::Process32Next(hProcessSnap, &pe32);  
+	}  
+	if(i>1)//大于1，排除自身  
+	{           
+		return 1;  
+	}
+
+	else if( i > 0 && i < 2 )
+	{
+		return 0;
+	}
+
+	else
+	{  
+		return -1;  
+	}  
+}  
 static void msbbox(const QString& msg)
 {
 	QMessageBox msgBox;
@@ -171,7 +217,7 @@ QString GetCADPathByWinAPI( QString locationKey ,pathType pat)
 
 	 DWORD dwAccess = KEY_ALL_ACCESS;
 	 //判断是否64位
-	 if(IsWow64() == TRUE)
+	 if(IsWow64())
 	 {
 		 dwAccess |= KEY_WOW64_64KEY;
 	 }
@@ -242,7 +288,7 @@ bool writeTestKeybyWinAPI(QString& cadPath)
 
 	DWORD dwAccess = KEY_ALL_ACCESS;
 	//判断是否64位
-	if(IsWow64() == TRUE)
+	if(IsWow64())
 	{
 		dwAccess |= KEY_WOW64_64KEY;
 	}
@@ -270,7 +316,7 @@ bool writeInfomationKeybyWinAPI(QString& cadPath)
 
 	DWORD dwAccess = KEY_ALL_ACCESS;
 	//判断是否64位
-	if(IsWow64() == TRUE)
+	if(IsWow64())
 	{
 		dwAccess |= KEY_WOW64_64KEY;
 	}
@@ -351,7 +397,7 @@ bool delTestKeybyWinAPI()
 
 	DWORD dwAccess = KEY_ALL_ACCESS;
 	//判断是否64位
-	if(IsWow64() == TRUE)
+	if(IsWow64())
 	{
 		dwAccess |= KEY_WOW64_64KEY;
 	}
@@ -374,7 +420,7 @@ bool delInfomationKeybyWinAPI()
 
 	DWORD dwAccess = KEY_ALL_ACCESS;
 	//判断是否64位
-	if(IsWow64() == TRUE)
+	if(IsWow64())
 	{
 		dwAccess |= KEY_WOW64_64KEY;
 	}

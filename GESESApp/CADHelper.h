@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QFileInfoList>
 #include <QString>
+#include <windows.h>
 /*
 qCopyDirectory -- ¿½±´Ä¿Â¼
 fromDir : Ô´Ä¿Â¼
@@ -33,5 +34,7 @@ extern  QString getCADPath(QString locationKey,pathType pat);
 extern  bool isAutoCADExist(QString& cadPath,const QStringList& argument);
 
 extern void writFiles( QString& fromDir, QString& toDir, const QString fileName);
+
+extern int FindProcess(LPCTSTR appName);
 //void ReadFluentInstallPath( QString& path );
 #endif //FILE_COPY_H

@@ -4,28 +4,29 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="CADHelper.cpp" line="221"/>
+        <location filename="CADHelper.cpp" line="267"/>
         <source>Not install AutoCAD</source>
         <translation>请确认已经安装AutoCAD 2010</translation>
     </message>
     <message>
-        <location filename="CADHelper.cpp" line="223"/>
+        <location filename="CADHelper.cpp" line="269"/>
         <source>tip</source>
         <translation>提示</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="54"/>
-        <location filename="main.cpp" line="116"/>
+        <location filename="main.cpp" line="53"/>
+        <location filename="main.cpp" line="115"/>
+        <location filename="RunGui.cpp" line="256"/>
         <source>reminder</source>
         <translation>提示</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="55"/>
+        <location filename="main.cpp" line="54"/>
         <source>failure</source>
         <translation>系统启动初始化失败！</translation>
     </message>
     <message>
-        <location filename="main.cpp" line="117"/>
+        <location filename="main.cpp" line="116"/>
         <source>Process is running</source>
         <translation>系统正在运行中!</translation>
     </message>
@@ -36,6 +37,11 @@
     <message>
         <source>did not run setup</source>
         <translation type="obsolete">软件没有注册！</translation>
+    </message>
+    <message>
+        <location filename="RunGui.cpp" line="257"/>
+        <source>CAD Process is running</source>
+        <translation>AutoCAD 正在运行，请先关闭AutoCAD！</translation>
     </message>
 </context>
 <context>
@@ -122,7 +128,7 @@
 <context>
     <name>RunGui</name>
     <message>
-        <location filename="RunGui.cpp" line="29"/>
+        <location filename="RunGui.cpp" line="102"/>
         <source>WindowsTitle</source>
         <translation>瓦斯抽采达标评价系统</translation>
     </message>
@@ -175,60 +181,58 @@
         <translation type="obsolete">帮助</translation>
     </message>
     <message>
-        <location filename="RunGui.cpp" line="25"/>
         <source>The official version</source>
-        <translation>注册版本</translation>
+        <translation type="obsolete">注册版本</translation>
     </message>
     <message>
-        <location filename="RunGui.cpp" line="26"/>
         <source>Unregistered version</source>
-        <translation>未注册版本</translation>
+        <translation type="obsolete">未注册版本</translation>
     </message>
     <message>
-        <location filename="RunGui.cpp" line="54"/>
+        <location filename="RunGui.cpp" line="115"/>
         <source>startNullButton</source>
         <translation>启动CAD绘图(创建CAD文件)</translation>
     </message>
     <message>
-        <location filename="RunGui.cpp" line="55"/>
+        <location filename="RunGui.cpp" line="116"/>
         <source>startFileButton</source>
         <translation>打开CAD文件(打开已经创建的CAD文件)</translation>
     </message>
     <message>
-        <location filename="RunGui.cpp" line="56"/>
+        <location filename="RunGui.cpp" line="117"/>
         <source>help</source>
         <translation>软件注册</translation>
     </message>
     <message>
-        <location filename="RunGui.cpp" line="105"/>
-        <location filename="RunGui.cpp" line="134"/>
-        <location filename="RunGui.cpp" line="175"/>
+        <location filename="RunGui.cpp" line="141"/>
+        <location filename="RunGui.cpp" line="170"/>
+        <location filename="RunGui.cpp" line="211"/>
         <source>tip</source>
         <translation>提示</translation>
     </message>
     <message>
-        <location filename="RunGui.cpp" line="108"/>
-        <location filename="RunGui.cpp" line="137"/>
+        <location filename="RunGui.cpp" line="144"/>
+        <location filename="RunGui.cpp" line="173"/>
         <source>Has not registered!</source>
         <translation>请先注册软件！</translation>
     </message>
     <message>
-        <location filename="RunGui.cpp" line="147"/>
+        <location filename="RunGui.cpp" line="183"/>
         <source>CAD Files</source>
         <translation>CAD文件</translation>
     </message>
     <message>
-        <location filename="RunGui.cpp" line="149"/>
+        <location filename="RunGui.cpp" line="185"/>
         <source>All File </source>
         <translation>所有文件</translation>
     </message>
     <message>
-        <location filename="RunGui.cpp" line="151"/>
+        <location filename="RunGui.cpp" line="187"/>
         <source>Open File</source>
         <translation>打开CAD文件</translation>
     </message>
     <message>
-        <location filename="RunGui.cpp" line="178"/>
+        <location filename="RunGui.cpp" line="214"/>
         <source>Has been successfully registered!</source>
         <translation>已经是注册版本！</translation>
     </message>

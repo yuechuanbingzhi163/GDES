@@ -4,41 +4,40 @@
 #include "RunGui.h"
 #include "CADHelper.h"
 #include <QTranslator>
-#include <windows.h>
 #include "eoLogger.h"
 
 //#include <psapi.h >
 //#pragma comment(lib,"psapi.lib")
 
-//检查进程是否存在
-#include <tlhelp32.h>  
-static BOOL FindProcess(LPCTSTR appName)  
-{  
-	int i=0;  
-	PROCESSENTRY32 pe32;  
-	pe32.dwSize = sizeof(pe32);   
-	HANDLE hProcessSnap = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);  
-	if(hProcessSnap == INVALID_HANDLE_VALUE)  
-	{  
-		i+=0;  
-	}  
-	BOOL bMore = ::Process32First(hProcessSnap, &pe32);  
-	while(bMore)  
-	{  
-		//printf(" 进程名称：%s \n", pe32.szExeFile);  
-		if(stricmp(appName,pe32.szExeFile)==0)  
-		{  
-			//printf("进程运行中");  
-			i+=1;  
-		}  
-		bMore = ::Process32Next(hProcessSnap, &pe32);  
-	}  
-	if(i>1){           //大于1，排除自身  
-		return true;  
-	}else{  
-		return false;  
-	}  
-}  
+////检查进程是否存在
+//#include <tlhelp32.h>  
+//static BOOL FindProcess(LPCTSTR appName)  
+//{  
+//	int i=0;  
+//	PROCESSENTRY32 pe32;  
+//	pe32.dwSize = sizeof(pe32);   
+//	HANDLE hProcessSnap = ::CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);  
+//	if(hProcessSnap == INVALID_HANDLE_VALUE)  
+//	{  
+//		i+=0;  
+//	}  
+//	BOOL bMore = ::Process32First(hProcessSnap, &pe32);  
+//	while(bMore)  
+//	{  
+//		//printf(" 进程名称：%s \n", pe32.szExeFile);  
+//		if(stricmp(appName,pe32.szExeFile)==0)  
+//		{  
+//			//printf("进程运行中");  
+//			i+=1;  
+//		}  
+//		bMore = ::Process32Next(hProcessSnap, &pe32);  
+//	}  
+//	if(i>1){           //大于1，排除自身  
+//		return true;  
+//	}else{  
+//		return false;  
+//	}  
+//}  
 
 static int initRunCAD()
 {
@@ -110,7 +109,17 @@ int main(int argc, char *argv[])
 	app.installTranslator(&translator);
 	app.installTranslator(&translator_zh);
 
-	if (FindProcess("GESESApp.exe"))
+	if (0 == FindProcess("acad.exe"))
+	{
+		QMessageBox msg;
+		msg.setWindowTitle(QObject::tr("reminder"));
+		msg.setText(QObject::tr("CAD Process is running"));
+		msg.exec();
+		return 0;
+	}
+
+
+	if (1 == FindProcess("GESESApp.exe"))
 	{
 		QMessageBox msg;
 		msg.setWindowTitle(QObject::tr("reminder"));

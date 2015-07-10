@@ -116,10 +116,10 @@ class CRegistry {
 public:
 	
 	CRegistry	(DWORD flags = CREG_CREATE);	
-	virtual		~CRegistry() { Close(); for (int i=0; i < _reEntries.size(); ++i) delete _reEntries[i]; delete [] _lpszSubKey; }
+	virtual		~CRegistry() { Close(); for (int i=0; i < (int)_reEntries.size(); ++i) delete _reEntries[i]; delete [] _lpszSubKey; }
 
 	CRegEntry&	operator[](LPCTSTR lpszVName);
-	CRegEntry*	GetAt(size_t n) { assert(n < Count());  return _reEntries.at(n); }
+	CRegEntry*	GetAt(int n) { assert(n < Count());  return _reEntries.at(n); }
 	
 	bool		Open(LPCTSTR lpszRegPath, HKEY hRootKey = HKEY_LOCAL_MACHINE,
 				DWORD dwAccess = KEY_QUERY_VALUE | KEY_SET_VALUE, bool bAuto = false);

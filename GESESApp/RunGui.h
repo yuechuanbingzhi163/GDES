@@ -36,7 +36,7 @@ private :
 	void paintEvent(QPaintEvent *e);
 	void getTime();
 	void initDialog();
-	void setHelpBtnStyle();
+	void setBtnStyle();
 	void cheakRegCode();
 
 	QString lastPath;
