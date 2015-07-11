@@ -273,6 +273,12 @@ static CString BuildPath( const CString& dir, const CString& fileName )
 	return path;
 }
 
+static bool IsSpecialFunc(CString& func)
+{
+	if(func.IsEmpty() || _T("基本信息") == func || _T("瓦斯泵选型参考") == func) return true;
+	return false;
+}
+
 IMPLEMENT_DYNAMIC( PropertyDataDlg, CDialog )
 
 PropertyDataDlg::PropertyDataDlg( CWnd* pParent /*=NULL*/,CString func )
@@ -304,7 +310,7 @@ BOOL PropertyDataDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	//	ModifyStyle(0, WS_SIZEBOX);
-	if(!m_func.IsEmpty() && _T("基本信息") != m_func && _T("瓦斯泵选型参考") != m_func)
+	if(!IsSpecialFunc(m_func))
 	{
 		GetDlgItem(IDOK)->SetWindowText(_T("计算"));
 		GetDlgItem(IDCANCEL)->SetWindowText(_T("退出"));
@@ -396,7 +402,7 @@ void PropertyDataDlg::OnBnClickedOk()
 	PropertyDataUpdater::WriteDataToGE( &m_propertyDataList, m_objId );
 
 
-	if(m_func.IsEmpty() || _T("基本信息") == m_func)
+	if(IsSpecialFunc(m_func))
 	{
 		OnOK();
 		return;
