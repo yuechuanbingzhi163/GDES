@@ -393,6 +393,7 @@ static BOOL SaveReport(CString savePath)
 static bool wordOprate(CString templPath,CString savePath,CString& mineName)
 {
 	AfxGetMainWnd()->BeginWaitCursor();//设置等待光标
+
 	if(CheckDocIsUsing(templPath)) return false;
 	MyWord->CreateApp();
 	//MyWord->ShowApp();
